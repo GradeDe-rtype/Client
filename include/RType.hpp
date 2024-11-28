@@ -14,6 +14,7 @@
     #include <memory>
 
     #include "GradeDe/GradeDe.hpp"
-    #include "lib/Papaya.hpp"
+    #include "Papaya.hpp"
+    #include "rfcArgParser.hpp"
 
 #endif /* !R_TYPE_HPP_ */

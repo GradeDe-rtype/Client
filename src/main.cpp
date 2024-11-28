@@ -9,17 +9,32 @@
 /*  ---- INCLUDES ---- */
 #include "RType.hpp"
 
-float speed = 10;
+float speed = 15;
 
 /*  ---- FUNCTION ---- */
 void handleEvent(gd::Window &window, gd::Event &event, gd::Shape &shape)
 {
+    bool orientationReset = true;
+
     if (event.close()) window.close();
     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape)) window.close();
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up)) shape.move({0, -speed});
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down)) shape.move({0, speed});
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left)) shape.move({-speed, 0});
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right)) shape.move({speed, 0});
+    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up)) {
+        shape.move({0, -speed});
+        shape.setRotation(-20);
+        orientationReset = false;
+    }
+    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down)) {
+        shape.move({0, speed});
+        shape.setRotation(20);
+        orientationReset = false;
+    }
+    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left)) {
+        shape.move({-speed, 0});
+    }
+    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right)) {
+        shape.move({speed, 0});
+    }
+    if (orientationReset) shape.setRotation(0);
     if (event.joyStick().isConnected()) {
         if (event.joyStick().isButtonPressed(gd::JoyStick::Button::A)) shape.setFillColor(gd::Color::Red);
         if (event.joyStick().isButtonPressed(gd::JoyStick::Button::B)) shape.setFillColor(gd::Color::Green);
@@ -47,7 +62,7 @@ void handleEvent(gd::Window &window, gd::Event &event, gd::Shape &shape)
     }
 }
 
-int main(int argc, char **argv)
+void gradeDe(void)
 {
     srand(time(NULL));
     gd::Window window;
@@ -55,20 +70,13 @@ int main(int argc, char **argv)
     gd::Event event;
     gd::Time time;
 
-    float size = 60;
-    gd::Shape shape({{0, 0}, {size, 0}, {size, size}, {0, size}});
-    shape.setFillColor(gd::Color::White);
-    gd::Texture texture;
-    try {
-        texture.loadFromFile("assets/GradeDe.png");
-    } catch (gd::Error &error) {
-        try {
-            texture.loadFromFile("../assets/GradeDe.png");
-        } catch (gd::Error &error) {
-            gd::Error::read(error);
-        }
-    }
-    shape.setTexture(texture);
+    float size = 40;
+    gd::Shape shape({{0, 0}, {size, size / 2}, {0, size}, {size / 4, size / 2}});
+    shape.setOrigin({size / 2, size / 2});
+
+    shape.setFillColor(gd::Color::Transparent);
+    shape.setOutlineColor(gd::Color::White);
+    shape.setOutlineThickness(5);
     shape.setPosition({ (float)(window.getWidth() / 2 - shape.getSize().x / 2), (float)(window.getHeight() / 2 - shape.getSize().y / 2) });
 
     while (window.isOpen()) {
@@ -82,4 +90,10 @@ int main(int argc, char **argv)
         window.display();
     }
     window.close();
+}
+
+int main(void)
+{
+    gradeDe();
+    return 0;
 }

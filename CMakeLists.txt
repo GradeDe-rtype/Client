@@ -5,8 +5,16 @@ project(RType VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Define the list of libraries
+set(RTYPE_LIBRARIES
+    papaya
+    rfcArgParser
+)
+
 # Include subdirectories for libraries
-add_subdirectory(lib/papaya)
+foreach(LIB ${RTYPE_LIBRARIES})
+    add_subdirectory(lib/${LIB})
+endforeach()
 
 # Collect all source files
 file(GLOB_RECURSE SOURCES
@@ -21,10 +29,13 @@ add_executable(rtype ${SOURCES})
 target_include_directories(rtype PRIVATE
     "include/"
 )
+foreach(LIB ${RTYPE_LIBRARIES})
+    target_include_directories(rtype PRIVATE "lib/${LIB}/include/")
+endforeach()
 
 # Link the libraries
 target_link_libraries(rtype PRIVATE
-    papaya
+    ${RTYPE_LIBRARIES}
     sfml-graphics sfml-window sfml-system sfml-audio sfml-network
 )
 

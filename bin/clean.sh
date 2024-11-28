@@ -29,14 +29,6 @@ else
     echo -e $YELLOW "\t> Library directory not found, skipping..." $RESET
 fi
 
-# Remove headers copied to the root include directory
-if [ -d "$INCLUDE_DIR" ]; then
-    echo -e $GREEN "\t> Cleaning headers in $INCLUDE_DIR..." $RESET
-    find "$INCLUDE_DIR" -type f -name "*.hpp" -exec rm -f {} \;
-else
-    echo -e $YELLOW "\t> Include directory not found, skipping..." $RESET
-fi
-
 # Remove the main executable
 if [ -f "$EXECUTABLE" ]; then
     echo -e $GREEN "\t> Removing executable $EXECUTABLE..." $RESET
