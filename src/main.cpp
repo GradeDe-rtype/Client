@@ -8,92 +8,43 @@
 
 /*  ---- INCLUDES ---- */
 #include "RType.hpp"
-
-float speed = 15;
+#include "Parsing.hpp"
+#include "Papaya.hpp"
+#include "Path.hpp"
 
 /*  ---- FUNCTION ---- */
-void handleEvent(gd::Window &window, gd::Event &event, gd::Shape &shape)
+
+int main(int argc, char **argv)
 {
-    bool orientationReset = true;
+    try {
+        srand(time(NULL));
+        RType::Parsing parsing(argc, argv);
+        std::cout << "Port: " << parsing.getPort() << std::endl;
+        std::cout << "Machine: " << parsing.getMachine() << std::endl;
 
-    if (event.close()) window.close();
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape)) window.close();
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up)) {
-        shape.move({0, -speed});
-        shape.setRotation(-20);
-        orientationReset = false;
-    }
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down)) {
-        shape.move({0, speed});
-        shape.setRotation(20);
-        orientationReset = false;
-    }
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left)) {
-        shape.move({-speed, 0});
-    }
-    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right)) {
-        shape.move({speed, 0});
-    }
-    if (orientationReset) shape.setRotation(0);
-    if (event.joyStick().isConnected()) {
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::A)) shape.setFillColor(gd::Color::Red);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::B)) shape.setFillColor(gd::Color::Green);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::X)) shape.setFillColor(gd::Color::Blue);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::Y)) shape.setFillColor(gd::Color::Yellow);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::LB)) shape.setFillColor(gd::Color::Magenta);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::RB)) shape.setFillColor(gd::Color::Cyan);
-        if (event.joyStick().isButtonPressed(gd::JoyStick::Button::Home)) window.close();
-        if (event.joyStick().isJoyStickMoved()) {
-            gd::Vector2<float> move = {0, 0};
-            if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LX)) {
-                float percent = event.joyStick().getAxisPosition(gd::JoyStick::Axis::LX) / 100;
-                move.x = speed * percent;
-            }
-            if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LY)) {
-                float percent = event.joyStick().getAxisPosition(gd::JoyStick::Axis::LY) / 100;
-                move.y = speed * percent;
-            }
-            shape.move(move);
-        }
-    }
-    if (event.mouse().getButtonState(gd::Mouse::Button::Left)) {
-        gd::Vector2<int> mouse = event.mouse().getPosition(window);
-        shape.setPosition({ (float)(mouse.x - shape.getSize().x / 2), (float)(mouse.y - shape.getSize().y / 2) });
-    }
-}
+        // std::shared_ptr<Zappy::Server::Server> server = std::make_shared<Zappy::Server::Server>(parsing.getMachine(), parsing.getPort());
+        // server->setRessources(Zappy::GUI::Ressources::Ref::get()->ressources);
+        // Zappy::GUI::Ressources::Ref::get()->shared_memory = server->getSharedMemory();
+        // Zappy::Server::Thread serverThread;
+        // serverThread.start([server]() { server->run(); });
 
-void gradeDe(void)
-{
-    srand(time(NULL));
-    gd::Window window;
-    window.create(800, 600, "R-Type");
-    gd::Event event;
-    gd::Time time;
-
-    float size = 40;
-    gd::Shape shape({{0, 0}, {size, size / 2}, {0, size}, {size / 4, size / 2}});
-    shape.setOrigin({size / 2, size / 2});
-
-    shape.setFillColor(gd::Color::Transparent);
-    shape.setOutlineColor(gd::Color::White);
-    shape.setOutlineThickness(5);
-    shape.setPosition({ (float)(window.getWidth() / 2 - shape.getSize().x / 2), (float)(window.getHeight() / 2 - shape.getSize().y / 2) });
-
-    while (window.isOpen()) {
-        if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
-        time.reset();
-        window.pollEvent(event);
-        handleEvent(window, event, shape);
-        window.clear(gd::Color::Black);
-
-        shape.draw(window);
-        window.display();
+        // Zappy::GUI::SceneManager sceneManager;
+        // sceneManager.run();
+        // server->shutdown();
+        // serverThread.join();
+    } catch (const RType::Parsing::ParsingError &e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << ">> Use -help for help." << std::endl;
+        return 84;
+    } catch (const RType::Parsing::Help &e) {
+        e.what();
+        return 0;
+    // } catch (const Exceptions::ConnexionServeurFail &e) {
+    //     std::cerr << "Server connection error: " << e.what() << std::endl;
+    //     return 84;
+    // } catch (const std::exception &e) {
+    //     std::cerr << "Unexpected error: " << e.what() << std::endl;
+    //     return 84;
     }
-    window.close();
-}
-
-int main(void)
-{
-    gradeDe();
     return 0;
 }

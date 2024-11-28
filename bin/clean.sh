@@ -4,7 +4,7 @@
 BUILD_DIR="build"
 LIB_DIR="lib"
 INCLUDE_DIR="include/lib"
-EXECUTABLE="rtype"
+EXECUTABLE="r-type_client"
 
 RESET="\033[0m"
 BOLD="\033[1m"

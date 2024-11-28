@@ -18,34 +18,38 @@ endforeach()
 
 # Collect all source files
 file(GLOB_RECURSE SOURCES
+    "src/**/**/*.cpp"
     "src/**/*.cpp"
     "src/*.cpp"
 )
 
 # Define the main executable
-add_executable(rtype ${SOURCES})
+add_executable(r-type_client ${SOURCES})
 
 # Include directories for the project and libraries
-target_include_directories(rtype PRIVATE
+target_include_directories(r-type_client PRIVATE
     "include/"
+    "src/Parsing/"
+    "src/Utils/Utils/"
+    "src/Utils/Path/"
 )
 foreach(LIB ${RTYPE_LIBRARIES})
-    target_include_directories(rtype PRIVATE "lib/${LIB}/include/")
+    target_include_directories(r-type_client PRIVATE "lib/${LIB}/include/")
 endforeach()
 
 # Link the libraries
-target_link_libraries(rtype PRIVATE
+target_link_libraries(r-type_client PRIVATE
     ${RTYPE_LIBRARIES}
     sfml-graphics sfml-window sfml-system sfml-audio sfml-network
 )
 
 # Copy the resulting executable to the project root
-add_custom_command(TARGET rtype POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:rtype> ${CMAKE_SOURCE_DIR}
+add_custom_command(TARGET r-type_client POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:r-type_client> ${CMAKE_SOURCE_DIR}
 )
 
 # Custom clean target
 add_custom_target(fclean
-    COMMAND ${CMAKE_COMMAND} -E remove rtype
-    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_SOURCE_DIR}/rtype
+    COMMAND ${CMAKE_COMMAND} -E remove r-type_client
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_SOURCE_DIR}/r-type_client
 )
