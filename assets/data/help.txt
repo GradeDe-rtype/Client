@@ -1,14 +1,14 @@
 USAGE
-    ./r-type_client [-p port] [-m machine]
+    ./r-type_client [-p port] [-i ip]
 
 DESCRIPTION
-    p    port number
-    m    name of the machine
+    p    server port
+    i    server ip adress
 
 NOTE
     You can start the r-type_client in 2 differents way:
         - Just call "./r-type_client", this will strat the client using a default port and machine name.
-        - Call it with argument, if you start the client with arguments, it will try to connect the client to the specified port and machine.
+        - Call it with argument, if you start the client with arguments, it will try to connect the client to the specified port and ip adress.
 
 WARNING
-    If you start the client using argument, without providing port and machine, the client will not start !
+    If you start the client using argument, without providing port and ip adress, the client will not start !

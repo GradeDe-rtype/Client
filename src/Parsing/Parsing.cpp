@@ -25,8 +25,8 @@ namespace RType {
                 i++;
                 continue;
             }
-            if (std::string(argv[i]) == "-m") {
-                _parseArgMachine(argc, argv, i);
+            if (std::string(argv[i]) == "-i") {
+                _parseArgIpAdress(argc, argv, i);
                 i++;
                 continue;
             }
@@ -34,8 +34,8 @@ namespace RType {
         }
         if (_port == -1)
             throw ParsingError("Invalid argument: \"-p\". Port not set.");
-        if (_machine.empty())
-            throw ParsingError("Invalid argument: \"-m\". Machine not set.");
+        if (_ipAdress.empty())
+            throw ParsingError("Invalid argument: \"-m\". Ip adress not set.");
     }
 
     int Parsing::getPort()
@@ -43,9 +43,9 @@ namespace RType {
         return _port;
     }
 
-    std::string Parsing::getMachine()
+    std::string Parsing::getIpAdress()
     {
-        return _machine;
+        return _ipAdress;
     }
 
 
@@ -62,15 +62,15 @@ namespace RType {
         _port = std::stoi(argv[i + 1]);
     }
 
-    void Parsing::_parseArgMachine(int argc, char **argv, int i)
+    void Parsing::_parseArgIpAdress(int argc, char **argv, int i)
     {
-        if (!_machine.empty())
+        if (!_ipAdress.empty())
             throw ParsingError("Invalid argument: \"-m\". Host already set.");
         if (i + 1 >= argc)
             throw ParsingError("Invalid argument for \"-m\". Expect a value.");
         if (std::string(argv[i + 1]).empty())
             throw ParsingError("Invalid argument for \"-m\". Expect a name.");
-        _machine = argv[i + 1];
+        _ipAdress = argv[i + 1];
     }
 
     void Parsing::_parseNoArgs()
@@ -83,9 +83,9 @@ namespace RType {
             throw ParsingError("Invalid port in the data file. Expect a number.");
         _port = std::stoi(tmpPort);
 
-        std::string tmpMachine = tmp.getData("ref", "ref", "machine");
-        if (tmpMachine.empty())
-            throw ParsingError("No machine in the data file.");
-        _machine = tmpMachine;
+        std::string tmpIpAdress = tmp.getData("ref", "ref", "ip adress");
+        if (tmpIpAdress.empty())
+            throw ParsingError("No ip adress in the data file.");
+        _ipAdress = tmpIpAdress;
     }
 }

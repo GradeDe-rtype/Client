@@ -76,7 +76,7 @@ namespace RType {
              *
              * @warning This function have to be used after the constructor. Else it will return an empty string
              */
-            std::string getMachine();
+            std::string getIpAdress();
 
         protected:
         private:
@@ -96,12 +96,12 @@ namespace RType {
              * @param argv The arguments
              * @param i The index of the argument
              */
-            void _parseArgMachine(int argc, char **argv, int i);
+            void _parseArgIpAdress(int argc, char **argv, int i);
 
             void _parseNoArgs();
 
             int _port = -1;
-            std::string _machine = "";
+            std::string _ipAdress = "";
     };
 }
 
