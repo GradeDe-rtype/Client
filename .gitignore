@@ -12,4 +12,4 @@ cmake-build-default
 build
 
 a.out
-rtype
+r-type_client
