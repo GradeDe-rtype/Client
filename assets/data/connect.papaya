@@ -1,2 +1,2 @@
 ref;port;ip adress
-ref;4666;localhost
+ref;4666;0.0.0.0

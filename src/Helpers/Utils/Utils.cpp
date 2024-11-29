@@ -55,5 +55,28 @@ namespace RType {
                     return false;
             return true;
         }
+
+        bool isIpAdress(const std::string &str)
+        {
+            std::vector<std::string> tokens = split(str, ".");
+            if (tokens.size() != 4)
+                return false;
+            for (const auto &token : tokens) {
+                if (!isNumber(token))
+                    return false;
+                if (std::stoi(token) < 0 || std::stoi(token) > 255)
+                    return false;
+            }
+            return true;
+        }
+
+        std::string trim(const std::string& str) {
+            auto is_trim_char = [](unsigned char c) {
+                return std::isspace(c) || c == '\n' || c == '\r' || c == '\t' || c == '\0';
+            };
+            auto start = std::find_if_not(str.begin(), str.end(), is_trim_char);
+            auto end = std::find_if_not(str.rbegin(), str.rend(), is_trim_char).base();
+            return (start < end) ? std::string(start, end) : "";
+        }
     }
 }

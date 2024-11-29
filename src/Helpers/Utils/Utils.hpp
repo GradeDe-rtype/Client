@@ -13,6 +13,7 @@
     #include <string>
     #include <vector>
     #include <sys/stat.h>
+    #include <algorithm>
 
 
     /*  ---- CLASS ---- */
@@ -45,6 +46,24 @@ namespace RType {
          * @return `true` if the string is made of only numbers, `false` otherwise
          */
         bool isNumber(const std::string &str);
+
+        /**
+         * @brief Check if a string is an IP adress
+         *
+         * @param str The string to check
+         *
+         * @return `true` if the string is an IP adress, `false` otherwise
+         */
+        bool isIpAdress(const std::string &str);
+
+        /**
+         * @brief Trim a string
+         *
+         * @param str The string to trim
+         *
+         * @return The trimmed string
+         */
+        std::string trim(const std::string& str);
     }
 }
 

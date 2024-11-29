@@ -36,7 +36,7 @@ namespace RType {
         if (_port == -1)
             throw ParsingError("Invalid argument: \"-p\". Port not set.");
         if (_ipAdress.empty())
-            throw ParsingError("Invalid argument: \"-m\". Ip adress not set.");
+            throw ParsingError("Invalid argument: \"-i\". Ip adress not set.");
     }
 
     int Parsing::getPort()
@@ -66,12 +66,17 @@ namespace RType {
     void Parsing::_parseArgIpAdress(int argc, char **argv, int i)
     {
         if (!_ipAdress.empty())
-            throw ParsingError("Invalid argument: \"-m\". Host already set.");
+            throw ParsingError("Invalid argument: \"-i\". Host already set.");
         if (i + 1 >= argc)
-            throw ParsingError("Invalid argument for \"-m\". Expect a value.");
+            throw ParsingError("Invalid argument for \"-i\". Expect a value.");
         if (std::string(argv[i + 1]).empty())
-            throw ParsingError("Invalid argument for \"-m\". Expect a name.");
-        _ipAdress = argv[i + 1];
+            throw ParsingError("Invalid argument for \"-i\". Expect an ip adress.");
+        if (!Utils::isIpAdress(argv[i + 1]) && (std::string(argv[i + 1]) != "localhost"))
+            throw ParsingError("Invalid argument for \"-p\": \"" + std::string(argv[i + 1]) + "\". Expect a number.");
+        if (std::string(argv[i + 1]) == "localhost")
+            _ipAdress = "0.0.0.0";
+        else
+            _ipAdress = argv[i + 1];
     }
 
     void Parsing::_parseNoArgs()

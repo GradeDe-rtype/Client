@@ -18,6 +18,9 @@
 #include "GradeDe/Time.hpp"
 #include "GradeDe/FrameRate.hpp"
 
+#include "Client.hpp"
+#include "SendList.hpp"
+
 
 /*  ---- FUNCTION ---- */
 
@@ -74,40 +77,34 @@ int main(int argc, char **argv)
     try {
         srand(time(NULL));
         RType::Parsing parsing(argc, argv);
-        std::cout << "Port: " << parsing.getPort() << std::endl;
-        std::cout << "Ip Adress: " << parsing.getIpAdress() << std::endl;
 
-        RType::Ressources::get();
-        gd::Window window;
-        window.create(800, 600, "R-Type");
-        gd::Event event;
-        gd::Time time;
-        RType::Ressources::get()->me().shape().setPosition({ (float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2) });
+        std::shared_ptr<RType::Communication::SendList> sendList = std::make_shared<RType::Communication::SendList>();
+        RType::Communication::Client client(parsing.getIpAdress(), parsing.getPort(), sendList);
 
-        while (window.isOpen()) {
-            if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
-            time.reset();
-            window.pollEvent(event);
-            handleEvent(window, event);
-            window.clear(gd::Color::Black);
+        sendList->push("start");
+        sendList->push("test");
+        sendList->push("stop");
+        client.run();
 
-            RType::Ressources::get()->me().shape().draw(window);
-            window.display();
-        }
-        window.close();
+        // RType::Ressources::get();
+        // gd::Window window;
+        // window.create(800, 600, "R-Type");
+        // gd::Event event;
+        // gd::Time time;
+        // RType::Ressources::get()->me().shape().setPosition({ (float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2) });
 
+        // while (window.isOpen()) {
+        //     if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
+        //     time.reset();
+        //     window.pollEvent(event);
+        //     handleEvent(window, event);
+        //     window.clear(gd::Color::Black);
 
+        //     RType::Ressources::get()->me().shape().draw(window);
+        //     window.display();
+        // }
+        // window.close();
 
-        // std::shared_ptr<Zappy::Server::Server> server = std::make_shared<Zappy::Server::Server>(parsing.getMachine(), parsing.getPort());
-        // server->setRessources(Zappy::GUI::Ressources::Ref::get()->ressources);
-        // Zappy::GUI::Ressources::Ref::get()->shared_memory = server->getSharedMemory();
-        // Zappy::Server::Thread serverThread;
-        // serverThread.start([server]() { server->run(); });
-
-        // Zappy::GUI::SceneManager sceneManager;
-        // sceneManager.run();
-        // server->shutdown();
-        // serverThread.join();
     } catch (const RType::Parsing::ParsingError &e) {
         std::cerr << "Error: " << e.what() << std::endl;
         std::cerr << ">> Use -help for help." << std::endl;
@@ -115,12 +112,6 @@ int main(int argc, char **argv)
     } catch (const RType::Parsing::Help &e) {
         e.what();
         return 0;
-    // } catch (const Exceptions::ConnexionServeurFail &e) {
-    //     std::cerr << "Server connection error: " << e.what() << std::endl;
-    //     return 84;
-    // } catch (const std::exception &e) {
-    //     std::cerr << "Unexpected error: " << e.what() << std::endl;
-    //     return 84;
     }
     return 0;
 }
