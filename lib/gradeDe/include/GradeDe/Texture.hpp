@@ -10,9 +10,13 @@
     #define GRADE_DE_TEXTURE_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
-    #include "GradeDe/Error.hpp"
+    #include <SFML/Graphics.hpp>
+    #include <string>
+    #include <fstream>
+
     #include "GradeDe/Vector.hpp"
+    #include "GradeDe/Error.hpp"
+
 
     /*  ---- CLASS ---- */
 namespace gd

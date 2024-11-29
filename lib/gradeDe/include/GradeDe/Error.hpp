@@ -10,7 +10,10 @@
     #define GRADE_DE_ERROR_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
+    #include <exception>
+    #include <string>
+    #include <iostream>
+
 
     /*  ---- CLASS ---- */
 namespace gd

@@ -10,11 +10,12 @@
     #define GRADE_DE_EVENT_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
+    #include <SFML/Window/Event.hpp>
+    #include <vector>
+
     #include "GradeDe/JoyStick.hpp"
-    #include "GradeDe/Mouse.hpp"
     #include "GradeDe/KeyBoard.hpp"
-    #include "GradeDe/Vector.hpp"
+    #include "GradeDe/Mouse.hpp"
 
 
     /*  ---- CLASS ---- */

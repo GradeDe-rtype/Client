@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Define the list of libraries
 set(RTYPE_LIBRARIES
+    gradeDe
     papaya
     rfcArgParser
 )
@@ -29,9 +30,11 @@ add_executable(r-type_client ${SOURCES})
 # Include directories for the project and libraries
 target_include_directories(r-type_client PRIVATE
     "include/"
+    "src/Graphique/Player/"
     "src/Parsing/"
     "src/Utils/Utils/"
     "src/Utils/Path/"
+    "src/Ressources/"
 )
 foreach(LIB ${RTYPE_LIBRARIES})
     target_include_directories(r-type_client PRIVATE "lib/${LIB}/include/")

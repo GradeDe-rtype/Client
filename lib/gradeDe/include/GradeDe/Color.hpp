@@ -10,7 +10,6 @@
     #define GRADE_DE_COLOR_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
 
     /*  ---- CLASS ---- */
 namespace gd

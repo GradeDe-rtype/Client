@@ -7,8 +7,7 @@
 */
 
 /*  ---- INCLUDES ---- */
-#include "GradeDe/Event.hpp"
-
+#include "GradeDe/JoyStick.hpp"
 
 namespace gd
 {

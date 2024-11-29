@@ -10,8 +10,6 @@
     #define GRADE_DE_VECTOR_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
-    #include "GradeDe/KeyBoard.hpp"
 
 
     /*  ---- CLASS ---- */

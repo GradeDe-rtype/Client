@@ -12,18 +12,13 @@
 
 namespace gd
 {
-    Shape::Shape(std::vector<gd::Vector2<float>> points)
-        : _position({0, 0})
+    void Shape::create(std::vector<gd::Vector2<float>> points)
     {
         _points = points;
         _shape.setPointCount(points.size());
         for (size_t i = 0; i < points.size(); i++)
             _shape.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
         _shape.setPosition(_position.x, _position.y);
-    }
-
-    Shape::~Shape()
-    {
     }
 
     void Shape::setFillColor(gd::Color color)

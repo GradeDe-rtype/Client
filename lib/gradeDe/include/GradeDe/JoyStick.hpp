@@ -10,7 +10,9 @@
     #define GRADE_DE_JOYSTICK_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
+    #include <unordered_map>
+    #include <SFML/Window/Joystick.hpp>
+
 
     /*  ---- CLASS ---- */
 namespace gd

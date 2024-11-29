@@ -10,11 +10,14 @@
     #define GRADE_DE_SHAPE_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
-    #include "Color.hpp"
-    #include "Texture.hpp"
-    #include "Vector.hpp"
-    #include "Window.hpp"
+    #include <vector>
+    #include <SFML/Graphics.hpp>
+
+    #include "GradeDe/Color.hpp"
+    #include "GradeDe/Vector.hpp"
+    #include "GradeDe/Texture.hpp"
+    #include "GradeDe/Window.hpp"
+
 
     /*  ---- CLASS ---- */
 namespace gd
@@ -31,19 +34,17 @@ namespace gd
             Shape() = default;
 
             /**
-             * \brief Constructor with parameters.
-             *
-             * This constructor creates a shape with the specified values.
+             * \brief Default destructor.
+             */
+            ~Shape() = default;
+
+
+            /**
+             * \brief Create the shape.
              *
              * \param points The points of the shape.
              */
-            Shape(std::vector<gd::Vector2<float>> points);
-
-            /**
-             * \brief Default destructor.
-             */
-            ~Shape();
-
+            void create(std::vector<gd::Vector2<float>> points);
 
             /**
              * \brief Set the fill color of the shape.
@@ -191,7 +192,7 @@ namespace gd
             /**
              * \brief The position of the shape.
              */
-            gd::Vector2<float> _position;
+            gd::Vector2<float> _position = {0, 0};
 
             /**
              * \brief The origin of the shape.

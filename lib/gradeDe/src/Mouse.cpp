@@ -9,6 +9,7 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Mouse.hpp"
 
+
 namespace gd
 {
     Mouse::Mouse()

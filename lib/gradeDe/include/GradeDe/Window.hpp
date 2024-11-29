@@ -10,9 +10,10 @@
     #define GRADE_DE_WINDOW_SFML_HPP_
 
     /*  ---- INCLUDES ---- */
-    #include "GradeDe/Includes.hpp"
-    #include "GradeDe/Color.hpp"
+    #include <SFML/Graphics.hpp>
+
     #include "GradeDe/Vector.hpp"
+    #include "GradeDe/Color.hpp"
 
 
     /*  ---- CLASS ---- */
