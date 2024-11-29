@@ -14,6 +14,7 @@
     #include <vector>
     #include <sys/stat.h>
 
+
     /*  ---- CLASS ---- */
 namespace RType {
     namespace Utils {

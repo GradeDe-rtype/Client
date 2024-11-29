@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** tmp
-** File description:
-** Parsing
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #include "Parsing.hpp"

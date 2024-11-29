@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** papaya-library
-** File description:
-** PapayaPrivate
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #include "Papaya.hpp"

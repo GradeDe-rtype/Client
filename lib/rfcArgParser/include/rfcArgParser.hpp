@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** rfc-arg-parser-library
-** File description:
-** library
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #ifndef RFC_ARG_PARSER_HPP_

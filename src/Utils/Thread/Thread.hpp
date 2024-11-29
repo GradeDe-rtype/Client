@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** Thread
-** File description:
-** Server
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #ifndef THREAD_HPP
@@ -11,6 +12,7 @@
     /*  ---- INCLUDES ---- */
     #include <thread>
     #include <functional>
+
 
     /*  ---- CLASS ---- */
 namespace RType

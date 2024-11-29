@@ -1,12 +1,16 @@
 /*
-** EPITECH PROJECT, 2024
-** GUI
-** File description:
-** Mutex
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
+    /*  ---- INCLUDES ---- */
 #include "Mutex.hpp"
 
+
+    /*  ---- FUNCTIONS ---- */
 namespace RType {
     void Mutex::lock()
     {

@@ -6,8 +6,11 @@
     --U-----U------------------------
 */
 
+    /*  ---- INCLUDES ---- */
 #include "Utils.hpp"
 
+
+    /*  ---- FUNCTIONS ---- */
 namespace RType {
     namespace Utils {
         std::vector<std::string> split(const std::string &str, const std::string &delim)

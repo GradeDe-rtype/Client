@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** GUI
-** File description:
-** Mutex
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #ifndef MUTEX_HPP_
@@ -10,6 +11,7 @@
 
     /*  ---- INCLUDES ---- */
     #include <mutex>
+
 
     /*  ---- CLASS ---- */
 namespace RType {

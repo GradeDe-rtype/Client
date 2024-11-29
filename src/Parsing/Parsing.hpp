@@ -1,8 +1,9 @@
 /*
-** EPITECH PROJECT, 2024
-** zappy_gui
-** File description:
-** Parsing
+    Authors:
+    >> Nathan TIROLF - { nathan.tirolf@epitech.eu }
+
+    („• ֊ •„)❤  <  Have a good day !
+    --U-----U------------------------
 */
 
 #ifndef RTYPE_PARSING_HPP_
