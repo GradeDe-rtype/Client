@@ -21,10 +21,12 @@
 #include "Client.hpp"
 #include "SendList.hpp"
 
+#include "Thread.hpp"
+
 
 /*  ---- FUNCTION ---- */
 
-void handleEvent(gd::Window &window, gd::Event &event)
+void handleEvent(gd::Window &window, gd::Event &event, std::shared_ptr<RType::Communication::SendList> sendList)
 {
     bool orientationReset = true;
     gd::Vector2<float> position = RType::Ressources::get()->me().shape().getPosition();
@@ -36,17 +38,21 @@ void handleEvent(gd::Window &window, gd::Event &event)
         RType::Ressources::get()->me().shape().move({0, -15});
         RType::Ressources::get()->me().shape().setRotation(-20);
         orientationReset = false;
+        sendList->push("UP");
     }
     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) && position.y <= window.getHeight() - size.y / 2) {
         RType::Ressources::get()->me().shape().move({0, 15});
         RType::Ressources::get()->me().shape().setRotation(20);
         orientationReset = false;
+        sendList->push("DOWN");
     }
     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) && position.x >= size.x / 2) {
         RType::Ressources::get()->me().shape().move({-15, 0});
+        sendList->push("LEFT");
     }
     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) && position.x <= window.getWidth() - size.x) {
         RType::Ressources::get()->me().shape().move({15, 0});
+        sendList->push("RIGHT");
     }
     if (orientationReset) RType::Ressources::get()->me().shape().setRotation(0);
     if (event.joyStick().isConnected()) {
@@ -79,31 +85,32 @@ int main(int argc, char **argv)
         RType::Parsing parsing(argc, argv);
 
         std::shared_ptr<RType::Communication::SendList> sendList = std::make_shared<RType::Communication::SendList>();
-        RType::Communication::Client client(parsing.getIpAdress(), parsing.getPort(), sendList);
+        std::shared_ptr<RType::Communication::Client> client = std::make_shared<RType::Communication::Client>(parsing.getIpAdress(), parsing.getPort(), sendList);
 
-        sendList->push("start");
-        sendList->push("test");
-        sendList->push("stop");
-        client.run();
+        RType::Helpers::Thread serverThread;
+        serverThread.start([client]() { client->run(); });
 
-        // RType::Ressources::get();
-        // gd::Window window;
-        // window.create(800, 600, "R-Type");
-        // gd::Event event;
-        // gd::Time time;
-        // RType::Ressources::get()->me().shape().setPosition({ (float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2) });
+        RType::Ressources::get();
+        gd::Window window;
+        window.create(800, 600, "R-Type");
+        gd::Event event;
+        gd::Time time;
+        RType::Ressources::get()->me().shape().setPosition({ (float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2) });
 
-        // while (window.isOpen()) {
-        //     if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
-        //     time.reset();
-        //     window.pollEvent(event);
-        //     handleEvent(window, event);
-        //     window.clear(gd::Color::Black);
+        while (window.isOpen()) {
+            if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
+            time.reset();
+            window.pollEvent(event);
+            handleEvent(window, event, sendList);
+            window.clear(gd::Color::Black);
 
-        //     RType::Ressources::get()->me().shape().draw(window);
-        //     window.display();
-        // }
-        // window.close();
+            RType::Ressources::get()->me().shape().draw(window);
+            window.display();
+        }
+        window.close();
+
+        client->shutdown();
+        serverThread.join();
 
     } catch (const RType::Parsing::ParsingError &e) {
         std::cerr << "Error: " << e.what() << std::endl;
