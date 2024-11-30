@@ -61,12 +61,17 @@ namespace RType {
 
         void Client::_disconnect()
         {
+            _socket.shutdown(boost::asio::ip::tcp::socket::shutdown_receive);
+            _socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send);
+            _socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
             _socket.close();
+            _buffer.clear();
             _state = DOWN;
         }
 
         void Client::_read() {
             try {
+                if (_socket.available() == 0) return;
                 boost::asio::streambuf streambuf;
                 boost::asio::read_until(_socket, streambuf, "\n");
                 std::istream is(&streambuf);
