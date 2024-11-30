@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_PLAYER_HPP_
-#define RTYPE_PLAYER_HPP_
+#ifndef RTYPE_DISPLAY_PLAYER_HPP_
+#define RTYPE_DISPLAY_PLAYER_HPP_
 
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Shape.hpp"
@@ -15,17 +15,20 @@
 /*  ---- CLASS ---- */
 namespace RType
 {
-    class Player
+    namespace Display
     {
-        public:
-            Player();
-            ~Player() = default;
+        class Player
+        {
+            public:
+                Player();
+                ~Player() = default;
 
-            gd::Shape &shape();
+                gd::Shape &shape();
 
-        private:
-            gd::Shape _shape;
-    };
+            private:
+                gd::Shape _shape;
+        };
+    } // namespace Display
 } // namespace RType
 
-#endif /* !RTYPE_PLAYER_HPP_ */
+#endif /* !RTYPE_DISPLAY_PLAYER_HPP_ */

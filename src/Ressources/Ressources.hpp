@@ -25,14 +25,14 @@ namespace RType
             static Ressources *get();
             ~Ressources() = default;
 
-            std::unordered_map<std::string, Player> &players();
-            Player &me();
+            std::unordered_map<std::string, RType::Display::Player> &players();
+            RType::Display::Player &me();
 
         private:
             Ressources();
 
-            Player _me;
-            std::unordered_map<std::string, Player> _players;
+            RType::Display::Player _me;
+            std::unordered_map<std::string, RType::Display::Player> _players;
     };
 } // namespace RType
 

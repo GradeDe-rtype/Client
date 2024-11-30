@@ -6,7 +6,7 @@
     --U-----U------------------------
 */
 
-#include "Client.hpp"
+#include "CommunicationClient.hpp"
 
 namespace RType
 {

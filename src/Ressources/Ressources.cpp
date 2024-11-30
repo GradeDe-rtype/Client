@@ -20,12 +20,12 @@ namespace RType
     {
     }
 
-    std::unordered_map<std::string, Player> &Ressources::players()
+    std::unordered_map<std::string, RType::Display::Player> &Ressources::players()
     {
         return _players;
     }
 
-    Player &Ressources::me()
+    RType::Display::Player &Ressources::me()
     {
         return _me;
     }

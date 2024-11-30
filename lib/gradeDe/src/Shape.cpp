@@ -99,6 +99,11 @@ namespace gd
         return {bounds.width, bounds.height};
     }
 
+    float Shape::getRotation() const
+    {
+        return _rotation;
+    }
+
     void Shape::draw(gd::Window &window)
     {
         sf::RenderWindow *win = (sf::RenderWindow *)window.getWindow();

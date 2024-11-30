@@ -42,6 +42,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Communication/Client/"
     "src/Communication/SendList/"
     "src/Display/"
+    "src/Display/Client/"
     "src/Display/Player/"
     "src/Helpers/"
     "src/Helpers/Mutex/"
