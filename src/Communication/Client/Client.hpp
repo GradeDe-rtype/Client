@@ -7,22 +7,24 @@
 */
 
 #ifndef RTYPE_COMMUNICATION_CLIENT_HPP_
-    #define RTYPE_COMMUNICATION_CLIENT_HPP_
+#define RTYPE_COMMUNICATION_CLIENT_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <string>
-    #include <boost/asio.hpp>
-    #include <iostream>
-    #include <memory>
+/*  ---- INCLUDES ---- */
+#include <boost/asio.hpp>
+#include <iostream>
+#include <memory>
+#include <string>
 
-    #include "SendList.hpp"
-    #include "Utils.hpp"
+#include "SendList.hpp"
+#include "Utils.hpp"
 
-
-    /*  ---- CLASS ---- */
-namespace RType {
-    namespace Communication {
-        class Client {
+/*  ---- CLASS ---- */
+namespace RType
+{
+    namespace Communication
+    {
+        class Client
+        {
             public:
                 Client(std::string ip, int port, std::shared_ptr<RType::Communication::SendList> sendList);
                 ~Client() = default;
@@ -53,7 +55,7 @@ namespace RType {
                 void _write();
                 void _checkOpen();
         };
-    }
-}
+    } // namespace Communication
+} // namespace RType
 
 #endif /* !RTYPE_COMMUNICATION_CLIENT_HPP_ */

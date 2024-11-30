@@ -7,14 +7,16 @@
 */
 
 #ifndef RTYPE_PLAYER_HPP_
-    #define RTYPE_PLAYER_HPP_
+#define RTYPE_PLAYER_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include "GradeDe/Shape.hpp"
+/*  ---- INCLUDES ---- */
+#include "GradeDe/Shape.hpp"
 
-    /*  ---- CLASS ---- */
-namespace RType {
-    class Player {
+/*  ---- CLASS ---- */
+namespace RType
+{
+    class Player
+    {
         public:
             Player();
             ~Player() = default;
@@ -24,6 +26,6 @@ namespace RType {
         private:
             gd::Shape _shape;
     };
-}
+} // namespace RType
 
 #endif /* !RTYPE_PLAYER_HPP_ */

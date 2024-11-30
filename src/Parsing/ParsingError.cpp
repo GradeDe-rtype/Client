@@ -8,7 +8,8 @@
 
 #include "Parsing.hpp"
 
-namespace RType {
+namespace RType
+{
     Parsing::ParsingError::ParsingError(const std::string &message)
         : _message(message)
     {
@@ -18,4 +19,4 @@ namespace RType {
     {
         return _message.c_str();
     }
-}
+} // namespace RType

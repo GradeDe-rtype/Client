@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Color.hpp"
 
-
 namespace gd
 {
     gd::Color::Color()
@@ -31,4 +30,4 @@ namespace gd
     const gd::Color gd::Color::Magenta = gd::Color(255, 0, 255);
     const gd::Color gd::Color::Cyan = gd::Color(0, 255, 255);
     const gd::Color gd::Color::Transparent = gd::Color(0, 0, 0, 0);
-}
+} // namespace gd

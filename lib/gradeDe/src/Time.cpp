@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Time.hpp"
 
-
 namespace gd
 {
     void Time::reset()
@@ -24,4 +23,4 @@ namespace gd
         int elapsedTime = _time.asMilliseconds();
         return elapsedTime;
     }
-}
+} // namespace gd

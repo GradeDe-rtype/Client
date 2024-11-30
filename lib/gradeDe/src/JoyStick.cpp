@@ -77,5 +77,4 @@ namespace gd
     {
         return _axis.at(axis);
     }
-}
-
+} // namespace gd

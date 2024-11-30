@@ -68,7 +68,6 @@ namespace gd
         }
     }
 
-
     bool Event::close() const
     {
         return _close;
@@ -91,5 +90,4 @@ namespace gd
     {
         return _mouse;
     }
-}
-
+} // namespace gd

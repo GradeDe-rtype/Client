@@ -7,18 +7,17 @@
 */
 
 #ifndef GRADE_DE_EVENT_SFML_HPP_
-    #define GRADE_DE_EVENT_SFML_HPP_
+#define GRADE_DE_EVENT_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <SFML/Window/Event.hpp>
-    #include <vector>
+/*  ---- INCLUDES ---- */
+#include <SFML/Window/Event.hpp>
+#include <vector>
 
-    #include "GradeDe/JoyStick.hpp"
-    #include "GradeDe/KeyBoard.hpp"
-    #include "GradeDe/Mouse.hpp"
+#include "GradeDe/JoyStick.hpp"
+#include "GradeDe/KeyBoard.hpp"
+#include "GradeDe/Mouse.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -37,7 +36,6 @@ namespace gd
              */
             ~Event() = default;
 
-
             /**
              * \brief Handle an event.
              *
@@ -53,7 +51,6 @@ namespace gd
              * This function clears the event.
              */
             void clear();
-
 
             /**
              * \brief Check if the window should be closed.
@@ -103,6 +100,6 @@ namespace gd
              */
             gd::Mouse _mouse;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_EVENT_SFML_HPP_ */

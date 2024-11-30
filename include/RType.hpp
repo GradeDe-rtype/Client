@@ -7,13 +7,13 @@
 */
 
 #ifndef R_TYPE_HPP_
-    #define R_TYPE_HPP_
+#define R_TYPE_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <iostream>
-    #include <memory>
+/*  ---- INCLUDES ---- */
+#include <iostream>
+#include <memory>
 
-    #include "Papaya.hpp"
-    #include "rfcArgParser.hpp"
+#include "Papaya.hpp"
+#include "rfcArgParser.hpp"
 
 #endif /* !R_TYPE_HPP_ */

@@ -7,13 +7,12 @@
 */
 
 #ifndef MUTEX_HPP_
-    #define MUTEX_HPP_
+#define MUTEX_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <mutex>
+/*  ---- INCLUDES ---- */
+#include <mutex>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace RType
 {
     namespace Helpers
@@ -55,7 +54,7 @@ namespace RType
                 std::mutex _mutex;
                 bool _isLocked = false;
         };
-    }
-}
+    } // namespace Helpers
+} // namespace RType
 
 #endif /* !MUTEX_HPP_ */

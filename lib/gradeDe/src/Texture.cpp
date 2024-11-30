@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Texture.hpp"
 
-
 namespace gd
 {
     void Texture::loadFromFile(const std::string &path)
@@ -30,4 +29,4 @@ namespace gd
         sf::Vector2u size = _texture.getSize();
         return gd::Vector2<int>(size.x, size.y);
     }
-}
+} // namespace gd

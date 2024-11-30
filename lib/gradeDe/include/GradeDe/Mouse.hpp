@@ -7,16 +7,15 @@
 */
 
 #ifndef GRADE_DE_MOUSE_SFML_HPP_
-    #define GRADE_DE_MOUSE_SFML_HPP_
+#define GRADE_DE_MOUSE_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <unordered_map>
+/*  ---- INCLUDES ---- */
+#include <unordered_map>
 
-    #include "GradeDe/Vector.hpp"
-    #include "GradeDe/Window.hpp"
+#include "GradeDe/Vector.hpp"
+#include "GradeDe/Window.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     class Mouse
@@ -28,8 +27,7 @@ namespace gd
              * This enum defines various key codes for each key on a standard mouse.
              * It is used for handling mouse input and key events.
              */
-            enum Button
-            {
+            enum Button {
                 /**
                  * \brief Key code for the left mouse button.
                  */
@@ -100,6 +98,6 @@ namespace gd
         private:
             std::unordered_map<Button, bool> _buttons;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_MOUSE_SFML_HPP_ */

@@ -7,24 +7,24 @@
 */
 
 #ifndef RFC_ARG_PARSER_HPP_
-    #define RFC_ARG_PARSER_HPP_
+#define RFC_ARG_PARSER_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <string>
-    #include <vector>
-    #include <unordered_map>
-    #include <iostream>
+/*  ---- INCLUDES ---- */
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
-
-    /*  ---- CLASS ---- */
-class rfcArgParser {
+/*  ---- CLASS ---- */
+class rfcArgParser
+{
     public:
         /**
          * @brief PapayaError class
          *
          * This class is used to handle errors in the Papaya class
-        */
-        class Error: public std::exception
+         */
+        class Error : public std::exception
         {
             public:
                 /**
@@ -32,37 +32,37 @@ class rfcArgParser {
                  *
                  * @param what The error message
                  * @param where The error location (default: "")
-                */
+                 */
                 Error(std::string const &what, std::string const &where = "");
 
                 /**
                  * @brief Get the error message
                  *
                  * @return `const char *` The error message
-                */
+                 */
                 const char *what() const noexcept override;
 
                 /**
                  * @brief Get the error location
                  *
                  * @return `const char *` The error location
-                */
+                 */
                 const char *where() const noexcept;
 
                 /**
                  * @brief Read the error message
-                */
+                 */
                 void read() const noexcept;
 
             private:
                 /**
                  * @brief The error message
-                */
+                 */
                 std::string _what;
 
                 /**
                  * @brief The error location
-                */
+                 */
                 std::string _where;
         };
 

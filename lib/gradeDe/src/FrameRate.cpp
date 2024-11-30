@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/FrameRate.hpp"
 
-
 namespace gd
 {
     FrameRate &FrameRate::get()
@@ -33,4 +32,4 @@ namespace gd
     {
         return _frameRate;
     }
-}
+} // namespace gd

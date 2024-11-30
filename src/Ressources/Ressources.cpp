@@ -8,7 +8,8 @@
 
 #include "Ressources.hpp"
 
-namespace RType {
+namespace RType
+{
     Ressources *Ressources::get()
     {
         static Ressources instance;
@@ -28,4 +29,4 @@ namespace RType {
     {
         return _me;
     }
-}
+} // namespace RType

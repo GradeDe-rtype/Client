@@ -33,7 +33,6 @@ Papaya::Papaya(std::string path, std::string name)
     _loadPapaya(lines);
 }
 
-
 bool Papaya::hasData(const std::string &refKey, const std::string &refValue, const std::string &key) const
 {
     _checkKeys({refKey, key}, "Papaya::hasData");
@@ -56,7 +55,6 @@ bool Papaya::hasKey(const std::string &key) const
 {
     return std::find(_keys.begin(), _keys.end(), key) != _keys.end();
 }
-
 
 std::vector<std::string> Papaya::getKeys() const
 {
@@ -100,7 +98,6 @@ std::vector<std::string> Papaya::getKey(const std::string &key) const
         keys.push_back(data.at(key));
     return keys;
 }
-
 
 void Papaya::addData(const std::string &key, const std::string &value)
 {
@@ -175,8 +172,9 @@ void Papaya::removeLine(const std::string &refKey, const std::string &refValue)
 {
     _checkKeys({refKey}, "Papaya::removeLine");
     _datas.erase(std::remove_if(_datas.begin(), _datas.end(), [refKey, refValue](const std::unordered_map<std::string, std::string> &data) {
-        return data.at(refKey) == refValue;
-    }), _datas.end());
+                     return data.at(refKey) == refValue;
+                 }),
+                 _datas.end());
 }
 
 void Papaya::updateData(const std::string &refKey, const std::string &refValue, const std::string &key, const std::string &value)

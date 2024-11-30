@@ -7,22 +7,21 @@
 */
 
 /*  ---- INCLUDES ---- */
-#include "RType.hpp"
-#include "Parsing.hpp"
 #include "Papaya.hpp"
+#include "Parsing.hpp"
 #include "Path.hpp"
+#include "RType.hpp"
 #include "Ressources.hpp"
 
-#include "GradeDe/Window.hpp"
 #include "GradeDe/Event.hpp"
-#include "GradeDe/Time.hpp"
 #include "GradeDe/FrameRate.hpp"
+#include "GradeDe/Time.hpp"
+#include "GradeDe/Window.hpp"
 
 #include "Client.hpp"
 #include "SendList.hpp"
 
 #include "Thread.hpp"
-
 
 /*  ---- FUNCTION ---- */
 
@@ -95,7 +94,7 @@ int main(int argc, char **argv)
         window.create(800, 600, "R-Type");
         gd::Event event;
         gd::Time time;
-        RType::Ressources::get()->me().shape().setPosition({ (float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2) });
+        RType::Ressources::get()->me().shape().setPosition({(float)(window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2)});
 
         while (window.isOpen()) {
             if (time.getElapsedTime() < gd::FrameRate::get().fps()) continue;

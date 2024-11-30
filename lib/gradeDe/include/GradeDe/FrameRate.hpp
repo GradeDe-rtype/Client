@@ -7,11 +7,11 @@
 */
 
 #ifndef GRADE_DE_FRAMERATE_SFML_HPP_
-    #define GRADE_DE_FRAMERATE_SFML_HPP_
+#define GRADE_DE_FRAMERATE_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -25,7 +25,6 @@ namespace gd
              */
             ~FrameRate() = default;
 
-
             /**
              * \brief Get the instance of the frame rate.
              */
@@ -35,7 +34,6 @@ namespace gd
              * \brief Get the frame rate.
              */
             int fps() const;
-
 
             /**
              * \brief Set the frame rate.
@@ -69,6 +67,6 @@ namespace gd
              */
             static FrameRate &_instance;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_FRAMERATE_SFML_HPP_ */

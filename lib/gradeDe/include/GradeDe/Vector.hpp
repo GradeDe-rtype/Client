@@ -7,12 +7,11 @@
 */
 
 #ifndef GRADE_DE_VECTOR_SFML_HPP_
-    #define GRADE_DE_VECTOR_SFML_HPP_
+#define GRADE_DE_VECTOR_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -86,7 +85,6 @@ namespace gd
              */
             Vector2<T> &operator/=(const Vector2<T> &vector);
 
-
             /**
              * \brief The x value of the vector.
              */
@@ -97,6 +95,6 @@ namespace gd
              */
             T y;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_VECTOR_SFML_HPP_ */

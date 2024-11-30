@@ -7,19 +7,18 @@
 */
 
 #ifndef GRADE_DE_SHAPE_SFML_HPP_
-    #define GRADE_DE_SHAPE_SFML_HPP_
+#define GRADE_DE_SHAPE_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <vector>
-    #include <SFML/Graphics.hpp>
+/*  ---- INCLUDES ---- */
+#include <SFML/Graphics.hpp>
+#include <vector>
 
-    #include "GradeDe/Color.hpp"
-    #include "GradeDe/Vector.hpp"
-    #include "GradeDe/Texture.hpp"
-    #include "GradeDe/Window.hpp"
+#include "GradeDe/Color.hpp"
+#include "GradeDe/Texture.hpp"
+#include "GradeDe/Vector.hpp"
+#include "GradeDe/Window.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -37,7 +36,6 @@ namespace gd
              * \brief Default destructor.
              */
             ~Shape() = default;
-
 
             /**
              * \brief Create the shape.
@@ -127,7 +125,6 @@ namespace gd
              */
             void rotate(float angle);
 
-
             /**
              * \brief Get the fill color of the shape.
              */
@@ -157,7 +154,6 @@ namespace gd
              * \brief Get the size of the shape.
              */
             gd::Vector2<float> getSize() const;
-
 
             /**
              * \brief Draw the shape.
@@ -209,6 +205,6 @@ namespace gd
              */
             sf::ConvexShape _shape;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_SHAPE_SFML_HPP_ */

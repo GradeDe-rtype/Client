@@ -7,13 +7,12 @@
 */
 
 #ifndef GRADE_DE_TIME_SFML_HPP_
-    #define GRADE_DE_TIME_SFML_HPP_
+#define GRADE_DE_TIME_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <SFML/System.hpp>
+/*  ---- INCLUDES ---- */
+#include <SFML/System.hpp>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -31,7 +30,6 @@ namespace gd
              * \brief Default destructor.
              */
             ~Time() = default;
-
 
             /**
              * \brief Reset the timer.
@@ -54,6 +52,6 @@ namespace gd
              */
             sf::Time _time;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_TIME_SFML_HPP_ */

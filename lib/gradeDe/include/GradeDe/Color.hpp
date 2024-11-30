@@ -7,11 +7,11 @@
 */
 
 #ifndef GRADE_DE_COLOR_SFML_HPP_
-    #define GRADE_DE_COLOR_SFML_HPP_
+#define GRADE_DE_COLOR_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -109,6 +109,6 @@ namespace gd
              */
             static const gd::Color Transparent;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_COLOR_SFML_HPP_ */

@@ -7,14 +7,13 @@
 */
 
 #ifndef THREAD_HPP
-    #define THREAD_HPP
+#define THREAD_HPP
 
-    /*  ---- INCLUDES ---- */
-    #include <thread>
-    #include <functional>
+/*  ---- INCLUDES ---- */
+#include <functional>
+#include <thread>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace RType
 {
     namespace Helpers
@@ -49,7 +48,7 @@ namespace RType
                 std::thread _thread;
                 bool _running;
         };
-    }
-}
+    } // namespace Helpers
+} // namespace RType
 
 #endif

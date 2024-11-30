@@ -32,5 +32,5 @@ namespace RType
         {
             return _path;
         }
-    }
-}
+    } // namespace Helpers
+} // namespace RType

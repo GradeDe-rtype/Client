@@ -7,32 +7,34 @@
 */
 
 #ifndef RTYPE_PARSING_HPP_
-    #define RTYPE_PARSING_HPP_
+#define RTYPE_PARSING_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <exception>
-    #include <string>
-    #include <iostream>
-    #include <fstream>
+/*  ---- INCLUDES ---- */
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include <string>
 
-    #include "Utils.hpp"
-    #include "Path.hpp"
-    #include "Papaya.hpp"
+#include "Papaya.hpp"
+#include "Path.hpp"
+#include "Utils.hpp"
 
-
-    /*  ---- CLASS ---- */
-namespace RType {
+/*  ---- CLASS ---- */
+namespace RType
+{
     /**
      * @brief Parsing class
      */
-    class Parsing {
+    class Parsing
+    {
         public:
             /**
              * @brief Parsing error class
              *
              * @note This class is used to throw parsing errors
              */
-            class ParsingError : public std::exception {
+            class ParsingError : public std::exception
+            {
                 public:
                     ParsingError(const std::string &message);
                     const char *what() const noexcept override;
@@ -46,7 +48,8 @@ namespace RType {
              *
              * @note This class is used to throw help errors
              */
-            class Help : public std::exception {
+            class Help : public std::exception
+            {
                 public:
                     Help() = default;
                     const char *what() const noexcept override;
@@ -80,6 +83,7 @@ namespace RType {
             std::string getIpAdress();
 
         protected:
+
         private:
             /**
              * @brief Parse the port argument
@@ -104,6 +108,6 @@ namespace RType {
             int _port = -1;
             std::string _ipAdress = "";
     };
-}
+} // namespace RType
 
 #endif /* !RTYPE_PARSING_HPP_ */

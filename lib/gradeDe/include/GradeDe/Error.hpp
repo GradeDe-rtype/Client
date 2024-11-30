@@ -7,21 +7,20 @@
 */
 
 #ifndef GRADE_DE_ERROR_SFML_HPP_
-    #define GRADE_DE_ERROR_SFML_HPP_
+#define GRADE_DE_ERROR_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <exception>
-    #include <string>
-    #include <iostream>
+/*  ---- INCLUDES ---- */
+#include <exception>
+#include <iostream>
+#include <string>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
      * \brief Class that represents an error.
      */
-    class Error: public std::exception
+    class Error : public std::exception
     {
         public:
             /**
@@ -65,6 +64,6 @@ namespace gd
              */
             std::string _where;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_FRAMERATE_SFML_HPP_ */

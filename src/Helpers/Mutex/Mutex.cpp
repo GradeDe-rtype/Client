@@ -6,11 +6,10 @@
     --U-----U------------------------
 */
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 #include "Mutex.hpp"
 
-
-    /*  ---- FUNCTIONS ---- */
+/*  ---- FUNCTIONS ---- */
 namespace RType
 {
     namespace Helpers
@@ -39,5 +38,5 @@ namespace RType
         {
             return _isLocked;
         }
-    }
-}
+    } // namespace Helpers
+} // namespace RType

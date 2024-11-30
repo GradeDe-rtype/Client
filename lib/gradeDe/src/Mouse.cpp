@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Mouse.hpp"
 
-
 namespace gd
 {
     Mouse::Mouse()
@@ -33,4 +32,4 @@ namespace gd
         sf::RenderWindow *sfmlWindow = (sf::RenderWindow *)window.getWindow();
         return gd::Vector2<int>(sf::Mouse::getPosition(*sfmlWindow).x, sf::Mouse::getPosition(*sfmlWindow).y);
     }
-}
+} // namespace gd

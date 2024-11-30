@@ -7,9 +7,8 @@
 */
 
 /*  ---- INCLUDES ---- */
-#include "GradeDe/Event.hpp"
 #include "GradeDe/Window.hpp"
-
+#include "GradeDe/Event.hpp"
 
 namespace gd
 {
@@ -17,7 +16,6 @@ namespace gd
     {
         close();
     }
-
 
     void Window::create()
     {
@@ -43,7 +41,6 @@ namespace gd
         _create(_videoMode, _title, sf::Style::Close | sf::Style::Titlebar);
     }
 
-
     void Window::close()
     {
         if (!_isOpen) return;
@@ -55,7 +52,6 @@ namespace gd
     {
         return _isOpen;
     }
-
 
     void Window::setWidth(int width)
     {
@@ -102,14 +98,12 @@ namespace gd
         return _fullscreen;
     }
 
-
     void Window::pollEvent(gd::Event &event)
     {
         sf::Event sfEvent;
         while (_window.pollEvent(sfEvent))
             event.handleEvent((void *)&sfEvent);
     }
-
 
     void Window::clear(gd::Color color)
     {
@@ -121,13 +115,11 @@ namespace gd
         _window.display();
     }
 
-
     void Window::_create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style)
     {
         _window.create(videoMode, title, style);
         _isOpen = true;
     }
-
 
     int Window::getWidth() const
     {
@@ -153,5 +145,4 @@ namespace gd
     {
         return &_window;
     }
-}
-
+} // namespace gd

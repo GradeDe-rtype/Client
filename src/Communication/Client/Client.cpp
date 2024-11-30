@@ -8,19 +8,28 @@
 
 #include "Client.hpp"
 
-namespace RType {
-    namespace Communication {
+namespace RType
+{
+    namespace Communication
+    {
         Client::Client(std::string ip, int port, std::shared_ptr<RType::Communication::SendList> sendList)
             : _ip(ip), _port(port), _sendList(sendList), _state(TRY_CONNECT), _socket(_io_context)
         {
         }
 
-        void Client::run() {
+        void Client::run()
+        {
             while (_state != DOWN) {
                 switch (_state) {
-                    case TRY_CONNECT: _connect(); break;
-                    case CONNECTED: _connected(); break;
-                    case DISCONNECT: _disconnect(); break;
+                    case TRY_CONNECT:
+                        _connect();
+                        break;
+                    case CONNECTED:
+                        _connected();
+                        break;
+                    case DISCONNECT:
+                        _disconnect();
+                        break;
                     default:
                         std::cerr << "Unknown state: " << _state << std::endl;
                         _state = DOWN;
@@ -33,7 +42,6 @@ namespace RType {
         {
             _state = DISCONNECT;
         }
-
 
         void Client::_connect()
         {
@@ -69,7 +77,8 @@ namespace RType {
             _state = DOWN;
         }
 
-        void Client::_read() {
+        void Client::_read()
+        {
             try {
                 if (_socket.available() == 0) return;
                 boost::asio::streambuf streambuf;
@@ -77,16 +86,17 @@ namespace RType {
                 std::istream is(&streambuf);
                 std::string line;
                 while (std::getline(is, line)) {
-                    std::string trimmed = Utils::trim(line);
+                    std::string trimmed = RType::Helpers::Utils::trim(line);
                     if (!trimmed.empty()) _buffer.push_back(trimmed);
                 }
-            } catch (const std::exception& e) {
+            } catch (const std::exception &e) {
                 std::cerr << "Read error: " << e.what() << std::endl;
                 _state = DISCONNECT;
             }
         }
 
-        void Client::_write() {
+        void Client::_write()
+        {
             if (_sendList->size() > 0) {
                 std::vector<std::string> messages = _sendList->pop();
                 for (std::string message : messages) {
@@ -100,5 +110,5 @@ namespace RType {
         {
             if (!_socket.is_open()) _state = DISCONNECT;
         }
-    }
-}
+    } // namespace Communication
+} // namespace RType

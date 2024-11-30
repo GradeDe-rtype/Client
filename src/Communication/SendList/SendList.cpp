@@ -6,13 +6,14 @@
     --U-----U------------------------
 */
 
-    /*  ---- INCLUDES ---- */
-    #include "SendList.hpp"
+/*  ---- INCLUDES ---- */
+#include "SendList.hpp"
 
-
-    /*  ---- FUNCTIONS ---- */
-namespace RType {
-    namespace Communication {
+/*  ---- FUNCTIONS ---- */
+namespace RType
+{
+    namespace Communication
+    {
         void SendList::push(std::string message)
         {
             _mutex.lock();
@@ -40,5 +41,5 @@ namespace RType {
             _mutex.unlock();
             return size;
         }
-    }
-}
+    } // namespace Communication
+} // namespace RType

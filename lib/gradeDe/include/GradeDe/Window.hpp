@@ -7,16 +7,15 @@
 */
 
 #ifndef GRADE_DE_WINDOW_SFML_HPP_
-    #define GRADE_DE_WINDOW_SFML_HPP_
+#define GRADE_DE_WINDOW_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <SFML/Graphics.hpp>
+/*  ---- INCLUDES ---- */
+#include <SFML/Graphics.hpp>
 
-    #include "GradeDe/Vector.hpp"
-    #include "GradeDe/Color.hpp"
+#include "GradeDe/Color.hpp"
+#include "GradeDe/Vector.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     class Event;
@@ -63,7 +62,6 @@ namespace gd
              */
             void create(int width, int height, const std::string &title);
 
-
             /**
              * \brief Close the window.
              */
@@ -73,7 +71,6 @@ namespace gd
              * \brief Check if the window is open.
              */
             bool isOpen() const;
-
 
             /**
              * \brief Set the width of the window.
@@ -135,7 +132,6 @@ namespace gd
              */
             bool isFullscreen() const;
 
-
             /**
              * \brief Poll the event.
              *
@@ -144,7 +140,6 @@ namespace gd
              * \param event The event.
              */
             void pollEvent(gd::Event &event);
-
 
             /**
              * \brief Clear the window.
@@ -155,7 +150,6 @@ namespace gd
              */
             void clear(gd::Color color = gd::Color::Black);
 
-
             /**
              * \brief Draw the shape.
              *
@@ -164,7 +158,6 @@ namespace gd
              * \param shape The shape.
              */
             void display();
-
 
             /**
              * \brief Get the width of the window.
@@ -222,12 +215,11 @@ namespace gd
              */
             bool _fullscreen = false;
 
-
             /**
              * \brief create the window
              */
             void _create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style);
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_WINDOW_SFML_HPP_ */

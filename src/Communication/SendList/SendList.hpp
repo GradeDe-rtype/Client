@@ -7,18 +7,21 @@
 */
 
 #ifndef RTYPE_COMMUNICATION_SENDLIST_HPP_
-    #define RTYPE_COMMUNICATION_SENDLIST_HPP_
+#define RTYPE_COMMUNICATION_SENDLIST_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <vector>
-    #include <string>
+/*  ---- INCLUDES ---- */
+#include <string>
+#include <vector>
 
-    #include "Mutex.hpp"
+#include "Mutex.hpp"
 
-    /*  ---- CLASS ---- */
-namespace RType {
-    namespace Communication {
-        class SendList {
+/*  ---- CLASS ---- */
+namespace RType
+{
+    namespace Communication
+    {
+        class SendList
+        {
             public:
                 SendList() = default;
                 ~SendList() = default;
@@ -31,7 +34,7 @@ namespace RType {
                 RType::Helpers::Mutex _mutex;
                 std::vector<std::string> _list;
         };
-    }
-}
+    } // namespace Communication
+} // namespace RType
 
 #endif /* !RTYPE_COMMUNICATION_SENDLIST_HPP_ */

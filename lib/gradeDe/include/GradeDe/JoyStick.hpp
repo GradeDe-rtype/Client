@@ -7,14 +7,13 @@
 */
 
 #ifndef GRADE_DE_JOYSTICK_SFML_HPP_
-    #define GRADE_DE_JOYSTICK_SFML_HPP_
+#define GRADE_DE_JOYSTICK_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <unordered_map>
-    #include <SFML/Window/Joystick.hpp>
+/*  ---- INCLUDES ---- */
+#include <SFML/Window/Joystick.hpp>
+#include <unordered_map>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -211,6 +210,6 @@ namespace gd
             std::unordered_map<Axis, float> _axis;
             bool _isConnected;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_JOYSTICK_SFML_HPP_ */

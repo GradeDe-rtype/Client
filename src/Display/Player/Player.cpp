@@ -8,7 +8,8 @@
 
 #include "Player.hpp"
 
-namespace RType {
+namespace RType
+{
     Player::Player()
     {
         float size = 40;
@@ -23,4 +24,4 @@ namespace RType {
     {
         return _shape;
     }
-}
+} // namespace RType

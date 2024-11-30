@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Shape.hpp"
 
-
 namespace gd
 {
     void Shape::create(std::vector<gd::Vector2<float>> points)
@@ -74,7 +73,6 @@ namespace gd
         _shape.setRotation(_rotation);
     }
 
-
     gd::Color Shape::getFillColor() const
     {
         return _fillColor;
@@ -101,10 +99,9 @@ namespace gd
         return {bounds.width, bounds.height};
     }
 
-
     void Shape::draw(gd::Window &window)
     {
         sf::RenderWindow *win = (sf::RenderWindow *)window.getWindow();
         win->draw(_shape);
     }
-}
+} // namespace gd

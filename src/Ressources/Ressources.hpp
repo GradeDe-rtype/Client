@@ -7,19 +7,20 @@
 */
 
 #ifndef RTYPE_RESSOURCES_HPP_
-    #define RTYPE_RESSOURCES_HPP_
+#define RTYPE_RESSOURCES_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <string>
-    #include <unordered_map>
+/*  ---- INCLUDES ---- */
+#include <string>
+#include <unordered_map>
 
-    #include "Utils.hpp"
-    #include "Player.hpp"
+#include "Player.hpp"
+#include "Utils.hpp"
 
-
-    /*  ---- CLASS ---- */
-namespace RType {
-    class Ressources {
+/*  ---- CLASS ---- */
+namespace RType
+{
+    class Ressources
+    {
         public:
             static Ressources *get();
             ~Ressources() = default;
@@ -33,6 +34,6 @@ namespace RType {
             Player _me;
             std::unordered_map<std::string, Player> _players;
     };
-}
+} // namespace RType
 
 #endif /* !RTYPE_RESSOURCES_HPP_ */

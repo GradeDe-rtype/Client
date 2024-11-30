@@ -7,13 +7,12 @@
 */
 
 #ifndef GRADE_DE_KEYBOARD_SFML_HPP_
-    #define GRADE_DE_KEYBOARD_SFML_HPP_
+#define GRADE_DE_KEYBOARD_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <unordered_map>
+/*  ---- INCLUDES ---- */
+#include <unordered_map>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     class KeyBoard
@@ -25,8 +24,7 @@ namespace gd
              * This enum defines various key codes for each key on a standard keyboard.
              * It is used for handling keyboard input and key events.
              */
-            enum Key
-            {
+            enum Key {
                 /**
                  * \brief Key code for unknown key.
                  * Used to represent an unknown or undefined key.
@@ -547,12 +545,12 @@ namespace gd
                 /**
                  * \deprecated Use Grave instead.
                  */
-                Tilde     = Grave,
+                Tilde = Grave,
 
                 /**
                  * \deprecated Use Hyphen instead.
                  */
-                Dash      = Hyphen,
+                Dash = Hyphen,
 
                 /**
                  * \deprecated Use Backspace instead.
@@ -572,12 +570,12 @@ namespace gd
                 /**
                  * \deprecated Use Enter instead.
                  */
-                Return    = Enter,
+                Return = Enter,
 
                 /**
                  * \deprecated Use Apostrophe instead.
                  */
-                Quote     = Apostrophe
+                Quote = Apostrophe
             };
 
             /**
@@ -610,6 +608,6 @@ namespace gd
         private:
             std::unordered_map<Key, bool> _keys;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_KEYBOARD_SFML_HPP_ */

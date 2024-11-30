@@ -7,15 +7,14 @@
 */
 
 #ifndef RTYPE_PATH_HPP_
-    #define RTYPE_PATH_HPP_
+#define RTYPE_PATH_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <string>
+/*  ---- INCLUDES ---- */
+#include <string>
 
-    #include "Utils.hpp"
+#include "Utils.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace RType
 {
     namespace Helpers
@@ -32,7 +31,7 @@ namespace RType
 
                 std::string _path;
         };
-    }
-}
+    } // namespace Helpers
+} // namespace RType
 
 #endif /* !RTYPE_PATH_HPP_ */

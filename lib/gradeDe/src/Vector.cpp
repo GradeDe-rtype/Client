@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Vector.hpp"
 
-
 namespace gd
 {
     template <typename T>
@@ -83,4 +82,4 @@ namespace gd
     template class Vector2<int>;
     template class Vector2<float>;
     template class Vector2<double>;
-}
+} // namespace gd

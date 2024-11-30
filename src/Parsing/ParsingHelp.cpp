@@ -8,8 +8,9 @@
 
 #include "Parsing.hpp"
 
-namespace RType {
-    const char* Parsing::Help::what() const noexcept
+namespace RType
+{
+    const char *Parsing::Help::what() const noexcept
     {
         std::ifstream file(RType::Helpers::Path::get()->path() + "data/help.txt");
         if (!file.is_open())
@@ -22,4 +23,4 @@ namespace RType {
         std::cout << content << std::endl;
         return "";
     }
-}
+} // namespace RType

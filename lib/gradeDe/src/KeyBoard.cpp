@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/KeyBoard.hpp"
 
-
 namespace gd
 {
     KeyBoard::KeyBoard()
@@ -27,4 +26,4 @@ namespace gd
     {
         return _keys.at(key);
     }
-}
+} // namespace gd

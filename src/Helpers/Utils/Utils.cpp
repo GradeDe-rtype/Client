@@ -6,11 +6,10 @@
     --U-----U------------------------
 */
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 #include "Utils.hpp"
 
-
-    /*  ---- FUNCTIONS ---- */
+/*  ---- FUNCTIONS ---- */
 namespace RType
 {
     namespace Helpers
@@ -74,7 +73,8 @@ namespace RType
                 return true;
             }
 
-            std::string trim(const std::string& str) {
+            std::string trim(const std::string &str)
+            {
                 auto is_trim_char = [](unsigned char c) {
                     return std::isspace(c) || c == '\n' || c == '\r' || c == '\t' || c == '\0';
                 };
@@ -82,6 +82,6 @@ namespace RType
                 auto end = std::find_if_not(str.rbegin(), str.rend(), is_trim_char).base();
                 return (start < end) ? std::string(start, end) : "";
             }
-        }
-    }
-}
+        } // namespace Utils
+    } // namespace Helpers
+} // namespace RType

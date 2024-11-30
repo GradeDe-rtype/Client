@@ -7,18 +7,17 @@
 */
 
 #ifndef GRADE_DE_TEXTURE_SFML_HPP_
-    #define GRADE_DE_TEXTURE_SFML_HPP_
+#define GRADE_DE_TEXTURE_SFML_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <SFML/Graphics.hpp>
-    #include <string>
-    #include <fstream>
+/*  ---- INCLUDES ---- */
+#include <SFML/Graphics.hpp>
+#include <fstream>
+#include <string>
 
-    #include "GradeDe/Vector.hpp"
-    #include "GradeDe/Error.hpp"
+#include "GradeDe/Error.hpp"
+#include "GradeDe/Vector.hpp"
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace gd
 {
     /**
@@ -37,14 +36,12 @@ namespace gd
              */
             ~Texture() = default;
 
-
             /**
              * \brief Load the texture from a file.
              *
              * \param path The path of the file.
              */
             void loadFromFile(const std::string &path);
-
 
             /**
              * \brief Get the texture.
@@ -63,6 +60,6 @@ namespace gd
         private:
             sf::Texture _texture;
     };
-}
+} // namespace gd
 
 #endif /* !GRADE_DE_TEXTURE_SFML_HPP_ */

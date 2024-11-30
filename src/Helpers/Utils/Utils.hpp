@@ -7,16 +7,15 @@
 */
 
 #ifndef RTYPE_UTILS_HPP_
-    #define RTYPE_UTILS_HPP_
+#define RTYPE_UTILS_HPP_
 
-    /*  ---- INCLUDES ---- */
-    #include <string>
-    #include <vector>
-    #include <sys/stat.h>
-    #include <algorithm>
+/*  ---- INCLUDES ---- */
+#include <algorithm>
+#include <string>
+#include <sys/stat.h>
+#include <vector>
 
-
-    /*  ---- CLASS ---- */
+/*  ---- CLASS ---- */
 namespace RType
 {
     namespace Helpers
@@ -67,9 +66,9 @@ namespace RType
              *
              * @return The trimmed string
              */
-            std::string trim(const std::string& str);
-        }
-    }
-}
+            std::string trim(const std::string &str);
+        } // namespace Utils
+    } // namespace Helpers
+} // namespace RType
 
 #endif /* !RTYPE_UTILS_HPP_ */

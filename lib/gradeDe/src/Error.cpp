@@ -9,7 +9,6 @@
 /*  ---- INCLUDES ---- */
 #include "GradeDe/Error.hpp"
 
-
 namespace gd
 {
     Error::Error(const std::string &what, const std::string &where)
@@ -33,4 +32,4 @@ namespace gd
         if (!error.where().empty())
             std::cerr << "At: " << error.where() << std::endl;
     }
-}
+} // namespace gd

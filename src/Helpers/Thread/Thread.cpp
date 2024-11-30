@@ -6,11 +6,10 @@
     --U-----U------------------------
 */
 
-    /*  ---- INCLUDES ---- */
+/*  ---- INCLUDES ---- */
 #include "Thread.hpp"
 
-
-    /*  ---- FUNCTIONS ---- */
+/*  ---- FUNCTIONS ---- */
 namespace RType
 {
     namespace Helpers
@@ -40,5 +39,5 @@ namespace RType
                 _running = false;
             }
         }
-    }
-}
+    } // namespace Helpers
+} // namespace RType
