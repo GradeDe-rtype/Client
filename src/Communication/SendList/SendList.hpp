@@ -28,7 +28,7 @@ namespace RType {
                 int size();
 
             private:
-                Mutex _mutex;
+                RType::Helpers::Mutex _mutex;
                 std::vector<std::string> _list;
         };
     }

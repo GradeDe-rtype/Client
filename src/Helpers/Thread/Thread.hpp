@@ -17,37 +17,39 @@
     /*  ---- CLASS ---- */
 namespace RType
 {
-    /**
-     * @brief Thread class
-     */
-    class Thread
+    namespace Helpers
     {
-        public:
-            /**
-             * @brief Construct a new Thread
-             */
-            Thread();
-            ~Thread();
+        /**
+         * @brief Thread class
+         */
+        class Thread
+        {
+            public:
+                /**
+                 * @brief Construct a new Thread
+                 */
+                Thread();
+                ~Thread();
 
-            /**
-             * @brief Start the thread with a given function
-             *
-             * @param function The function to run in the thread
-             */
-            void start(std::function<void()> function);
+                /**
+                 * @brief Start the thread with a given function
+                 *
+                 * @param function The function to run in the thread
+                 */
+                void start(std::function<void()> function);
 
-            /**
-             * @brief Join the thread
-             *
-             * @brief This function blocks until the thread finishes its execution.
-             */
-            void join();
+                /**
+                 * @brief Join the thread
+                 *
+                 * @brief This function blocks until the thread finishes its execution.
+                 */
+                void join();
 
-        private:
-            std::thread _thread;
-            bool _running;
-
-    };
+            private:
+                std::thread _thread;
+                bool _running;
+        };
+    }
 }
 
 #endif

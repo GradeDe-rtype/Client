@@ -11,7 +11,7 @@
 namespace RType {
     const char* Parsing::Help::what() const noexcept
     {
-        std::ifstream file(Utils::Path::get()->path() + "data/help.txt");
+        std::ifstream file(RType::Helpers::Path::get()->path() + "data/help.txt");
         if (!file.is_open())
             return "Failed to open help file.";
         std::string content;

@@ -8,8 +8,10 @@
 
 #include "Path.hpp"
 
-namespace RType {
-    namespace Utils {
+namespace RType
+{
+    namespace Helpers
+    {
         Path *Path::get()
         {
             static Path instance;
@@ -20,9 +22,9 @@ namespace RType {
         {
             _path = "assets/";
 
-            if (!DirectoryExists(_path.c_str()))
+            if (!Utils::DirectoryExists(_path.c_str()))
                 _path = "../assets/";
-            if (!DirectoryExists(_path.c_str()))
+            if (!Utils::DirectoryExists(_path.c_str()))
                 _path = "Client/assets/";
         }
 

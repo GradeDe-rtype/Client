@@ -13,29 +13,32 @@
     /*  ---- FUNCTIONS ---- */
 namespace RType
 {
-    Thread::Thread()
+    namespace Helpers
     {
-        _running = false;
-    }
-
-    Thread::~Thread()
-    {
-        this->join();
-    }
-
-    void Thread::start(std::function<void()> function)
-    {
-        if (!_running) {
-            _running = true;
-            _thread = std::thread(function);
-        }
-    }
-
-    void Thread::join()
-    {
-        if (_running && _thread.joinable()) {
-            _thread.join();
+        Thread::Thread()
+        {
             _running = false;
+        }
+
+        Thread::~Thread()
+        {
+            this->join();
+        }
+
+        void Thread::start(std::function<void()> function)
+        {
+            if (!_running) {
+                _running = true;
+                _thread = std::thread(function);
+            }
+        }
+
+        void Thread::join()
+        {
+            if (_running && _thread.joinable()) {
+                _thread.join();
+                _running = false;
+            }
         }
     }
 }

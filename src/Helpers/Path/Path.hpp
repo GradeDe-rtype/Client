@@ -16,9 +16,12 @@
 
 
     /*  ---- CLASS ---- */
-namespace RType {
-    namespace Utils {
-        class Path {
+namespace RType
+{
+    namespace Helpers
+    {
+        class Path
+        {
             public:
                 static Path *get();
                 std::string path() const;

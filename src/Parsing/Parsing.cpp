@@ -56,7 +56,7 @@ namespace RType {
             throw ParsingError("Invalid argument: \"-p\". Port already set.");
         if (i + 1 >= argc)
             throw ParsingError("Invalid argument for \"-p\": \". Expect a value.");
-        if (!Utils::isNumber(argv[i + 1]))
+        if (!RType::Helpers::Utils::isNumber(argv[i + 1]))
             throw ParsingError("Invalid argument for \"-p\": \"" + std::string(argv[i + 1]) + "\". Expect a number.");
         if (std::stoi(argv[i + 1]) < 0 || std::stoi(argv[i + 1]) > 65535)
                 throw ParsingError("Invalid argument for \"-p\": \"" + std::string(argv[i + 1]) + "\". Expect a number between 0 and 65535.");
@@ -71,7 +71,7 @@ namespace RType {
             throw ParsingError("Invalid argument for \"-i\". Expect a value.");
         if (std::string(argv[i + 1]).empty())
             throw ParsingError("Invalid argument for \"-i\". Expect an ip adress.");
-        if (!Utils::isIpAdress(argv[i + 1]) && (std::string(argv[i + 1]) != "localhost"))
+        if (!RType::Helpers::Utils::isIpAdress(argv[i + 1]) && (std::string(argv[i + 1]) != "localhost"))
             throw ParsingError("Invalid argument for \"-p\": \"" + std::string(argv[i + 1]) + "\". Expect a number.");
         if (std::string(argv[i + 1]) == "localhost")
             _ipAdress = "0.0.0.0";
@@ -81,11 +81,11 @@ namespace RType {
 
     void Parsing::_parseNoArgs()
     {
-        Papaya tmp = Papaya(Utils::Path::get()->path() + "data", "connect");
+        Papaya tmp = Papaya(RType::Helpers::Path::get()->path() + "data", "connect");
         std::string tmpPort = tmp.getData("ref", "ref", "port");
         if (tmpPort.empty())
             throw ParsingError("No port in the data file.");
-        if (!Utils::isNumber(tmpPort))
+        if (!RType::Helpers::Utils::isNumber(tmpPort))
             throw ParsingError("Invalid port in the data file. Expect a number.");
         _port = std::stoi(tmpPort);
 
