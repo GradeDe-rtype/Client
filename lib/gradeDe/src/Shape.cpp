@@ -20,6 +20,17 @@ namespace gd
         _shape.setPosition(_position.x, _position.y);
     }
 
+    void Shape::createRectangle(float width, float height)
+    {
+        _points = {
+            {0, 0},
+            {width, 0},
+            {width, height},
+            {0, height},
+        };
+        create(_points);
+    }
+
     void Shape::setFillColor(gd::Color color)
     {
         _fillColor = color;

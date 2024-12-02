@@ -10,14 +10,14 @@
 #define RTYPE_DISPLAY_CLIENT_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/FrameRate.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
+#include "SceneManager.hpp"
 #include "SendList.hpp"
-
-#include <memory>
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -27,7 +27,7 @@ namespace RType
         class Client
         {
             public:
-                Client(std::shared_ptr<RType::Communication::SendList> sendList);
+                Client();
                 ~Client() = default;
 
                 void run();
@@ -36,9 +36,11 @@ namespace RType
                 gd::Window _window;
                 gd::Event _event;
                 gd::Time _time;
-                std::shared_ptr<RType::Communication::SendList> _sendList;
+                std::unique_ptr<RType::Display::Scene::SceneManager> _sceneManager;
 
                 void _handleEvent();
+                void _draw();
+                void _handleGeneralEvent();
         };
     } // namespace Display
 } // namespace RType

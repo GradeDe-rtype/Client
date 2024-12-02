@@ -45,6 +45,13 @@ namespace gd
             void create(std::vector<gd::Vector2<float>> points);
 
             /**
+             * \brief Create a rectangle.
+             *
+             * \param size The size of the rectangle.
+             */
+            void createRectangle(float width, float height);
+
+            /**
              * \brief Set the fill color of the shape.
              *
              * This function sets the fill color of the shape.

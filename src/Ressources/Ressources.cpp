@@ -29,4 +29,15 @@ namespace RType
     {
         return _me;
     }
+
+    std::shared_ptr<RType::Communication::SendList> &Ressources::sendList()
+    {
+        return _sendList;
+    }
+
+    void Ressources::setSendList(std::shared_ptr<RType::Communication::SendList> sendList)
+    {
+        _sendList = sendList;
+    }
+
 } // namespace RType

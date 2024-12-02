@@ -40,7 +40,7 @@ namespace RType
 
         void Client::shutdown()
         {
-            _state = DISCONNECT;
+            _state = (_state == CONNECTED) ? DISCONNECT : DOWN;
         }
 
         void Client::_connect()
