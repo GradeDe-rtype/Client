@@ -10,10 +10,10 @@
 #define RFC_ARG_PARSER_HPP_
 
 /*  ---- INCLUDES ---- */
-#include <iostream>
-#include <string>
 #include <unordered_map>
+#include <iostream>
 #include <vector>
+#include <string>
 
 /*  ---- CLASS ---- */
 class rfcArgParser
@@ -83,6 +83,15 @@ class rfcArgParser
          * @return `std::unordered_map<std::string, std::string>` The parsed object
          */
         static std::unordered_map<std::string, std::string> ParseObject(std::string str);
+
+        /**
+         * @brief Create a object
+         *
+         * @param obj The map containing all the object informations
+         *
+         * @return std::string Representing the created object
+         */
+        static std::string CreateObject(std::unordered_map<std::string, std::string> obj);
 
     private:
         /**

@@ -10,7 +10,9 @@
 #define RTYPE_DISPLAY_PLAYER_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <unordered_map>
 #include "GradeDe/Shape.hpp"
+#include "rfcArgParser.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -20,13 +22,35 @@ namespace RType
         class Player
         {
             public:
-                Player(gd::Vector2<float> position = {0, 0});
+                Player(int id = 0, std::string color = "#FFFFFF", int x = 0, int y = 0, int health = 100);
                 ~Player() = default;
 
                 gd::Shape &shape();
 
+                void setId(int id);
+                void setColor(std::string color);
+                void setHealth(int health);
+                void setX(int x);
+                void setY(int y);
+                void setPosition(int x, int y);
+                void move(int x, int y);
+
+                int getId() const;
+                std::string getColor() const;
+                int getHealth() const;
+                int getX() const;
+                int getY() const;
+                std::string getPlayerInfo() const;
+                std::string getPlayerSmallInfo() const;
+                std::string getPlayerPosition() const;
+
             private:
                 gd::Shape _shape;
+                int _id;
+                std::string _color;
+                int _health;
+                int _x;
+                int _y;
         };
     } // namespace Display
 } // namespace RType

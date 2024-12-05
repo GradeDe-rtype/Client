@@ -29,10 +29,22 @@ std::unordered_map<std::string, std::string> rfcArgParser::ParseObject(std::stri
     std::vector<std::string> tmpArray = _split(tmp, ',');
 
     for (std::string s : tmpArray) {
-        std::cerr << "s: {" << s << "}" << std::endl;
         std::vector<std::string> tmpPair = _split(s, ':');
         result[tmpPair[0]] = tmpPair[1];
     }
+    return result;
+}
+
+std::string rfcArgParser::CreateObject(std::unordered_map<std::string, std::string> obj)
+{
+    if (obj.size() == 0)
+        throw rfcArgParser::Error("Invalid object format, empty object", "rfcArgParser::CreateObject");
+    std::string result = "{";
+    for (auto it = obj.begin(); it != obj.end(); it++) {
+        result += it->first + ":" + it->second + ",";
+    }
+    result.pop_back();
+    result += "}";
     return result;
 }
 

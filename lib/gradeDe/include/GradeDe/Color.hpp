@@ -10,6 +10,7 @@
 #define GRADE_DE_COLOR_SFML_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <string>
 
 /*  ---- CLASS ---- */
 namespace gd
@@ -37,7 +38,7 @@ namespace gd
              * \param b The blue component of the color.
              * \param a The alpha component of the color.
              */
-            Color(int r, int g, int b, int a = 255);
+            Color(int r = 0, int g = 0, int b = 0, int a = 255);
 
             /**
              * \brief Default destructor.
@@ -108,6 +109,14 @@ namespace gd
              * \brief Predefined color: Transparent.
              */
             static const gd::Color Transparent;
+
+            /**
+             * \brief Convert a color to a hexadecimal string.
+             *
+             * \param color The color to convert.
+             * \return The hexadecimal string.
+             */
+            static const gd::Color fromHex(std::string hex);
     };
 } // namespace gd
 

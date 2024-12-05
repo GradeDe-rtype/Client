@@ -16,10 +16,6 @@ namespace RType
         return &instance;
     }
 
-    Ressources::Ressources()
-    {
-    }
-
     std::unordered_map<std::string, RType::Display::Player> &Ressources::players()
     {
         return _players;

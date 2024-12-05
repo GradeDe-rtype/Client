@@ -33,9 +33,9 @@ namespace RType
             void setSendList(std::shared_ptr<RType::Communication::SendList> sendList);
 
         private:
-            Ressources();
+            Ressources() = default;
 
-            RType::Display::Player _me;
+            RType::Display::Player _me = RType::Display::Player(0, "#FFFFFF", 400, 300, 100);
             std::unordered_map<std::string, RType::Display::Player> _players;
             std::shared_ptr<RType::Communication::SendList> _sendList;
     };

@@ -30,26 +30,26 @@ namespace RType
 
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape)) return "menu";
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) && position.y >= size.y / 2) {
-                    RType::Ressources::get()->me().shape().move({0, -15});
+                    RType::Ressources::get()->me().move(0, -15);
                     if (RType::Ressources::get()->me().shape().getRotation() > -30)
                         RType::Ressources::get()->me().shape().rotate(-10);
                     orientationReset = false;
-                    RType::Ressources::get()->sendList()->push("UP");
+                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) && position.y <= window.getHeight() - size.y / 2) {
-                    RType::Ressources::get()->me().shape().move({0, 15});
+                    RType::Ressources::get()->me().move(0, 15);
                     if (RType::Ressources::get()->me().shape().getRotation() < 30)
                         RType::Ressources::get()->me().shape().rotate(10);
                     orientationReset = false;
-                    RType::Ressources::get()->sendList()->push("DOWN");
+                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) && position.x >= size.x / 2) {
-                    RType::Ressources::get()->me().shape().move({-15, 0});
-                    RType::Ressources::get()->sendList()->push("LEFT");
+                    RType::Ressources::get()->me().move(-15, 0);
+                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) && position.x <= window.getWidth() - size.x) {
-                    RType::Ressources::get()->me().shape().move({15, 0});
-                    RType::Ressources::get()->sendList()->push("RIGHT");
+                    RType::Ressources::get()->me().move(15, 0);
+                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
                 if (event.joyStick().isConnected()) {
                     if (event.joyStick().isButtonPressed(gd::JoyStick::Button::Home)) window.close();
@@ -66,15 +66,14 @@ namespace RType
                             if (move.y > 0) {
                                 if (RType::Ressources::get()->me().shape().getRotation() < 30)
                                     RType::Ressources::get()->me().shape().rotate(10);
-                                RType::Ressources::get()->sendList()->push("DOWN");
                             }
                             if (move.y < 0) {
                                 if (RType::Ressources::get()->me().shape().getRotation() > -30)
                                     RType::Ressources::get()->me().shape().rotate(-10);
-                                RType::Ressources::get()->sendList()->push("UP");
                             }
                         }
-                        RType::Ressources::get()->me().shape().move(move);
+                        RType::Ressources::get()->me().move(move.x, move.y);
+                        RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                     }
                 }
                 if (orientationReset) {
