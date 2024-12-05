@@ -14,9 +14,9 @@
 #include <iostream>
 #include <memory>
 #include <string>
-
 #include "SendList.hpp"
 #include "Utils.hpp"
+#include "Commands.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -47,6 +47,7 @@ namespace RType
                 boost::asio::ip::tcp::socket _socket;
                 std::vector<std::string> _buffer;
                 std::shared_ptr<RType::Communication::SendList> _sendList;
+                RType::Communication::Commands _commands;
 
                 void _connect();
                 void _connected();

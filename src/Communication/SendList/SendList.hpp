@@ -12,7 +12,6 @@
 /*  ---- INCLUDES ---- */
 #include <string>
 #include <vector>
-
 #include "Mutex.hpp"
 
 /*  ---- CLASS ---- */

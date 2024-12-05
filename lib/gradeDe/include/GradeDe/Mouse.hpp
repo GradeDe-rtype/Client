@@ -11,7 +11,6 @@
 
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
-
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
 

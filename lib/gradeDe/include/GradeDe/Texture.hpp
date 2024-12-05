@@ -13,7 +13,6 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <string>
-
 #include "GradeDe/Error.hpp"
 #include "GradeDe/Vector.hpp"
 

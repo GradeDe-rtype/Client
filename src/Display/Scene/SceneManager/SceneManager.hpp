@@ -13,7 +13,6 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-
 #include "GameScene.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"

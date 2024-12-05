@@ -20,7 +20,7 @@ namespace RType
         class Player
         {
             public:
-                Player();
+                Player(gd::Vector2<float> position = {0, 0});
                 ~Player() = default;
 
                 gd::Shape &shape();

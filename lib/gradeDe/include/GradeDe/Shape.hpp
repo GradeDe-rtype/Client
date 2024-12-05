@@ -12,7 +12,6 @@
 /*  ---- INCLUDES ---- */
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Texture.hpp"
 #include "GradeDe/Vector.hpp"

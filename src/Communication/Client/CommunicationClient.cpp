@@ -60,7 +60,7 @@ namespace RType
 
             if (_buffer.size() > 0) {
                 for (std::string message : _buffer)
-                    std::cout << "Received: " << message << std::endl;
+                    _commands.handleCommand(message);
                 _buffer.clear();
             }
 

@@ -10,7 +10,6 @@
 #include <ctime>
 #include <iostream>
 #include <memory>
-
 #include "CommunicationClient.hpp"
 #include "DisplayClient.hpp"
 #include "Parsing.hpp"

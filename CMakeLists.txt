@@ -40,6 +40,7 @@ target_include_directories(r-type_client PRIVATE
     "src/"
     "src/Communication/"
     "src/Communication/Client/"
+    "src/Communication/Commands/"
     "src/Communication/SendList/"
     "src/Display/"
     "src/Display/Client/"

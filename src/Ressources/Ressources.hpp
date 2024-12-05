@@ -13,7 +13,6 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-
 #include "Player.hpp"
 #include "SendList.hpp"
 #include "Utils.hpp"

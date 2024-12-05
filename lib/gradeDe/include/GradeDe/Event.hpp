@@ -12,7 +12,6 @@
 /*  ---- INCLUDES ---- */
 #include <SFML/Window/Event.hpp>
 #include <vector>
-
 #include "GradeDe/JoyStick.hpp"
 #include "GradeDe/KeyBoard.hpp"
 #include "GradeDe/Mouse.hpp"

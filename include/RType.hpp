@@ -12,7 +12,6 @@
 /*  ---- INCLUDES ---- */
 #include <iostream>
 #include <memory>
-
 #include "Papaya.hpp"
 #include "rfcArgParser.hpp"
 

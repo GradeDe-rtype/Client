@@ -97,6 +97,8 @@ namespace RType
             void Game::draw(gd::Window &window)
             {
                 RType::Ressources::get()->me().shape().draw(window);
+                for (auto &player : RType::Ressources::get()->players())
+                    player.second.shape().draw(window);
             }
         } // namespace Scene
     } // namespace Display

@@ -12,7 +12,7 @@ namespace RType
 {
     namespace Display
     {
-        Player::Player()
+        Player::Player(gd::Vector2<float> position)
         {
             float size = 40;
             _shape.create({{0, 0}, {size, size / 2}, {0, size}, {size / 4, size / 2}});
@@ -20,6 +20,7 @@ namespace RType
             _shape.setFillColor(gd::Color::Transparent);
             _shape.setOutlineColor(gd::Color::White);
             _shape.setOutlineThickness(5);
+            _shape.setPosition(position);
         }
 
         gd::Shape &Player::shape()
