@@ -27,7 +27,8 @@ namespace RType
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)
             {
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space)) return "game";
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Released) return "game";
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) window.close();
                 return "";
             }
 

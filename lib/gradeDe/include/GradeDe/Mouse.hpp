@@ -10,7 +10,9 @@
 #define GRADE_DE_MOUSE_SFML_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <tuple>
 #include <unordered_map>
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
 
@@ -58,6 +60,23 @@ namespace gd
                 ButtonCount
             };
 
+            enum State {
+                /**
+                 * \brief Button is pressed.
+                 */
+                Pressed,
+
+                /**
+                 * \brief Button is released.
+                 */
+                Released,
+
+                /**
+                 * \brief Button is not pressed.
+                 */
+                None,
+            };
+
             /**
              * \brief Constructor of the Mouse class.
              */
@@ -74,7 +93,7 @@ namespace gd
              * \param key The key to set the state of.
              * \param state The state to set the key to.
              */
-            void setButtonState(Button button, bool state);
+            void setButtonState(Button button, State state);
 
             /**
              * \brief Get the state of a key.
@@ -83,7 +102,7 @@ namespace gd
              *
              * \return The state of the key.
              */
-            bool getButtonState(Button button) const;
+            State getButtonState(Button button);
 
             /**
              * \brief Get the position of the mouse.
@@ -95,7 +114,7 @@ namespace gd
             gd::Vector2<int> getPosition(gd::Window &window) const;
 
         private:
-            std::unordered_map<Button, bool> _buttons;
+            std::unordered_map<Button, std::tuple<State, gd::Time>> _buttons;
     };
 } // namespace gd
 

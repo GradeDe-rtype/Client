@@ -24,7 +24,7 @@ namespace gd
             /**
              * \brief Default constructor.
              */
-            Time() = default;
+            Time();
 
             /**
              * \brief Default destructor.

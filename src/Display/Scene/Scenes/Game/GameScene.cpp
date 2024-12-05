@@ -28,31 +28,23 @@ namespace RType
                 gd::Vector2<float> position = RType::Ressources::get()->me().shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me().shape().getSize();
 
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape)) return "menu";
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) && position.y >= size.y / 2) {
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed && position.y >= size.y / 2) {
                     RType::Ressources::get()->me().move(0, -15);
                     if (RType::Ressources::get()->me().shape().getRotation() > -30)
-                        RType::Ressources::get()->me().shape().rotate(-10);
+                        RType::Ressources::get()->me().shape().rotate(RType::Ressources::get()->me().shape().getRotation() > 0 ? -20 : -10);
                     orientationReset = false;
-                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) && position.y <= window.getHeight() - size.y / 2) {
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) {
                     RType::Ressources::get()->me().move(0, 15);
                     if (RType::Ressources::get()->me().shape().getRotation() < 30)
-                        RType::Ressources::get()->me().shape().rotate(10);
+                        RType::Ressources::get()->me().shape().rotate(RType::Ressources::get()->me().shape().getRotation() < 0 ? 20 : 10);
                     orientationReset = false;
-                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                 }
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) && position.x >= size.x / 2) {
-                    RType::Ressources::get()->me().move(-15, 0);
-                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
-                }
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) && position.x <= window.getWidth() - size.x) {
-                    RType::Ressources::get()->me().move(15, 0);
-                    RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
-                }
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed && position.x >= size.x / 2) RType::Ressources::get()->me().move(-15, 0);
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed && position.x <= window.getWidth() - size.x) RType::Ressources::get()->me().move(15, 0);
                 if (event.joyStick().isConnected()) {
-                    if (event.joyStick().isButtonPressed(gd::JoyStick::Button::Home)) window.close();
+                    if (event.joyStick().getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                     if (event.joyStick().isJoyStickMoved()) {
                         gd::Vector2<float> move = {0, 0};
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LX)) {
@@ -62,18 +54,9 @@ namespace RType
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LY)) {
                             float percent = event.joyStick().getAxisPosition(gd::JoyStick::Axis::LY) / 100;
                             move.y = 15 * percent;
-                            orientationReset = false;
-                            if (move.y > 0) {
-                                if (RType::Ressources::get()->me().shape().getRotation() < 30)
-                                    RType::Ressources::get()->me().shape().rotate(10);
-                            }
-                            if (move.y < 0) {
-                                if (RType::Ressources::get()->me().shape().getRotation() > -30)
-                                    RType::Ressources::get()->me().shape().rotate(-10);
-                            }
+                            RType::Ressources::get()->me().shape().setRotation(50 * percent);
                         }
                         RType::Ressources::get()->me().move(move.x, move.y);
-                        RType::Ressources::get()->sendList()->push("position " + RType::Ressources::get()->me().getPlayerPosition());
                     }
                 }
                 if (orientationReset) {

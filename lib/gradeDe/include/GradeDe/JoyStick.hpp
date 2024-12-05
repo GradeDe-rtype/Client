@@ -11,7 +11,9 @@
 
 /*  ---- INCLUDES ---- */
 #include <SFML/Window/Joystick.hpp>
+#include <tuple>
 #include <unordered_map>
+#include "GradeDe/Time.hpp"
 
 /*  ---- CLASS ---- */
 namespace gd
@@ -31,42 +33,47 @@ namespace gd
                 /**
                  * \brief Button code for the B button.
                  */
-                B = 1,
+                B,
 
                 /**
                  * \brief Button code for the X button.
                  */
-                X = 2,
+                X,
 
                 /**
                  * \brief Button code for the Y button.
                  */
-                Y = 3,
+                Y,
 
                 /**
                  * \brief Button code for the LB button.
                  */
-                LB = 4,
+                LB,
 
                 /**
                  * \brief Button code for the RB button.
                  */
-                RB = 5,
+                RB,
 
                 /**
                  * \brief Button code for the Select button.
                  */
-                Select = 6,
+                Select,
 
                 /**
                  * \brief Button code for the Start button.
                  */
-                Menu = 7,
+                Menu,
 
                 /**
                  * \brief Button code for the Home button.
                  */
-                Home = 8,
+                Home,
+
+                /**
+                 * \brief Key code for the total number of buttons.
+                 */
+                ButtonCount,
             };
 
             enum Axis {
@@ -83,7 +90,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Left JoyStick Y axis.
                  */
-                LeftJoyStickY = 1,
+                LeftJoyStickY,
 
                 /**
                  * \brief Axis code for the Left JoyStick Y axis.
@@ -93,7 +100,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Left Trigger.
                  */
-                LeftTrigger = 2,
+                LeftTrigger,
 
                 /**
                  * \brief Axis code for the Left Trigger.
@@ -103,7 +110,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Right Trigger.
                  */
-                RightTrigger = 3,
+                RightTrigger,
 
                 /**
                  * \brief Axis code for the Right Trigger.
@@ -113,7 +120,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Left JoyStick X axis.
                  */
-                RightJoyStickX = 4,
+                RightJoyStickX,
 
                 /**
                  * \brief Axis code for the Left JoyStick Y axis.
@@ -123,7 +130,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Right Trigger.
                  */
-                RightJoyStickY = 5,
+                RightJoyStickY,
 
                 /**
                  * \brief Axis code for the Right Trigger.
@@ -133,7 +140,7 @@ namespace gd
                 /**
                  * \brief Axis code for the Cross X axis.
                  */
-                CrossX = 6,
+                CrossX,
 
                 /**
                  * \brief Axis code for the Cross X axis.
@@ -143,12 +150,34 @@ namespace gd
                 /**
                  * \brief Axis code for the Cross Y axis.
                  */
-                CrossY = 7,
+                CrossY,
 
                 /**
                  * \brief Axis code for the Cross Y axis.
                  */
                 CY = CrossY,
+
+                /**
+                 * \brief Key code for the total number of axis.
+                 */
+                AxisCount,
+            };
+
+            enum State {
+                /**
+                 * \brief Button is pressed.
+                 */
+                Pressed,
+
+                /**
+                 * \brief Button is released.
+                 */
+                Released,
+
+                /**
+                 * \brief Button is not pressed.
+                 */
+                None,
             };
 
             /**
@@ -173,7 +202,7 @@ namespace gd
             /**
              * \brief Set the state of a button.
              */
-            void setButtonPressed(Button button, bool pressed);
+            void setButtonState(Button button, State pressed);
 
             /**
              * \brief Set the position of an axis.
@@ -188,7 +217,7 @@ namespace gd
             /**
              * \brief Check if a button is pressed.
              */
-            bool isButtonPressed(Button button) const;
+            State getButtonState(Button button);
 
             /**
              * \brief Check if one of the joystick is moved.
@@ -206,7 +235,7 @@ namespace gd
             float getAxisPosition(Axis axis) const;
 
         private:
-            std::unordered_map<Button, bool> _buttons;
+            std::unordered_map<Button, std::tuple<State, gd::Time>> _buttons;
             std::unordered_map<Axis, float> _axis;
             bool _isConnected;
     };

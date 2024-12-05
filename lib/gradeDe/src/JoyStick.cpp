@@ -15,23 +15,11 @@ namespace gd
     {
         _isConnected = sf::Joystick::isConnected(id);
 
-        _buttons[Button::A] = false;
-        _buttons[Button::B] = false;
-        _buttons[Button::X] = false;
-        _buttons[Button::Y] = false;
-        _buttons[Button::LB] = false;
-        _buttons[Button::RB] = false;
-        _buttons[Button::Select] = false;
-        _buttons[Button::Home] = false;
+        for (Button button = Button::A; button < Button::ButtonCount; button = static_cast<Button>(button + 1))
+            _buttons[button] = std::make_tuple(State::None, gd::Time());
 
-        _axis[Axis::LX] = 0;
-        _axis[Axis::LY] = 0;
-        _axis[Axis::RX] = 0;
-        _axis[Axis::RY] = 0;
-        _axis[Axis::LT] = 0;
-        _axis[Axis::RT] = 0;
-        _axis[Axis::CX] = 0;
-        _axis[Axis::CY] = 0;
+        for (Axis axis = Axis::LeftJoyStickX; axis < Axis::AxisCount; axis = static_cast<Axis>(axis + 1))
+            _axis[axis] = 0;
     }
 
     void JoyStick::setConnected(bool connected)
@@ -39,9 +27,11 @@ namespace gd
         _isConnected = connected;
     }
 
-    void JoyStick::setButtonPressed(Button button, bool pressed)
+    void JoyStick::setButtonState(Button button, JoyStick::State state)
     {
-        _buttons[button] = pressed;
+        if (_buttons.find(button) == _buttons.end()) return;
+        std::get<0>(_buttons.at(button)) = state;
+        std::get<1>(_buttons.at(button)).reset();
     }
 
     void JoyStick::setAxisMoved(Axis axis, float position)
@@ -54,17 +44,21 @@ namespace gd
         return _isConnected;
     }
 
-    bool JoyStick::isButtonPressed(Button button) const
+    JoyStick::State JoyStick::getButtonState(Button button)
     {
-        return _buttons.at(button);
+        if (_buttons.find(button) == _buttons.end()) return State::None;
+        if (std::get<0>(_buttons.at(button)) == State::Released) {
+            if (std::get<1>(_buttons.at(button)).getElapsedTime() >= 100)
+                setButtonState(button, State::None);
+            return std::get<0>(_buttons.at(button));
+        }
+        return std::get<0>(_buttons.at(button));
     }
 
     bool JoyStick::isJoyStickMoved() const
     {
-        for (const auto &axis : _axis) {
-            if (axis.second != 0)
-                return true;
-        }
+        for (const auto &axis : _axis)
+            if (axis.second != 0) return true;
         return false;
     }
 

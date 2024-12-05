@@ -27,16 +27,16 @@ namespace gd
                 _close = true;
                 break;
             case sf::Event::KeyPressed:
-                _keyBoard.setKeyState(static_cast<gd::KeyBoard::Key>(_event.key.code), true);
+                _keyBoard.setKeyState(static_cast<gd::KeyBoard::Key>(_event.key.code), gd::KeyBoard::State::Pressed);
                 break;
             case sf::Event::KeyReleased:
-                _keyBoard.setKeyState(static_cast<gd::KeyBoard::Key>(_event.key.code), false);
+                _keyBoard.setKeyState(static_cast<gd::KeyBoard::Key>(_event.key.code), gd::KeyBoard::State::Released);
                 break;
             case sf::Event::MouseButtonPressed:
-                _mouse.setButtonState(static_cast<gd::Mouse::Button>(_event.mouseButton.button), true);
+                _mouse.setButtonState(static_cast<gd::Mouse::Button>(_event.mouseButton.button), gd::Mouse::State::Pressed);
                 break;
             case sf::Event::MouseButtonReleased:
-                _mouse.setButtonState(static_cast<gd::Mouse::Button>(_event.mouseButton.button), false);
+                _mouse.setButtonState(static_cast<gd::Mouse::Button>(_event.mouseButton.button), gd::Mouse::State::Released);
                 break;
             case sf::Event::JoystickConnected:
                 for (auto &joyStick : _joySticks)
@@ -51,12 +51,12 @@ namespace gd
             case sf::Event::JoystickButtonPressed:
                 for (auto &joyStick : _joySticks)
                     if (joyStick.first == _event.joystickButton.joystickId)
-                        joyStick.second.setButtonPressed(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), true);
+                        joyStick.second.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Pressed);
                 break;
             case sf::Event::JoystickButtonReleased:
                 for (auto &joyStick : _joySticks)
                     if (joyStick.first == _event.joystickButton.joystickId)
-                        joyStick.second.setButtonPressed(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), false);
+                        joyStick.second.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Released);
                 break;
             case sf::Event::JoystickMoved:
                 for (auto &joyStick : _joySticks)

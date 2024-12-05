@@ -10,7 +10,9 @@
 #define GRADE_DE_KEYBOARD_SFML_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <tuple>
 #include <unordered_map>
+#include "GradeDe/Time.hpp"
 
 /*  ---- CLASS ---- */
 namespace gd
@@ -578,6 +580,23 @@ namespace gd
                 Quote = Apostrophe
             };
 
+            enum State {
+                /**
+                 * \brief Button is pressed.
+                 */
+                Pressed,
+
+                /**
+                 * \brief Button is released.
+                 */
+                Released,
+
+                /**
+                 * \brief Button is not pressed.
+                 */
+                None,
+            };
+
             /**
              * \brief Constructor of the KeyBoard class.
              */
@@ -594,7 +613,7 @@ namespace gd
              * \param key The key to set the state of.
              * \param state The state to set the key to.
              */
-            void setKeyState(Key key, bool state);
+            void setKeyState(Key key, State state);
 
             /**
              * \brief Get the state of a key.
@@ -603,10 +622,10 @@ namespace gd
              *
              * \return The state of the key.
              */
-            bool getKeyState(Key key) const;
+            State getKeyState(Key key);
 
         private:
-            std::unordered_map<Key, bool> _keys;
+            std::unordered_map<Key, std::tuple<State, gd::Time>> _keys;
     };
 } // namespace gd
 

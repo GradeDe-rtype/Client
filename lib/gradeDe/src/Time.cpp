@@ -11,6 +11,12 @@
 
 namespace gd
 {
+    Time::Time()
+    {
+        _clock.restart();
+        _time = _clock.getElapsedTime();
+    }
+
     void Time::reset()
     {
         _clock.restart();
