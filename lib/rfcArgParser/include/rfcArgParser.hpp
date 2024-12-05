@@ -10,10 +10,10 @@
 #define RFC_ARG_PARSER_HPP_
 
 /*  ---- INCLUDES ---- */
-#include <unordered_map>
 #include <iostream>
-#include <vector>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 /*  ---- CLASS ---- */
 class rfcArgParser
