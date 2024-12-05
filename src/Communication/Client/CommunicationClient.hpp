@@ -14,9 +14,9 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include "Commands.hpp"
 #include "SendList.hpp"
 #include "Utils.hpp"
-#include "Commands.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

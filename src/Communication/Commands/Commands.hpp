@@ -12,12 +12,12 @@
 /*  ---- INCLUDES ---- */
 #include <iostream>
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
+#include "Player.hpp"
+#include "Ressources.hpp"
 #include "Utils.hpp"
 #include "rfcArgParser.hpp"
-#include "Ressources.hpp"
-#include "Player.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
