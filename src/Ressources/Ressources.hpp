@@ -12,7 +12,9 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
+#include <tuple>
 #include <unordered_map>
+#include "GradeDe/Time.hpp"
 #include "Player.hpp"
 #include "SendList.hpp"
 #include "Utils.hpp"
@@ -29,15 +31,19 @@ namespace RType
             std::unordered_map<std::string, RType::Display::Player> &players();
             RType::Display::Player &me();
             std::shared_ptr<RType::Communication::SendList> &sendList();
+            void update();
 
             void setSendList(std::shared_ptr<RType::Communication::SendList> sendList);
 
         private:
-            Ressources() = default;
+            Ressources();
 
             RType::Display::Player _me = RType::Display::Player(0, "#FFFFFF", 400, 300, 100);
             std::unordered_map<std::string, RType::Display::Player> _players;
-            std::shared_ptr<RType::Communication::SendList> _sendList;
+            std::shared_ptr<RType::Communication::SendList> _sendList = nullptr;
+            std::vector<std::tuple<gd::Time, int, void (Ressources::*)()>> _timers;
+
+            void _sendPlayerPosition();
     };
 } // namespace RType
 

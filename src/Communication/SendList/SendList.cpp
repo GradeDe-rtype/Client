@@ -14,8 +14,14 @@ namespace RType
 {
     namespace Communication
     {
+        void SendList::unlock()
+        {
+            _isLocked = false;
+        }
+
         void SendList::push(std::string message)
         {
+            if (_isLocked) return;
             _mutex.lock();
             _list.push_back(message);
             _mutex.unlock();

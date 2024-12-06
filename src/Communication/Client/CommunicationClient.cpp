@@ -51,6 +51,7 @@ namespace RType
             _socket.connect(endpoint, error);
             if (error) return;
             _state = CONNECTED;
+            _sendList->unlock();
         }
 
         void Client::_connected()

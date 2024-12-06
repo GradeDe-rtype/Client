@@ -16,6 +16,7 @@ namespace RType
         {
             _commands["connect"] = &Commands::_handleConnect;
             _commands["disconnect"] = &Commands::_handleDisconnect;
+            _commands["p_position"] = &Commands::_handlePosition;
         }
 
         void Commands::handleCommand(std::string command)
@@ -35,6 +36,12 @@ namespace RType
         void Commands::_handleDisconnect(std::vector<std::string> args)
         {
             RType::Ressources::get()->players().erase(args[1]);
+        }
+
+        void Commands::_handlePosition(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
+            RType::Ressources::get()->players()[obj["player_id"]].setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
     } // namespace Communication
 } // namespace RType

@@ -10,6 +10,11 @@
 
 namespace RType
 {
+    Ressources::Ressources()
+    {
+        _timers.push_back(std::make_tuple(gd::Time(), 100, &Ressources::_sendPlayerPosition));
+    }
+
     Ressources *Ressources::get()
     {
         static Ressources instance;
@@ -34,6 +39,21 @@ namespace RType
     void Ressources::setSendList(std::shared_ptr<RType::Communication::SendList> sendList)
     {
         _sendList = sendList;
+    }
+
+    void Ressources::update()
+    {
+        for (auto &timer : _timers) {
+            if (std::get<0>(timer).getElapsedTime() >= std::get<1>(timer)) {
+                (this->*std::get<2>(timer))();
+                std::get<0>(timer).reset();
+            }
+        }
+    }
+
+    void Ressources::_sendPlayerPosition()
+    {
+        _sendList->push("position " + _me.getPlayerPosition());
     }
 
 } // namespace RType

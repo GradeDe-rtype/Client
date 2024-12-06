@@ -26,6 +26,7 @@ namespace RType
         void Client::run()
         {
             while (_window.isOpen()) {
+                Ressources::get()->update();
                 if (_time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
                 _time.reset();
                 _handleEvent();

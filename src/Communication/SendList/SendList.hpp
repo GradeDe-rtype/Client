@@ -25,6 +25,7 @@ namespace RType
                 SendList() = default;
                 ~SendList() = default;
 
+                void unlock();
                 void push(std::string message);
                 std::vector<std::string> pop();
                 int size();
@@ -32,6 +33,7 @@ namespace RType
             private:
                 RType::Helpers::Mutex _mutex;
                 std::vector<std::string> _list;
+                bool _isLocked = false;
         };
     } // namespace Communication
 } // namespace RType
