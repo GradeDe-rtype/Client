@@ -60,11 +60,17 @@ namespace RType
             _x = x;
             _y = y;
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
+            _moved = true;
         }
 
         void Player::move(int x, int y)
         {
             setPosition(_x + x, _y + y);
+        }
+
+        void Player::setGoto(int x, int y)
+        {
+            _goto = {x, y};
         }
 
         int Player::getId() const
@@ -92,6 +98,18 @@ namespace RType
             return _y;
         }
 
+        int Player::getSpeed() const
+        {
+            return _speed;
+        }
+
+        bool Player::hasMoved()
+        {
+            bool tmp = _moved;
+            _moved = false;
+            return tmp;
+        }
+
         std::string Player::getPlayerInfo() const
         {
             std::unordered_map<std::string, std::string> tmp;
@@ -117,6 +135,40 @@ namespace RType
             tmp["x"] = std::to_string(_x);
             tmp["y"] = std::to_string(_y);
             return rfcArgParser::CreateObject(tmp);
+        }
+
+        void Player::update()
+        {
+            bool orientationReset = true;
+
+            if (_goto.y >= 0 && _goto.x >= 0) {
+                if (_y > _goto.y) {
+                    if (_shape.getRotation() > -30)
+                        _shape.rotate(_shape.getRotation() > 0 ? -20 : -10);
+                    orientationReset = false;
+                }
+                if (_y < _goto.y) {
+                    if (_shape.getRotation() < 30)
+                        _shape.rotate(_shape.getRotation() < 0 ? 20 : 10);
+                    orientationReset = false;
+                }
+                setPosition(_goto.x, _goto.y);
+                _goto = {-1, -1};
+            }
+            if (orientationReset) {
+                if (_shape.getRotation() > 0) {
+                    if (_shape.getRotation() < 8)
+                        _shape.setRotation(0);
+                    else
+                        _shape.rotate(-8);
+                }
+                if (_shape.getRotation() < 0) {
+                    if (_shape.getRotation() > -8)
+                        _shape.setRotation(0);
+                    else
+                        _shape.rotate(8);
+                }
+            }
         }
     } // namespace Display
 } // namespace RType

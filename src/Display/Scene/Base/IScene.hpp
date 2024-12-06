@@ -55,6 +55,11 @@ namespace RType
                      * @param `window` The window
                      */
                     virtual void draw(gd::Window &window) = 0;
+
+                    /**
+                     * @brief Update the scene
+                     */
+                    virtual void update() = 0;
             };
         } // namespace Scene
     } // namespace Display

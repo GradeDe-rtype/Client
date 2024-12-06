@@ -12,7 +12,7 @@ namespace RType
 {
     Ressources::Ressources()
     {
-        _timers.push_back(std::make_tuple(gd::Time(), 100, &Ressources::_sendPlayerPosition));
+        _timers.push_back(std::make_tuple(gd::Time(), 1, &Ressources::_sendPlayerPosition));
     }
 
     Ressources *Ressources::get()
@@ -53,7 +53,8 @@ namespace RType
 
     void Ressources::_sendPlayerPosition()
     {
-        _sendList->push("position " + _me.getPlayerPosition());
+        if (_me.hasMoved())
+            _sendList->push("position " + _me.getPlayerPosition());
     }
 
 } // namespace RType

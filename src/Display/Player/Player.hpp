@@ -12,6 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
 #include "GradeDe/Shape.hpp"
+#include "GradeDe/Vector.hpp"
 #include "rfcArgParser.hpp"
 
 /*  ---- CLASS ---- */
@@ -26,6 +27,7 @@ namespace RType
                 ~Player() = default;
 
                 gd::Shape &shape();
+                void update();
 
                 void setId(int id);
                 void setColor(std::string color);
@@ -34,6 +36,7 @@ namespace RType
                 void setY(int y);
                 void setPosition(int x, int y);
                 void move(int x, int y);
+                void setGoto(int x, int y);
 
                 int getId() const;
                 std::string getColor() const;
@@ -43,6 +46,8 @@ namespace RType
                 std::string getPlayerInfo() const;
                 std::string getPlayerSmallInfo() const;
                 std::string getPlayerPosition() const;
+                int getSpeed() const;
+                bool hasMoved();
 
             private:
                 gd::Shape _shape;
@@ -51,6 +56,9 @@ namespace RType
                 int _health;
                 int _x;
                 int _y;
+                int _speed = 15;
+                gd::Vector2<int> _goto = {-1, -1};
+                bool _moved = false;
         };
     } // namespace Display
 } // namespace RType

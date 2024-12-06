@@ -62,6 +62,11 @@ namespace RType
                      * @param `window` The window
                      */
                     void draw(gd::Window &window) override;
+
+                    /**
+                     * @brief Update the scene
+                     */
+                    void update() override;
             };
         } // namespace Scene
     } // namespace Display

@@ -30,13 +30,13 @@ namespace RType
 
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed && position.y >= size.y / 2) {
-                    RType::Ressources::get()->me().move(0, -15);
+                    RType::Ressources::get()->me().move(0, -RType::Ressources::get()->me().getSpeed());
                     if (RType::Ressources::get()->me().shape().getRotation() > -30)
                         RType::Ressources::get()->me().shape().rotate(RType::Ressources::get()->me().shape().getRotation() > 0 ? -20 : -10);
                     orientationReset = false;
                 }
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) {
-                    RType::Ressources::get()->me().move(0, 15);
+                    RType::Ressources::get()->me().move(0, RType::Ressources::get()->me().getSpeed());
                     if (RType::Ressources::get()->me().shape().getRotation() < 30)
                         RType::Ressources::get()->me().shape().rotate(RType::Ressources::get()->me().shape().getRotation() < 0 ? 20 : 10);
                     orientationReset = false;
@@ -49,11 +49,11 @@ namespace RType
                         gd::Vector2<float> move = {0, 0};
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LX)) {
                             float percent = event.joyStick().getAxisPosition(gd::JoyStick::Axis::LX) / 100;
-                            move.x = 15 * percent;
+                            move.x = RType::Ressources::get()->me().getSpeed() * percent;
                         }
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LY)) {
                             float percent = event.joyStick().getAxisPosition(gd::JoyStick::Axis::LY) / 100;
-                            move.y = 15 * percent;
+                            move.y = RType::Ressources::get()->me().getSpeed() * percent;
                             RType::Ressources::get()->me().shape().setRotation(50 * percent);
                         }
                         RType::Ressources::get()->me().move(move.x, move.y);
@@ -81,6 +81,12 @@ namespace RType
                 RType::Ressources::get()->me().shape().draw(window);
                 for (auto &player : RType::Ressources::get()->players())
                     player.second.shape().draw(window);
+            }
+
+            void Game::update()
+            {
+                for (auto &player : RType::Ressources::get()->players())
+                    player.second.update();
             }
         } // namespace Scene
     } // namespace Display

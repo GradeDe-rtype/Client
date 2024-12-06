@@ -29,6 +29,7 @@ namespace RType
                 Ressources::get()->update();
                 if (_time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
                 _time.reset();
+                _sceneManager->getScene()->update();
                 _handleEvent();
                 _draw();
             }

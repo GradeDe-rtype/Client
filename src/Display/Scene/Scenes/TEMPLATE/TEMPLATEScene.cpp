@@ -30,6 +30,10 @@ namespace RType
             void TEMPLATE::draw(gd::Window &window)
             {
             }
+
+            void TEMPLATE::update()
+            {
+            }
         } // namespace Scene
     } // namespace Display
 } // namespace RType

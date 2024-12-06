@@ -29,8 +29,7 @@ namespace RType
         void Commands::_handleConnect(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            gd::Vector2<float> pos = {(float)(rand() % 600 + 100), (float)(rand() % 400 + 100)};
-            RType::Ressources::get()->players()[obj["player_id"]] = RType::Display::Player(std::stoi(obj["player_id"]), obj["color"], 100, pos.x, pos.y);
+            RType::Ressources::get()->players()[obj["player_id"]] = RType::Display::Player(std::stoi(obj["player_id"]), obj["color"]);
         }
 
         void Commands::_handleDisconnect(std::vector<std::string> args)
@@ -41,7 +40,7 @@ namespace RType
         void Commands::_handlePosition(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
-            RType::Ressources::get()->players()[obj["player_id"]].setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
+            RType::Ressources::get()->players()[obj["player_id"]].setGoto(std::stoi(obj["x"]), std::stoi(obj["y"]));
         }
     } // namespace Communication
 } // namespace RType

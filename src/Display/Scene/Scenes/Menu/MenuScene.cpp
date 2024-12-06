@@ -36,6 +36,10 @@ namespace RType
             {
                 _background.draw(window);
             }
+
+            void Menu::update()
+            {
+            }
         } // namespace Scene
     } // namespace Display
 } // namespace RType

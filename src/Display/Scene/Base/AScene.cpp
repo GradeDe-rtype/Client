@@ -30,6 +30,10 @@ namespace RType
             void AScene::draw(gd::Window &window)
             {
             }
+
+            void AScene::update()
+            {
+            }
         } // namespace Scene
     } // namespace Display
 } // namespace RType
