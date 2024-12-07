@@ -21,7 +21,7 @@ namespace RType
         return &instance;
     }
 
-    std::unordered_map<std::string, RType::Display::Player> &Ressources::players()
+    std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> &Ressources::players()
     {
         return _players;
     }

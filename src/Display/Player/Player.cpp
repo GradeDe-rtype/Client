@@ -22,6 +22,7 @@ namespace RType
             _shape.setOutlineColor(gd::Color::fromHex(color));
             _shape.setOutlineThickness(5);
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
+            _shape.setRotation(0);
         }
 
         gd::Shape &Player::shape()

@@ -48,14 +48,14 @@ namespace RType
             {
                 RType::Ressources::get()->me().shape().draw(window);
                 for (auto &player : RType::Ressources::get()->players())
-                    player.second.shape().draw(window);
+                    player.second->shape().draw(window);
             }
 
             void Game::update()
             {
                 RType::Ressources::get()->me().update();
                 for (auto &player : RType::Ressources::get()->players())
-                    player.second.update();
+                    player.second->update();
             }
         } // namespace Scene
     } // namespace Display

@@ -23,7 +23,7 @@ namespace RType
         class Player
         {
             public:
-                Player(int id = 0, std::string color = "#FFFFFF", int x = 0, int y = 0, int health = 100);
+                Player(int id, std::string color = "#FFFFFF", int x = 0, int y = 0, int health = 100);
                 ~Player() = default;
 
                 gd::Shape &shape();
