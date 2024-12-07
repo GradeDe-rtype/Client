@@ -121,6 +121,21 @@ namespace gd
         _window.draw(*sh);
     }
 
+    void Window::draw(std::vector<gd::Vertex> &vertices, gd::PrimitiveType primitiveType)
+    {
+        sf::VertexArray va;
+        va.setPrimitiveType((sf::PrimitiveType)primitiveType);
+        for (auto &vertex : vertices)
+            va.append(*(sf::Vertex *)vertex.getVertex());
+        _window.draw(va);
+    }
+
+    void Window::draw(gd::VertexArray &vertexArray)
+    {
+        sf::VertexArray *va = (sf::VertexArray *)vertexArray.getVertexArray();
+        _window.draw(*va);
+    }
+
     void Window::_create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style)
     {
         _window.create(videoMode, title, style);

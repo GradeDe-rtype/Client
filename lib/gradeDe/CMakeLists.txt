@@ -24,6 +24,8 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Texture.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Time.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Vector.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Vertex.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/VertexArray.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Window.cpp
 )
 

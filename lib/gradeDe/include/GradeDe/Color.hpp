@@ -22,13 +22,6 @@ namespace gd
     {
         public:
             /**
-             * \brief Default constructor.
-             *
-             * \note This constructor creates a color with the default values (0, 0, 0, 255).
-             */
-            Color();
-
-            /**
              * \brief Constructor with parameters.
              *
              * This constructor creates a color with the specified values.

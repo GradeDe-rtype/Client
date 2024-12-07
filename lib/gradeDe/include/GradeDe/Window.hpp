@@ -12,8 +12,10 @@
 /*  ---- INCLUDES ---- */
 #include <SFML/Graphics.hpp>
 #include "GradeDe/Color.hpp"
+#include "GradeDe/PrimitiveType.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Vector.hpp"
+#include "GradeDe/VertexArray.hpp"
 
 /*  ---- CLASS ---- */
 namespace gd
@@ -165,6 +167,21 @@ namespace gd
              * \param shape The shape to draw.
              */
             void draw(gd::Shape &shape);
+
+            /**
+             * \brief Draw the vertex array.
+             *
+             * \param vertices The vertices to draw.
+             * \param primitiveType The primitive type.
+             */
+            void draw(std::vector<gd::Vertex> &vertices, gd::PrimitiveType primitiveType);
+
+            /**
+             * \brief Draw the vertex array.
+             *
+             * \param vertexArray The vertex array to draw.
+             */
+            void draw(gd::VertexArray &vertexArray);
 
             /**
              * \brief Get the width of the window.
