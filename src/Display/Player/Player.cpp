@@ -57,6 +57,7 @@ namespace RType
 
         void Player::setPosition(int x, int y)
         {
+            if (_x == x && _y == y) return;
             _x = x;
             _y = y;
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
@@ -142,32 +143,23 @@ namespace RType
             bool orientationReset = true;
 
             if (_goto.y >= 0 && _goto.x >= 0) {
+                int distY = _goto.y - _y;
+                distY *= distY < 0 ? -1 : 1;
+                float percent = static_cast<float>(distY) / static_cast<float>(_speed);
                 if (_y > _goto.y) {
-                    if (_shape.getRotation() > -30)
-                        _shape.rotate(_shape.getRotation() > 0 ? -20 : -10);
+                    if (_shape.getRotation() > -_maxRotationAngle) (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
                     orientationReset = false;
                 }
                 if (_y < _goto.y) {
-                    if (_shape.getRotation() < 30)
-                        _shape.rotate(_shape.getRotation() < 0 ? 20 : 10);
+                    if (_shape.getRotation() < _maxRotationAngle) (percent == 1) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
                     orientationReset = false;
                 }
                 setPosition(_goto.x, _goto.y);
                 _goto = {-1, -1};
             }
             if (orientationReset) {
-                if (_shape.getRotation() > 0) {
-                    if (_shape.getRotation() < 8)
-                        _shape.setRotation(0);
-                    else
-                        _shape.rotate(-8);
-                }
-                if (_shape.getRotation() < 0) {
-                    if (_shape.getRotation() > -8)
-                        _shape.setRotation(0);
-                    else
-                        _shape.rotate(8);
-                }
+                if (_shape.getRotation() > 0) (_shape.getRotation() < 8) ? _shape.setRotation(0) : _shape.rotate(-8);
+                if (_shape.getRotation() < 0) (_shape.getRotation() > -8) ? _shape.setRotation(0) : _shape.rotate(8);
             }
         }
     } // namespace Display

@@ -59,6 +59,7 @@ namespace RType
                 int _speed = 15;
                 gd::Vector2<int> _goto = {-1, -1};
                 bool _moved = false;
+                int _maxRotationAngle = 30;
         };
     } // namespace Display
 } // namespace RType
