@@ -46,9 +46,9 @@ namespace RType
 
             void Game::draw(gd::Window &window)
             {
-                RType::Ressources::get()->me().shape().draw(window);
+                window.draw(RType::Ressources::get()->me().shape());
                 for (auto &player : RType::Ressources::get()->players())
-                    player.second->shape().draw(window);
+                    window.draw(player.second->shape());
             }
 
             void Game::update()

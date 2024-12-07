@@ -115,6 +115,12 @@ namespace gd
         _window.display();
     }
 
+    void Window::draw(gd::Shape &shape)
+    {
+        sf::ConvexShape *sh = (sf::ConvexShape *)shape.getShape();
+        _window.draw(*sh);
+    }
+
     void Window::_create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style)
     {
         _window.create(videoMode, title, style);

@@ -35,7 +35,7 @@ namespace RType
 
             void Menu::draw(gd::Window &window)
             {
-                _background.draw(window);
+                window.draw(_background);
             }
 
             void Menu::update()

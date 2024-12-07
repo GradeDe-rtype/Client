@@ -115,9 +115,8 @@ namespace gd
         return _rotation;
     }
 
-    void Shape::draw(gd::Window &window)
+    void *Shape::getShape()
     {
-        sf::RenderWindow *win = (sf::RenderWindow *)window.getWindow();
-        win->draw(_shape);
+        return &_shape;
     }
 } // namespace gd

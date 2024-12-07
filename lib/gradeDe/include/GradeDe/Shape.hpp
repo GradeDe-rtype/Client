@@ -15,7 +15,6 @@
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Texture.hpp"
 #include "GradeDe/Vector.hpp"
-#include "GradeDe/Window.hpp"
 
 /*  ---- CLASS ---- */
 namespace gd
@@ -162,13 +161,9 @@ namespace gd
             gd::Vector2<float> getSize() const;
 
             /**
-             * \brief Draw the shape.
-             *
-             * This function draws the shape.
-             *
-             * \param window The window.
+             * \brief Get the shape.
              */
-            void draw(gd::Window &window);
+            void *getShape();
 
         private:
             /**

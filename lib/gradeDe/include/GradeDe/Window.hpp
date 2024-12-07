@@ -12,6 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <SFML/Graphics.hpp>
 #include "GradeDe/Color.hpp"
+#include "GradeDe/Shape.hpp"
 #include "GradeDe/Vector.hpp"
 
 /*  ---- CLASS ---- */
@@ -157,6 +158,13 @@ namespace gd
              * \param shape The shape.
              */
             void display();
+
+            /**
+             * \brief Draw the shape.
+             *
+             * \param shape The shape to draw.
+             */
+            void draw(gd::Shape &shape);
 
             /**
              * \brief Get the width of the window.

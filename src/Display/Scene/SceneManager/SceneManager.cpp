@@ -61,7 +61,7 @@ namespace RType
 
             void SceneManager::draw(gd::Window &window)
             {
-                _transitionShape.draw(window);
+                window.draw(_transitionShape);
             }
 
             bool SceneManager::isTransitioning() const
