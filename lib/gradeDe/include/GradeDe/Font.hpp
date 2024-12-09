@@ -24,6 +24,8 @@ namespace gd
 
             void load(const std::string &path);
 
+            void *getFont();
+
         private:
             sf::Font _font;
     };
