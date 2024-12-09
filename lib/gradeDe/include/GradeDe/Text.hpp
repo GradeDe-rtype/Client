@@ -33,7 +33,6 @@ namespace gd
             Text() = default;
             ~Text() = default;
 
-            void create();
             void setCharacterSize(unsigned int size);
             void setColor(const gd::Color &color);
             void setFont(const gd::Font &font);
@@ -42,11 +41,13 @@ namespace gd
             void setStyle(Style style);
 
             unsigned int getCharacterSize() const;
-            const gd::Color &getColor() const;
-            const gd::Font &getFont() const;
-            const gd::Vector2<int> &getPosition() const;
-            const std::string &getString() const;
+            gd::Color getColor() const;
+            gd::Font getFont() const;
+            gd::Vector2<int> getPosition() const;
+            std::string getString() const;
             Style getStyle() const;
+            gd::Vector2<float> getSize() const;
+            void *getText();
 
         private:
             sf::Text _text;
