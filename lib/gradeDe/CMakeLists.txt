@@ -16,6 +16,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Color.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Error.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Event.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Font.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/FrameRate.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/JoyStick.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/KeyBoard.cpp
