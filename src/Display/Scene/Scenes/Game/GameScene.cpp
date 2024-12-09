@@ -16,6 +16,7 @@ namespace RType
         {
             void Game::load(gd::Window &window)
             {
+                _blaster.load("assets/sounds/blaster.mp3");
             }
 
             void Game::unload()
@@ -28,6 +29,7 @@ namespace RType
                 gd::Vector2<float> position = RType::Ressources::get()->me().shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me().shape().getSize();
 
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Released) _blaster.play();
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed && position.y >= size.y / 2) position.y -= RType::Ressources::get()->me().getSpeed();
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) position.y += RType::Ressources::get()->me().getSpeed();

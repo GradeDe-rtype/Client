@@ -13,6 +13,7 @@
 #include <string>
 #include "AScene.hpp"
 #include "GradeDe/Event.hpp"
+#include "GradeDe/Sound.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 
@@ -67,6 +68,9 @@ namespace RType
                      * @brief Update the scene
                      */
                     void update() override;
+
+                private:
+                    gd::Sound _blaster;
             };
         } // namespace Scene
     } // namespace Display
