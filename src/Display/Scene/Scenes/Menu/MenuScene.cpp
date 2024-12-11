@@ -19,23 +19,12 @@ namespace RType
             {
                 _background.createRectangle(window.getWidth(), window.getHeight());
                 _background.setFillColor(gd::Color::White);
-                _backgroundMusic.load("assets/music/Neon Frenzy.mp3");
                 _font.load("assets/font/Karma Future.otf");
                 _text.setFont(_font);
                 _text.setCharacterSize(30);
                 _text.setString("Press 'Space' to start the game");
                 _text.setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _text.getSize().x / 2), (int)(window.getHeight() / 2 - _text.getSize().y / 2)});
                 _text.setColor(gd::Color::Black);
-            }
-
-            void Menu::enter()
-            {
-                _backgroundMusic.play();
-            }
-
-            void Menu::leave()
-            {
-                _backgroundMusic.stop();
             }
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)

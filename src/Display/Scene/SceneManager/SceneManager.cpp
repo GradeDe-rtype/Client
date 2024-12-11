@@ -16,6 +16,8 @@ namespace RType
         {
             SceneManager::SceneManager(gd::Window &window)
             {
+                _musicManager = std::make_unique<RType::Display::Audio::MusicManager>();
+                _musicManager->setVolume(100);
                 _transitionShape.createRectangle((float)window.getWidth(), (float)window.getHeight());
                 _transitionShape.setFillColor(_transitionColor);
                 _transitionShape.setPosition((gd::Vector2<float>){0, 0});
@@ -24,6 +26,7 @@ namespace RType
                 _addScene("menu", std::make_shared<RType::Display::Scene::Menu>(), window);
 
                 _currentScene = _scenes["menu"];
+                _musicManager->setMusic("menu");
                 _currentScene->enter();
             }
 
@@ -32,6 +35,8 @@ namespace RType
                 _nextScene = name;
                 _transitionOpacity = 0;
                 _transitionState = FADE_IN;
+                _backupVolume = _musicManager->getVolume();
+                _volumeTransition = _backupVolume / _transitionFrame;
             }
 
             std::shared_ptr<IScene> SceneManager::getScene()
@@ -43,16 +48,20 @@ namespace RType
             {
                 if (_transitionState == FADE_IN) {
                     _transitionOpacity += _transitionSpeed;
+                    _musicManager->modifyVolume(-_volumeTransition);
                     if (_transitionOpacity >= 255) {
                         _transitionOpacity = 255;
                         _transitionState = FADE_OUT;
                         _currentScene->leave();
                         _currentScene = _scenes[_nextScene];
+                        _musicManager->setMusic(_nextScene);
                         _currentScene->enter();
                     }
                 } else if (_transitionState == FADE_OUT) {
                     _transitionOpacity -= _transitionSpeed;
+                    _musicManager->modifyVolume(_volumeTransition);
                     if (_transitionOpacity <= 0) {
+                        _musicManager->setVolume(_backupVolume);
                         _transitionOpacity = 0;
                         _transitionState = NOTHING;
                     }

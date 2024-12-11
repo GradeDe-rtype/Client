@@ -43,6 +43,8 @@ target_include_directories(r-type_client PRIVATE
     "src/Communication/Commands/"
     "src/Communication/SendList/"
     "src/Display/"
+    "src/Display/Audio/"
+    "src/Display/Audio/MusicManager/"
     "src/Display/Client/"
     "src/Display/Player/"
     "src/Display/Scene/"

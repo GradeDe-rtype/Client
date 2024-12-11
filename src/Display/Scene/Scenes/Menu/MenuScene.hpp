@@ -46,16 +46,6 @@ namespace RType
                     void load(gd::Window &window) override;
 
                     /**
-                     * @brief Enter the scene
-                     */
-                    void enter() override;
-
-                    /**
-                     * @brief Leave the scene
-                     */
-                    void leave() override;
-
-                    /**
                      * @brief Update the scene
                      *
                      * @param `window` The window
@@ -77,7 +67,6 @@ namespace RType
 
                 private:
                     gd::Shape _background;
-                    gd::Music _backgroundMusic;
                     gd::Text _text;
                     gd::Font _font;
             };
