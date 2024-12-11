@@ -48,6 +48,16 @@ namespace RType
                     void unload() override;
 
                     /**
+                     * @brief Enter the scene
+                     */
+                    void enter() override;
+
+                    /**
+                     * @brief Leave the scene
+                     */
+                    void leave() override;
+
+                    /**
                      * @brief Update the scene
                      *
                      * @param `window` The window

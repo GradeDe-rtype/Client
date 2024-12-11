@@ -14,6 +14,7 @@
 #include "GradeDe/Color.hpp"
 #include "GradeDe/PrimitiveType.hpp"
 #include "GradeDe/Shape.hpp"
+#include "GradeDe/Text.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/VertexArray.hpp"
 
@@ -182,6 +183,13 @@ namespace gd
              * \param vertexArray The vertex array to draw.
              */
             void draw(gd::VertexArray &vertexArray);
+
+            /**
+             * \brief Draw the text.
+             *
+             * \param text The text to draw.
+             */
+            void draw(gd::Text &text);
 
             /**
              * \brief Get the width of the window.

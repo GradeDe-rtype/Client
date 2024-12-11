@@ -42,6 +42,16 @@ namespace RType
                     virtual void unload() = 0;
 
                     /**
+                     * @brief Enter the scene
+                     */
+                    virtual void enter() = 0;
+
+                    /**
+                     * @brief Leave the scene
+                     */
+                    virtual void leave() = 0;
+
+                    /**
                      * @brief Update the scene
                      *
                      * @param `window` The window

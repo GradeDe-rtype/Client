@@ -24,6 +24,7 @@ namespace RType
                 _addScene("menu", std::make_shared<RType::Display::Scene::Menu>(), window);
 
                 _currentScene = _scenes["menu"];
+                _currentScene->enter();
             }
 
             void SceneManager::changeScene(const std::string &name)
@@ -45,7 +46,9 @@ namespace RType
                     if (_transitionOpacity >= 255) {
                         _transitionOpacity = 255;
                         _transitionState = FADE_OUT;
+                        _currentScene->leave();
                         _currentScene = _scenes[_nextScene];
+                        _currentScene->enter();
                     }
                 } else if (_transitionState == FADE_OUT) {
                     _transitionOpacity -= _transitionSpeed;

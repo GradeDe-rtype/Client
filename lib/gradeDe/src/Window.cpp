@@ -136,6 +136,12 @@ namespace gd
         _window.draw(*va);
     }
 
+    void Window::draw(gd::Text &text)
+    {
+        sf::Text *t = (sf::Text *)text.getText();
+        _window.draw(*t);
+    }
+
     void Window::_create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style)
     {
         _window.create(videoMode, title, style);
