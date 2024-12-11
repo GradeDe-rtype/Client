@@ -17,10 +17,17 @@ namespace RType
             void Game::load(gd::Window &window)
             {
                 _blaster.load("assets/sounds/blaster.mp3");
+                _backgroundMusic.load("assets/music/Adrenaline Surge.mp3");
             }
 
-            void Game::unload()
+            void Game::enter()
             {
+                _backgroundMusic.play();
+            }
+
+            void Game::leave()
+            {
+                _backgroundMusic.stop();
             }
 
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)

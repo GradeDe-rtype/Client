@@ -13,6 +13,8 @@
 #include <string>
 #include "AScene.hpp"
 #include "GradeDe/Event.hpp"
+#include "GradeDe/Music.hpp"
+#include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 
@@ -44,9 +46,14 @@ namespace RType
                     void load(gd::Window &window) override;
 
                     /**
-                     * @brief Unload the scene
+                     * @brief Enter the scene
                      */
-                    void unload() override;
+                    void enter() override;
+
+                    /**
+                     * @brief Leave the scene
+                     */
+                    void leave() override;
 
                     /**
                      * @brief Update the scene
@@ -70,6 +77,9 @@ namespace RType
 
                 private:
                     gd::Shape _background;
+                    gd::Music _backgroundMusic;
+                    gd::Text _text;
+                    gd::Font _font;
             };
         } // namespace Scene
     } // namespace Display

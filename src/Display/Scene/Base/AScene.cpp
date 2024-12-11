@@ -22,6 +22,14 @@ namespace RType
             {
             }
 
+            void AScene::enter()
+            {
+            }
+
+            void AScene::leave()
+            {
+            }
+
             std::string AScene::handleEvent(gd::Window &window, gd::Event &event)
             {
                 return "";

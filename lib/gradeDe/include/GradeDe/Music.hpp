@@ -33,7 +33,6 @@ namespace gd
             void play();
             void pause();
             void stop();
-            void clear();
             void setLoop(bool loop);
             void setVolume(float volume);
             void setPitch(float pitch);
@@ -42,12 +41,11 @@ namespace gd
             bool isLooping() const;
             float getVolume() const;
             float getPitch() const;
-            void *getMusic();
 
         private:
             sf::Music _music;
             Status _status = Unloaded;
-            bool _loop = false;
+            bool _loop = true;
             float _volume = 100;
             float _pitch = 1;
     };
