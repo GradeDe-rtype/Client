@@ -69,7 +69,7 @@ namespace RType
                     /**
                      * @brief Update the scene
                      */
-                    virtual void update() = 0;
+                    virtual void update(gd::Window &window) = 0;
             };
         } // namespace Scene
     } // namespace Display

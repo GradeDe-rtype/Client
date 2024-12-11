@@ -23,6 +23,7 @@ namespace RType
             _shape.setOutlineThickness(5);
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
             _shape.setRotation(0);
+            _shootTimer.reset();
         }
 
         gd::Shape &Player::shape()
@@ -73,6 +74,12 @@ namespace RType
         void Player::setGoto(int x, int y)
         {
             _goto = {x, y};
+        }
+
+        void Player::shoot()
+        {
+            if (_shootTimer.getElapsedTime() > _shootCooldown)
+                _shootTimer.reset();
         }
 
         int Player::getId() const
@@ -137,6 +144,13 @@ namespace RType
             tmp["x"] = std::to_string(_x);
             tmp["y"] = std::to_string(_y);
             return rfcArgParser::CreateObject(tmp);
+        }
+
+        int Player::getShootCooldown()
+        {
+            if (_shootTimer.getElapsedTime() > _shootCooldown)
+                return 0;
+            return _shootCooldown - _shootTimer.getElapsedTime();
         }
 
         void Player::update()

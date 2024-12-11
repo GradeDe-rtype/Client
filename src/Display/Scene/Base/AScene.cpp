@@ -39,7 +39,7 @@ namespace RType
             {
             }
 
-            void AScene::update()
+            void AScene::update(gd::Window &window)
             {
             }
         } // namespace Scene

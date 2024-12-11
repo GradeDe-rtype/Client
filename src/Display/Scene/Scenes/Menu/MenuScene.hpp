@@ -60,11 +60,6 @@ namespace RType
                      */
                     void draw(gd::Window &window) override;
 
-                    /**
-                     * @brief Update the scene
-                     */
-                    void update() override;
-
                 private:
                     gd::Shape _background;
                     gd::Text _text;

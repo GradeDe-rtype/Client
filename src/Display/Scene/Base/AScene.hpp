@@ -75,7 +75,7 @@ namespace RType
                     /**
                      * @brief Update the scene
                      */
-                    void update() override;
+                    void update(gd::Window &window) override;
             };
         } // namespace Scene
     } // namespace Display

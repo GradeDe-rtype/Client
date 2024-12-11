@@ -38,6 +38,7 @@ namespace RType
                 void _handleConnect(std::vector<std::string> args);
                 void _handleDisconnect(std::vector<std::string> args);
                 void _handlePosition(std::vector<std::string> args);
+                void _handleShoot(std::vector<std::string> args);
         };
     } // namespace Communication
 } // namespace RType

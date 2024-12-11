@@ -17,6 +17,7 @@
 #include "GradeDe/Time.hpp"
 #include "Player.hpp"
 #include "SendList.hpp"
+#include "Shoot.hpp"
 #include "Utils.hpp"
 
 /*  ---- CLASS ---- */
@@ -31,6 +32,7 @@ namespace RType
             std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> &players();
             RType::Display::Player &me();
             std::shared_ptr<RType::Communication::SendList> &sendList();
+            std::vector<std::unique_ptr<RType::Display::Shoot>> &shoots();
             void update();
 
             void setSendList(std::shared_ptr<RType::Communication::SendList> sendList);
@@ -42,6 +44,7 @@ namespace RType
             std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> _players;
             std::shared_ptr<RType::Communication::SendList> _sendList = nullptr;
             std::vector<std::tuple<gd::Time, int, void (Ressources::*)()>> _timers;
+            std::vector<std::unique_ptr<RType::Display::Shoot>> _shoots;
             void _sendPlayerPosition();
     };
 } // namespace RType

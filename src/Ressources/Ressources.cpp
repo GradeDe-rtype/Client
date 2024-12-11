@@ -41,6 +41,11 @@ namespace RType
         _sendList = sendList;
     }
 
+    std::vector<std::unique_ptr<RType::Display::Shoot>> &Ressources::shoots()
+    {
+        return _shoots;
+    }
+
     void Ressources::update()
     {
         for (auto &timer : _timers) {

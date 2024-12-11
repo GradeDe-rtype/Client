@@ -67,8 +67,10 @@ namespace RType
                     }
                 }
 
-                _transitionColor = gd::Color(0, 0, 0, _transitionOpacity);
-                _transitionShape.setFillColor(_transitionColor);
+                if (_transitionState != NOTHING) {
+                    _transitionColor = gd::Color(0, 0, 0, _transitionOpacity);
+                    _transitionShape.setFillColor(_transitionColor);
+                }
             }
 
             void SceneManager::draw(gd::Window &window)

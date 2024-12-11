@@ -40,10 +40,6 @@ namespace RType
                 window.draw(_background);
                 window.draw(_text);
             }
-
-            void Menu::update()
-            {
-            }
         } // namespace Scene
     } // namespace Display
 } // namespace RType

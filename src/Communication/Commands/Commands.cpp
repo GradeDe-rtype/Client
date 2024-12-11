@@ -17,6 +17,7 @@ namespace RType
             _commands["connect"] = &Commands::_handleConnect;
             _commands["disconnect"] = &Commands::_handleDisconnect;
             _commands["p_position"] = &Commands::_handlePosition;
+            _commands["shoot"] = &Commands::_handleShoot;
         }
 
         void Commands::handleCommand(std::string command)
@@ -42,6 +43,12 @@ namespace RType
             if (RType::Ressources::get()->players().find(args[1]) == RType::Ressources::get()->players().end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
             RType::Ressources::get()->players()[args[1]]->setGoto(std::stoi(obj["x"]), std::stoi(obj["y"]));
+        }
+
+        void Commands::_handleShoot(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots().push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"])));
         }
     } // namespace Communication
 } // namespace RType

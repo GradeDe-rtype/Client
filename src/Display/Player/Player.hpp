@@ -12,6 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
 #include "GradeDe/Shape.hpp"
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
 #include "rfcArgParser.hpp"
 
@@ -37,6 +38,7 @@ namespace RType
                 void setPosition(int x, int y);
                 void move(int x, int y);
                 void setGoto(int x, int y);
+                void shoot();
 
                 int getId() const;
                 std::string getColor() const;
@@ -48,6 +50,7 @@ namespace RType
                 std::string getPlayerPosition() const;
                 int getSpeed() const;
                 bool hasMoved();
+                int getShootCooldown();
 
             private:
                 gd::Shape _shape;
@@ -60,6 +63,8 @@ namespace RType
                 gd::Vector2<int> _goto = {-1, -1};
                 bool _moved = false;
                 int _maxRotationAngle = 30;
+                gd::Time _shootTimer;
+                int _shootCooldown = 1000;
         };
     } // namespace Display
 } // namespace RType

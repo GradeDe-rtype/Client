@@ -58,6 +58,7 @@ namespace RType
             {
                 _musics[name] = std::make_shared<gd::Music>();
                 _musics[name]->load(path);
+                _musics[name]->setVolume(_volume);
             }
         } // namespace Audio
     } // namespace Display

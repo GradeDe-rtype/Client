@@ -53,6 +53,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Display/Scene/Scenes/"
     "src/Display/Scene/Scenes/Game/"
     "src/Display/Scene/Scenes/Menu/"
+    "src/Display/Shoot/"
     "src/Helpers/"
     "src/Helpers/Mutex/"
     "src/Helpers/Path/"
