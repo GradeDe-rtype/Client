@@ -39,13 +39,6 @@ namespace RType
                     ~Game() override = default;
 
                     /**
-                     * @brief Load the scene
-                     *
-                     * @param `window` The window
-                     */
-                    void load(gd::Window &window) override;
-
-                    /**
                      * @brief Update the scene
                      *
                      * @param `window` The window
@@ -66,7 +59,6 @@ namespace RType
                     void update(gd::Window &window) override;
 
                 private:
-                    gd::Sound _blaster;
             };
         } // namespace Scene
     } // namespace Display

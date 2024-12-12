@@ -14,11 +14,6 @@ namespace RType
     {
         namespace Scene
         {
-            void Game::load(gd::Window &window)
-            {
-                _blaster.load("assets/sounds/blaster.mp3");
-            }
-
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)
             {
                 bool orientationReset = true;
@@ -28,7 +23,6 @@ namespace RType
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Pressed) {
                     if (RType::Ressources::get()->me().getShootCooldown() == 0) {
                         RType::Ressources::get()->me().shoot();
-                        _blaster.play();
                         int x = RType::Ressources::get()->me().shape().getPosition().x + RType::Ressources::get()->me().shape().getSize().x / 2;
                         int y = RType::Ressources::get()->me().shape().getPosition().y;
                         RType::Ressources::get()->shoots().push_back(std::make_unique<RType::Display::Shoot>(x, y));

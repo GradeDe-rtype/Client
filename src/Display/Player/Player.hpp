@@ -39,6 +39,8 @@ namespace RType
                 void move(int x, int y);
                 void setGoto(int x, int y);
                 void shoot();
+                void setSpeed(int speed);
+                void setShootCooldown(int cooldown);
 
                 int getId() const;
                 std::string getColor() const;

@@ -82,6 +82,16 @@ namespace RType
                 _shootTimer.reset();
         }
 
+        void Player::setSpeed(int speed)
+        {
+            _speed = speed;
+        }
+
+        void Player::setShootCooldown(int cooldown)
+        {
+            _shootCooldown = cooldown;
+        }
+
         int Player::getId() const
         {
             return _id;

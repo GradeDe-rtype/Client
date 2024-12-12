@@ -21,10 +21,9 @@ namespace RType
             _shape.setFillColor(gd::Color::Cyan);
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
             _shape.setRotation(0);
-
-            std::unordered_map<std::string, std::string> tmp;
-            tmp["x"] = std::to_string(_x);
-            tmp["y"] = std::to_string(_y);
+            _blaster.load("assets/sounds/blaster.mp3");
+            _blaster.setVolume(50);
+            _blaster.play();
         }
 
         gd::Shape &Shoot::shape()
