@@ -55,6 +55,8 @@ namespace RType
                     window.draw(player.second->shape());
                 for (auto &shoot : RType::Ressources::get()->shoots())
                     window.draw(shoot->shape());
+                for (auto &enemy : RType::Ressources::get()->enemies())
+                    window.draw(enemy.second->shape());
             }
 
             void Game::update(gd::Window &window)

@@ -46,6 +46,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Display/Audio/"
     "src/Display/Audio/MusicManager/"
     "src/Display/Client/"
+    "src/Display/Enemy/"
     "src/Display/Player/"
     "src/Display/Scene/"
     "src/Display/Scene/Base/"

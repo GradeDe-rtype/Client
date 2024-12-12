@@ -46,6 +46,11 @@ namespace RType
         return _shoots;
     }
 
+    std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> &Ressources::enemies()
+    {
+        return _enemies;
+    }
+
     void Ressources::update()
     {
         for (auto &timer : _timers) {
