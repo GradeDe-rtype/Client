@@ -15,7 +15,6 @@ namespace RType
         Client::Client(std::string ip, int port, std::shared_ptr<RType::Communication::SendList> sendList)
             : _ip(ip), _port(port), _sendList(sendList), _state(TRY_CONNECT), _socket(_io_context)
         {
-            _connect();
         }
 
         void Client::run()
@@ -26,7 +25,7 @@ namespace RType
                         _connect();
                         break;
                     case CONNECTED:
-                        _connected();
+                        _read();
                         break;
                     case DISCONNECT:
                         _disconnect();
@@ -46,27 +45,14 @@ namespace RType
 
         void Client::_connect()
         {
-            boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(_ip), _port);
-            boost::system::error_code error;
-
-            _socket.connect(endpoint, error);
-            if (error) return;
-            _state = CONNECTED;
-            _sendList->unlock();
-        }
-
-        void Client::_connected()
-        {
-            _checkOpen();
-            _read();
-
-            if (_buffer.size() > 0) {
-                for (std::string message : _buffer)
-                    _commands.handleCommand(message);
-                _buffer.clear();
+            try {
+                boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(_ip), _port);
+                _socket.connect(endpoint);
+                _state = CONNECTED;
+            } catch (const boost::system::system_error &e) {
+                std::cerr << "Connection error: " << e.what() << std::endl;
+                _state = DISCONNECT;
             }
-
-            _write();
         }
 
         void Client::_disconnect()
@@ -83,15 +69,22 @@ namespace RType
         {
             try {
                 if (_socket.available() == 0) return;
-                std::array<char, sizeof(rfcArgParser::DataPacket)> buffer;
                 std::cout << "Reading..." << std::endl;
-                boost::asio::read(_socket, boost::asio::buffer(buffer, 16));
-                std::cout << "Received:" << std::endl;
-                std::string data(buffer.begin(), buffer.end());
-                rfcArgParser::DataPacket packet = rfcArgParser::DeserializePacket(data, sizeof(data));
-                std::cout << "Command: " << packet.command << "Args :" << packet.args << std::endl;
-                _buffer.push_back(rfcArgParser::DeserializePacket(packet));
-                // _read();
+                auto buffer = std::make_shared<std::array<char, sizeof(rfcArgParser::DataPacket)>>();
+                boost::asio::async_read(_socket, boost::asio::buffer(*buffer),
+                [this, buffer](const boost::system::error_code &error, const std::size_t length) {
+                     if (!error) {
+                         const std::string data(buffer->begin(), buffer->begin() + length);
+                         rfcArgParser::DataPacket packet = rfcArgParser::DeserializePacket(data, length);
+                         _commands.handleCommand(rfcArgParser::DeserializePacket(packet));
+                         std::cout << "sent a packet with command: " << packet.command << "\n";
+                         std::cout << "Arguments: " << packet.args << "\n";
+                         _read();
+                     } else {
+                         std::cerr << "Client disconnected" << error.message() << "\n";
+                         _state = DISCONNECT;
+                     }
+                });
             } catch (const boost::system::system_error &e) {
                 std::cerr << "Read error: " << e.what() << std::endl;
                 _state = DISCONNECT;
@@ -100,7 +93,6 @@ namespace RType
                 _state = DISCONNECT;
             }
         }
-
 
         void Client::_write()
         {
