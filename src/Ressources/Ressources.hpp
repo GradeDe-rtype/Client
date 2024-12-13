@@ -35,6 +35,7 @@ namespace RType
             std::shared_ptr<RType::Communication::SendList> &sendList();
             std::vector<std::unique_ptr<RType::Display::Shoot>> &shoots();
             std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> &enemies();
+            int &wave();
             void update();
 
             void setSendList(std::shared_ptr<RType::Communication::SendList> sendList);
@@ -48,6 +49,7 @@ namespace RType
             std::shared_ptr<RType::Communication::SendList> _sendList = nullptr;
             std::vector<std::tuple<gd::Time, int, void (Ressources::*)()>> _timers;
             std::vector<std::unique_ptr<RType::Display::Shoot>> _shoots;
+            int _wave = 1;
             void _sendPlayerPosition();
     };
 } // namespace RType

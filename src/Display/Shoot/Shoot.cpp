@@ -12,8 +12,8 @@ namespace RType
 {
     namespace Display
     {
-        Shoot::Shoot(int x, int y)
-            : _x(x), _y(y)
+        Shoot::Shoot(int x, int y, int speed)
+            : _x(x), _y(y), _speed(speed)
         {
             float size = 20;
             _shape.create({{0, 0}, {size, size / 4}, {0, size / 2}, {size - size / 10, size / 4}});
@@ -24,6 +24,11 @@ namespace RType
             _blaster.load("assets/sounds/blaster.mp3");
             _blaster.setVolume(50);
             _blaster.play();
+
+            if (_speed < 0) {
+                _shape.setRotation(180);
+                _shape.setFillColor(gd::Color::Yellow);
+            }
         }
 
         gd::Shape &Shoot::shape()

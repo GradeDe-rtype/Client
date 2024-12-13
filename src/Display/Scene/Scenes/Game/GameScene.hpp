@@ -15,6 +15,7 @@
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Sound.hpp"
+#include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 
@@ -39,6 +40,13 @@ namespace RType
                     ~Game() override = default;
 
                     /**
+                     * @brief Load the scene
+                     *
+                     * @param `window` The window
+                     */
+                    void load(gd::Window &window) override;
+
+                    /**
                      * @brief Update the scene
                      *
                      * @param `window` The window
@@ -59,6 +67,9 @@ namespace RType
                     void update(gd::Window &window) override;
 
                 private:
+                    int _wave = 0;
+                    gd::Font _font;
+                    gd::Text _waveText;
             };
         } // namespace Scene
     } // namespace Display

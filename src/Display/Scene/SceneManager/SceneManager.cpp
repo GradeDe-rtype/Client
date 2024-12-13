@@ -27,6 +27,7 @@ namespace RType
 
                 _currentScene = _scenes["menu"];
                 _musicManager->setMusic("menu");
+                _musicManager->setVolume(0);
                 _currentScene->enter();
             }
 

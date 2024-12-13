@@ -14,6 +14,16 @@ namespace RType
     {
         namespace Scene
         {
+            void Game::load(gd::Window &window)
+            {
+                _font.load("assets/font/Karma Future.otf");
+                _waveText.setFont(_font);
+                _waveText.setCharacterSize(30);
+                _waveText.setColor(gd::Color::White);
+                _waveText.setString("Wave " + std::to_string(_wave));
+                _waveText.setPosition((gd::Vector2<int>){0, (int)(window.getHeight() - _waveText.getSize().y - 2)});
+            }
+
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)
             {
                 bool orientationReset = true;
@@ -57,6 +67,7 @@ namespace RType
                     window.draw(shoot->shape());
                 for (auto &enemy : RType::Ressources::get()->enemies())
                     window.draw(enemy.second->shape());
+                window.draw(_waveText);
             }
 
             void Game::update(gd::Window &window)
@@ -66,10 +77,15 @@ namespace RType
                     player.second->update();
                 for (int i = 0; i < (int)RType::Ressources::get()->shoots().size(); i++) {
                     RType::Ressources::get()->shoots()[i]->update();
-                    if (RType::Ressources::get()->shoots()[i]->getX() > window.getWidth()) {
+                    if (RType::Ressources::get()->shoots()[i]->getX() > window.getWidth() || RType::Ressources::get()->shoots()[i]->getX() < 0) {
                         RType::Ressources::get()->shoots().erase(RType::Ressources::get()->shoots().begin() + i);
                         i--;
                     }
+                }
+                if (RType::Ressources::get()->wave() != _wave) {
+                    _wave = RType::Ressources::get()->wave();
+                    _waveText.setString("Wave " + std::to_string(_wave));
+                    _waveText.setPosition((gd::Vector2<int>){0, (int)(window.getHeight() - _waveText.getSize().y - 2)});
                 }
             }
         } // namespace Scene
