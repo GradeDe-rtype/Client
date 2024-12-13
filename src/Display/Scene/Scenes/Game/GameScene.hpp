@@ -18,6 +18,7 @@
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
+#include "StarsBackground.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -70,6 +71,7 @@ namespace RType
                     int _wave = 0;
                     gd::Font _font;
                     gd::Text _waveText;
+                    std::unique_ptr<RType::Display::Components::StarsBackground> _starBackground;
             };
         } // namespace Scene
     } // namespace Display

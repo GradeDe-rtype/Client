@@ -21,6 +21,7 @@ endforeach()
 
 #  ---- SOURCES ---- #
 file(GLOB_RECURSE SOURCES
+    "src/**/**/**/*.cpp"
     "src/**/**/*.cpp"
     "src/**/*.cpp"
     "src/*.cpp"
@@ -46,6 +47,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Display/Audio/"
     "src/Display/Audio/MusicManager/"
     "src/Display/Client/"
+    "src/Display/Components/StarsBackground/"
     "src/Display/Enemy/"
     "src/Display/Player/"
     "src/Display/Scene/"
