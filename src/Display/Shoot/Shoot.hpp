@@ -23,7 +23,7 @@ namespace RType
         class Shoot
         {
             public:
-                Shoot(int x = 0, int y = 0);
+                Shoot(int x = 0, int y = 0, int speed = 15);
                 ~Shoot() = default;
 
                 gd::Shape &shape();

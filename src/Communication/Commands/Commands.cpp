@@ -17,17 +17,23 @@ namespace RType
             _commands["connect"] = &Commands::_handlePlayerConnection;
             _commands["disconnect"] = &Commands::_handlePlayerDisconnection;
             _commands["p_position"] = &Commands::_handlePlayerPosition;
-            _commands["shoot"] = &Commands::_handleShoot;
+            _commands["p_shoot"] = &Commands::_handlePlayerShoot;
+            _commands["e_shoot"] = &Commands::_handleEnemyShoot;
             _commands["enemy"] = &Commands::_handleEnemyAppear;
             _commands["e_death"] = &Commands::_handleEnemyDeath;
             _commands["e_position"] = &Commands::_handleEnemyPosition;
+            _commands["wave"] = &Commands::_handleWave;
         }
 
         void Commands::handleCommand(std::string command)
         {
-            std::vector<std::string> args = Helpers::Utils::split(command, " ");
-            if (_commands.find(args[0]) != _commands.end())
-                (this->*_commands[args[0]])(args);
+            try {
+                std::vector<std::string> args = Helpers::Utils::split(command, " ");
+                if (_commands.find(args[0]) != _commands.end())
+                    (this->*_commands[args[0]])(args);
+            } catch (rfcArgParser::Error &e) {
+                e.read();
+            }
         }
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
@@ -48,10 +54,16 @@ namespace RType
             RType::Ressources::get()->players()[args[1]]->setGoto(std::stoi(obj["x"]), std::stoi(obj["y"]));
         }
 
-        void Commands::_handleShoot(std::vector<std::string> args)
+        void Commands::_handlePlayerShoot(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots().push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"])));
+            RType::Ressources::get()->shoots().push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), 15));
+        }
+
+        void Commands::_handleEnemyShoot(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots().push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -15));
         }
 
         void Commands::_handleEnemyAppear(std::vector<std::string> args)
@@ -70,6 +82,11 @@ namespace RType
             if (RType::Ressources::get()->enemies().find(args[1]) == RType::Ressources::get()->enemies().end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
             RType::Ressources::get()->enemies()[args[1]]->setPosition(std::stoi(obj["x"]), std::stoi(obj["y"]));
+        }
+
+        void Commands::_handleWave(std::vector<std::string> args)
+        {
+            RType::Ressources::get()->wave() = std::stoi(args[1]);
         }
     } // namespace Communication
 } // namespace RType

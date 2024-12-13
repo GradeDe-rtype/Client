@@ -51,6 +51,11 @@ namespace RType
         return _enemies;
     }
 
+    int &Ressources::wave()
+    {
+        return _wave;
+    }
+
     void Ressources::update()
     {
         for (auto &timer : _timers) {

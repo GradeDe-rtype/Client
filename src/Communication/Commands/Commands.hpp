@@ -38,10 +38,12 @@ namespace RType
                 void _handlePlayerConnection(std::vector<std::string> args);
                 void _handlePlayerDisconnection(std::vector<std::string> args);
                 void _handlePlayerPosition(std::vector<std::string> args);
-                void _handleShoot(std::vector<std::string> args);
+                void _handlePlayerShoot(std::vector<std::string> args);
+                void _handleEnemyShoot(std::vector<std::string> args);
                 void _handleEnemyAppear(std::vector<std::string> args);
                 void _handleEnemyDeath(std::vector<std::string> args);
                 void _handleEnemyPosition(std::vector<std::string> args);
+                void _handleWave(std::vector<std::string> args);
         };
     } // namespace Communication
 } // namespace RType
