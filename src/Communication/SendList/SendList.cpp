@@ -7,7 +7,8 @@
 */
 
 /*  ---- INCLUDES ---- */
-#include "SendList.hpp"
+#include <CommunicationClient.hpp>
+#include <SendList.hpp>
 
 /*  ---- FUNCTIONS ---- */
 namespace RType
@@ -24,6 +25,8 @@ namespace RType
             if (_isLocked) return;
             _mutex.lock();
             _list.push_back(message);
+            _client->_write(_list);
+            _list.clear();
             _mutex.unlock();
         }
 
