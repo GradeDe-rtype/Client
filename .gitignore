@@ -9,9 +9,8 @@
 vgcore*
 
 cmake-build-default
+cmake-build-debug
 build
 
 a.out
 r-type_client
-build
-cmake-build-debug
