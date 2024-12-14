@@ -39,7 +39,7 @@ namespace RType
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->players()[obj["player_id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["player_id"]), obj["color"]);
+            RType::Ressources::get()->players()[obj["id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["id"]), obj["color"]);
         }
 
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)

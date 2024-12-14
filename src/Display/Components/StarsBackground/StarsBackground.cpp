@@ -29,7 +29,7 @@ namespace RType
                     {(float)(size / 3), (float)(size / 3)},
                 });
                 _shape.setOrigin({(float)(size / 2), (float)(size / 2)});
-                _shape.setFillColor(gd::Color::fromHex("#282828"));
+                _shape.setFillColor(gd::Color::fromHex("#505050"));
                 _shape.setPosition(_position);
             }
 
