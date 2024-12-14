@@ -19,6 +19,7 @@ namespace RType
 {
     namespace Communication
     {
+        class Client;
         class SendList
         {
             public:
@@ -29,11 +30,13 @@ namespace RType
                 void push(std::string message);
                 std::vector<std::string> pop();
                 int size();
+                void setClient(Client *client) { _client = client; }
 
             private:
                 RType::Helpers::Mutex _mutex;
                 std::vector<std::string> _list;
                 bool _isLocked = false;
+                RType::Communication::Client *_client = nullptr;
         };
     } // namespace Communication
 } // namespace RType

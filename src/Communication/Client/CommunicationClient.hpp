@@ -26,13 +26,15 @@ namespace RType
         class Client
         {
             public:
-                Client(std::string ip, int port, std::shared_ptr<RType::Communication::SendList> sendList);
+                Client(const std::string& ip, int port, std::shared_ptr<SendList> sendList);
                 ~Client() = default;
 
                 void run();
                 void shutdown();
+                void _write(std::vector<std::string>messages);
 
             private:
+
                 typedef enum {
                     TRY_CONNECT,
                     CONNECTED,
@@ -53,7 +55,6 @@ namespace RType
                 void _connected();
                 void _disconnect();
                 void _read();
-                void _write();
                 void _checkOpen();
         };
     } // namespace Communication

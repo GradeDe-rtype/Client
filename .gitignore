@@ -13,3 +13,5 @@ build
 
 a.out
 r-type_client
+build
+cmake-build-debug
