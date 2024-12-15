@@ -72,6 +72,7 @@ namespace RType
                 int _shootCooldown = 1000;
                 bool _dead = false;
                 gd::Time _rotationReset;
+                gd::Time _moveClock;
         };
     } // namespace Display
 } // namespace RType

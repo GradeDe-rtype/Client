@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Sound.hpp"
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
 
 /*  ---- CLASS ---- */
@@ -43,6 +44,7 @@ namespace RType
                 int _y;
                 int _speed = 15;
                 gd::Sound _blaster;
+                gd::Time _moveClock;
         };
     } // namespace Display
 } // namespace RType

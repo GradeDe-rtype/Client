@@ -22,17 +22,20 @@ namespace RType
             _sceneManager = std::make_unique<RType::Display::Scene::SceneManager>(_window);
             if (RType::Ressources::get()->me != nullptr)
                 RType::Ressources::get()->me->shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me->shape().getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me->shape().getSize().y / 2)});
+
+            gd::FrameRate::get().setFrameRate(120);
         }
 
         void Client::run()
         {
             while (_window.isOpen()) {
                 Ressources::get()->update();
-                if (_time.getElapsedTime() < gd::FrameRate::get().fps()) continue;
-                _time.reset();
                 _sceneManager->getScene()->update(_window);
                 _handleEvent();
-                _draw();
+                if (_time.getElapsedTime() >= gd::FrameRate::get().fps()) {
+                    _draw();
+                    _time.reset();
+                }
             }
             _window.close();
         }

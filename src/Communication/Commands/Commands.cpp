@@ -19,6 +19,7 @@ namespace RType
             _commands["list"] = &Commands::_handleListRooms;
             _commands["info"] = &Commands::_handleRoomInfo;
             _commands["connect"] = &Commands::_handlePlayerConnection;
+            _commands["connect_you"] = &Commands::_handleYouConnection;
             _commands["disconnect"] = &Commands::_handlePlayerDisconnection;
             _commands["color"] = &Commands::_handlePlayerColor;
             _commands["mode"] = &Commands::_handleRoomMode;
@@ -74,11 +75,13 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["id"]), obj["color"]);
+        }
 
-            if (RType::Ressources::get()->me == nullptr) {
-                RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
-                RType::Ressources::get()->me->setColor("#FFFFFF");
-            }
+        void Commands::_handleYouConnection(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["id"]), obj["color"]);
+            RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
         }
 
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)

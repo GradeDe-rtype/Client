@@ -24,6 +24,7 @@ namespace RType
             _blaster.load("assets/sounds/blaster.mp3");
             _blaster.setVolume(50);
             _blaster.play();
+            _moveClock.reset();
 
             if (_speed < 0) {
                 _shape.setRotation(180);
@@ -71,7 +72,10 @@ namespace RType
 
         void Shoot::update()
         {
-            move(_speed, 0);
+            if (_moveClock.getElapsedTime() > 1000 / 60) {
+                _moveClock.reset();
+                move(_speed, 0);
+            }
         }
     } // namespace Display
 } // namespace RType

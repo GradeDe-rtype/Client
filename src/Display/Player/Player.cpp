@@ -28,6 +28,7 @@ namespace RType
             _shootTimer.reset();
             _rotationReset.reset();
             _dead = false;
+            _moveClock.reset();
         }
 
         gd::Shape &Player::shape()
@@ -190,30 +191,33 @@ namespace RType
 
         void Player::update()
         {
-            if (_goto.y >= 0 && _goto.x >= 0) {
-                int distY = _goto.y - _y;
-                distY *= distY < 0 ? -1 : 1;
-                float percent = static_cast<float>(distY) / static_cast<float>(_speed);
-                if (_y > _goto.y) {
-                    if (_shape.getRotation() > -_maxRotationAngle)
-                        (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
-                    else
-                        _shape.setRotation(-_maxRotationAngle);
-                    _rotationReset.reset();
+            if (_moveClock.getElapsedTime() >= 1000 / 24) {
+                if (_goto.y >= 0 && _goto.x >= 0) {
+                    int distY = _goto.y - _y;
+                    distY *= distY < 0 ? -1 : 1;
+                    float percent = static_cast<float>(distY) / static_cast<float>(_speed);
+                    if (_y > _goto.y) {
+                        if (_shape.getRotation() > -_maxRotationAngle)
+                            (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
+                        else
+                            _shape.setRotation(-_maxRotationAngle);
+                        _rotationReset.reset();
+                    }
+                    if (_y < _goto.y) {
+                        if (_shape.getRotation() < _maxRotationAngle)
+                            (percent >= 0.8) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
+                        else
+                            _shape.setRotation(_maxRotationAngle);
+                        _rotationReset.reset();
+                    }
+                    setPosition(_goto.x, _goto.y);
+                    _goto = {-1, -1};
                 }
-                if (_y < _goto.y) {
-                    if (_shape.getRotation() < _maxRotationAngle)
-                        (percent >= 0.8) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
-                    else
-                        _shape.setRotation(_maxRotationAngle);
-                    _rotationReset.reset();
+                if (_rotationReset.getElapsedTime() > 50) {
+                    if (_shape.getRotation() > 0) (_shape.getRotation() < 8) ? _shape.setRotation(0) : _shape.rotate(-8);
+                    if (_shape.getRotation() < 0) (_shape.getRotation() > -8) ? _shape.setRotation(0) : _shape.rotate(8);
                 }
-                setPosition(_goto.x, _goto.y);
-                _goto = {-1, -1};
-            }
-            if (_rotationReset.getElapsedTime() > 50) {
-                if (_shape.getRotation() > 0) (_shape.getRotation() < 8) ? _shape.setRotation(0) : _shape.rotate(-8);
-                if (_shape.getRotation() < 0) (_shape.getRotation() > -8) ? _shape.setRotation(0) : _shape.rotate(8);
+                _moveClock.reset();
             }
         }
     } // namespace Display

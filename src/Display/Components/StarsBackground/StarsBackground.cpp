@@ -57,19 +57,24 @@ namespace RType
             {
                 for (int i = 0; i < rand() % 90 + 10; i++)
                     _stars.push_back(Star(window, rand() % window.getWidth(), rand() % (window.getHeight() + 10) - 5, rand() % 9 + 1));
+                _spawnclock.reset();
+                _updateClock.reset();
             }
 
             void StarsBackground::update(gd::Window &window)
             {
-                for (auto &star : _stars) {
-                    star.update();
-                    if (star.getPosition().x < 0)
-                        _stars.erase(_stars.begin());
+                if (_updateClock.getElapsedTime() > 1000 / 24) {
+                    for (auto &star : _stars) {
+                        star.update();
+                        if (star.getPosition().x < 0)
+                            _stars.erase(_stars.begin());
+                    }
+                    _updateClock.reset();
                 }
 
-                if (_time.getElapsedTime() >= rand() % 600 + 100) {
+                if (_spawnclock.getElapsedTime() >= rand() % 600 + 100) {
                     _stars.push_back(Star(window, window.getWidth(), rand() % window.getHeight(), rand() % 10 + 5));
-                    _time.reset();
+                    _spawnclock.reset();
                 }
             }
 

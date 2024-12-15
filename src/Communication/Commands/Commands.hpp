@@ -40,6 +40,7 @@ namespace RType
                 void _handleListRooms(std::vector<std::string> args);
                 void _handleRoomInfo(std::vector<std::string> args);
                 void _handlePlayerConnection(std::vector<std::string> args);
+                void _handleYouConnection(std::vector<std::string> args);
                 void _handlePlayerDisconnection(std::vector<std::string> args);
                 void _handlePlayerColor(std::vector<std::string> args);
                 void _handleRoomMode(std::vector<std::string> args);

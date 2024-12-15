@@ -52,7 +52,8 @@ namespace RType
 
                 private:
                     std::vector<Star> _stars;
-                    gd::Time _time;
+                    gd::Time _updateClock;
+                    gd::Time _spawnclock;
             };
         } // namespace Components
     } // namespace Display
