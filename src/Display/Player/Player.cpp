@@ -26,6 +26,7 @@ namespace RType
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
             _shape.setRotation(0);
             _shootTimer.reset();
+            _rotationReset.reset();
         }
 
         gd::Shape &Player::shape()
@@ -189,8 +190,6 @@ namespace RType
 
         void Player::update()
         {
-            bool orientationReset = true;
-
             if (_goto.y >= 0 && _goto.x >= 0) {
                 int distY = _goto.y - _y;
                 distY *= distY < 0 ? -1 : 1;
@@ -200,19 +199,19 @@ namespace RType
                         (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
                     else
                         _shape.setRotation(-_maxRotationAngle);
-                    orientationReset = false;
+                    _rotationReset.reset();
                 }
                 if (_y < _goto.y) {
                     if (_shape.getRotation() < _maxRotationAngle)
                         (percent >= 0.8) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
                     else
                         _shape.setRotation(_maxRotationAngle);
-                    orientationReset = false;
+                    _rotationReset.reset();
                 }
                 setPosition(_goto.x, _goto.y);
                 _goto = {-1, -1};
             }
-            if (orientationReset) {
+            if (_rotationReset.getElapsedTime() > 50) {
                 if (_shape.getRotation() > 0) (_shape.getRotation() < 8) ? _shape.setRotation(0) : _shape.rotate(-8);
                 if (_shape.getRotation() < 0) (_shape.getRotation() > -8) ? _shape.setRotation(0) : _shape.rotate(8);
             }
