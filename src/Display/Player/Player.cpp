@@ -196,11 +196,17 @@ namespace RType
                 distY *= distY < 0 ? -1 : 1;
                 float percent = static_cast<float>(distY) / static_cast<float>(_speed);
                 if (_y > _goto.y) {
-                    if (_shape.getRotation() > -_maxRotationAngle) (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
+                    if (_shape.getRotation() > -_maxRotationAngle)
+                        (percent == 1) ? _shape.rotate(-_maxRotationAngle / 3) : _shape.setRotation(-_maxRotationAngle * percent);
+                    else
+                        _shape.setRotation(-_maxRotationAngle);
                     orientationReset = false;
                 }
                 if (_y < _goto.y) {
-                    if (_shape.getRotation() < _maxRotationAngle) (percent == 1) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
+                    if (_shape.getRotation() < _maxRotationAngle)
+                        (percent >= 0.8) ? _shape.rotate(_maxRotationAngle / 3) : _shape.setRotation(_maxRotationAngle * percent);
+                    else
+                        _shape.setRotation(_maxRotationAngle);
                     orientationReset = false;
                 }
                 setPosition(_goto.x, _goto.y);

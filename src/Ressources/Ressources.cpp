@@ -21,41 +21,6 @@ namespace RType
         return &instance;
     }
 
-    std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> &Ressources::players()
-    {
-        return _players;
-    }
-
-    RType::Display::Player &Ressources::me()
-    {
-        return _me;
-    }
-
-    std::shared_ptr<RType::Communication::SendList> &Ressources::sendList()
-    {
-        return _sendList;
-    }
-
-    void Ressources::setSendList(std::shared_ptr<RType::Communication::SendList> sendList)
-    {
-        _sendList = sendList;
-    }
-
-    std::vector<std::unique_ptr<RType::Display::Shoot>> &Ressources::shoots()
-    {
-        return _shoots;
-    }
-
-    std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> &Ressources::enemies()
-    {
-        return _enemies;
-    }
-
-    int &Ressources::wave()
-    {
-        return _wave;
-    }
-
     void Ressources::update()
     {
         for (auto &timer : _timers) {
@@ -68,8 +33,9 @@ namespace RType
 
     void Ressources::_sendPlayerPosition()
     {
-        if (_me.hasMoved())
-            _sendList->push("position " + _me.getPlayerPosition());
+        if (me == nullptr) return;
+        if (me->hasMoved())
+            sendList->push("position " + me->getPlayerPosition());
     }
 
 } // namespace RType

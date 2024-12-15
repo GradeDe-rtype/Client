@@ -19,8 +19,9 @@ namespace RType
         {
             RType::Ressources::get();
             _window.create(800, 600, "R-Type");
-            RType::Ressources::get()->me().shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me().shape().getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me().shape().getSize().y / 2)});
             _sceneManager = std::make_unique<RType::Display::Scene::SceneManager>(_window);
+            if (RType::Ressources::get()->me != nullptr)
+                RType::Ressources::get()->me->shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me->shape().getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me->shape().getSize().y / 2)});
         }
 
         void Client::run()

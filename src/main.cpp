@@ -27,7 +27,7 @@ int main(int argc, char **argv)
         std::shared_ptr<RType::Communication::SendList> sendList = std::make_shared<RType::Communication::SendList>();
         std::shared_ptr<RType::Communication::Client> client = std::make_shared<RType::Communication::Client>(parsing.getIpAdress(), parsing.getPort(), sendList);
         sendList->setClient(client.get());
-        RType::Ressources::get()->setSendList(sendList);
+        RType::Ressources::get()->sendList = sendList;
 
         RType::Helpers::Thread serverThread;
         serverThread.start([client]() { client->run(); });

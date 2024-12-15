@@ -30,26 +30,20 @@ namespace RType
             static Ressources *get();
             ~Ressources() = default;
 
-            std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> &players();
-            RType::Display::Player &me();
-            std::shared_ptr<RType::Communication::SendList> &sendList();
-            std::vector<std::unique_ptr<RType::Display::Shoot>> &shoots();
-            std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> &enemies();
-            int &wave();
             void update();
 
-            void setSendList(std::shared_ptr<RType::Communication::SendList> sendList);
+            std::shared_ptr<RType::Display::Player> me = nullptr;
+            std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> players;
+            std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> enemies;
+            std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
+            std::vector<std::unique_ptr<RType::Display::Shoot>> shoots;
+            int wave = 1;
 
         private:
             Ressources();
 
-            RType::Display::Player _me = RType::Display::Player(0, "#FFFFFF", 400, 300, 100);
-            std::unordered_map<std::string, std::shared_ptr<RType::Display::Player>> _players;
-            std::unordered_map<std::string, std::shared_ptr<RType::Display::Enemy>> _enemies;
-            std::shared_ptr<RType::Communication::SendList> _sendList = nullptr;
             std::vector<std::tuple<gd::Time, int, void (Ressources::*)()>> _timers;
-            std::vector<std::unique_ptr<RType::Display::Shoot>> _shoots;
-            int _wave = 1;
+
             void _sendPlayerPosition();
     };
 } // namespace RType
