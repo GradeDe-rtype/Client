@@ -28,7 +28,6 @@ namespace RType
 
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)
             {
-                bool orientationReset = true;
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->shape().getSize();
 

@@ -27,6 +27,7 @@ namespace RType
             _shape.setRotation(0);
             _shootTimer.reset();
             _rotationReset.reset();
+            _dead = false;
         }
 
         gd::Shape &Player::shape()
@@ -176,8 +177,7 @@ namespace RType
 
         int Player::getShootCooldown()
         {
-            if (!_dead)
-                return -1;
+            if (_dead) return -1;
             if (_shootTimer.getElapsedTime() > _shootCooldown)
                 return 0;
             return _shootCooldown - _shootTimer.getElapsedTime();
