@@ -40,4 +40,14 @@ namespace gd
 
         return gd::Color(r, g, b, a);
     }
+
+    const std::string gd::Color::toHex(const gd::Color &color)
+    {
+        std::stringstream ss;
+        ss << "#"
+           << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(color.r)
+           << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(color.g)
+           << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(color.b);
+        return ss.str();
+    }
 } // namespace gd

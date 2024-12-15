@@ -13,13 +13,15 @@ namespace RType
     namespace Display
     {
         Player::Player(int id, std::string color, int x, int y, int health)
-            : _id(id), _color(color), _x(x), _y(y), _health(health)
+            : _id(id), _x(x), _y(y), _health(health)
         {
+            _color = gd::Color::fromHex(color);
+
             float size = 40;
             _shape.create({{0, 0}, {size, size / 2}, {0, size}, {size / 4, size / 2}});
             _shape.setOrigin({size / 2, size / 2});
             _shape.setFillColor(gd::Color::Transparent);
-            _shape.setOutlineColor(gd::Color::fromHex(color));
+            _shape.setOutlineColor(_color);
             _shape.setOutlineThickness(5);
             _shape.setPosition((gd::Vector2<float>){static_cast<float>(_x), static_cast<float>(_y)});
             _shape.setRotation(0);
@@ -38,8 +40,8 @@ namespace RType
 
         void Player::setColor(std::string color)
         {
-            _color = color;
-            _shape.setOutlineColor(gd::Color::fromHex(color));
+            _color = gd::Color::fromHex(color);
+            _shape.setOutlineColor(_color);
         }
 
         void Player::setHealth(int health)
@@ -78,6 +80,7 @@ namespace RType
 
         void Player::shoot()
         {
+            if (_dead) return;
             if (_shootTimer.getElapsedTime() > _shootCooldown)
                 _shootTimer.reset();
         }
@@ -92,6 +95,20 @@ namespace RType
             _shootCooldown = cooldown;
         }
 
+        void Player::die()
+        {
+            _color.a = 100;
+            _shape.setOutlineColor(_color);
+            _dead = true;
+        }
+
+        void Player::respawn()
+        {
+            _color.a = 255;
+            _shape.setOutlineColor(_color);
+            _dead = false;
+        }
+
         int Player::getId() const
         {
             return _id;
@@ -99,7 +116,7 @@ namespace RType
 
         std::string Player::getColor() const
         {
-            return _color;
+            return gd::Color::toHex(_color);
         }
 
         int Player::getHealth() const
@@ -133,7 +150,7 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> tmp;
             tmp["id"] = std::to_string(_id);
-            tmp["color"] = _color;
+            tmp["color"] = gd::Color::toHex(_color);
             tmp["health"] = std::to_string(_health);
             tmp["x"] = std::to_string(_x);
             tmp["y"] = std::to_string(_y);
@@ -144,7 +161,7 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> tmp;
             tmp["id"] = std::to_string(_id);
-            tmp["color"] = _color;
+            tmp["color"] = gd::Color::toHex(_color);
             return rfcArgParser::CreateObject(tmp);
         }
 
@@ -158,9 +175,16 @@ namespace RType
 
         int Player::getShootCooldown()
         {
+            if (!_dead)
+                return -1;
             if (_shootTimer.getElapsedTime() > _shootCooldown)
                 return 0;
             return _shootCooldown - _shootTimer.getElapsedTime();
+        }
+
+        bool Player::isDead()
+        {
+            return _dead;
         }
 
         void Player::update()

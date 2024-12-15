@@ -41,6 +41,8 @@ namespace RType
                 void shoot();
                 void setSpeed(int speed);
                 void setShootCooldown(int cooldown);
+                void die();
+                void respawn();
 
                 int getId() const;
                 std::string getColor() const;
@@ -53,11 +55,12 @@ namespace RType
                 int getSpeed() const;
                 bool hasMoved();
                 int getShootCooldown();
+                bool isDead();
 
             private:
                 gd::Shape _shape;
                 int _id;
-                std::string _color;
+                gd::Color _color;
                 int _health;
                 int _x;
                 int _y;
@@ -67,6 +70,7 @@ namespace RType
                 int _maxRotationAngle = 30;
                 gd::Time _shootTimer;
                 int _shootCooldown = 1000;
+                bool _dead = false;
         };
     } // namespace Display
 } // namespace RType
