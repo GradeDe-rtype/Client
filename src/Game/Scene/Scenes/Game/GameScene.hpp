@@ -19,6 +19,7 @@
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 #include "StarsBackground.hpp"
+#include "WaveNotif.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -72,6 +73,7 @@ namespace RType
                     gd::Font _font;
                     gd::Text _waveText;
                     std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
+                    std::unique_ptr<RType::Game::Components::WaveNotif> _waveNotif;
             };
         } // namespace Scene
     } // namespace Game

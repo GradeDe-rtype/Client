@@ -24,10 +24,13 @@ namespace RType
                 _waveText.setPosition((gd::Vector2<int>){5, (int)(window.getHeight() - _waveText.getSize().y - 10)});
 
                 _starBackground = std::make_unique<RType::Game::Components::StarsBackground>(window);
+                _waveNotif = std::make_unique<RType::Game::Components::WaveNotif>(window);
             }
 
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)
             {
+                _waveNotif->handleEvent(window, event);
+
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->shape().getSize();
 
@@ -70,10 +73,12 @@ namespace RType
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     window.draw(enemy.second->shape());
                 window.draw(_waveText);
+                _waveNotif->draw(window);
             }
 
             void Game::update(gd::Window &window)
             {
+                _waveNotif->update(window);
                 _starBackground->update(window);
                 RType::Ressources::get()->me->update();
                 for (auto &player : RType::Ressources::get()->players)
@@ -84,12 +89,6 @@ namespace RType
                         RType::Ressources::get()->shoots.erase(RType::Ressources::get()->shoots.begin() + i);
                         i--;
                     }
-                }
-                if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::NEXT_WAVE) {
-                    _wave = RType::Ressources::get()->wave;
-                    RType::Ressources::get()->waveState = RType::Ressources::WaveState::WAITING;
-                    _waveText.setString("Wave " + std::to_string(_wave));
-                    _waveText.setPosition((gd::Vector2<int>){5, (int)(window.getHeight() - _waveText.getSize().y - 10)});
                 }
             }
         } // namespace Scene

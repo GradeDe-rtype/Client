@@ -169,10 +169,10 @@ namespace RType
         void Commands::_handleGameWave(std::vector<std::string> args)
         {
             RType::Ressources::get()->wave = std::stoi(args[1]);
-            RType::Ressources::get()->waveState = RType::Ressources::WaveState::NEXT_WAVE;
             for (auto &player : RType::Ressources::get()->players)
                 if (!player.second->getIsAlive())
                     player.second->respawn();
+            RType::Ressources::get()->waveState = RType::Ressources::WaveState::NEXT_WAVE;
         }
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)

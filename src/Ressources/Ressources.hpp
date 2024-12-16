@@ -45,7 +45,7 @@ namespace RType
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
             std::vector<std::unique_ptr<RType::Game::Entity::Shoot>> shoots;
             int wave = 1;
-            WaveState waveState = WaveState::NEXT_WAVE;
+            WaveState waveState = WaveState::GAME;
             bool isConnected = false;
 
         private:
