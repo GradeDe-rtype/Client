@@ -17,12 +17,12 @@ namespace RType
             void Game::load(gd::Window &window)
             {
                 _starBackground = std::make_unique<RType::Game::Components::StarsBackground>(window);
-                _waveNotif = std::make_unique<RType::Game::Components::WaveNotif>(window);
+                _waveIndicators = std::make_unique<RType::Game::Components::WaveIndicators>(window);
             }
 
             std::string Game::handleEvent(gd::Window &window, gd::Event &event)
             {
-                _waveNotif->handleEvent(window, event);
+                _waveIndicators->handleEvent(window, event);
 
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->shape().getSize();
@@ -65,12 +65,12 @@ namespace RType
                     window.draw(shoot->shape());
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     window.draw(enemy.second->shape());
-                _waveNotif->draw(window);
+                _waveIndicators->draw(window);
             }
 
             void Game::update(gd::Window &window)
             {
-                _waveNotif->update(window);
+                _waveIndicators->update(window);
                 _starBackground->update(window);
                 RType::Ressources::get()->me->update();
                 for (auto &player : RType::Ressources::get()->players)

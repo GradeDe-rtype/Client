@@ -18,7 +18,7 @@
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 #include "StarsBackground.hpp"
-#include "WaveNotif.hpp"
+#include "WaveIndicators.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -69,7 +69,7 @@ namespace RType
 
                 private:
                     std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
-                    std::unique_ptr<RType::Game::Components::WaveNotif> _waveNotif;
+                    std::unique_ptr<RType::Game::Components::WaveIndicators> _waveIndicators;
             };
         } // namespace Scene
     } // namespace Game

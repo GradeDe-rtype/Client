@@ -6,7 +6,7 @@
     --U-----U------------------------
 */
 
-#include "WaveNotif.hpp"
+#include "WaveIndicators.hpp"
 
 namespace RType
 {
@@ -14,7 +14,7 @@ namespace RType
     {
         namespace Components
         {
-            WaveNotif::WaveNotif(gd::Window &window)
+            WaveIndicators::WaveIndicators(gd::Window &window)
             {
                 int _currentWave = RType::Ressources::get()->wave;
 
@@ -47,7 +47,7 @@ namespace RType
                 _opacity = 0;
             }
 
-            void WaveNotif::handleEvent(gd::Window &window, gd::Event &event)
+            void WaveIndicators::handleEvent(gd::Window &window, gd::Event &event)
             {
                 if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::WAITING) {
                     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed) {
@@ -58,7 +58,7 @@ namespace RType
                 }
             }
 
-            void WaveNotif::draw(gd::Window &window)
+            void WaveIndicators::draw(gd::Window &window)
             {
                 window.draw(_nextWave);
                 window.draw(_waveUpgrade);
@@ -66,7 +66,7 @@ namespace RType
                 window.draw(_waveIndicator);
             }
 
-            void WaveNotif::update(gd::Window &window)
+            void WaveIndicators::update(gd::Window &window)
             {
                 if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::NEXT_WAVE) {
                     _waveUpgrade.setString(std::to_string(_currentWave) + " -> " + std::to_string(RType::Ressources::get()->wave));

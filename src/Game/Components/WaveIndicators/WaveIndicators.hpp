@@ -26,11 +26,11 @@ namespace RType
     {
         namespace Components
         {
-            class WaveNotif
+            class WaveIndicators
             {
                 public:
-                    WaveNotif(gd::Window &window);
-                    ~WaveNotif() = default;
+                    WaveIndicators(gd::Window &window);
+                    ~WaveIndicators() = default;
 
                     void handleEvent(gd::Window &window, gd::Event &event);
                     void draw(gd::Window &window);
