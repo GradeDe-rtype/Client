@@ -15,6 +15,7 @@
 #include <memory>
 #include <string>
 #include "Commands.hpp"
+#include "Ressources.hpp"
 #include "SendList.hpp"
 #include "Utils.hpp"
 

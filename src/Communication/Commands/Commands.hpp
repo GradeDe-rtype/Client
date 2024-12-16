@@ -35,15 +35,29 @@ namespace RType
             private:
                 std::unordered_map<std::string, void (Commands::*)(std::vector<std::string>)> _commands;
 
+                void _handleCreateRoom(std::vector<std::string> args);
+                void _handleJoinRoom(std::vector<std::string> args);
+                void _handleListRooms(std::vector<std::string> args);
+                void _handleRoomInfo(std::vector<std::string> args);
                 void _handlePlayerConnection(std::vector<std::string> args);
+                void _handleYouConnection(std::vector<std::string> args);
                 void _handlePlayerDisconnection(std::vector<std::string> args);
+                void _handlePlayerColor(std::vector<std::string> args);
+                void _handleRoomMode(std::vector<std::string> args);
+                void _handleRoomStartGame(std::vector<std::string> args);
                 void _handlePlayerPosition(std::vector<std::string> args);
+                void _handlePlayerDamage(std::vector<std::string> args);
+                void _handlePlayerDeath(std::vector<std::string> args);
                 void _handlePlayerShoot(std::vector<std::string> args);
-                void _handleEnemyShoot(std::vector<std::string> args);
-                void _handleEnemyAppear(std::vector<std::string> args);
-                void _handleEnemyDeath(std::vector<std::string> args);
+                void _handlePlayerInfo(std::vector<std::string> args);
+                void _handleEnemyCreation(std::vector<std::string> args);
                 void _handleEnemyPosition(std::vector<std::string> args);
-                void _handleWave(std::vector<std::string> args);
+                void _handleEnemyDamage(std::vector<std::string> args);
+                void _handleEnemyDeath(std::vector<std::string> args);
+                void _handleEnemyShoot(std::vector<std::string> args);
+                void _handleEnemyInfo(std::vector<std::string> args);
+                void _handleGameWave(std::vector<std::string> args);
+                void _handleRoomEndGame(std::vector<std::string> args);
         };
     } // namespace Communication
 } // namespace RType

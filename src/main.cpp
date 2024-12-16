@@ -11,7 +11,7 @@
 #include <iostream>
 #include <memory>
 #include "CommunicationClient.hpp"
-#include "DisplayClient.hpp"
+#include "GameClient.hpp"
 #include "Parsing.hpp"
 #include "SendList.hpp"
 #include "Thread.hpp"
@@ -25,17 +25,17 @@ int main(int argc, char **argv)
         RType::Parsing parsing(argc, argv);
 
         std::shared_ptr<RType::Communication::SendList> sendList = std::make_shared<RType::Communication::SendList>();
-        std::shared_ptr<RType::Communication::Client> client = std::make_shared<RType::Communication::Client>(parsing.getIpAdress(), parsing.getPort(), sendList);
-        sendList->setClient(client.get());
-        RType::Ressources::get()->setSendList(sendList);
+        std::shared_ptr<RType::Communication::Client> communicationclient = std::make_shared<RType::Communication::Client>(parsing.getIpAdress(), parsing.getPort(), sendList);
+        sendList->setClient(communicationclient.get());
+        RType::Ressources::get()->sendList = sendList;
 
         RType::Helpers::Thread serverThread;
-        serverThread.start([client]() { client->run(); });
+        serverThread.start([communicationclient]() { communicationclient->run(); });
 
-        RType::Display::Client displayClient;
-        displayClient.run();
+        RType::Game::Client gameClient;
+        gameClient.run();
 
-        client->shutdown();
+        communicationclient->shutdown();
         serverThread.join();
 
     } catch (const RType::Parsing::ParsingError &e) {

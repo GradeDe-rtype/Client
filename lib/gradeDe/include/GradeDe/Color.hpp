@@ -10,6 +10,8 @@
 #define GRADE_DE_COLOR_SFML_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <iomanip>
+#include <sstream>
 #include <string>
 
 /*  ---- CLASS ---- */
@@ -110,6 +112,8 @@ namespace gd
              * \return The hexadecimal string.
              */
             static const gd::Color fromHex(std::string hex);
+
+            static const std::string toHex(const gd::Color &color);
     };
 } // namespace gd
 
