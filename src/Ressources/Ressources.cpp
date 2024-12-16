@@ -35,7 +35,7 @@ namespace RType
     {
         if (me == nullptr) return;
         if (me->hasMoved())
-            sendList->push("position " + me->getPlayerPosition());
+            sendList->push("position " + me->getEntityPosition());
     }
 
 } // namespace RType

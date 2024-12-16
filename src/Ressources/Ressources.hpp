@@ -32,11 +32,11 @@ namespace RType
 
             void update();
 
-            std::shared_ptr<RType::Game::Player> me = nullptr;
-            std::unordered_map<std::string, std::shared_ptr<RType::Game::Player>> players;
-            std::unordered_map<std::string, std::shared_ptr<RType::Game::Enemy>> enemies;
+            std::shared_ptr<RType::Game::Entity::Player> me = nullptr;
+            std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Player>> players;
+            std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Enemy>> enemies;
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
-            std::vector<std::unique_ptr<RType::Game::Shoot>> shoots;
+            std::vector<std::unique_ptr<RType::Game::Entity::Shoot>> shoots;
             int wave = 1;
             bool isConnected = false;
 

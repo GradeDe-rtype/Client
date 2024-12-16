@@ -36,7 +36,7 @@ namespace RType
                         RType::Ressources::get()->me->shoot();
                         int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->shape().getSize().x / 2;
                         int y = RType::Ressources::get()->me->shape().getPosition().y;
-                        RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Shoot>(x, y));
+                        RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(x, y));
                         std::unordered_map<std::string, std::string> tmp;
                         tmp["x"] = std::to_string(x);
                         tmp["y"] = std::to_string(y);
