@@ -41,7 +41,6 @@ namespace RType
 
         void Commands::handleCommand(std::string command)
         {
-            std::cerr << "Command: {" << command << "}" << std::endl;
             try {
                 std::vector<std::string> args = Helpers::Utils::split(command, " ");
                 if (_commands.find(args[0]) != _commands.end())
@@ -74,13 +73,13 @@ namespace RType
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["id"]), obj["color"]);
+            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Player>(std::stoi(obj["id"]), obj["color"]);
         }
 
         void Commands::_handleYouConnection(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Display::Player>(std::stoi(obj["id"]), obj["color"]);
+            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Player>(std::stoi(obj["id"]), obj["color"]);
             RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
         }
 
@@ -125,7 +124,7 @@ namespace RType
         void Commands::_handlePlayerShoot(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), 15));
+            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), 15));
         }
 
         void Commands::_handlePlayerInfo(std::vector<std::string> args)
@@ -136,7 +135,7 @@ namespace RType
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Display::Enemy>(std::stoi(obj["id"]));
+            RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Enemy>(std::stoi(obj["id"]), std::stoi(obj["x"]), std::stoi(obj["y"]));
         }
 
         void Commands::_handleEnemyPosition(std::vector<std::string> args)
@@ -159,7 +158,7 @@ namespace RType
         void Commands::_handleEnemyShoot(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Display::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -15));
+            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -15));
         }
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
