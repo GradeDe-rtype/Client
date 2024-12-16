@@ -42,6 +42,10 @@ namespace RType
                     gd::Text _waveUpgrade;
                     gd::Text _pressEnter;
                     gd::Font _font;
+                    gd::Time _fade;
+                    int _opacity = 0;
+                    int _fadeSpeed = 20;
+                    int _fadeTime = 50;
             };
         } // namespace Components
     } // namespace Game
