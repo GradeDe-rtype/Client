@@ -19,10 +19,11 @@ namespace RType
 
         void Client::run()
         {
-            _connect();
-            _io_context.run();
             while (_state != DOWN) {
                 switch (_state) {
+                    case TRY_CONNECT:
+                        _connect();
+                        break;
                     case CONNECTED:
                         _read();
                         std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -47,16 +48,15 @@ namespace RType
 
         void Client::_connect()
         {
-            boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(_ip), _port);
-            _socket.async_connect(endpoint, [this](const boost::system::error_code &error) {
-                if (!error) {
-                    _state = CONNECTED;
-                    _read();
-                } else {
-                    std::cerr << "Connection error: " << error.message() << std::endl;
-                    _state = DISCONNECT;
-                }
-            });
+            try {
+                boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string(_ip), _port);
+                _socket.connect(endpoint);
+                _state = CONNECTED;
+                _read();
+                _io_context.run();
+                RType::Ressources::get()->isConnected = true;
+            } catch (const boost::system::system_error &e) {
+            }
         }
 
         void Client::_disconnect()

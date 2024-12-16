@@ -38,6 +38,7 @@ namespace RType
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
             std::vector<std::unique_ptr<RType::Game::Shoot>> shoots;
             int wave = 1;
+            bool isConnected = false;
 
         private:
             Ressources();

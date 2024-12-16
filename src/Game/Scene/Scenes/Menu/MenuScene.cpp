@@ -29,7 +29,8 @@ namespace RType
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)
             {
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Released) return "game";
+                if (RType::Ressources::get()->isConnected)
+                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Released) return "game";
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) window.close();
                 if (event.joyStick().isConnected() && event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return "game";
                 return "";
@@ -38,7 +39,8 @@ namespace RType
             void Menu::draw(gd::Window &window)
             {
                 window.draw(_background);
-                window.draw(_text);
+                if (RType::Ressources::get()->isConnected)
+                    window.draw(_text);
             }
         } // namespace Scene
     } // namespace Game
