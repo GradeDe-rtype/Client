@@ -41,6 +41,7 @@ namespace RType
                     gd::Text _nextWave;
                     gd::Text _waveUpgrade;
                     gd::Text _pressEnter;
+                    gd::Text _waveIndicator;
                     gd::Font _font;
                     gd::Time _fade;
                     int _opacity = 0;

@@ -16,13 +16,6 @@ namespace RType
         {
             void Game::load(gd::Window &window)
             {
-                _font.load("assets/font/Karma Future.otf");
-                _waveText.setFont(_font);
-                _waveText.setCharacterSize(30);
-                _waveText.setColor(gd::Color::White);
-                _waveText.setString("Wave " + std::to_string(_wave));
-                _waveText.setPosition((gd::Vector2<int>){5, (int)(window.getHeight() - _waveText.getSize().y - 10)});
-
                 _starBackground = std::make_unique<RType::Game::Components::StarsBackground>(window);
                 _waveNotif = std::make_unique<RType::Game::Components::WaveNotif>(window);
             }
@@ -72,7 +65,6 @@ namespace RType
                     window.draw(shoot->shape());
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     window.draw(enemy.second->shape());
-                window.draw(_waveText);
                 _waveNotif->draw(window);
             }
 

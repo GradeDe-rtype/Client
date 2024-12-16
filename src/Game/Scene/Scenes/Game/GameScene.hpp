@@ -15,7 +15,6 @@
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Sound.hpp"
-#include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 #include "StarsBackground.hpp"
@@ -69,9 +68,6 @@ namespace RType
                     void update(gd::Window &window) override;
 
                 private:
-                    int _wave = 0;
-                    gd::Font _font;
-                    gd::Text _waveText;
                     std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
                     std::unique_ptr<RType::Game::Components::WaveNotif> _waveNotif;
             };
