@@ -172,6 +172,7 @@ namespace RType
             for (auto &player : RType::Ressources::get()->players)
                 if (!player.second->getIsAlive())
                     player.second->respawn();
+            RType::Ressources::get()->waveState = RType::Ressources::WaveState::NEXT_WAVE;
         }
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)

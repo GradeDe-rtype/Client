@@ -29,6 +29,11 @@ namespace RType
                 std::get<0>(timer).reset();
             }
         }
+
+        if (waveState == WaveState::READY) {
+            waveState = WaveState::GAME;
+            sendList->push("ready");
+        }
     }
 
     void Ressources::_sendPlayerPosition()
