@@ -63,7 +63,7 @@ namespace RType
                 window.draw(_nextWave);
                 window.draw(_waveUpgrade);
                 window.draw(_pressEnter);
-                window.draw(_waveIndicator);
+                if (_currentWave > 0) window.draw(_waveIndicator);
             }
 
             void WaveIndicators::update(gd::Window &window)
