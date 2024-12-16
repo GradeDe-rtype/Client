@@ -85,8 +85,9 @@ namespace RType
                         i--;
                     }
                 }
-                if (RType::Ressources::get()->wave != _wave) {
+                if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::NEXT_WAVE) {
                     _wave = RType::Ressources::get()->wave;
+                    RType::Ressources::get()->waveState = RType::Ressources::WaveState::WAITING;
                     _waveText.setString("Wave " + std::to_string(_wave));
                     _waveText.setPosition((gd::Vector2<int>){5, (int)(window.getHeight() - _waveText.getSize().y - 10)});
                 }

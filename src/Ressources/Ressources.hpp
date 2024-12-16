@@ -27,6 +27,13 @@ namespace RType
     class Ressources
     {
         public:
+            enum WaveState {
+                NEXT_WAVE,
+                WAITING,
+                READY,
+                GAME,
+            };
+
             static Ressources *get();
             ~Ressources() = default;
 
@@ -38,6 +45,7 @@ namespace RType
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
             std::vector<std::unique_ptr<RType::Game::Entity::Shoot>> shoots;
             int wave = 1;
+            WaveState waveState = WaveState::NEXT_WAVE;
             bool isConnected = false;
 
         private:
