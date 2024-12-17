@@ -172,12 +172,13 @@ namespace RType
             for (auto &player : RType::Ressources::get()->players)
                 if (!player.second->getIsAlive())
                     player.second->respawn();
-            RType::Ressources::get()->waveState = RType::Ressources::WaveState::NEXT_WAVE;
+            RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
         }
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
         {
             RType::Ressources::get()->endScore = std::stoi(args[1]);
+            RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
         }
     } // namespace Communication
 } // namespace RType

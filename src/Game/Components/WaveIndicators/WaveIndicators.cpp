@@ -49,9 +49,9 @@ namespace RType
 
             void WaveIndicators::handleEvent(gd::Window &window, gd::Event &event)
             {
-                if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::WAITING) {
+                if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::WAVE_WAITING) {
                     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed) {
-                        RType::Ressources::get()->waveState = RType::Ressources::WaveState::READY;
+                        RType::Ressources::get()->roomState = RType::Ressources::RoomState::WAVE_READY;
                         _currentWave = RType::Ressources::get()->wave;
                         _waveIndicator.setString("Wave " + std::to_string(_currentWave));
                     }
@@ -68,15 +68,15 @@ namespace RType
 
             void WaveIndicators::update(gd::Window &window)
             {
-                if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::NEXT_WAVE) {
+                if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::NEXT_WAVE) {
                     _waveUpgrade.setString(std::to_string(_currentWave) + " -> " + std::to_string(RType::Ressources::get()->wave));
                     _waveUpgrade.setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _waveUpgrade.getSize().x / 2), (int)(window.getHeight() / 2 - _waveUpgrade.getSize().y / 2)});
                     int _currentWave = RType::Ressources::get()->wave;
-                    RType::Ressources::get()->waveState = RType::Ressources::WaveState::WAITING;
+                    RType::Ressources::get()->roomState = RType::Ressources::RoomState::WAVE_WAITING;
                 }
 
                 if (_fade.getElapsedTime() >= _fadeTime) {
-                    if (RType::Ressources::get()->waveState == RType::Ressources::WaveState::WAITING)
+                    if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::WAVE_WAITING)
                         _opacity = (_opacity + _fadeSpeed < 255) ? _opacity + _fadeSpeed : 255;
                     else
                         _opacity = (_opacity - _fadeSpeed > 0) ? _opacity - _fadeSpeed : 0;

@@ -30,8 +30,8 @@ namespace RType
             }
         }
 
-        if (waveState == WaveState::READY) {
-            waveState = WaveState::GAME;
+        if (roomState == RoomState::WAVE_READY) {
+            roomState = RoomState::GAME;
             sendList->push("ready");
         }
     }

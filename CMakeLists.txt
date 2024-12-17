@@ -47,6 +47,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Game/Audio/"
     "src/Game/Audio/MusicManager/"
     "src/Game/Client/"
+    "src/Game/Components/EndIndicator/"
     "src/Game/Components/Entity/"
     "src/Game/Components/Entity/Base/"
     "src/Game/Components/Entity/Enemy/"

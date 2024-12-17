@@ -12,6 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <string>
 #include "AScene.hpp"
+#include "EndIndicator.hpp"
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Sound.hpp"
@@ -70,6 +71,7 @@ namespace RType
                 private:
                     std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
                     std::unique_ptr<RType::Game::Components::WaveIndicators> _waveIndicators;
+                    std::unique_ptr<RType::Game::Components::EndIndicator> _endIndicator;
             };
         } // namespace Scene
     } // namespace Game
