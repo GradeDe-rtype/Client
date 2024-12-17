@@ -25,6 +25,8 @@ namespace RType
                 _text.setString("Press 'Space' to start the game");
                 _text.setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _text.getSize().x / 2), (int)(window.getHeight() / 2 - _text.getSize().y / 2)});
                 _text.setColor(gd::Color::Black);
+
+                _starRating = std::make_unique<RType::Game::Components::StarRating>(window);
             }
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)
@@ -33,6 +35,7 @@ namespace RType
                     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Released) return "game";
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) window.close();
                 if (event.joyStick().isConnected() && event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return "game";
+                _starRating->update(window);
                 return "";
             }
 
@@ -41,6 +44,7 @@ namespace RType
                 window.draw(_background);
                 if (RType::Ressources::get()->isConnected)
                     window.draw(_text);
+                _starRating->draw(window);
             }
         } // namespace Scene
     } // namespace Game

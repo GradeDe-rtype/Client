@@ -177,7 +177,7 @@ namespace RType
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
         {
-            std::cerr << "\"end\" command not implemented yet" << std::endl;
+            RType::Ressources::get()->endScore = std::stoi(args[1]);
         }
     } // namespace Communication
 } // namespace RType

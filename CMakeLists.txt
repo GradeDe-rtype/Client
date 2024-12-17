@@ -52,6 +52,8 @@ target_include_directories(r-type_client PRIVATE
     "src/Game/Components/Entity/Enemy/"
     "src/Game/Components/Entity/Player/"
     "src/Game/Components/Entity/Shoot/"
+    "src/Game/Components/Entity/Star/"
+    "src/Game/Components/StarRating/"
     "src/Game/Components/StarsBackground/"
     "src/Game/Components/WaveIndicators/"
     "src/Game/Scene/"

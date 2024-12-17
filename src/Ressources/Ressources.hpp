@@ -47,6 +47,7 @@ namespace RType
             int wave = 0;
             WaveState waveState = WaveState::GAME;
             bool isConnected = false;
+            int endScore = 5;
 
         private:
             Ressources();
