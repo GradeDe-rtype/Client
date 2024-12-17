@@ -172,6 +172,7 @@ namespace RType
             for (auto &player : RType::Ressources::get()->players)
                 if (!player.second->getIsAlive())
                     player.second->respawn();
+            RType::Ressources::get()->enemies.clear();
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
         }
 
@@ -179,6 +180,7 @@ namespace RType
         {
             RType::Ressources::get()->endScore = std::stoi(args[1]);
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
+            RType::Ressources::get()->enemies.clear();
         }
     } // namespace Communication
 } // namespace RType
