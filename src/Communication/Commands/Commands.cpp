@@ -135,7 +135,7 @@ namespace RType
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), std::stoi(obj["x"]), std::stoi(obj["y"]));
+            RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), static_cast<RType::Game::Entity::Enemy::Type>(std::stoi(obj["type"])), std::stoi(obj["x"]), std::stoi(obj["y"]), std::stoi(obj["health"]));
         }
 
         void Commands::_handleEnemyPosition(std::vector<std::string> args)
