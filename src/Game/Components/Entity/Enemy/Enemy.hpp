@@ -23,8 +23,22 @@ namespace RType
             class Enemy : public AEntity
             {
                 public:
-                    Enemy(int id, float x = 0, float y = 0, int health = 100);
+                    typedef enum {
+                        MONSTER = 0,
+                        BOSS = 1,
+                        KAMIKAZE_MONSTER = 2,
+                        BASIC_MONSTER = 3
+                    } Type;
+
+                    Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
                     ~Enemy() = default;
+
+                private:
+                    Type _type;
+
+                    void _createMonsterShape();
+                    void _createKamikazeMonster();
+                    void _createBasicMonster();
             };
         } // namespace Entity
     } // namespace Game

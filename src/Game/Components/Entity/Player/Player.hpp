@@ -46,7 +46,7 @@ namespace RType
                     bool _moved = false;
                     int _maxRotationAngle = 30;
                     gd::Time _shootTimer;
-                    int _shootCooldown = 1000;
+                    int _shootCooldown = 800;
                     gd::Time _rotationReset;
             };
         } // namespace Entity
