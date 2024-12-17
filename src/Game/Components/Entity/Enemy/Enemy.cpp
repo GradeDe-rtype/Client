@@ -27,7 +27,6 @@ namespace RType
                     {static_cast<float>(_size / 2), static_cast<float>(_size)},
                     {static_cast<float>(0), static_cast<float>(_size / 2)},
                 });
-                _shape.setOrigin({static_cast<float>(_size / 2), static_cast<float>(_size / 2)});
                 _shape.setFillColor(gd::Color::Transparent);
                 _shape.setOutlineColor(gd::Color::Magenta);
                 _shape.setOutlineThickness(5);

@@ -158,7 +158,7 @@ namespace RType
         void Commands::_handleEnemyShoot(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -15));
+            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -8));
         }
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)

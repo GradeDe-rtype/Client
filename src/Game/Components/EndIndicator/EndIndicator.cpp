@@ -46,6 +46,7 @@ namespace RType
                 if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::END) {
                     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::GAME;
+                        RType::Ressources::get()->wave = 1;
                         for (auto &player : RType::Ressources::get()->players)
                             if (!player.second->getIsAlive())
                                 player.second->respawn();
