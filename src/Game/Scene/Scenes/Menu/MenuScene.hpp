@@ -17,7 +17,6 @@
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
-#include "StarRating.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -65,7 +64,6 @@ namespace RType
                     gd::Shape _background;
                     gd::Text _text;
                     gd::Font _font;
-                    std::unique_ptr<RType::Game::Components::StarRating> _starRating;
             };
         } // namespace Scene
     } // namespace Game
