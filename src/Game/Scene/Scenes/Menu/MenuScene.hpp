@@ -10,11 +10,12 @@
 #define RTYPE_Game_SCENE_MENU_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include <string>
 #include "AScene.hpp"
+#include "Game/Components/Text/Text.hpp"
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
-#include "GradeDe/Text.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
 
@@ -61,8 +62,7 @@ namespace RType
                     void draw(gd::Window &window) override;
 
                 private:
-                    gd::Text _text;
-                    gd::Font _font;
+                    std::unique_ptr<RType::Game::Components::Text> _text;
             };
         } // namespace Scene
     } // namespace Game

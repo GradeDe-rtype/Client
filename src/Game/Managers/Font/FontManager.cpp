@@ -20,7 +20,7 @@ namespace RType
                 return instance;
             }
 
-            gd::Font Font::load(const std::string &name)
+            gd::Font Font::getFont(const std::string &name)
             {
                 if (_fonts.find(name) == _fonts.end())
                     _loadNewFont(name);

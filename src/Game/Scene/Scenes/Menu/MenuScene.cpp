@@ -17,12 +17,8 @@ namespace RType
         {
             void Menu::load(gd::Window &window)
             {
-                _font.load("assets/font/Karma Future.otf");
-                _text.setFont(_font);
-                _text.setCharacterSize(30);
-                _text.setString("Press 'Space' to start the game");
-                _text.setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _text.getSize().x / 2), (int)(window.getHeight() / 2 - _text.getSize().y / 2)});
-                _text.setColor(gd::Color::Black);
+                _text = std::make_unique<Game::Components::Text>("Karma Future", "Press 'Space' to start the game");
+                _text->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _text->getSize().x / 2), (int)(window.getHeight() / 2 - _text->getSize().y / 2)});
             }
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)
@@ -37,7 +33,7 @@ namespace RType
             void Menu::draw(gd::Window &window)
             {
                 if (RType::Ressources::get()->isConnected)
-                    window.draw(_text);
+                    _text->draw(window);
             }
         } // namespace Scene
     } // namespace Game

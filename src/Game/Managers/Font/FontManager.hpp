@@ -30,7 +30,7 @@ namespace RType
 
                     static Font &get();
 
-                    gd::Font load(const std::string &name);
+                    gd::Font getFont(const std::string &name);
 
                 private:
                     Font() = default;

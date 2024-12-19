@@ -10,11 +10,11 @@
 #define RTYPE_GAME_COMPONENT_END_INDICATOR_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include <unordered_map>
+#include "Game/Components/Text/Text.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Event.hpp"
-#include "GradeDe/Font.hpp"
-#include "GradeDe/Text.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
@@ -38,10 +38,9 @@ namespace RType
 
                 private:
                     int _endScore = 0;
-                    gd::Text _endText;
-                    gd::Text _scoreText;
-                    gd::Text _pressEnter;
-                    gd::Font _font;
+                    std::unique_ptr<RType::Game::Components::Text> _endText;
+                    std::unique_ptr<RType::Game::Components::Text> _scoreText;
+                    std::unique_ptr<RType::Game::Components::Text> _pressEnter;
                     gd::Time _fade;
                     int _opacity = 0;
                     int _fadeSpeed = 20;
