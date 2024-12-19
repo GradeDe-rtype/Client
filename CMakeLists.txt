@@ -21,6 +21,10 @@ endforeach()
 
 #  ---- SOURCES ---- #
 file(GLOB_RECURSE SOURCES
+    "src/**/**/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/*.cpp"
     "src/**/**/**/*.cpp"
     "src/**/**/*.cpp"
     "src/**/*.cpp"

@@ -17,6 +17,7 @@ namespace RType
             Music::Music()
             {
                 _addMusic("menu", "assets/music/Neon Frenzy.mp3");
+                _addMusic("settings", "assets/music/Neon Frenzy.mp3");
                 _addMusic("game", "assets/music/Adrenaline Surge.mp3");
             }
 

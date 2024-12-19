@@ -21,6 +21,7 @@
 #include "Game/Scenes/Base/IScene.hpp"
 #include "Game/Scenes/Game/GameScene.hpp"
 #include "Game/Scenes/Menu/MenuScene.hpp"
+#include "Game/Scenes/Settings/SettingsScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -49,7 +50,7 @@ namespace RType
                         NOTHING,
                     } TransitionState;
 
-                    int _transitionFrame = 20;
+                    int _transitionFrame = 40;
                     int _transitionSpeed = 255 / _transitionFrame;
                     int _backupVolume = 100;
                     int _volumeTransition = 100 / _transitionFrame;

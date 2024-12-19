@@ -17,6 +17,7 @@ namespace RType
             void Menu::load(gd::Window &window)
             {
                 _addLink("game", "Play", window);
+                _addLink("settings", "Settings", window);
                 _addLink("exit", "Quit", window);
                 _setPositionsLinks();
 
