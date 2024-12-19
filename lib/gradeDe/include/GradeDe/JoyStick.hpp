@@ -13,6 +13,7 @@
 #include <SFML/Window/Joystick.hpp>
 #include <tuple>
 #include <unordered_map>
+#include <vector>
 #include "GradeDe/Time.hpp"
 
 /*  ---- CLASS ---- */
@@ -234,10 +235,26 @@ namespace gd
              */
             float getAxisPosition(Axis axis) const;
 
+            /**
+             * \brief Get the position of X axis.
+             *
+             * \params highest If true, return the highest X axis position. Else, return the lowest.
+             */
+            float getXAxisPosition(bool highest) const;
+
+            /**
+             * \brief Get the position of Y axis.
+             *
+             * \params highest If true, return the highest Y axis position. Else, return the lowest.
+             */
+            float getYAxisPosition(bool highest) const;
+
         private:
             std::unordered_map<Button, std::tuple<State, gd::Time>> _buttons;
             std::unordered_map<Axis, float> _axis;
             bool _isConnected;
+            std::vector<Axis> _axisX;
+            std::vector<Axis> _axisY;
     };
 } // namespace gd
 

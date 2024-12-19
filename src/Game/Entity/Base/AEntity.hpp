@@ -15,7 +15,8 @@
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
-#include "Game/Components/Entity/Base/IEntity.hpp"
+#include "GradeDe/Window.hpp"
+#include "Game/Entity/Base/IEntity.hpp"
 #include "rfcArgParser.hpp"
 
 namespace RType
@@ -30,6 +31,7 @@ namespace RType
                     AEntity() = default;
                     ~AEntity() = default;
 
+                    void draw(gd::Window &window) override;
                     void update() override;
                     void move(float x, float y) override;
                     void move(gd::Vector2<float> move) override;
@@ -55,7 +57,7 @@ namespace RType
                     gd::Vector2<float> getPosition() const override;
                     float getX() const override;
                     float getY() const override;
-                    int getSize() const override;
+                    gd::Vector2<float> getSize() const override;
                     int getSpeed() const override;
                     std::string getEntityInfo() const override;
                     std::string getEntitySmallInfo() const override;

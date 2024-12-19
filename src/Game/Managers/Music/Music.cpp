@@ -22,6 +22,7 @@ namespace RType
 
             void Music::setMusic(const std::string &name)
             {
+                if (_musics.find(name) == _musics.end()) return;
                 if (_currentMusic)
                     _currentMusic->stop();
                 _currentMusic = _musics[name];

@@ -22,9 +22,11 @@ namespace RType
                 _transitionShape.setFillColor(_transitionColor);
                 _transitionShape.setPosition((gd::Vector2<float>){0, 0});
 
-                _addScene("game", std::make_shared<RType::Game::Scenes::Game>(), window);
+                _addScene("exit", std::make_shared<RType::Game::Scenes::AScene>(), window);
                 _addScene("menu", std::make_shared<RType::Game::Scenes::Menu>(), window);
+                _addScene("game", std::make_shared<RType::Game::Scenes::Game>(), window);
 
+                _currentSceneName = "menu";
                 _currentScene = _scenes["menu"];
                 _musicManager->setMusic("menu");
                 _musicManager->setVolume(0);
@@ -54,6 +56,7 @@ namespace RType
                         _transitionOpacity = 255;
                         _transitionState = FADE_OUT;
                         _currentScene->leave();
+                        _currentSceneName = _nextScene;
                         _currentScene = _scenes[_nextScene];
                         _musicManager->setMusic(_nextScene);
                         _currentScene->enter();
@@ -82,6 +85,11 @@ namespace RType
             bool Scenes::isTransitioning() const
             {
                 return _transitionState != NOTHING;
+            }
+
+            std::string Scenes::getCurrentSceneName() const
+            {
+                return _currentSceneName;
             }
 
             void Scenes::_addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window)

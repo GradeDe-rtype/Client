@@ -13,6 +13,7 @@
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Vector.hpp"
+#include "GradeDe/Window.hpp"
 
 namespace RType
 {
@@ -25,6 +26,7 @@ namespace RType
                 public:
                     virtual ~IEntity() = default;
 
+                    virtual void draw(gd::Window &window) = 0;
                     virtual void update() = 0;
                     virtual void move(float x, float y) = 0;
                     virtual void move(gd::Vector2<float> move) = 0;
@@ -50,7 +52,7 @@ namespace RType
                     virtual gd::Vector2<float> getPosition() const = 0;
                     virtual float getX() const = 0;
                     virtual float getY() const = 0;
-                    virtual int getSize() const = 0;
+                    virtual gd::Vector2<float> getSize() const = 0;
                     virtual int getSpeed() const = 0;
                     virtual std::string getEntityInfo() const = 0;
                     virtual std::string getEntitySmallInfo() const = 0;

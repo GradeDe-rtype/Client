@@ -26,12 +26,12 @@ namespace RType
                 _endIndicator->handleEvent(window, event);
 
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
-                gd::Vector2<float> size = RType::Ressources::get()->me->shape().getSize();
+                gd::Vector2<float> size = RType::Ressources::get()->me->getSize();
 
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Pressed) {
                     if (RType::Ressources::get()->me->getShootCooldown() == 0) {
                         RType::Ressources::get()->me->shoot();
-                        int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->shape().getSize().x / 2;
+                        int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->getSize().x / 2;
                         int y = RType::Ressources::get()->me->shape().getPosition().y;
                         RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(x, y, 8));
                         std::unordered_map<std::string, std::string> tmp;

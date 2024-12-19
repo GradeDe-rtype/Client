@@ -16,6 +16,11 @@ namespace RType
         namespace Entity
         {
             /*  ---- FUNCTIONS ---- */
+            void AEntity::draw(gd::Window &window)
+            {
+                window.draw(_shape);
+            }
+
             void AEntity::update()
             {
             }
@@ -136,9 +141,9 @@ namespace RType
                 return _position.y;
             }
 
-            int AEntity::getSize() const
+            gd::Vector2<float> AEntity::getSize() const
             {
-                return _size;
+                return _shape.getSize();
             }
 
             int AEntity::getSpeed() const

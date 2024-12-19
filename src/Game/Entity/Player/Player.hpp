@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
-#include "Game/Components/Entity/Base/AEntity.hpp"
+#include "Game/Entity/Base/AEntity.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

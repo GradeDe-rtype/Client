@@ -11,7 +11,7 @@
 
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
-#include "Game/Components/Entity/Base/AEntity.hpp"
+#include "Game/Entity/Base/AEntity.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

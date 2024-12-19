@@ -12,10 +12,14 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
+#include <utility>
+#include <vector>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
 #include "Game/Components/Text/Text.hpp"
+#include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
 
@@ -29,16 +33,6 @@ namespace RType
             class Menu : public AScene
             {
                 public:
-                    /**
-                     * @brief Construct a new AScene object
-                     */
-                    Menu() = default;
-
-                    /**
-                     * @brief Destroy the IScene object
-                     */
-                    ~Menu() override = default;
-
                     /**
                      * @brief Load the scene
                      *
@@ -61,8 +55,25 @@ namespace RType
                      */
                     void draw(gd::Window &window) override;
 
+                    /**
+                     * @brief Update the scene
+                     */
+                    void update(gd::Window &window) override;
+
                 private:
-                    std::unique_ptr<RType::Game::Components::Text> _text;
+                    std::vector<std::pair<std::string, std::unique_ptr<RType::Game::Components::Text>>> _links;
+                    std::unique_ptr<RType::Game::Entity::SelectArrow> _selectArrow;
+                    bool _connected = false;
+                    int _linkGap = 75;
+                    int _linkSpacing = 50;
+                    int _selectIndex = 1;
+                    gd::Time _input;
+
+                    void _addLink(std::string name, std::string link, gd::Window &window);
+                    void _setPositionsLinks();
+                    int _getIndexLink(std::string name);
+                    void _moveSelectArrow(int index);
+                    void _setSelectArrowPosition();
             };
         } // namespace Scenes
     } // namespace Game

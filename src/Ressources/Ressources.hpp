@@ -16,9 +16,9 @@
 #include <unordered_map>
 #include "GradeDe/Time.hpp"
 #include "Communication/SendList/SendList.hpp"
-#include "Game/Components/Entity/Enemy/Enemy.hpp"
-#include "Game/Components/Entity/Player/Player.hpp"
-#include "Game/Components/Entity/Shoot/Shoot.hpp"
+#include "Game/Entity/Enemy/Enemy.hpp"
+#include "Game/Entity/Player/Player.hpp"
+#include "Game/Entity/Shoot/Shoot.hpp"
 #include "Helpers/Utils/Utils.hpp"
 
 /*  ---- CLASS ---- */

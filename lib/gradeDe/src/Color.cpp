@@ -50,4 +50,14 @@ namespace gd
            << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(color.b);
         return ss.str();
     }
+
+    bool gd::Color::operator!=(const gd::Color &color) const
+    {
+        return r != color.r || g != color.g || b != color.b || a != color.a;
+    }
+
+    bool gd::Color::operator==(const gd::Color &color) const
+    {
+        return r == color.r && g == color.g && b == color.b && a == color.a;
+    }
 } // namespace gd
