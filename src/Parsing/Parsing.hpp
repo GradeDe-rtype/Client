@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef PARSING_HPP_
-#define PARSING_HPP_
+#ifndef RTYPE_PARSING_HPP_
+#define RTYPE_PARSING_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <exception>
@@ -109,4 +109,4 @@ namespace RType
     };
 } // namespace RType
 
-#endif /* !PARSING_HPP_ */
+#endif /* !RTYPE_PARSING_HPP_ */

@@ -7,8 +7,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_ENTITY_ABSTRACT_HPP_
-#define RTYPE_GAME_ENTITY_ABSTRACT_HPP_
+#ifndef RTYPE_GAME_COMPONENT_ENTITY_ABSTRACT_HPP_
+#define RTYPE_GAME_COMPONENT_ENTITY_ABSTRACT_HPP_
 
 #include <vector>
 #include "GradeDe/Color.hpp"
@@ -79,4 +79,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif // RTYPE_GAME_ENTITY_ABSTRACT_HPP_
+#endif // RTYPE_GAME_COMPONENT_ENTITY_ABSTRACT_HPP_

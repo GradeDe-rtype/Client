@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef HELPERS_UTILS_HPP_
-#define HELPERS_UTILS_HPP_
+#ifndef RTYPE_HELPERS_UTILS_HPP_
+#define RTYPE_HELPERS_UTILS_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <algorithm>
@@ -71,4 +71,4 @@ namespace RType
     } // namespace Helpers
 } // namespace RType
 
-#endif /* !HELPERS_UTILS_HPP_ */
+#endif /* !RTYPE_HELPERS_UTILS_HPP_ */

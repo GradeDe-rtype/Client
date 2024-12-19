@@ -7,8 +7,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_ENTITY_INTERFACE_HPP_
-#define RTYPE_GAME_ENTITY_INTERFACE_HPP_
+#ifndef RTYPE_GAME_COMPONENT_ENTITY_INTERFACE_HPP_
+#define RTYPE_GAME_COMPONENT_ENTITY_INTERFACE_HPP_
 
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"
@@ -61,4 +61,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif // RTYPE_GAME_ENTITY_INTERFACE_HPP_
+#endif // RTYPE_GAME_COMPONENT_ENTITY_INTERFACE_HPP_

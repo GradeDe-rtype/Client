@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef HELPERS_PATH_HPP_
-#define HELPERS_PATH_HPP_
+#ifndef RTYPE_HELPERS_PATH_HPP_
+#define RTYPE_HELPERS_PATH_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <string>
@@ -33,4 +33,4 @@ namespace RType
     } // namespace Helpers
 } // namespace RType
 
-#endif /* !HELPERS_PATH_HPP_ */
+#endif /* !RTYPE_HELPERS_PATH_HPP_ */

@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_SCENE_MENU_HPP_
-#define RTYPE_Game_SCENE_MENU_HPP_
+#ifndef RTYPE_GAME_SCENE_MENU_HPP_
+#define RTYPE_GAME_SCENE_MENU_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>
@@ -68,4 +68,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_SCENE_MENU_HPP_ */
+#endif /* !RTYPE_GAME_SCENE_MENU_HPP_ */

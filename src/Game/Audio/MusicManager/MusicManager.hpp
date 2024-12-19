@@ -45,4 +45,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_MUSIC_MANAGER_HPP_ */
+#endif /* !RTYPE_GAME_MUSIC_MANAGER_HPP_ */

@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef HELPERS_THREAD_HPP
-#define HELPERS_THREAD_HPP
+#ifndef RTYPE_HELPERS_THREAD_HPP
+#define RTYPE_HELPERS_THREAD_HPP
 
 /*  ---- INCLUDES ---- */
 #include <functional>
@@ -51,4 +51,4 @@ namespace RType
     } // namespace Helpers
 } // namespace RType
 
-#endif /* !HELPERS_THREAD_HPP */
+#endif /* !RTYPE_HELPERS_THREAD_HPP */

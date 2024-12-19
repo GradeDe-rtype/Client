@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_CLIENT_HPP_
-#define RTYPE_Game_CLIENT_HPP_
+#ifndef RTYPE_GAME_CLIENT_HPP_
+#define RTYPE_GAME_CLIENT_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>
@@ -47,4 +47,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_CLIENT_HPP_ */
+#endif /* !RTYPE_GAME_CLIENT_HPP_ */

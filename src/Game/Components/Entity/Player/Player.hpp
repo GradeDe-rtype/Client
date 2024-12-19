@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_PLAYER_HPP_
-#define RTYPE_Game_PLAYER_HPP_
+#ifndef RTYPE_GAME_COMPONENT_ENTITY_PLAYER_HPP_
+#define RTYPE_GAME_COMPONENT_ENTITY_PLAYER_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
@@ -53,4 +53,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_PLAYER_HPP_ */
+#endif /* !RTYPE_GAME_COMPONENT_ENTITY_PLAYER_HPP_ */

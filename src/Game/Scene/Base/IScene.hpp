@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_SCENE_INTERFACE_HPP_
-#define RTYPE_Game_SCENE_INTERFACE_HPP_
+#ifndef RTYPE_GAME_SCENE_INTERFACE_HPP_
+#define RTYPE_GAME_SCENE_INTERFACE_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <string>
@@ -75,4 +75,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_SCENE_INTERFACE_HPP_ */
+#endif /* !RTYPE_GAME_SCENE_INTERFACE_HPP_ */
