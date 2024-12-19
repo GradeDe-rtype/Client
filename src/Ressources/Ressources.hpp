@@ -14,12 +14,12 @@
 #include <string>
 #include <tuple>
 #include <unordered_map>
-#include "Enemy.hpp"
 #include "GradeDe/Time.hpp"
-#include "Player.hpp"
-#include "SendList.hpp"
-#include "Shoot.hpp"
-#include "Utils.hpp"
+#include "Communication/SendList/SendList.hpp"
+#include "Game/Entity/Enemy/Enemy.hpp"
+#include "Game/Entity/Player/Player.hpp"
+#include "Game/Entity/Shoot/Shoot.hpp"
+#include "Helpers/Utils/Utils.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

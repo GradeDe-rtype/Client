@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_COMPONENT_STARS_BACKGROUND_HPP_
-#define RTYPE_Game_COMPONENT_STARS_BACKGROUND_HPP_
+#ifndef RTYPE_GAME_COMPONENT_STARS_BACKGROUND_HPP_
+#define RTYPE_GAME_COMPONENT_STARS_BACKGROUND_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <vector>
@@ -59,4 +59,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_COMPONENT_STARS_BACKGROUND_HPP_ */
+#endif /* !RTYPE_GAME_COMPONENT_STARS_BACKGROUND_HPP_ */

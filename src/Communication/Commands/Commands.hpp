@@ -14,9 +14,9 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "Player.hpp"
-#include "Ressources.hpp"
-#include "Utils.hpp"
+#include "Game/Entity/Player/Player.hpp"
+#include "Helpers/Utils/Utils.hpp"
+#include "Ressources/Ressources.hpp"
 #include "rfcArgParser.hpp"
 
 /*  ---- CLASS ---- */

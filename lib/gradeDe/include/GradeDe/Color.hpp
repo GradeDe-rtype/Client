@@ -114,6 +114,9 @@ namespace gd
             static const gd::Color fromHex(std::string hex);
 
             static const std::string toHex(const gd::Color &color);
+
+            bool operator!=(const gd::Color &color) const;
+            bool operator==(const gd::Color &color) const;
     };
 } // namespace gd
 

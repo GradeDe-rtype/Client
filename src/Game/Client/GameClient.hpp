@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_CLIENT_HPP_
-#define RTYPE_Game_CLIENT_HPP_
+#ifndef RTYPE_GAME_CLIENT_HPP_
+#define RTYPE_GAME_CLIENT_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>
@@ -15,9 +15,10 @@
 #include "GradeDe/FrameRate.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
-#include "SceneManager.hpp"
-#include "SendList.hpp"
+#include "Communication/SendList/SendList.hpp"
+#include "Game/Components/StarsBackground/StarsBackground.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -36,7 +37,8 @@ namespace RType
                 gd::Window _window;
                 gd::Event _event;
                 gd::Time _time;
-                std::unique_ptr<RType::Game::Scene::SceneManager> _sceneManager;
+                std::unique_ptr<RType::Game::Managers::Scenes> _scenesManager;
+                std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
 
                 void _handleEvent();
                 void _draw();
@@ -45,4 +47,4 @@ namespace RType
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_Game_CLIENT_HPP_ */
+#endif /* !RTYPE_GAME_CLIENT_HPP_ */

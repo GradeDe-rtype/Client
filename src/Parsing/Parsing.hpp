@@ -14,9 +14,9 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Helpers/Path/Path.hpp"
+#include "Helpers/Utils/Utils.hpp"
 #include "Papaya.hpp"
-#include "Path.hpp"
-#include "Utils.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

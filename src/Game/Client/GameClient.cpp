@@ -19,18 +19,19 @@ namespace RType
         {
             RType::Ressources::get();
             _window.create(800, 600, "R-Type");
-            _sceneManager = std::make_unique<RType::Game::Scene::SceneManager>(_window);
+            _scenesManager = std::make_unique<RType::Game::Managers::Scenes>(_window);
             if (RType::Ressources::get()->me != nullptr)
-                RType::Ressources::get()->me->shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me->shape().getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me->shape().getSize().y / 2)});
+                RType::Ressources::get()->me->shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me->getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me->getSize().y / 2)});
 
             gd::FrameRate::get().setFrameRate(120);
+            _starBackground = std::make_unique<RType::Game::Components::StarsBackground>(_window);
         }
 
         void Client::run()
         {
-            while (_window.isOpen()) {
+            while (_window.isOpen() && _scenesManager->getCurrentSceneName() != "exit") {
                 Ressources::get()->update();
-                _sceneManager->getScene()->update(_window);
+                _scenesManager->getScene()->update(_window);
                 _handleEvent();
                 if (_time.getElapsedTime() >= gd::FrameRate::get().fps()) {
                     _draw();
@@ -49,17 +50,19 @@ namespace RType
         {
             _window.pollEvent(_event);
             _handleGeneralEvent();
-            _sceneManager->update();
-            if (_sceneManager->isTransitioning()) return;
-            std::string next_scene = _sceneManager->getScene()->handleEvent(_window, _event);
-            if (next_scene != "") _sceneManager->changeScene(next_scene);
+            _scenesManager->update();
+            _starBackground->update(_window);
+            if (_scenesManager->isTransitioning()) return;
+            std::string next_scene = _scenesManager->getScene()->handleEvent(_window, _event);
+            if (next_scene != "") _scenesManager->changeScene(next_scene);
         }
 
         void Client::_draw()
         {
             _window.clear(gd::Color::Black);
-            _sceneManager->getScene()->draw(_window);
-            _sceneManager->draw(_window);
+            _starBackground->draw(_window);
+            _scenesManager->getScene()->draw(_window);
+            _scenesManager->draw(_window);
             _window.display();
         }
 

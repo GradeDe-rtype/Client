@@ -10,14 +10,14 @@
 #define RTYPE_GAME_COMPONENT_WAVE_NOTIF_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include <unordered_map>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Event.hpp"
-#include "GradeDe/Font.hpp"
-#include "GradeDe/Text.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
+#include "Game/Components/Text/Text.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -38,11 +38,10 @@ namespace RType
 
                 private:
                     int _currentWave = 0;
-                    gd::Text _nextWave;
-                    gd::Text _waveUpgrade;
-                    gd::Text _pressEnter;
-                    gd::Text _waveIndicator;
-                    gd::Font _font;
+                    std::unique_ptr<RType::Game::Components::Text> _nextWave;
+                    std::unique_ptr<RType::Game::Components::Text> _waveUpgrade;
+                    std::unique_ptr<RType::Game::Components::Text> _pressEnter;
+                    std::unique_ptr<RType::Game::Components::Text> _waveIndicator;
                     gd::Time _fade;
                     int _opacity = 0;
                     int _fadeSpeed = 20;
