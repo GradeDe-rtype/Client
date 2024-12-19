@@ -45,13 +45,6 @@ namespace gd
             void handleEvent(void *event);
 
             /**
-             * \brief Clear the event.
-             *
-             * This function clears the event.
-             */
-            void clear();
-
-            /**
              * \brief Check if the window should be closed.
              */
             bool close() const;
@@ -59,7 +52,7 @@ namespace gd
             /**
              * \brief Get the joystick informations.
              */
-            gd::JoyStick joyStick(unsigned int id = 0) const;
+            gd::JoyStick joyStick() const;
 
             /**
              * \brief Get the keyboard informations.
@@ -84,10 +77,7 @@ namespace gd
              */
             bool _close = false;
 
-            /**
-             * \brief Set the key that is released.
-             */
-            std::vector<std::pair<unsigned int, gd::JoyStick>> _joySticks;
+            gd::JoyStick _joyStick = gd::JoyStick(0);
 
             /**
              * \brief The keyboard informations.

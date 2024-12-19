@@ -13,9 +13,12 @@ namespace gd
 {
     Event::Event()
     {
-        unsigned int max = sf::Joystick::Count;
-        for (unsigned int i = 0; i < (unsigned int)max; i++)
-            _joySticks.push_back(std::make_pair(i, gd::JoyStick(i)));
+        for (unsigned int i = 0; i < 100; i++) {
+            if (sf::Joystick::isConnected(i)) {
+                _joyStick.setConnected(true);
+                break;
+            }
+        }
     }
 
     void Event::handleEvent(void *event)
@@ -39,29 +42,19 @@ namespace gd
                 _mouse.setButtonState(static_cast<gd::Mouse::Button>(_event.mouseButton.button), gd::Mouse::State::Released);
                 break;
             case sf::Event::JoystickConnected:
-                for (auto &joyStick : _joySticks)
-                    if (joyStick.first == _event.joystickConnect.joystickId)
-                        joyStick.second.setConnected(true);
+                _joyStick.setConnected(true);
                 break;
             case sf::Event::JoystickDisconnected:
-                for (auto &joyStick : _joySticks)
-                    if (joyStick.first == _event.joystickConnect.joystickId)
-                        joyStick.second.setConnected(false);
+                _joyStick.setConnected(false);
                 break;
             case sf::Event::JoystickButtonPressed:
-                for (auto &joyStick : _joySticks)
-                    if (joyStick.first == _event.joystickButton.joystickId)
-                        joyStick.second.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Pressed);
+                _joyStick.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Pressed);
                 break;
             case sf::Event::JoystickButtonReleased:
-                for (auto &joyStick : _joySticks)
-                    if (joyStick.first == _event.joystickButton.joystickId)
-                        joyStick.second.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Released);
+                _joyStick.setButtonState(static_cast<gd::JoyStick::Button>(_event.joystickButton.button), gd::JoyStick::State::Released);
                 break;
             case sf::Event::JoystickMoved:
-                for (auto &joyStick : _joySticks)
-                    if (joyStick.first == _event.joystickMove.joystickId)
-                        joyStick.second.setAxisMoved(static_cast<gd::JoyStick::Axis>(_event.joystickMove.axis), _event.joystickMove.position);
+                _joyStick.setAxisMoved(static_cast<gd::JoyStick::Axis>(_event.joystickMove.axis), _event.joystickMove.position);
                 break;
             default:
                 break;
@@ -73,12 +66,9 @@ namespace gd
         return _close;
     }
 
-    gd::JoyStick Event::joyStick(unsigned int id) const
+    gd::JoyStick Event::joyStick() const
     {
-        for (const auto &joyStick : _joySticks)
-            if (joyStick.first == id)
-                return joyStick.second;
-        return gd::JoyStick(0);
+        return _joyStick;
     }
 
     gd::KeyBoard Event::keyBoard() const
