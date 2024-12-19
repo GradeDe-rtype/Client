@@ -6,21 +6,21 @@
     --U-----U------------------------
 */
 
-#include "MusicManager.hpp"
+#include "Music.hpp"
 
 namespace RType
 {
     namespace Game
     {
-        namespace Audio
+        namespace Managers
         {
-            MusicManager::MusicManager()
+            Music::Music()
             {
                 _addMusic("menu", "assets/music/Neon Frenzy.mp3");
                 _addMusic("game", "assets/music/Adrenaline Surge.mp3");
             }
 
-            void MusicManager::setMusic(const std::string &name)
+            void Music::setMusic(const std::string &name)
             {
                 if (_currentMusic)
                     _currentMusic->stop();
@@ -29,14 +29,14 @@ namespace RType
                 _currentMusic->play();
             }
 
-            void MusicManager::setVolume(int volume)
+            void Music::setVolume(int volume)
             {
                 _volume = volume;
                 if (_currentMusic)
                     _currentMusic->setVolume(volume);
             }
 
-            void MusicManager::modifyVolume(int volume)
+            void Music::modifyVolume(int volume)
             {
                 _volume += volume;
                 if (_volume < 0) _volume = 0;
@@ -44,22 +44,22 @@ namespace RType
                 if (_currentMusic) _currentMusic->setVolume(_volume);
             }
 
-            std::shared_ptr<gd::Music> MusicManager::getMusic()
+            std::shared_ptr<gd::Music> Music::getMusic()
             {
                 return _currentMusic;
             }
 
-            int MusicManager::getVolume() const
+            int Music::getVolume() const
             {
                 return _volume;
             }
 
-            void MusicManager::_addMusic(const std::string &name, const std::string &path)
+            void Music::_addMusic(const std::string &name, const std::string &path)
             {
                 _musics[name] = std::make_shared<gd::Music>();
                 _musics[name]->load(path);
                 _musics[name]->setVolume(_volume);
             }
-        } // namespace Audio
+        } // namespace Managers
     } // namespace Game
 } // namespace RType

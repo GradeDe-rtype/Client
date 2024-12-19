@@ -16,7 +16,7 @@ namespace RType
         {
             SceneManager::SceneManager(gd::Window &window)
             {
-                _musicManager = std::make_unique<RType::Game::Audio::MusicManager>();
+                _musicManager = std::make_unique<RType::Game::Managers::Music>();
                 _musicManager->setVolume(100);
                 _transitionShape.createRectangle((float)window.getWidth(), (float)window.getHeight());
                 _transitionShape.setFillColor(_transitionColor);

@@ -17,7 +17,7 @@
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
-#include "Game/Audio/MusicManager/MusicManager.hpp"
+#include "Game/Managers/Music/Music.hpp"
 #include "Game/Scene/Base/IScene.hpp"
 #include "Game/Scene/Scenes/Game/GameScene.hpp"
 #include "Game/Scene/Scenes/Menu/MenuScene.hpp"
@@ -59,7 +59,7 @@ namespace RType
                     std::unordered_map<std::string, std::shared_ptr<IScene>> _scenes = {};
                     gd::Shape _transitionShape;
                     gd::Color _transitionColor = gd::Color::Transparent;
-                    std::unique_ptr<RType::Game::Audio::MusicManager> _musicManager = nullptr;
+                    std::unique_ptr<RType::Game::Managers::Music> _musicManager = nullptr;
 
                     void _addScene(const std::string &name, std::shared_ptr<IScene> scene, gd::Window &window);
             };

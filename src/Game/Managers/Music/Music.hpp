@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_MUSIC_MANAGER_HPP_
-#define RTYPE_GAME_MUSIC_MANAGER_HPP_
+#ifndef RTYPE_GAME_MANAGERS_MUSIC_HPP_
+#define RTYPE_GAME_MANAGERS_MUSIC_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>
@@ -19,13 +19,13 @@ namespace RType
 {
     namespace Game
     {
-        namespace Audio
+        namespace Managers
         {
-            class MusicManager
+            class Music
             {
                 public:
-                    MusicManager();
-                    ~MusicManager() = default;
+                    Music();
+                    ~Music() = default;
 
                     void setVolume(int volume);
                     void modifyVolume(int volume);
@@ -41,8 +41,8 @@ namespace RType
 
                     void _addMusic(const std::string &name, const std::string &path);
             };
-        } // namespace Audio
+        } // namespace Managers
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_GAME_MUSIC_MANAGER_HPP_ */
+#endif /* !RTYPE_GAME_MANAGERS_MUSIC_HPP_ */
