@@ -12,7 +12,7 @@ namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Scenes
         {
             void Game::load(gd::Window &window)
             {
@@ -84,6 +84,6 @@ namespace RType
                     }
                 }
             }
-        } // namespace Scene
+        } // namespace Scenes
     } // namespace Game
 } // namespace RType

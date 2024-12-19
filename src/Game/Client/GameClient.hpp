@@ -17,7 +17,7 @@
 #include "GradeDe/Window.hpp"
 #include "Communication/SendList/SendList.hpp"
 #include "Game/Components/StarsBackground/StarsBackground.hpp"
-#include "Game/Scene/SceneManager/SceneManager.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
 #include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
@@ -37,7 +37,7 @@ namespace RType
                 gd::Window _window;
                 gd::Event _event;
                 gd::Time _time;
-                std::unique_ptr<RType::Game::Scene::SceneManager> _sceneManager;
+                std::unique_ptr<RType::Game::Managers::Scenes> _scenesManager;
                 std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
 
                 void _handleEvent();

@@ -6,17 +6,18 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_SCENE_MENU_HPP_
-#define RTYPE_GAME_SCENE_MENU_HPP_
+#ifndef RTYPE_GAME_SCENE_GAME_HPP_
+#define RTYPE_GAME_SCENE_GAME_HPP_
 
 /*  ---- INCLUDES ---- */
-#include <memory>
 #include <string>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
+#include "GradeDe/Sound.hpp"
 #include "GradeDe/Window.hpp"
-#include "Game/Components/Text/Text.hpp"
-#include "Game/Scene/Base/AScene.hpp"
+#include "Game/Components/EndIndicator/EndIndicator.hpp"
+#include "Game/Components/WaveIndicators/WaveIndicators.hpp"
+#include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
@@ -24,20 +25,20 @@ namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Scenes
         {
-            class Menu : public AScene
+            class Game : public AScene
             {
                 public:
                     /**
                      * @brief Construct a new AScene object
                      */
-                    Menu() = default;
+                    Game() = default;
 
                     /**
                      * @brief Destroy the IScene object
                      */
-                    ~Menu() override = default;
+                    ~Game() override = default;
 
                     /**
                      * @brief Load the scene
@@ -61,11 +62,17 @@ namespace RType
                      */
                     void draw(gd::Window &window) override;
 
+                    /**
+                     * @brief Update the scene
+                     */
+                    void update(gd::Window &window) override;
+
                 private:
-                    std::unique_ptr<RType::Game::Components::Text> _text;
+                    std::unique_ptr<RType::Game::Components::WaveIndicators> _waveIndicators;
+                    std::unique_ptr<RType::Game::Components::EndIndicator> _endIndicator;
             };
-        } // namespace Scene
+        } // namespace Scenes
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_GAME_SCENE_MENU_HPP_ */
+#endif /* !RTYPE_GAME_SCENE_GAME_HPP_ */

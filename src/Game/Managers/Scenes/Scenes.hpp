@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_SCENE_SCENE_MANAGER_HPP_
-#define RTYPE_GAME_SCENE_SCENE_MANAGER_HPP_
+#ifndef RTYPE_GAME_MANAGERS_SCENES_HPP_
+#define RTYPE_GAME_MANAGERS_SCENES_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>
@@ -18,25 +18,25 @@
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
 #include "Game/Managers/Music/Music.hpp"
-#include "Game/Scene/Base/IScene.hpp"
-#include "Game/Scene/Scenes/Game/GameScene.hpp"
-#include "Game/Scene/Scenes/Menu/MenuScene.hpp"
+#include "Game/Scenes/Base/IScene.hpp"
+#include "Game/Scenes/Game/GameScene.hpp"
+#include "Game/Scenes/Menu/MenuScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Managers
         {
-            class SceneManager
+            class Scenes
             {
                 public:
-                    SceneManager(gd::Window &window);
-                    ~SceneManager() = default;
+                    Scenes(gd::Window &window);
+                    ~Scenes() = default;
 
                     void changeScene(const std::string &name);
-                    std::shared_ptr<IScene> getScene();
+                    std::shared_ptr<RType::Game::Scenes::IScene> getScene();
                     void update();
                     void draw(gd::Window &window);
                     bool isTransitioning() const;
@@ -52,19 +52,19 @@ namespace RType
                     int _transitionSpeed = 255 / _transitionFrame;
                     int _backupVolume = 100;
                     int _volumeTransition = 100 / _transitionFrame;
-                    std::shared_ptr<IScene> _currentScene = nullptr;
+                    std::shared_ptr<RType::Game::Scenes::IScene> _currentScene = nullptr;
                     std::string _nextScene = "";
                     TransitionState _transitionState = NOTHING;
                     int _transitionOpacity = 0;
-                    std::unordered_map<std::string, std::shared_ptr<IScene>> _scenes = {};
+                    std::unordered_map<std::string, std::shared_ptr<RType::Game::Scenes::IScene>> _scenes = {};
                     gd::Shape _transitionShape;
                     gd::Color _transitionColor = gd::Color::Transparent;
                     std::unique_ptr<RType::Game::Managers::Music> _musicManager = nullptr;
 
-                    void _addScene(const std::string &name, std::shared_ptr<IScene> scene, gd::Window &window);
+                    void _addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window);
             };
-        } // namespace Scene
+        } // namespace Managers
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_GAME_SCENE_SCENE_MANAGER_HPP_ */
+#endif /* !RTYPE_GAME_MANAGERS_SCENES_HPP_ */

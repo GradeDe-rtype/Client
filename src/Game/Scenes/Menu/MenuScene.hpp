@@ -6,50 +6,45 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_GAME_SCENE_INTERFACE_HPP_
-#define RTYPE_GAME_SCENE_INTERFACE_HPP_
+#ifndef RTYPE_GAME_SCENE_MENU_HPP_
+#define RTYPE_GAME_SCENE_MENU_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include <string>
 #include "GradeDe/Event.hpp"
+#include "GradeDe/Music.hpp"
 #include "GradeDe/Window.hpp"
+#include "Game/Components/Text/Text.hpp"
+#include "Game/Scenes/Base/AScene.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Scenes
         {
-            class IScene
+            class Menu : public AScene
             {
                 public:
                     /**
+                     * @brief Construct a new AScene object
+                     */
+                    Menu() = default;
+
+                    /**
                      * @brief Destroy the IScene object
                      */
-                    virtual ~IScene() = default;
+                    ~Menu() override = default;
 
                     /**
                      * @brief Load the scene
                      *
                      * @param `window` The window
                      */
-                    virtual void load(gd::Window &window) = 0;
-
-                    /**
-                     * @brief Unload the scene
-                     */
-                    virtual void unload() = 0;
-
-                    /**
-                     * @brief Enter the scene
-                     */
-                    virtual void enter() = 0;
-
-                    /**
-                     * @brief Leave the scene
-                     */
-                    virtual void leave() = 0;
+                    void load(gd::Window &window) override;
 
                     /**
                      * @brief Update the scene
@@ -57,22 +52,20 @@ namespace RType
                      * @param `window` The window
                      * @param `event` The event
                      */
-                    virtual std::string handleEvent(gd::Window &window, gd::Event &event) = 0;
+                    std::string handleEvent(gd::Window &window, gd::Event &event) override;
 
                     /**
                      * @brief Draw the scene
                      *
                      * @param `window` The window
                      */
-                    virtual void draw(gd::Window &window) = 0;
+                    void draw(gd::Window &window) override;
 
-                    /**
-                     * @brief Update the scene
-                     */
-                    virtual void update(gd::Window &window) = 0;
+                private:
+                    std::unique_ptr<RType::Game::Components::Text> _text;
             };
-        } // namespace Scene
+        } // namespace Scenes
     } // namespace Game
 } // namespace RType
 
-#endif /* !RTYPE_GAME_SCENE_INTERFACE_HPP_ */
+#endif /* !RTYPE_GAME_SCENE_MENU_HPP_ */

@@ -13,7 +13,7 @@ namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Scenes
         {
             void Menu::load(gd::Window &window)
             {
@@ -35,6 +35,6 @@ namespace RType
                 if (RType::Ressources::get()->isConnected)
                     _text->draw(window);
             }
-        } // namespace Scene
+        } // namespace Scenes
     } // namespace Game
 } // namespace RType

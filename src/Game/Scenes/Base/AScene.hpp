@@ -13,14 +13,14 @@
 #include <string>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Window.hpp"
-#include "Game/Scene/Base/IScene.hpp"
+#include "Game/Scenes/Base/IScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Scenes
         {
             class AScene : public IScene
             {
@@ -77,7 +77,7 @@ namespace RType
                      */
                     void update(gd::Window &window) override;
             };
-        } // namespace Scene
+        } // namespace Scenes
     } // namespace Game
 } // namespace RType
 

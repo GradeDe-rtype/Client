@@ -6,15 +6,15 @@
     --U-----U------------------------
 */
 
-#include "SceneManager.hpp"
+#include "Scenes.hpp"
 
 namespace RType
 {
     namespace Game
     {
-        namespace Scene
+        namespace Managers
         {
-            SceneManager::SceneManager(gd::Window &window)
+            Scenes::Scenes(gd::Window &window)
             {
                 _musicManager = std::make_unique<RType::Game::Managers::Music>();
                 _musicManager->setVolume(100);
@@ -22,8 +22,8 @@ namespace RType
                 _transitionShape.setFillColor(_transitionColor);
                 _transitionShape.setPosition((gd::Vector2<float>){0, 0});
 
-                _addScene("game", std::make_shared<RType::Game::Scene::Game>(), window);
-                _addScene("menu", std::make_shared<RType::Game::Scene::Menu>(), window);
+                _addScene("game", std::make_shared<RType::Game::Scenes::Game>(), window);
+                _addScene("menu", std::make_shared<RType::Game::Scenes::Menu>(), window);
 
                 _currentScene = _scenes["menu"];
                 _musicManager->setMusic("menu");
@@ -31,7 +31,7 @@ namespace RType
                 _currentScene->enter();
             }
 
-            void SceneManager::changeScene(const std::string &name)
+            void Scenes::changeScene(const std::string &name)
             {
                 _nextScene = name;
                 _transitionOpacity = 0;
@@ -40,12 +40,12 @@ namespace RType
                 _volumeTransition = _backupVolume / _transitionFrame;
             }
 
-            std::shared_ptr<IScene> SceneManager::getScene()
+            std::shared_ptr<RType::Game::Scenes::IScene> Scenes::getScene()
             {
                 return _currentScene;
             }
 
-            void SceneManager::update()
+            void Scenes::update()
             {
                 if (_transitionState == FADE_IN) {
                     _transitionOpacity += _transitionSpeed;
@@ -74,21 +74,21 @@ namespace RType
                 }
             }
 
-            void SceneManager::draw(gd::Window &window)
+            void Scenes::draw(gd::Window &window)
             {
                 window.draw(_transitionShape);
             }
 
-            bool SceneManager::isTransitioning() const
+            bool Scenes::isTransitioning() const
             {
                 return _transitionState != NOTHING;
             }
 
-            void SceneManager::_addScene(const std::string &name, std::shared_ptr<IScene> scene, gd::Window &window)
+            void Scenes::_addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window)
             {
                 _scenes[name] = scene;
                 _scenes[name]->load(window);
             }
-        } // namespace Scene
+        } // namespace Managers
     } // namespace Game
 } // namespace RType
