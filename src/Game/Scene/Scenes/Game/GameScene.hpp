@@ -18,7 +18,6 @@
 #include "GradeDe/Sound.hpp"
 #include "GradeDe/Window.hpp"
 #include "Ressources.hpp"
-#include "StarsBackground.hpp"
 #include "WaveIndicators.hpp"
 
 /*  ---- CLASS ---- */
@@ -69,7 +68,6 @@ namespace RType
                     void update(gd::Window &window) override;
 
                 private:
-                    std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
                     std::unique_ptr<RType::Game::Components::WaveIndicators> _waveIndicators;
                     std::unique_ptr<RType::Game::Components::EndIndicator> _endIndicator;
             };

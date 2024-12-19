@@ -17,8 +17,6 @@ namespace RType
         {
             void Menu::load(gd::Window &window)
             {
-                _background.createRectangle(window.getWidth(), window.getHeight());
-                _background.setFillColor(gd::Color::White);
                 _font.load("assets/font/Karma Future.otf");
                 _text.setFont(_font);
                 _text.setCharacterSize(30);
@@ -38,7 +36,6 @@ namespace RType
 
             void Menu::draw(gd::Window &window)
             {
-                window.draw(_background);
                 if (RType::Ressources::get()->isConnected)
                     window.draw(_text);
             }

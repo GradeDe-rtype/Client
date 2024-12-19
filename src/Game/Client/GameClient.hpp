@@ -18,6 +18,7 @@
 #include "Ressources.hpp"
 #include "SceneManager.hpp"
 #include "SendList.hpp"
+#include "StarsBackground.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -37,6 +38,7 @@ namespace RType
                 gd::Event _event;
                 gd::Time _time;
                 std::unique_ptr<RType::Game::Scene::SceneManager> _sceneManager;
+                std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
 
                 void _handleEvent();
                 void _draw();

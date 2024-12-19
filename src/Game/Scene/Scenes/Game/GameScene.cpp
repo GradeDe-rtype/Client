@@ -16,7 +16,6 @@ namespace RType
         {
             void Game::load(gd::Window &window)
             {
-                _starBackground = std::make_unique<RType::Game::Components::StarsBackground>(window);
                 _waveIndicators = std::make_unique<RType::Game::Components::WaveIndicators>(window);
                 _endIndicator = std::make_unique<RType::Game::Components::EndIndicator>(window);
             }
@@ -59,7 +58,6 @@ namespace RType
 
             void Game::draw(gd::Window &window)
             {
-                _starBackground->draw(window);
                 window.draw(RType::Ressources::get()->me->shape());
                 for (auto &player : RType::Ressources::get()->players)
                     window.draw(player.second->shape());
@@ -75,7 +73,6 @@ namespace RType
             {
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
-                _starBackground->update(window);
                 RType::Ressources::get()->me->update();
                 for (auto &player : RType::Ressources::get()->players)
                     player.second->update();

@@ -61,7 +61,6 @@ namespace RType
                     void draw(gd::Window &window) override;
 
                 private:
-                    gd::Shape _background;
                     gd::Text _text;
                     gd::Font _font;
             };
