@@ -22,6 +22,7 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/KeyBoard.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Mouse.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Music.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/RectangleShape.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Shape.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Sound.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Text.cpp

@@ -113,6 +113,18 @@ namespace gd
             void setRotation(float angle);
 
             /**
+             * \brief Set the size of the shape.
+             *
+             * This function sets the size of the shape.
+             *
+             * \param size The size of the shape.
+             */
+            void setSize(gd::Vector2<float> factor);
+
+            void setSizeX(float x);
+            void setSizeY(float y);
+
+            /**
              * \brief Move the shape.
              *
              * This function moves the shape.

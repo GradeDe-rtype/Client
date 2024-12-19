@@ -23,7 +23,6 @@
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
-#include "Game/Scenes/Settings/MiniScene/General/GeneralMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Graphics/GraphicsMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
 #include "Ressources/Ressources.hpp"

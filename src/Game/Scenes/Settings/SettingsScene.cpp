@@ -16,7 +16,6 @@ namespace RType
         {
             void Settings::load(gd::Window &window)
             {
-                _links.push_back(std::make_tuple("general", std::make_unique<Game::Components::Text>("Karma Future", "General"), std::make_unique<Game::Scenes::MiniScene::Settings::GeneralMiniScene>()));
                 _links.push_back(std::make_tuple("graphics", std::make_unique<Game::Components::Text>("Karma Future", "Graphics"), std::make_unique<Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
                 _links.push_back(std::make_tuple("sound", std::make_unique<Game::Components::Text>("Karma Future", "Sound"), std::make_unique<Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 

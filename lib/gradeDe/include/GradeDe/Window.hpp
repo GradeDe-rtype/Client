@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/PrimitiveType.hpp"
+#include "GradeDe/RectangleShape.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Vector.hpp"
@@ -168,6 +169,8 @@ namespace gd
              * \param shape The shape to draw.
              */
             void draw(gd::Shape &shape);
+
+            void draw(gd::RectangleShape &rectangleShape);
 
             /**
              * \brief Draw the vertex array.

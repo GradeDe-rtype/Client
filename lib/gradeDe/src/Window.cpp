@@ -121,6 +121,12 @@ namespace gd
         _window.draw(*sh);
     }
 
+    void Window::draw(gd::RectangleShape &shape)
+    {
+        sf::RectangleShape *sh = (sf::RectangleShape *)shape.getShape();
+        _window.draw(*sh);
+    }
+
     void Window::draw(std::vector<gd::Vertex> &vertices, gd::PrimitiveType primitiveType)
     {
         sf::VertexArray va;

@@ -12,8 +12,10 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
+#include <tuple>
 #include "GradeDe/Event.hpp"
-#include "GradeDe/Shape.hpp"
+#include "GradeDe/Time.hpp"
+#include "Game/Components/Range/Range.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
 
@@ -36,7 +38,16 @@ namespace RType
                             void draw(gd::Window &window) override;
 
                         private:
-                            std::unique_ptr<RType::Game::Components::Text> _title;
+                            std::vector<std::tuple<std::string, std::shared_ptr<RType::Game::Components::Text>, std::shared_ptr<RType::Game::Components::Range>>> _datas;
+                            std::unique_ptr<RType::Game::Components::Text> _save;
+                            int _innerPadding = 50;
+                            gd::Time _input;
+                            int _selected = 0;
+                            bool _changes = false;
+
+                            void _changeRangeValue(int value);
+                            void _moveSelected(int value);
+                            void _saveSettings();
                     };
                 } // namespace Settings
             } // namespace MiniScene
