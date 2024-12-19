@@ -57,6 +57,7 @@ target_include_directories(r-type_client PRIVATE
     "src/Game/Components/StarRating/"
     "src/Game/Components/StarsBackground/"
     "src/Game/Components/WaveIndicators/"
+    "src/Game/Managers/Font/"
     "src/Game/Scene/"
     "src/Game/Scene/Base/"
     "src/Game/Scene/SceneManager/"
