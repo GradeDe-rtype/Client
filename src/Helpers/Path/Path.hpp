@@ -6,12 +6,12 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_PATH_HPP_
-#define RTYPE_PATH_HPP_
+#ifndef HELPERS_PATH_HPP_
+#define HELPERS_PATH_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <string>
-#include "Utils.hpp"
+#include "Helpers/Utils/Utils.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -33,4 +33,4 @@ namespace RType
     } // namespace Helpers
 } // namespace RType
 
-#endif /* !RTYPE_PATH_HPP_ */
+#endif /* !HELPERS_PATH_HPP_ */

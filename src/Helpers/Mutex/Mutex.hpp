@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef MUTEX_HPP_
-#define MUTEX_HPP_
+#ifndef HELPERS_MUTEX_HPP_
+#define HELPERS_MUTEX_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <mutex>
@@ -57,4 +57,4 @@ namespace RType
     } // namespace Helpers
 } // namespace RType
 
-#endif /* !MUTEX_HPP_ */
+#endif /* !HELPERS_MUTEX_HPP_ */

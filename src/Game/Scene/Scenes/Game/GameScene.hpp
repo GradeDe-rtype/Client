@@ -11,14 +11,14 @@
 
 /*  ---- INCLUDES ---- */
 #include <string>
-#include "AScene.hpp"
-#include "EndIndicator.hpp"
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Sound.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
-#include "WaveIndicators.hpp"
+#include "Game/Components/EndIndicator/EndIndicator.hpp"
+#include "Game/Components/WaveIndicators/WaveIndicators.hpp"
+#include "Game/Scene/Base/AScene.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

@@ -15,7 +15,7 @@
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
-#include "IEntity.hpp"
+#include "Game/Components/Entity/Base/IEntity.hpp"
 #include "rfcArgParser.hpp"
 
 namespace RType

@@ -14,10 +14,9 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "Commands.hpp"
-#include "Ressources.hpp"
-#include "SendList.hpp"
-#include "Utils.hpp"
+#include "Communication/Commands/Commands.hpp"
+#include "Communication/SendList/SendList.hpp"
+#include "Helpers/Utils/Utils.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

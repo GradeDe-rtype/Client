@@ -12,12 +12,12 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <unordered_map>
-#include "Game/Components/Text/Text.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
+#include "Game/Components/Text/Text.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

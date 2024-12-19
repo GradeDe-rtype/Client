@@ -11,12 +11,12 @@
 
 /*  ---- INCLUDES ---- */
 #include <string>
-#include "Game/Managers/Font/FontManager.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Font.hpp"
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
+#include "Game/Managers/Font/FontManager.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

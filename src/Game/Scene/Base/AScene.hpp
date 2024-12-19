@@ -13,7 +13,7 @@
 #include <string>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Window.hpp"
-#include "IScene.hpp"
+#include "Game/Scene/Base/IScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

@@ -13,14 +13,14 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include "GameScene.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
-#include "IScene.hpp"
-#include "MenuScene.hpp"
-#include "MusicManager.hpp"
+#include "Game/Audio/MusicManager/MusicManager.hpp"
+#include "Game/Scene/Base/IScene.hpp"
+#include "Game/Scene/Scenes/Game/GameScene.hpp"
+#include "Game/Scene/Scenes/Menu/MenuScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

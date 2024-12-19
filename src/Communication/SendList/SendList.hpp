@@ -6,13 +6,13 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_COMMUNICATION_SENDLIST_HPP_
-#define RTYPE_COMMUNICATION_SENDLIST_HPP_
+#ifndef RTYPE_COMMUNICATION_SEND_LIST_HPP_
+#define RTYPE_COMMUNICATION_SEND_LIST_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <string>
 #include <vector>
-#include "Mutex.hpp"
+#include "Helpers/Mutex/Mutex.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

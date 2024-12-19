@@ -10,11 +10,11 @@
 #include <ctime>
 #include <iostream>
 #include <memory>
-#include "CommunicationClient.hpp"
-#include "GameClient.hpp"
-#include "Parsing.hpp"
-#include "SendList.hpp"
-#include "Thread.hpp"
+#include "Communication/Client/CommunicationClient.hpp"
+#include "Communication/SendList/SendList.hpp"
+#include "Game/Client/GameClient.hpp"
+#include "Helpers/Thread/Thread.hpp"
+#include "Parsing/Parsing.hpp"
 
 /*  ---- FUNCTION ---- */
 

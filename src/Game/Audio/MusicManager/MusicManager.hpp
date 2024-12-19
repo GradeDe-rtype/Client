@@ -6,8 +6,8 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_Game_MUSIC_MANAGER_HPP_
-#define RTYPE_Game_MUSIC_MANAGER_HPP_
+#ifndef RTYPE_GAME_MUSIC_MANAGER_HPP_
+#define RTYPE_GAME_MUSIC_MANAGER_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <memory>

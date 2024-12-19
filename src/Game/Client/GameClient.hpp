@@ -15,10 +15,10 @@
 #include "GradeDe/FrameRate.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
-#include "SceneManager.hpp"
-#include "SendList.hpp"
-#include "StarsBackground.hpp"
+#include "Communication/SendList/SendList.hpp"
+#include "Game/Components/StarsBackground/StarsBackground.hpp"
+#include "Game/Scene/SceneManager/SceneManager.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

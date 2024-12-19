@@ -11,9 +11,9 @@
 
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
-#include "AEntity.hpp"
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Sound.hpp"
+#include "Game/Components/Entity/Base/AEntity.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

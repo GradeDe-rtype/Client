@@ -8,7 +8,7 @@
 
 /*  ---- INCLUDES ---- */
 #include "SendList.hpp"
-#include "CommunicationClient.hpp"
+#include "Communication/Client/CommunicationClient.hpp"
 
 /*  ---- FUNCTIONS ---- */
 namespace RType

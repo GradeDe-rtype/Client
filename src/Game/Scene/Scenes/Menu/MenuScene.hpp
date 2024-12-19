@@ -12,12 +12,12 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
-#include "AScene.hpp"
-#include "Game/Components/Text/Text.hpp"
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Window.hpp"
-#include "Ressources.hpp"
+#include "Game/Components/Text/Text.hpp"
+#include "Game/Scene/Base/AScene.hpp"
+#include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

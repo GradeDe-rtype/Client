@@ -6,17 +6,17 @@
     --U-----U------------------------
 */
 
-#ifndef RTYPE_PARSING_HPP_
-#define RTYPE_PARSING_HPP_
+#ifndef PARSING_HPP_
+#define PARSING_HPP_
 
 /*  ---- INCLUDES ---- */
 #include <exception>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Helpers/Path/Path.hpp"
+#include "Helpers/Utils/Utils.hpp"
 #include "Papaya.hpp"
-#include "Path.hpp"
-#include "Utils.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -109,4 +109,4 @@ namespace RType
     };
 } // namespace RType
 
-#endif /* !RTYPE_PARSING_HPP_ */
+#endif /* !PARSING_HPP_ */
