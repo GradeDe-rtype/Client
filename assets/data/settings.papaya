@@ -1,2 +1,4 @@
 setting;value
-music;80
+music;30
+sound;0
+frameRate;24

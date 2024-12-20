@@ -15,6 +15,7 @@
 #include <tuple>
 #include <vector>
 #include "GradeDe/Event.hpp"
+#include "GradeDe/FrameRate.hpp"
 #include "GradeDe/Music.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Time.hpp"

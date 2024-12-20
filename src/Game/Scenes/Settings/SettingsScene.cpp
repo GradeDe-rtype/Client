@@ -104,6 +104,7 @@ namespace RType
             {
                 Papaya settings("./assets/data", "settings");
                 RType::Game::Managers::Music::get().setVolume(std::stoi(settings.getData("setting", "music", "value")));
+                gd::FrameRate::get().setFrameRate(std::stoi(settings.getData("setting", "frameRate", "value")));
             }
         } // namespace Scenes
     } // namespace Game
