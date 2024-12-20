@@ -62,7 +62,6 @@ namespace RType
                     std::unordered_map<std::string, std::shared_ptr<RType::Game::Scenes::IScene>> _scenes = {};
                     gd::Shape _transitionShape;
                     gd::Color _transitionColor = gd::Color::Transparent;
-                    std::unique_ptr<RType::Game::Managers::Music> _musicManager = nullptr;
 
                     void _addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window);
             };

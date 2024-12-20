@@ -16,8 +16,6 @@ namespace RType
         {
             Scenes::Scenes(gd::Window &window)
             {
-                _musicManager = std::make_unique<RType::Game::Managers::Music>();
-                _musicManager->setVolume(100);
                 _transitionShape.createRectangle((float)window.getWidth(), (float)window.getHeight());
                 _transitionShape.setFillColor(_transitionColor);
                 _transitionShape.setPosition((gd::Vector2<float>){0, 0});
@@ -29,8 +27,7 @@ namespace RType
 
                 _currentSceneName = "menu";
                 _currentScene = _scenes["menu"];
-                _musicManager->setMusic("menu");
-                _musicManager->setVolume(0);
+                RType::Game::Managers::Music::get().setMusic("menu");
                 _currentScene->enter();
             }
 
@@ -39,7 +36,7 @@ namespace RType
                 _nextScene = name;
                 _transitionOpacity = 0;
                 _transitionState = FADE_IN;
-                _backupVolume = _musicManager->getVolume();
+                _backupVolume = RType::Game::Managers::Music::get().getVolume();
                 _volumeTransition = _backupVolume / _transitionFrame;
             }
 
@@ -52,21 +49,21 @@ namespace RType
             {
                 if (_transitionState == FADE_IN) {
                     _transitionOpacity += _transitionSpeed;
-                    _musicManager->modifyVolume(-_volumeTransition);
+                    RType::Game::Managers::Music::get().modifyVolume(-_volumeTransition);
                     if (_transitionOpacity >= 255) {
                         _transitionOpacity = 255;
                         _transitionState = FADE_OUT;
                         _currentScene->leave();
                         _currentSceneName = _nextScene;
                         _currentScene = _scenes[_nextScene];
-                        _musicManager->setMusic(_nextScene);
+                        RType::Game::Managers::Music::get().setMusic(_nextScene);
                         _currentScene->enter();
                     }
                 } else if (_transitionState == FADE_OUT) {
                     _transitionOpacity -= _transitionSpeed;
-                    _musicManager->modifyVolume(_volumeTransition);
+                    RType::Game::Managers::Music::get().modifyVolume(_volumeTransition);
                     if (_transitionOpacity <= 0) {
-                        _musicManager->setVolume(_backupVolume);
+                        RType::Game::Managers::Music::get().setVolume(_backupVolume);
                         _transitionOpacity = 0;
                         _transitionState = NOTHING;
                     }

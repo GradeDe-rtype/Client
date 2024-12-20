@@ -21,10 +21,12 @@
 #include "GradeDe/Window.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
+#include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Graphics/GraphicsMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
+#include "Papaya.hpp"
 #include "Ressources/Ressources.hpp"
 
 /*  ---- CLASS ---- */
@@ -53,6 +55,7 @@ namespace RType
 
                     void _moveSelectArrow(int index);
                     void _moveSelectedColumn(int index);
+                    void _loadSettings(void);
             };
         } // namespace Scenes
     } // namespace Game

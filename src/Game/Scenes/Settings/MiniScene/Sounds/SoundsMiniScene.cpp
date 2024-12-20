@@ -30,6 +30,10 @@ namespace RType
                             _datas.push_back(std::make_tuple(sections[i], std::make_shared<Game::Components::Text>("Karma Future", sections[i]), std::make_shared<Game::Components::Range>(0, 100, 2, (gd::Vector2<float>){(float)(coord.x + _innerPadding), (float)(h + 50)}, (gd::Vector2<float>){window.x - _innerPadding * 2, 20})));
                             std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
                             h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
+
+                            if (sections[i] == "Music")
+                                std::get<2>(_datas[i])->setValue(RType::Game::Managers::Music::get().getVolume());
+
                             std::get<1>(_datas[i])->setText(std::get<0>(_datas[i]) + ": " + std::to_string((int)(std::get<2>(_datas[i])->getValue())));
                             std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
                             std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
@@ -81,6 +85,7 @@ namespace RType
                         else
                             std::get<2>(_datas[_selected])->upValue();
                         std::get<1>(_datas[_selected])->setText(std::get<0>(_datas[_selected]) + ": " + std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
+                        RType::Game::Managers::Music::get().setVolume(std::get<2>(_datas[1])->getValue());
                         if (_changes == false) {
                             _changes = true;
                             _save->setText("Save changes");
@@ -112,6 +117,10 @@ namespace RType
                         if (_changes == false) return;
                         _changes = false;
                         _save->setText("Back");
+
+                        Papaya settings("./assets/data", "settings");
+                        settings.updateData("setting", "music", "value", std::to_string((int)std::get<2>(_datas[1])->getValue()));
+                        settings.save();
                     }
                 } // namespace Settings
             } // namespace MiniScene

@@ -16,6 +16,7 @@ namespace RType
         {
             void Settings::load(gd::Window &window)
             {
+                _loadSettings();
                 _links.push_back(std::make_tuple("graphics", std::make_unique<Game::Components::Text>("Karma Future", "Graphics"), std::make_unique<Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
                 _links.push_back(std::make_tuple("sound", std::make_unique<Game::Components::Text>("Karma Future", "Sound"), std::make_unique<Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 
@@ -97,6 +98,12 @@ namespace RType
 
                 for (int i = 0; i < (int)_rectangles.size(); i++)
                     _rectangles[i].setOutlineColor((i == _columnIndex) ? gd::Color::White : gd::Color(255, 255, 255, 150));
+            }
+
+            void Settings::_loadSettings(void)
+            {
+                Papaya settings("./assets/data", "settings");
+                RType::Game::Managers::Music::get().setVolume(std::stoi(settings.getData("setting", "music", "value")));
             }
         } // namespace Scenes
     } // namespace Game

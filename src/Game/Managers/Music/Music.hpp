@@ -24,7 +24,7 @@ namespace RType
             class Music
             {
                 public:
-                    Music();
+                    static Music &get();
                     ~Music() = default;
 
                     void setVolume(int volume);
@@ -35,9 +35,10 @@ namespace RType
                     int getVolume() const;
 
                 private:
+                    Music();
                     std::unordered_map<std::string, std::shared_ptr<gd::Music>> _musics = {};
                     std::shared_ptr<gd::Music> _currentMusic = nullptr;
-                    int _volume = 100;
+                    int _volume = 0;
 
                     void _addMusic(const std::string &name, const std::string &path);
             };
