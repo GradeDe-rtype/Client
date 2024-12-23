@@ -22,6 +22,10 @@ namespace RType
             {
             }
 
+            void AScene::reload(gd::Window &window)
+            {
+            }
+
             void AScene::enter()
             {
             }

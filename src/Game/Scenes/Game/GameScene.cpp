@@ -56,6 +56,12 @@ namespace RType
                 return "";
             }
 
+            void Game::reload(gd::Window &window)
+            {
+                _waveIndicators->reload(window);
+                _endIndicator->reload(window);
+            }
+
             void Game::draw(gd::Window &window)
             {
                 window.draw(RType::Ressources::get()->me->shape());

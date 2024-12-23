@@ -74,6 +74,13 @@ namespace RType
             {
                 return _value;
             }
+
+            void Range::setPosition(gd::Vector2<float> position)
+            {
+                _position = position;
+                _background.setPosition(position);
+                _range.setPosition({position.x + 2, position.y + 2});
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

@@ -43,6 +43,7 @@ namespace RType
             {
                 public:
                     void load(gd::Window &window) override;
+                    void reload(gd::Window &window) override;
                     std::string handleEvent(gd::Window &window, gd::Event &event) override;
                     void draw(gd::Window &window) override;
 

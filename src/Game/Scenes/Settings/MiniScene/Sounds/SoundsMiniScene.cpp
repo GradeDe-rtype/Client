@@ -46,6 +46,25 @@ namespace RType
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                     }
 
+                    void SoundsMiniScene::reload(gd::Vector2<float> coord, gd::Vector2<float> window)
+                    {
+                        _coord = coord;
+                        _window = window;
+
+                        int h = coord.y + 50;
+                        for (auto &data : _datas) {
+                            std::string text = Traductor::get()->translate(std::get<0>(data));
+                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(data)->getValue())));
+                            std::get<1>(data)->setText(text);
+                            std::get<1>(data)->setPosition({(int)(coord.x + _innerPadding), h});
+                            h = std::get<1>(data)->getPosition().y + std::get<1>(data)->getSize().y + 100;
+                            std::get<1>(data)->setColor(gd::Color(255, 255, 255, 150));
+                            std::get<2>(data)->setColor(gd::Color(255, 255, 255, 150));
+                        }
+                        _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _save->setColor(gd::Color(255, 255, 255, 150));
+                    }
+
                     bool SoundsMiniScene::handleEvent(gd::Event &event)
                     {
                         if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);

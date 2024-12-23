@@ -37,12 +37,14 @@ namespace RType
                     ~Scenes() = default;
 
                     void load(gd::Window &window);
+                    void reload(gd::Window &window);
                     void changeScene(const std::string &name);
                     std::shared_ptr<RType::Game::Scenes::IScene> getScene();
                     void update();
                     void draw(gd::Window &window);
                     bool isTransitioning() const;
                     std::string getCurrentSceneName() const;
+                    void needToReload();
 
                 private:
                     Scenes() = default;
@@ -65,6 +67,7 @@ namespace RType
                     std::unordered_map<std::string, std::shared_ptr<RType::Game::Scenes::IScene>> _scenes = {};
                     gd::Shape _transitionShape;
                     gd::Color _transitionColor = gd::Color::Transparent;
+                    bool _needReload = false;
 
                     void _addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window);
             };

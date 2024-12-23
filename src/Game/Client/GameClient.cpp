@@ -40,6 +40,7 @@ namespace RType
         {
             while (_window.isOpen() && RType::Game::Managers::Scenes::get().getCurrentSceneName() != "exit") {
                 Ressources::get()->update();
+                RType::Game::Managers::Scenes::get().reload(_window);
                 RType::Game::Managers::Scenes::get().getScene()->update(_window);
                 _handleEvent();
                 if (_time.getElapsedTime() >= gd::FrameRate::get().fps()) {

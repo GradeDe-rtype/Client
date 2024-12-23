@@ -78,6 +78,20 @@ namespace RType
                     _fade.reset();
                 }
             }
+
+            void WaveIndicators::reload(gd::Window &window)
+            {
+                _nextWave->setText(Traductor::get()->translate("game.wave.nextWave"));
+                _waveUpgrade->setText(std::to_string(RType::Ressources::get()->wave));
+                _pressEnter->setText(Traductor::get()->translate("game.wave.pressEnterReady"));
+                std::string text = Traductor::get()->translate("game.wave.wave");
+                text.replace(text.find("{value}"), 7, std::to_string(RType::Ressources::get()->wave));
+                _waveIndicator->setText(text);
+
+                _nextWave->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _nextWave->getSize().x / 2), (int)(window.getHeight() / 3 - _nextWave->getSize().y / 2)});
+                _waveUpgrade->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _waveUpgrade->getSize().x / 2), (int)(window.getHeight() / 2 - _waveUpgrade->getSize().y / 2)});
+                _pressEnter->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (int)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

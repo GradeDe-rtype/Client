@@ -29,6 +29,7 @@ namespace RType
                         AMiniScene() = default;
                         ~AMiniScene() override = default;
                         void load(gd::Vector2<float> coord, gd::Vector2<float> window) override;
+                        void reload(gd::Vector2<float> coord, gd::Vector2<float> window) override;
                         bool handleEvent(gd::Event &event) override;
                         void draw(gd::Window &window) override;
 

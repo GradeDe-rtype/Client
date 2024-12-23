@@ -36,6 +36,7 @@ namespace RType
                     void handleEvent(gd::Window &window, gd::Event &event);
                     void draw(gd::Window &window);
                     void update(gd::Window &window);
+                    void reload(gd::Window &window);
 
                 private:
                     int _endScore = 0;

@@ -16,16 +16,16 @@ namespace RType
         {
             void Settings::load(gd::Window &window)
             {
-                _links.push_back(std::make_tuple("dico.graphic", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.graphic")), std::make_unique<Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
-                _links.push_back(std::make_tuple("dico.sound", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
-                _links.push_back(std::make_tuple("dico.language", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
+                _links.push_back(std::make_tuple("dico.graphic", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.graphic")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
+                _links.push_back(std::make_tuple("dico.sound", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
+                _links.push_back(std::make_tuple("dico.language", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
 
                 for (int i = 0; i < (int)_links.size(); i++) {
                     std::get<1>(_links[i])->setPosition({(int)(_linkSpacing * 1.5), (int)(_linkGap * i + _linkSpacing)});
                     std::get<2>(_links[i])->load({(float)(window.getWidth() / 3 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 3 * 2 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
                 }
 
-                _selectArrow = std::make_unique<Game::Entity::SelectArrow>();
+                _selectArrow = std::make_unique<RType::Game::Entity::SelectArrow>();
                 _selectArrow->setPosition({(float)_linkSpacing, (float)(std::get<1>(_links[_selectIndex])->getPosition().y + std::get<1>(_links[_selectIndex])->getSize().y / 2)});
 
                 _rectangles.push_back(gd::Shape());
@@ -42,6 +42,14 @@ namespace RType
                 _rectangles[1].setFillColor(gd::Color::Transparent);
                 _rectangles[1].setOutlineColor(gd::Color(255, 255, 255, 150));
                 _rectangles[1].setOutlineThickness(4);
+            }
+
+            void Settings::reload(gd::Window &window)
+            {
+                for (auto &link : _links) {
+                    std::get<1>(link)->setText(Traductor::get()->translate(std::get<0>(link)));
+                    std::get<2>(link)->reload({(float)(window.getWidth() / 3 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 3 * 2 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
+                }
             }
 
             void Settings::draw(gd::Window &window)

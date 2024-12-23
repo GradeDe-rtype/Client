@@ -37,6 +37,14 @@ namespace RType
                 _currentScene->enter();
             }
 
+            void Scenes::reload(gd::Window &window)
+            {
+                if (!_needReload) return;
+                _needReload = false;
+                for (auto &scene : _scenes)
+                    scene.second->reload(window);
+            }
+
             void Scenes::changeScene(const std::string &name)
             {
                 _nextScene = name;
@@ -94,6 +102,11 @@ namespace RType
             std::string Scenes::getCurrentSceneName() const
             {
                 return _currentSceneName;
+            }
+
+            void Scenes::needToReload()
+            {
+                _needReload = true;
             }
 
             void Scenes::_addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window)

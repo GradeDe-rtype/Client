@@ -47,6 +47,8 @@ namespace RType
                      */
                     void load(gd::Window &window) override;
 
+                    void reload(gd::Window &window) override;
+
                     /**
                      * @brief Update the scene
                      *

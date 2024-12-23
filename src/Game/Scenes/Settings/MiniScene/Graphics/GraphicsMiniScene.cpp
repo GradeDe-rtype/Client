@@ -46,6 +46,23 @@ namespace RType
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                     }
 
+                    void GraphicsMiniScene::reload(gd::Vector2<float> coord, gd::Vector2<float> window)
+                    {
+                        _coord = coord;
+                        _window = window;
+
+                        int h = coord.y + 50;
+                        for (int i = 0; i < (int)_datas.size(); i++) {
+                            std::string text = Traductor::get()->translate(std::get<0>(_datas[i]));
+                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
+                            std::get<1>(_datas[i])->setText(text);
+                            std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
+                            std::get<2>(_datas[i])->setPosition({(float)(coord.x + _innerPadding), (float)(h + 50)});
+                            h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
+                        }
+                        _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                    }
+
                     bool GraphicsMiniScene::handleEvent(gd::Event &event)
                     {
                         if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);

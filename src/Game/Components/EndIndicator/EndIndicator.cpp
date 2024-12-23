@@ -74,6 +74,17 @@ namespace RType
                     _fade.reset();
                 }
             }
+
+            void EndIndicator::reload(gd::Window &window)
+            {
+                _endText->setText(Traductor::get()->translate("game.end.lose"));
+                _scoreText->setText(std::to_string(_endScore));
+                _pressEnter->setText(Traductor::get()->translate("game.end.pressEnterReplay"));
+
+                _endText->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _endText->getSize().x / 2), (int)(window.getHeight() / 3 - _endText->getSize().y / 2)});
+                _scoreText->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _scoreText->getSize().x / 2), (int)(window.getHeight() / 2 - _scoreText->getSize().y / 2)});
+                _pressEnter->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (int)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

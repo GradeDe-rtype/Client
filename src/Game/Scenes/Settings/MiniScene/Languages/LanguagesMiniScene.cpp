@@ -24,11 +24,11 @@ namespace RType
                         _window = window;
                         int h = coord.y + _innerPadding;
 
-                        _selectArrow = std::make_unique<Game::Entity::SelectArrow>();
+                        _selectArrow = std::make_unique<RType::Game::Entity::SelectArrow>();
                         _selectArrow->setColor(gd::Color(255, 255, 255, 150));
 
                         for (auto &lang : Traductor::get()->getLangs()) {
-                            _langs.push_back(std::make_tuple(lang, std::make_shared<Game::Components::Text>("Karma Future", Traductor::get()->translate("languages." + lang))));
+                            _langs.push_back(std::make_tuple(lang, std::make_shared<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("languages." + lang))));
                             std::get<1>(_langs.back())->setPosition({(int)(coord.x + _innerPadding), h});
                             h += std::get<1>(_langs.back())->getSize().y + _innerPadding;
                             std::get<1>(_langs.back())->setColor(gd::Color(255, 255, 255, 150));
@@ -39,8 +39,30 @@ namespace RType
                             }
                         }
 
-                        _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
+                        _save = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _selected = _langs.size();
+                    }
+
+                    void LanguagesMiniScene::reload(gd::Vector2<float> coord, gd::Vector2<float> window)
+                    {
+                        _coord = coord;
+                        _window = window;
+                        int h = coord.y + _innerPadding;
+
+                        _selectArrow->setColor(gd::Color(255, 255, 255, 150));
+
+                        for (auto &lang : _langs) {
+                            std::get<1>(lang)->setText(Traductor::get()->translate("languages." + std::get<0>(lang)));
+                            std::get<1>(lang)->setPosition({(int)(coord.x + _innerPadding), h});
+                            h += std::get<1>(lang)->getSize().y + _innerPadding;
+                            std::get<1>(lang)->setColor(gd::Color(255, 255, 255, 150));
+                        }
+
+                        _selectArrow->setPosition({(float)(_selectedLang->getPosition().x - _selectArrow->getSize().x - 10), (float)(_selectedLang->getPosition().y + _selectedLang->getSize().y / 2)});
+
+                        _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _save->setColor(gd::Color(255, 255, 255, 150));
                         _selected = _langs.size();
                     }
 
@@ -98,6 +120,7 @@ namespace RType
                             _changes = true;
                             _save->setText(Traductor::get()->translate("dico.save"));
                         }
+                        RType::Game::Managers::Scenes::get().needToReload();
                     }
 
                     void LanguagesMiniScene::_saveSettings()
