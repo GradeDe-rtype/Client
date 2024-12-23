@@ -22,6 +22,7 @@
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

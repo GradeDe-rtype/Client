@@ -57,7 +57,6 @@ namespace RType
 
                     void _moveSelectArrow(int index);
                     void _moveSelectedColumn(int index);
-                    void _loadSettings(void);
             };
         } // namespace Scenes
     } // namespace Game

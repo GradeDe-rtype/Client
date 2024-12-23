@@ -21,7 +21,11 @@ namespace RType
 
             Traductor::get()->loadLang("assets/lang/en.json", "EN");
             Traductor::get()->loadLang("assets/lang/fr.json", "FR");
-            Traductor::get()->setLang("EN");
+
+            Papaya settings("./assets/data", "settings");
+            Traductor::get()->setLang(settings.getData("setting", "lang", "value"));
+            RType::Game::Managers::Music::get().setVolume(std::stoi(settings.getData("setting", "music", "value")));
+            gd::FrameRate::get().setFrameRate(std::stoi(settings.getData("setting", "frameRate", "value")));
 
             _window.create(800, 600, "R-Type");
             RType::Game::Managers::Scenes::get().load(_window);

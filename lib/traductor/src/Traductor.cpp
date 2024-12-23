@@ -32,8 +32,13 @@ void Traductor::loadLang(std::string filepath, std::string lang)
 
 std::string Traductor::traduction(std::string key)
 {
-    if (_lang == "") throw Error("No language setted", "traduction");
-    return _traductions.at(_lang).getValue(_split(key, '.'));
+    try {
+        if (_lang == "") throw Error("No language setted", "traduction");
+        return _traductions.at(_lang).getValue(_split(key, '.'));
+    } catch (Error &e) {
+        e.read();
+    }
+    return key;
 }
 
 std::string Traductor::getLang(void) const

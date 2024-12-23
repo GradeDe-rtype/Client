@@ -20,6 +20,7 @@
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
 #include "Papaya.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

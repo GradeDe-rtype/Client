@@ -18,6 +18,7 @@
 #include "GradeDe/Window.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

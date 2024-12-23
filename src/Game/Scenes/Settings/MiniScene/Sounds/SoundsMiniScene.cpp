@@ -24,23 +24,25 @@ namespace RType
                         _window = window;
 
                         int h = coord.y + 50;
-                        std::vector<std::string> sections = {"Sounds", "Music"};
+                        std::vector<std::string> sections = {"settings.sound", "settings.music"};
 
                         for (int i = 0; i < (int)sections.size(); i++) {
-                            _datas.push_back(std::make_tuple(sections[i], std::make_shared<Game::Components::Text>("Karma Future", sections[i]), std::make_shared<Game::Components::Range>(0, 100, 2, (gd::Vector2<float>){(float)(coord.x + _innerPadding), (float)(h + 50)}, (gd::Vector2<float>){window.x - _innerPadding * 2, 20})));
+                            _datas.push_back(std::make_tuple(sections[i], std::make_shared<Game::Components::Text>("Karma Future", Traductor::get()->traduction(sections[i])), std::make_shared<Game::Components::Range>(0, 100, 2, (gd::Vector2<float>){(float)(coord.x + _innerPadding), (float)(h + 50)}, (gd::Vector2<float>){window.x - _innerPadding * 2, 20})));
                             std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
                             h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
 
-                            if (sections[i] == "Music")
+                            if (sections[i] == "settings.music")
                                 std::get<2>(_datas[i])->setValue(RType::Game::Managers::Music::get().getVolume());
 
-                            std::get<1>(_datas[i])->setText(std::get<0>(_datas[i]) + ": " + std::to_string((int)(std::get<2>(_datas[i])->getValue())));
+                            std::string text = Traductor::get()->traduction(sections[i]);
+                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
+                            std::get<1>(_datas[i])->setText(text);
                             std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
                             std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
                         }
                         _selected = (int)sections.size();
 
-                        _save = std::make_unique<Game::Components::Text>("Karma Future", "Back");
+                        _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->traduction("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                     }
 
@@ -53,8 +55,8 @@ namespace RType
                             if (event.joyStick().getYAxisPosition(true) > 50) _moveSelected(1);
                         }
                         if (_selected < (int)_datas.size()) {
-                            if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _changeRangeValue(1);
-                            if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _changeRangeValue(-1);
+                            if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _changeRangeValue(-1);
+                            if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _changeRangeValue(1);
                             if (event.joyStick().isConnected()) {
                                 if (event.joyStick().getXAxisPosition(false) < -50) _changeRangeValue(-1);
                                 if (event.joyStick().getXAxisPosition(true) > 50) _changeRangeValue(1);
@@ -84,11 +86,13 @@ namespace RType
                             std::get<2>(_datas[_selected])->downValue();
                         else
                             std::get<2>(_datas[_selected])->upValue();
-                        std::get<1>(_datas[_selected])->setText(std::get<0>(_datas[_selected]) + ": " + std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
+                        std::string text = Traductor::get()->traduction(std::get<0>(_datas[_selected]));
+                        text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
+                        std::get<1>(_datas[_selected])->setText(text);
                         RType::Game::Managers::Music::get().setVolume(std::get<2>(_datas[1])->getValue());
                         if (_changes == false) {
                             _changes = true;
-                            _save->setText("Save changes");
+                            _save->setText(Traductor::get()->traduction("dico.save"));
                         }
                     }
 
@@ -116,7 +120,7 @@ namespace RType
                     {
                         if (_changes == false) return;
                         _changes = false;
-                        _save->setText("Back");
+                        _save->setText(Traductor::get()->traduction("dico.back"));
 
                         Papaya settings("./assets/data", "settings");
                         settings.updateData("setting", "music", "value", std::to_string((int)std::get<2>(_datas[1])->getValue()));

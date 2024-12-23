@@ -4,5 +4,32 @@
     "languages": {
         "en": "English",
         "fr": "French"
+    },
+    "game": {
+        "end": {
+            "lose": "You lose !",
+            "pressEnterReplay": "Press 'Enter' when you want to replay",
+            "wave": "{value} / 5 waves completed",
+            "win": "You win !"
+        },
+        "wave": {
+            "nextWave": "Next Wave !",
+            "pressEnterReady": "Press 'Enter' when you're ready",
+            "wave": "Wave {value}"
+        }
+    },
+    "settings": {
+        "frameRate": "Frame Rate: {value}",
+        "music": "Music: {value}",
+        "sound": "Sound: {value}"
+    },
+    "dico": {
+        "back": "Back",
+        "graphics": "Graphics",
+        "play": "Play",
+        "quit": "Quit",
+        "save": "Save",
+        "settings": "Settings",
+        "sound": "Sound"
     }
 }

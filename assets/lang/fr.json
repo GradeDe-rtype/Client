@@ -4,5 +4,32 @@
     "languages": {
         "gb": "Anglais",
         "fr": "Français"
+    },
+    "game": {
+        "end": {
+            "lose": "Vous avez perdu !",
+            "pressEnterReplay": "Appuyez sur 'Entree' pour rejouer",
+            "wave": "{value} / 5 vagues completees",
+            "win": "Vous avez gagne !"
+        },
+        "wave": {
+            "nextWave": "Prochaine vague !",
+            "pressEnterReady": "Appuyez sur 'Entree' quand vous etes pret",
+            "wave": "Vague {value}"
+        }
+    },
+    "settings": {
+        "frameRate": "Rafraichissement: {value}",
+        "music": "Musique: {value}",
+        "sound": "Son: {value}"
+    },
+    "dico": {
+        "back": "Retour",
+        "graphics": "Graphismes",
+        "play": "Jouer",
+        "quit": "Quitter",
+        "save": "Sauvegarder",
+        "settings": "Options",
+        "sound": "Son"
     }
 }

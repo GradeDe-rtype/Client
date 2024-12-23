@@ -16,9 +16,9 @@ namespace RType
         {
             void Menu::load(gd::Window &window)
             {
-                _addLink("game", "Play", window);
-                _addLink("settings", "Settings", window);
-                _addLink("exit", "Quit", window);
+                _addLink("game", Traductor::get()->traduction("dico.play"), window);
+                _addLink("settings", Traductor::get()->traduction("dico.settings"), window);
+                _addLink("exit", Traductor::get()->traduction("dico.quit"), window);
                 _setPositionsLinks();
 
                 _links[_getIndexLink("game")].second->setColor(gd::Color(255, 255, 255, 150));

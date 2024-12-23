@@ -18,16 +18,18 @@ namespace RType
             {
                 int _currentWave = RType::Ressources::get()->wave;
 
-                _nextWave = std::make_unique<RType::Game::Components::Text>("Karma Future", "Next Wave !", 50, gd::Color(255, 255, 255, 0));
+                _nextWave = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->traduction("game.wave.nextWave"), 50, gd::Color(255, 255, 255, 0));
                 _nextWave->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _nextWave->getSize().x / 2), (int)(window.getHeight() / 3 - _nextWave->getSize().y / 2)});
 
                 _waveUpgrade = std::make_unique<RType::Game::Components::Text>("Karma Future", std::to_string(_currentWave), 40, gd::Color(255, 255, 255, 0));
                 _waveUpgrade->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _waveUpgrade->getSize().x / 2), (int)(window.getHeight() / 2 - _waveUpgrade->getSize().y / 2)});
 
-                _pressEnter = std::make_unique<RType::Game::Components::Text>("Karma Future", "Press 'Enter' when you're ready !", 30, gd::Color(255, 255, 255, 0));
+                _pressEnter = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->traduction("game.wave.pressEnterReady"), 30, gd::Color(255, 255, 255, 0));
                 _pressEnter->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (int)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
 
-                _waveIndicator = std::make_unique<RType::Game::Components::Text>("Karma Future", "Wave " + std::to_string(_currentWave), 30, gd::Color(255, 255, 255, 255));
+                std::string text = Traductor::get()->traduction("game.wave.wave");
+                text.replace(text.find("{value}"), 7, std::to_string(_currentWave));
+                _waveIndicator = std::make_unique<RType::Game::Components::Text>("Karma Future", text, 30, gd::Color(255, 255, 255, 255));
                 _waveIndicator->setPosition((gd::Vector2<int>){4, (int)(window.getHeight() - _waveIndicator->getSize().y - 8)});
 
                 _fade.reset();
@@ -40,7 +42,9 @@ namespace RType
                     if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::WAVE_READY;
                         _currentWave = RType::Ressources::get()->wave;
-                        _waveIndicator->setText("Wave " + std::to_string(_currentWave));
+                        std::string text = Traductor::get()->traduction("game.wave.wave");
+                        text.replace(text.find("{value}"), 7, std::to_string(_currentWave));
+                        _waveIndicator->setText(text);
                     }
                 }
             }
