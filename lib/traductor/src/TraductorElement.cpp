@@ -42,7 +42,7 @@ std::string Traductor::TraductorElement::getValue(std::vector<std::string> keys)
             return _elements.at(key).getValue(keys);
         }
     }
-    throw Traductor::Error("No key \"" + keys[0] + "\" in \"" + _key + "\"", "traduction");
+    throw Traductor::Error("No key \"" + keys[0] + "\" in \"" + _key + "\"", "translate");
 }
 
 std::string Traductor::TraductorElement::_extract(std::string str, const char start, const char end) const

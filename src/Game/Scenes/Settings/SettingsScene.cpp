@@ -16,8 +16,8 @@ namespace RType
         {
             void Settings::load(gd::Window &window)
             {
-                _links.push_back(std::make_tuple("dico.graphics", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->traduction("dico.graphics")), std::make_unique<Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
-                _links.push_back(std::make_tuple("dico.sound", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->traduction("dico.sound")), std::make_unique<Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
+                _links.push_back(std::make_tuple("dico.graphics", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.graphics")), std::make_unique<Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
+                _links.push_back(std::make_tuple("dico.sound", std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 
                 for (int i = 0; i < (int)_links.size(); i++) {
                     std::get<1>(_links[i])->setPosition({(int)(_linkSpacing * 1.5), (int)(_linkGap * i + _linkSpacing)});

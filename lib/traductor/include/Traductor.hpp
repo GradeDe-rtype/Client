@@ -59,7 +59,7 @@ class Traductor
 
         void setLang(std::string lang);
         void loadLang(std::string filepath, std::string lang);
-        std::string traduction(std::string key);
+        std::string translate(std::string key);
         std::string getLang(void) const;
 
     private:

@@ -30,10 +30,10 @@ void Traductor::loadLang(std::string filepath, std::string lang)
     _traductions[lang].parse(file, lang, false);
 }
 
-std::string Traductor::traduction(std::string key)
+std::string Traductor::translate(std::string key)
 {
     try {
-        if (_lang == "") throw Error("No language setted", "traduction");
+        if (_lang == "") throw Error("No language setted", "translate");
         return _traductions.at(_lang).getValue(_split(key, '.'));
     } catch (Error &e) {
         e.read();

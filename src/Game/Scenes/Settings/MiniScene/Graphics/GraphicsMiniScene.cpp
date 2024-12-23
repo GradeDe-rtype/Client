@@ -34,7 +34,7 @@ namespace RType
                             if (sections[i] == "settings.frameRate")
                                 std::get<2>(_datas[i])->setValue((float)gd::FrameRate::get().getFrameRate());
 
-                            std::string text = Traductor::get()->traduction(sections[i]);
+                            std::string text = Traductor::get()->translate(sections[i]);
                             text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
                             std::get<1>(_datas[i])->setText(text);
                             std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
@@ -42,7 +42,7 @@ namespace RType
                         }
                         _selected = (int)sections.size();
 
-                        _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->traduction("dico.back"));
+                        _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                     }
 
@@ -86,13 +86,13 @@ namespace RType
                             std::get<2>(_datas[_selected])->downValue();
                         else
                             std::get<2>(_datas[_selected])->upValue();
-                        std::string text = Traductor::get()->traduction(std::get<0>(_datas[_selected]));
+                        std::string text = Traductor::get()->translate(std::get<0>(_datas[_selected]));
                         text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
                         std::get<1>(_datas[_selected])->setText(text);
                         gd::FrameRate::get().setFrameRate((int)std::get<2>(_datas[0])->getValue());
                         if (_changes == false) {
                             _changes = true;
-                            _save->setText(Traductor::get()->traduction("dico.save"));
+                            _save->setText(Traductor::get()->translate("dico.save"));
                         }
                     }
 
@@ -120,7 +120,7 @@ namespace RType
                     {
                         if (_changes == false) return;
                         _changes = false;
-                        _save->setText(Traductor::get()->traduction("dico.back"));
+                        _save->setText(Traductor::get()->translate("dico.back"));
 
                         Papaya settings("./assets/data", "settings");
                         settings.updateData("setting", "frameRate", "value", std::to_string((int)std::get<2>(_datas[0])->getValue()));
