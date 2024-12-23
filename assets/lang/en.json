@@ -1,9 +1,7 @@
 {
-    "langCode": "en",
-    "langName": "English",
     "languages": {
-        "en": "English",
-        "fr": "French"
+        "EN": "English",
+        "FR": "French"
     },
     "game": {
         "end": {
@@ -25,7 +23,8 @@
     },
     "dico": {
         "back": "Back",
-        "graphics": "Graphics",
+        "graphic": "Graphic",
+        "language": "Language",
         "play": "Play",
         "quit": "Quit",
         "save": "Save",

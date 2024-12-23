@@ -46,6 +46,14 @@ std::string Traductor::getLang(void) const
     return _lang;
 }
 
+std::vector<std::string> Traductor::getLangs(void) const
+{
+    std::vector<std::string> langs;
+    for (auto &lang : _traductions)
+        langs.push_back(lang.first);
+    return langs;
+}
+
 std::vector<std::string> Traductor::_split(std::string str, char delimiter)
 {
     std::vector<std::string> result;

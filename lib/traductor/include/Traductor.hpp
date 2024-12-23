@@ -61,6 +61,7 @@ class Traductor
         void loadLang(std::string filepath, std::string lang);
         std::string translate(std::string key);
         std::string getLang(void) const;
+        std::vector<std::string> getLangs(void) const;
 
     private:
         Traductor() = default;
