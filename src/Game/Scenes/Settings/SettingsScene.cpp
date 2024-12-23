@@ -103,6 +103,7 @@ namespace RType
             void Settings::_loadSettings(void)
             {
                 Papaya settings("./assets/data", "settings");
+                Traductor::get()->setLang(settings.getData("setting", "lang", "value"));
                 RType::Game::Managers::Music::get().setVolume(std::stoi(settings.getData("setting", "music", "value")));
                 gd::FrameRate::get().setFrameRate(std::stoi(settings.getData("setting", "frameRate", "value")));
             }

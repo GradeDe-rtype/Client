@@ -19,6 +19,7 @@
 #include "Game/Components/StarsBackground/StarsBackground.hpp"
 #include "Game/Managers/Scenes/Scenes.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

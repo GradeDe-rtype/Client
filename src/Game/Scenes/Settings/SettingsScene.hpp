@@ -29,6 +29,7 @@
 #include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
 #include "Papaya.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType

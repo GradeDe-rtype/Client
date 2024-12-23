@@ -18,6 +18,11 @@ namespace RType
         Client::Client()
         {
             RType::Ressources::get();
+
+            Traductor::get()->loadLang("assets/lang/en.json", "EN");
+            Traductor::get()->loadLang("assets/lang/fr.json", "FR");
+            Traductor::get()->setLang("EN");
+
             _window.create(800, 600, "R-Type");
             _scenesManager = std::make_unique<RType::Game::Managers::Scenes>(_window);
             if (RType::Ressources::get()->me != nullptr)

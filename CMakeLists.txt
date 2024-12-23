@@ -13,6 +13,7 @@ set(RTYPE_LIBRARIES
     gradeDe
     papaya
     rfcArgParser
+    traductor
 )
 
 foreach(LIB ${RTYPE_LIBRARIES})
