@@ -14,7 +14,13 @@ namespace RType
     {
         namespace Managers
         {
-            Scenes::Scenes(gd::Window &window)
+            Scenes &Scenes::get()
+            {
+                static Scenes instance;
+                return instance;
+            }
+
+            void Scenes::load(gd::Window &window)
             {
                 _transitionShape.createRectangle((float)window.getWidth(), (float)window.getHeight());
                 _transitionShape.setFillColor(_transitionColor);

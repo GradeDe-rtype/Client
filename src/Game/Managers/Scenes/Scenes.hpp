@@ -33,9 +33,10 @@ namespace RType
             class Scenes
             {
                 public:
-                    Scenes(gd::Window &window);
+                    static Scenes &get();
                     ~Scenes() = default;
 
+                    void load(gd::Window &window);
                     void changeScene(const std::string &name);
                     std::shared_ptr<RType::Game::Scenes::IScene> getScene();
                     void update();
@@ -44,6 +45,8 @@ namespace RType
                     std::string getCurrentSceneName() const;
 
                 private:
+                    Scenes() = default;
+
                     typedef enum {
                         FADE_IN,
                         FADE_OUT,

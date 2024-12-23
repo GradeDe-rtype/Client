@@ -38,7 +38,6 @@ namespace RType
                 gd::Window _window;
                 gd::Event _event;
                 gd::Time _time;
-                std::unique_ptr<RType::Game::Managers::Scenes> _scenesManager;
                 std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
 
                 void _handleEvent();
