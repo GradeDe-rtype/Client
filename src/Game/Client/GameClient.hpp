@@ -18,6 +18,7 @@
 #include "Communication/SendList/SendList.hpp"
 #include "Game/Components/StarsBackground/StarsBackground.hpp"
 #include "Game/Managers/Scenes/Scenes.hpp"
+#include "Game/Managers/Sound/Sound.hpp"
 #include "Ressources/Ressources.hpp"
 #include "Traductor.hpp"
 

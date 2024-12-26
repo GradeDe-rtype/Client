@@ -108,7 +108,11 @@ namespace RType
                         std::string text = Traductor::get()->translate(std::get<0>(_datas[_selected]));
                         text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
                         std::get<1>(_datas[_selected])->setText(text);
-                        RType::Game::Managers::Music::get().setVolume(std::get<2>(_datas[1])->getValue());
+                        if (std::get<0>(_datas[_selected]) == "settings.sound") {
+                            RType::Game::Managers::Sound::get().setVolume(std::get<2>(_datas[0])->getValue());
+                            RType::Game::Managers::Sound::get().play("beep");
+                        } else if (std::get<0>(_datas[_selected]) == "settings.music")
+                            RType::Game::Managers::Music::get().setVolume(std::get<2>(_datas[1])->getValue());
                         if (_changes == false) {
                             _changes = true;
                             _save->setText(Traductor::get()->translate("dico.save"));
@@ -143,6 +147,7 @@ namespace RType
 
                         Papaya settings("./assets/data", "settings");
                         settings.updateData("setting", "music", "value", std::to_string((int)std::get<2>(_datas[1])->getValue()));
+                        settings.updateData("setting", "sound", "value", std::to_string((int)std::get<2>(_datas[0])->getValue()));
                         settings.save();
                     }
                 } // namespace Settings

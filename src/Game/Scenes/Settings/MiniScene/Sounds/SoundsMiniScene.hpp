@@ -18,6 +18,7 @@
 #include "Game/Components/Range/Range.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Game/Managers/Music/Music.hpp"
+#include "Game/Managers/Sound/Sound.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
 #include "Papaya.hpp"
 #include "Traductor.hpp"

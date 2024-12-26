@@ -30,9 +30,7 @@ namespace RType
                 _shape.setFillColor(gd::Color::Cyan);
                 _shape.setPosition(_position);
                 _shape.setRotation(0);
-                _blaster.load("assets/sounds/blaster.mp3");
-                _blaster.setVolume(50);
-                _blaster.play();
+                RType::Game::Managers::Sound::get().play("blaster");
                 _moveClock.reset();
 
                 if (_speed < 0) {

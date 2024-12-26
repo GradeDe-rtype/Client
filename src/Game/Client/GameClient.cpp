@@ -18,6 +18,7 @@ namespace RType
         Client::Client()
         {
             RType::Ressources::get();
+            RType::Game::Managers::Sound::get();
 
             Traductor::get()->loadLang("assets/lang/en.json", "EN");
             Traductor::get()->loadLang("assets/lang/fr.json", "FR");
@@ -40,6 +41,7 @@ namespace RType
         {
             while (_window.isOpen() && RType::Game::Managers::Scenes::get().getCurrentSceneName() != "exit") {
                 Ressources::get()->update();
+                RType::Game::Managers::Sound::get().update();
                 RType::Game::Managers::Scenes::get().reload(_window);
                 RType::Game::Managers::Scenes::get().getScene()->update(_window);
                 _handleEvent();

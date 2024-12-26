@@ -14,6 +14,7 @@
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Sound.hpp"
 #include "Game/Entity/Base/AEntity.hpp"
+#include "Game/Managers/Sound/Sound.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -29,9 +30,6 @@ namespace RType
                     ~Shoot() = default;
 
                     void update();
-
-                private:
-                    gd::Sound _blaster;
             };
         } // namespace Entity
     } // namespace Game
