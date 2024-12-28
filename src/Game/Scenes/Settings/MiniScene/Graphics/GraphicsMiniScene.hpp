@@ -17,9 +17,11 @@
 #include "GradeDe/FrameRate.hpp"
 #include "GradeDe/Time.hpp"
 #include "Game/Components/Range/Range.hpp"
+#include "Game/Components/SectionRange/SectionRange.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
+#include "Helpers/Utils/Utils.hpp"
 #include "Papaya.hpp"
 #include "Traductor.hpp"
 
@@ -37,13 +39,21 @@ namespace RType
                     class GraphicsMiniScene : public AMiniScene
                     {
                         public:
+                            class SectionFrameRate : public RType::Game::Components::SectionRange
+                            {
+                                public:
+                                    SectionFrameRate(gd::Vector2<float> size);
+
+                                    void setSettingValue() override;
+                            };
+
                             void load(gd::Vector2<float> coord, gd::Vector2<float> window) override;
                             void reload(gd::Vector2<float> coord, gd::Vector2<float> window) override;
                             bool handleEvent(gd::Event &event) override;
                             void draw(gd::Window &window) override;
 
                         private:
-                            std::vector<std::tuple<std::string, std::shared_ptr<RType::Game::Components::Text>, std::shared_ptr<RType::Game::Components::Range>>> _datas;
+                            std::vector<std::unique_ptr<RType::Game::Components::SectionRange>> _sections;
                             std::unique_ptr<RType::Game::Components::Text> _save;
                             int _innerPadding = 50;
                             gd::Time _input;

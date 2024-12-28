@@ -18,29 +18,46 @@ namespace RType
             {
                 namespace Settings
                 {
+                    SoundsMiniScene::SectionSound::SectionSound(gd::Vector2<float> size)
+                        : RType::Game::Components::SectionRange("settings.sound", size)
+                    {
+                        _range->setValue(RType::Game::Managers::Sound::get().getVolume());
+                        setTextValue();
+                    }
+
+                    void SoundsMiniScene::SectionSound::setSettingValue()
+                    {
+                        RType::Game::Managers::Sound::get().setVolume(_range->getValue());
+                        RType::Game::Managers::Sound::get().play("beep");
+                    }
+
+                    SoundsMiniScene::SectionMusic::SectionMusic(gd::Vector2<float> size)
+                        : RType::Game::Components::SectionRange("settings.music", size)
+                    {
+                        _range->setValue(RType::Game::Managers::Music::get().getVolume());
+                        setTextValue();
+                    }
+
+                    void SoundsMiniScene::SectionMusic::setSettingValue()
+                    {
+                        RType::Game::Managers::Music::get().setVolume(_range->getValue());
+                    }
+
                     void SoundsMiniScene::load(gd::Vector2<float> coord, gd::Vector2<float> window)
                     {
                         _coord = coord;
                         _window = window;
 
+                        _sections.push_back(std::make_unique<SectionSound>((gd::Vector2<float>){window.x - _innerPadding * 2, 20}));
+                        _sections.push_back(std::make_unique<SectionMusic>((gd::Vector2<float>){window.x - _innerPadding * 2, 20}));
+
                         int h = coord.y + 50;
-                        std::vector<std::string> sections = {"settings.sound", "settings.music"};
-
-                        for (int i = 0; i < (int)sections.size(); i++) {
-                            _datas.push_back(std::make_tuple(sections[i], std::make_shared<Game::Components::Text>("Karma Future", Traductor::get()->translate(sections[i])), std::make_shared<Game::Components::Range>(0, 100, 2, (gd::Vector2<float>){(float)(coord.x + _innerPadding), (float)(h + 50)}, (gd::Vector2<float>){window.x - _innerPadding * 2, 20})));
-                            std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
-                            h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
-
-                            if (sections[i] == "settings.music")
-                                std::get<2>(_datas[i])->setValue(RType::Game::Managers::Music::get().getVolume());
-
-                            std::string text = Traductor::get()->translate(sections[i]);
-                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
-                            std::get<1>(_datas[i])->setText(text);
-                            std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                            std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
+                        for (auto &section : _sections) {
+                            section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                            h += section->getSizeY() + 100;
                         }
-                        _selected = (int)sections.size();
+
+                        _selected = (int)_sections.size();
 
                         _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
@@ -52,15 +69,14 @@ namespace RType
                         _window = window;
 
                         int h = coord.y + 50;
-                        for (auto &data : _datas) {
-                            std::string text = Traductor::get()->translate(std::get<0>(data));
-                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(data)->getValue())));
-                            std::get<1>(data)->setText(text);
-                            std::get<1>(data)->setPosition({(int)(coord.x + _innerPadding), h});
-                            h = std::get<1>(data)->getPosition().y + std::get<1>(data)->getSize().y + 100;
-                            std::get<1>(data)->setColor(gd::Color(255, 255, 255, 150));
-                            std::get<2>(data)->setColor(gd::Color(255, 255, 255, 150));
+                        for (auto &section : _sections) {
+                            section->setTextValue();
+                            section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                            h += section->getSizeY() + 100;
+                            section->setColor(gd::Color(255, 255, 255, 150));
                         }
+
+                        _save->setText(Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                         _save->setColor(gd::Color(255, 255, 255, 150));
                     }
@@ -73,7 +89,7 @@ namespace RType
                             if (event.joyStick().getYAxisPosition(false) < -50) _moveSelected(-1);
                             if (event.joyStick().getYAxisPosition(true) > 50) _moveSelected(1);
                         }
-                        if (_selected < (int)_datas.size()) {
+                        if (_selected < (int)_sections.size()) {
                             if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _changeRangeValue(-1);
                             if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _changeRangeValue(1);
                             if (event.joyStick().isConnected()) {
@@ -90,10 +106,8 @@ namespace RType
 
                     void SoundsMiniScene::draw(gd::Window &window)
                     {
-                        for (auto &data : _datas) {
-                            std::get<1>(data)->draw(window);
-                            std::get<2>(data)->draw(window);
-                        }
+                        for (auto &section : _sections)
+                            section->draw(window);
                         _save->draw(window);
                     }
 
@@ -102,17 +116,12 @@ namespace RType
                         if (_input.getElapsedTime() < 100) return;
                         _input.reset();
                         if (value < 0)
-                            std::get<2>(_datas[_selected])->downValue();
+                            _sections[_selected]->range()->downValue();
                         else
-                            std::get<2>(_datas[_selected])->upValue();
-                        std::string text = Traductor::get()->translate(std::get<0>(_datas[_selected]));
-                        text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
-                        std::get<1>(_datas[_selected])->setText(text);
-                        if (std::get<0>(_datas[_selected]) == "settings.sound") {
-                            RType::Game::Managers::Sound::get().setVolume(std::get<2>(_datas[0])->getValue());
-                            RType::Game::Managers::Sound::get().play("beep");
-                        } else if (std::get<0>(_datas[_selected]) == "settings.music")
-                            RType::Game::Managers::Music::get().setVolume(std::get<2>(_datas[1])->getValue());
+                            _sections[_selected]->range()->upValue();
+
+                        _sections[_selected]->setTextValue();
+                        _sections[_selected]->setSettingValue();
                         if (_changes == false) {
                             _changes = true;
                             _save->setText(Traductor::get()->translate("dico.save"));
@@ -125,17 +134,14 @@ namespace RType
                         _input.reset();
                         _selected += value;
                         if (_selected < 0) _selected = 0;
-                        if (_selected >= (int)_datas.size()) _selected = (int)_datas.size();
+                        if (_selected >= (int)_sections.size()) _selected = (int)_sections.size();
 
-                        for (int i = 0; i < (int)_datas.size(); i++) {
-                            std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                            std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                        }
+                        for (auto &section : _sections)
+                            section->setColor(gd::Color(255, 255, 255, 150));
                         _save->setColor(gd::Color(255, 255, 255, 150));
-                        if (_selected < (int)_datas.size()) {
-                            std::get<2>(_datas[_selected])->setColor(gd::Color::White);
-                            std::get<1>(_datas[_selected])->setColor(gd::Color::White);
-                        } else
+                        if (_selected < (int)_sections.size())
+                            _sections[_selected]->setColor(gd::Color::White);
+                        else
                             _save->setColor(gd::Color::White);
                     }
 
@@ -146,8 +152,8 @@ namespace RType
                         _save->setText(Traductor::get()->translate("dico.back"));
 
                         Papaya settings("./assets/data", "settings");
-                        settings.updateData("setting", "music", "value", std::to_string((int)std::get<2>(_datas[1])->getValue()));
-                        settings.updateData("setting", "sound", "value", std::to_string((int)std::get<2>(_datas[0])->getValue()));
+                        for (auto &section : _sections)
+                            settings.updateData("setting", RType::Helpers::Utils::split(section->getName(), ".")[1], "value", std::to_string((int)section->getValue()));
                         settings.save();
                     }
                 } // namespace Settings

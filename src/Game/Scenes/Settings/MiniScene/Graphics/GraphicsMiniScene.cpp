@@ -18,29 +18,32 @@ namespace RType
             {
                 namespace Settings
                 {
+                    GraphicsMiniScene::SectionFrameRate::SectionFrameRate(gd::Vector2<float> size)
+                        : RType::Game::Components::SectionRange("settings.frameRate", size, 6, 120, 6)
+                    {
+                        _range->setValue(gd::FrameRate::get().getFrameRate());
+                        setTextValue();
+                    }
+
+                    void GraphicsMiniScene::SectionFrameRate::setSettingValue()
+                    {
+                        gd::FrameRate::get().setFrameRate(_range->getValue());
+                    }
+
                     void GraphicsMiniScene::load(gd::Vector2<float> coord, gd::Vector2<float> window)
                     {
                         _coord = coord;
                         _window = window;
 
+                        _sections.push_back(std::make_unique<SectionFrameRate>((gd::Vector2<float>){window.x - _innerPadding * 2, 20}));
+
                         int h = coord.y + 50;
-                        std::vector<std::string> sections = {"settings.frameRate"};
-
-                        for (int i = 0; i < (int)sections.size(); i++) {
-                            _datas.push_back(std::make_tuple(sections[i], std::make_shared<Game::Components::Text>("Karma Future", sections[i]), std::make_shared<Game::Components::Range>(24, 180, 6, (gd::Vector2<float>){(float)(coord.x + _innerPadding), (float)(h + 50)}, (gd::Vector2<float>){window.x - _innerPadding * 2, 20})));
-                            std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
-                            h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
-
-                            if (sections[i] == "settings.frameRate")
-                                std::get<2>(_datas[i])->setValue((float)gd::FrameRate::get().getFrameRate());
-
-                            std::string text = Traductor::get()->translate(sections[i]);
-                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
-                            std::get<1>(_datas[i])->setText(text);
-                            std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                            std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
+                        for (auto &section : _sections) {
+                            section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                            h += section->getSizeY() + 100;
                         }
-                        _selected = (int)sections.size();
+
+                        _selected = (int)_sections.size();
 
                         _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
@@ -52,15 +55,16 @@ namespace RType
                         _window = window;
 
                         int h = coord.y + 50;
-                        for (int i = 0; i < (int)_datas.size(); i++) {
-                            std::string text = Traductor::get()->translate(std::get<0>(_datas[i]));
-                            text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[i])->getValue())));
-                            std::get<1>(_datas[i])->setText(text);
-                            std::get<1>(_datas[i])->setPosition({(int)(coord.x + _innerPadding), h});
-                            std::get<2>(_datas[i])->setPosition({(float)(coord.x + _innerPadding), (float)(h + 50)});
-                            h = std::get<1>(_datas[i])->getPosition().y + std::get<1>(_datas[i])->getSize().y + 100;
+                        for (auto &section : _sections) {
+                            section->setTextValue();
+                            section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                            h += section->getSizeY() + 100;
+                            section->setColor(gd::Color(255, 255, 255, 150));
                         }
+
+                        _save->setText(Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _save->setColor(gd::Color(255, 255, 255, 150));
                     }
 
                     bool GraphicsMiniScene::handleEvent(gd::Event &event)
@@ -71,7 +75,7 @@ namespace RType
                             if (event.joyStick().getYAxisPosition(false) < -50) _moveSelected(-1);
                             if (event.joyStick().getYAxisPosition(true) > 50) _moveSelected(1);
                         }
-                        if (_selected < (int)_datas.size()) {
+                        if (_selected < (int)_sections.size()) {
                             if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _changeRangeValue(-1);
                             if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _changeRangeValue(1);
                             if (event.joyStick().isConnected()) {
@@ -88,10 +92,8 @@ namespace RType
 
                     void GraphicsMiniScene::draw(gd::Window &window)
                     {
-                        for (auto &data : _datas) {
-                            std::get<1>(data)->draw(window);
-                            std::get<2>(data)->draw(window);
-                        }
+                        for (auto &section : _sections)
+                            section->draw(window);
                         _save->draw(window);
                     }
 
@@ -100,13 +102,12 @@ namespace RType
                         if (_input.getElapsedTime() < 100) return;
                         _input.reset();
                         if (value < 0)
-                            std::get<2>(_datas[_selected])->downValue();
+                            _sections[_selected]->range()->downValue();
                         else
-                            std::get<2>(_datas[_selected])->upValue();
-                        std::string text = Traductor::get()->translate(std::get<0>(_datas[_selected]));
-                        text.replace(text.find("{value}"), 7, std::to_string((int)(std::get<2>(_datas[_selected])->getValue())));
-                        std::get<1>(_datas[_selected])->setText(text);
-                        gd::FrameRate::get().setFrameRate((int)std::get<2>(_datas[0])->getValue());
+                            _sections[_selected]->range()->upValue();
+
+                        _sections[_selected]->setTextValue();
+                        _sections[_selected]->setSettingValue();
                         if (_changes == false) {
                             _changes = true;
                             _save->setText(Traductor::get()->translate("dico.save"));
@@ -119,17 +120,14 @@ namespace RType
                         _input.reset();
                         _selected += value;
                         if (_selected < 0) _selected = 0;
-                        if (_selected >= (int)_datas.size()) _selected = (int)_datas.size();
+                        if (_selected >= (int)_sections.size()) _selected = (int)_sections.size();
 
-                        for (int i = 0; i < (int)_datas.size(); i++) {
-                            std::get<2>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                            std::get<1>(_datas[i])->setColor(gd::Color(255, 255, 255, 150));
-                        }
+                        for (auto &section : _sections)
+                            section->setColor(gd::Color(255, 255, 255, 150));
                         _save->setColor(gd::Color(255, 255, 255, 150));
-                        if (_selected < (int)_datas.size()) {
-                            std::get<2>(_datas[_selected])->setColor(gd::Color::White);
-                            std::get<1>(_datas[_selected])->setColor(gd::Color::White);
-                        } else
+                        if (_selected < (int)_sections.size())
+                            _sections[_selected]->setColor(gd::Color::White);
+                        else
                             _save->setColor(gd::Color::White);
                     }
 
@@ -140,7 +138,8 @@ namespace RType
                         _save->setText(Traductor::get()->translate("dico.back"));
 
                         Papaya settings("./assets/data", "settings");
-                        settings.updateData("setting", "frameRate", "value", std::to_string((int)std::get<2>(_datas[0])->getValue()));
+                        for (auto &section : _sections)
+                            settings.updateData("setting", RType::Helpers::Utils::split(section->getName(), ".")[1], "value", std::to_string((int)section->getValue()));
                         settings.save();
                     }
                 } // namespace Settings

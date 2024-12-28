@@ -81,6 +81,11 @@ namespace RType
                 _background.setPosition(position);
                 _range.setPosition({position.x + 2, position.y + 2});
             }
+
+            gd::Vector2<float> Range::getSize() const
+            {
+                return _background.getSize();
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

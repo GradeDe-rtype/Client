@@ -39,6 +39,7 @@ namespace RType
                     void setPosition(gd::Vector2<float> position);
 
                     float getValue() const;
+                    gd::Vector2<float> getSize() const;
 
                 private:
                     gd::RectangleShape _range;
