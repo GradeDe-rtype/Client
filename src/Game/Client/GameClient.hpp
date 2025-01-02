@@ -20,6 +20,7 @@
 #include "Game/Managers/Accessibility/AccessibilityManager.hpp"
 #include "Game/Managers/Scenes/Scenes.hpp"
 #include "Game/Managers/Sound/Sound.hpp"
+#include "Papaya.hpp"
 #include "Ressources/Ressources.hpp"
 #include "Traductor.hpp"
 

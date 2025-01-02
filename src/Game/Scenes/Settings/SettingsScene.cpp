@@ -7,6 +7,10 @@
 */
 
 #include "SettingsScene.hpp"
+#include "Game/Scenes/Settings/MiniScene/Accessibility/AccessibilityMiniScene.hpp"
+#include "Game/Scenes/Settings/MiniScene/Graphics/GraphicsMiniScene.hpp"
+#include "Game/Scenes/Settings/MiniScene/Languages/LanguagesMiniScene.hpp"
+#include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
 
 namespace RType
 {

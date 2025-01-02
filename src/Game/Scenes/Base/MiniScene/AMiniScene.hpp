@@ -10,9 +10,16 @@
 #define RTYPE_GAME_MINI_SCENE_ABSTRACT_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <memory>
 #include <string>
+#include <vector>
 #include "GradeDe/Event.hpp"
+#include "GradeDe/Time.hpp"
+#include "Game/Components/SectionRange/SectionRange.hpp"
+#include "Game/Components/Text/Text.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
 #include "Game/Scenes/Base/MiniScene/IMiniScene.hpp"
+#include "Papaya.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -32,12 +39,24 @@ namespace RType
                         void reload(gd::Vector2<float> coord, gd::Vector2<float> window) override;
                         bool handleEvent(gd::Event &event) override;
                         void draw(gd::Window &window) override;
+                        void loadSections(gd::Vector2<float> window) override;
 
                     protected:
                         gd::Vector2<float> _window;
                         gd::Vector2<float> _coord;
+                        std::vector<std::unique_ptr<RType::Game::Components::SectionRange>> _sections;
+                        std::unique_ptr<RType::Game::Components::Text> _save;
+                        int _innerPadding = 50;
+                        int _sectionGap = 50;
+                        gd::Time _input;
+                        int _selected = 0;
+                        bool _changes = false;
+
+                        void _changeRangeValue(int value);
+                        void _moveSelected(int value);
+                        void _saveSettings();
                 };
-            }; // namespace MiniScene
+            } // namespace MiniScene
         } // namespace Scenes
     } // namespace Game
 } // namespace RType

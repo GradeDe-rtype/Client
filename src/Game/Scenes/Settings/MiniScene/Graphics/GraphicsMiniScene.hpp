@@ -10,20 +10,9 @@
 #define RTYPE_GAME_SETTINGS_GRAPHICS_MINI_SCENE_HPP_
 
 /*  ---- INCLUDES ---- */
-#include <memory>
-#include <string>
-#include <tuple>
-#include "GradeDe/Event.hpp"
 #include "GradeDe/FrameRate.hpp"
-#include "GradeDe/Time.hpp"
-#include "Game/Components/Range/Range.hpp"
 #include "Game/Components/SectionRange/SectionRange.hpp"
-#include "Game/Components/Text/Text.hpp"
-#include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
-#include "Helpers/Utils/Utils.hpp"
-#include "Papaya.hpp"
-#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -47,22 +36,7 @@ namespace RType
                                     void setSettingValue() override;
                             };
 
-                            void load(gd::Vector2<float> coord, gd::Vector2<float> window) override;
-                            void reload(gd::Vector2<float> coord, gd::Vector2<float> window) override;
-                            bool handleEvent(gd::Event &event) override;
-                            void draw(gd::Window &window) override;
-
-                        private:
-                            std::vector<std::unique_ptr<RType::Game::Components::SectionRange>> _sections;
-                            std::unique_ptr<RType::Game::Components::Text> _save;
-                            int _innerPadding = 50;
-                            gd::Time _input;
-                            int _selected = 0;
-                            bool _changes = false;
-
-                            void _changeRangeValue(int value);
-                            void _moveSelected(int value);
-                            void _saveSettings();
+                            void loadSections(gd::Vector2<float> window) override;
                     };
                 } // namespace Settings
             } // namespace MiniScene
