@@ -19,7 +19,7 @@ namespace RType
                 namespace Settings
                 {
                     AccessibilityMiniScene::SectionTextSize::SectionTextSize(gd::Vector2<float> size)
-                        : RType::Game::Components::SectionRange("settings.textSize", size, 20, 40, 5)
+                        : RType::Game::Components::SectionRange("settings.textSize", size, 20, 50, 5)
                     {
                         _range->setValue(RType::Game::Managers::Accessibility::get().getTextSize());
                         setTextValue();
@@ -37,15 +37,15 @@ namespace RType
 
                         _sections.push_back(std::make_unique<SectionTextSize>((gd::Vector2<float>){window.x - _innerPadding * 2, 20}));
 
-                        int h = coord.y + 50;
+                        int h = coord.y + _innerPadding;
                         for (auto &section : _sections) {
                             section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
-                            h += section->getSizeY() + 100;
+                            h += section->getSizeY() + _sectionGap;
                         }
 
                         _selected = (int)_sections.size();
 
-                        _save = std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
+                        _save = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
                     }
 
@@ -58,13 +58,11 @@ namespace RType
                         for (auto &section : _sections) {
                             section->setTextValue();
                             section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
-                            h += section->getSizeY() + 100;
-                            section->setColor(gd::Color(255, 255, 255, 150));
+                            h += section->getSizeY() + _sectionGap;
                         }
 
-                        _save->setText(Traductor::get()->translate("dico.back"));
+                        _save->setText(Traductor::get()->translate((_changes) ? "dico.save" : "dico.back"));
                         _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
-                        _save->setColor(gd::Color(255, 255, 255, 150));
                     }
 
                     bool AccessibilityMiniScene::handleEvent(gd::Event &event)
@@ -108,6 +106,7 @@ namespace RType
 
                         _sections[_selected]->setTextValue();
                         _sections[_selected]->setSettingValue();
+                        RType::Game::Managers::Scenes::get().needToReload();
                         if (_changes == false) {
                             _changes = true;
                             _save->setText(Traductor::get()->translate("dico.save"));

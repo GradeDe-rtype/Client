@@ -52,7 +52,7 @@ namespace RType
                     std::vector<std::tuple<std::string, std::unique_ptr<RType::Game::Components::TextBox>, std::unique_ptr<RType::Game::Scenes::MiniScene::AMiniScene>>> _links;
                     std::unique_ptr<RType::Game::Entity::SelectArrow> _selectArrow;
                     std::vector<gd::Shape> _rectangles;
-                    int _linkGap = 75;
+                    int _linkGap = 25;
                     int _linkSpacing = 50;
                     int _selectIndex = 0;
                     int _columnIndex = 0;

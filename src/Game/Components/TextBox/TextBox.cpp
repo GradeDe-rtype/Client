@@ -118,7 +118,7 @@ namespace RType
                     int wordWidth = text.getSize().x;
                     if (wordWidth + currentWidth >= _size.x) {
                         if (wordWidth >= _size.x) {
-                            currentLine += " ";
+                            if (!currentLine.empty()) currentLine += " ";
                             std::string wordPart = "";
                             for (int j = 0; j < (int)word.size(); j++) {
                                 wordPart += word[j];

@@ -24,7 +24,7 @@ namespace RType
 
                 _gdText.setFont(_gdFont);
                 _gdText.setString(text);
-                _gdText.setCharacterSize(charactersize);
+                _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * charactersize);
                 _gdText.setPosition(position);
                 _gdText.setColor(color);
             }
@@ -37,7 +37,7 @@ namespace RType
             void Text::setCharacterSize(int charactersize)
             {
                 _charactersize = charactersize;
-                _gdText.setCharacterSize(_charactersize);
+                _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * charactersize);
             }
 
             void Text::setColor(gd::Color color)

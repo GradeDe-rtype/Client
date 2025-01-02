@@ -16,6 +16,7 @@
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
+#include "Game/Managers/Accessibility/AccessibilityManager.hpp"
 #include "Game/Managers/Font/FontManager.hpp"
 
 /*  ---- CLASS ---- */
@@ -28,7 +29,7 @@ namespace RType
             class Text
             {
                 public:
-                    Text(std::string font, std::string text, int charactersize = 30, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
+                    Text(std::string font, std::string text, int charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
                     ~Text() = default;
 
                     void draw(gd::Window &window);

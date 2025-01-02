@@ -20,6 +20,7 @@
 #include "Game/Components/SectionRange/SectionRange.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Game/Managers/Accessibility/AccessibilityManager.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
 #include "Helpers/Utils/Utils.hpp"
 #include "Papaya.hpp"
@@ -56,6 +57,7 @@ namespace RType
                             std::vector<std::unique_ptr<RType::Game::Components::SectionRange>> _sections;
                             std::unique_ptr<RType::Game::Components::Text> _save;
                             int _innerPadding = 50;
+                            int _sectionGap = 50;
                             gd::Time _input;
                             int _selected = 0;
                             bool _changes = false;

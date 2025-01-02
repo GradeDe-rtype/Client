@@ -21,9 +21,11 @@ namespace RType
                 _links.push_back(std::make_tuple("dico.language", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
                 _links.push_back(std::make_tuple("dico.sound", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 
-                for (int i = 0; i < (int)_links.size(); i++) {
-                    std::get<1>(_links[i])->setPosition({(int)(_linkSpacing * 1.5), (int)(_linkGap * i + _linkSpacing)});
-                    std::get<2>(_links[i])->load({(float)(window.getWidth() / 5 * 2 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 5 * 3 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
+                int h = _linkSpacing;
+                for (auto &link : _links) {
+                    std::get<1>(link)->setPosition({(int)(_linkSpacing * 1.5), h});
+                    h += _linkGap + std::get<1>(link)->getSize().y;
+                    std::get<2>(link)->load({(float)(window.getWidth() / 5 * 2 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 5 * 3 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
                 }
 
                 _selectArrow = std::make_unique<RType::Game::Entity::SelectArrow>();
@@ -47,10 +49,14 @@ namespace RType
 
             void Settings::reload(gd::Window &window)
             {
+                int h = _linkSpacing;
                 for (auto &link : _links) {
                     std::get<1>(link)->setText(Traductor::get()->translate(std::get<0>(link)));
-                    std::get<2>(link)->reload({(float)(window.getWidth() / 3 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 3 * 2 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
+                    std::get<1>(link)->setPosition({(int)(_linkSpacing * 1.5), h});
+                    h += _linkGap + std::get<1>(link)->getSize().y;
+                    std::get<2>(link)->reload({(float)(window.getWidth() / 5 * 2 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 5 * 3 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
                 }
+                _selectArrow->setPosition({(float)_linkSpacing, (float)(std::get<1>(_links[_selectIndex])->getPosition().y + std::get<1>(_links[_selectIndex])->getSize().y / 2)});
             }
 
             void Settings::draw(gd::Window &window)

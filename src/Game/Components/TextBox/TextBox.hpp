@@ -38,7 +38,7 @@ namespace RType
                         Right
                     };
 
-                    TextBox(float max, std::string font, std::string text, Align align = Align::Left, int charactersize = 30, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
+                    TextBox(float max, std::string font, std::string text, Align align = Align::Left, int charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
                     ~TextBox() = default;
 
                     void draw(gd::Window &window);
