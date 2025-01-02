@@ -14,7 +14,7 @@ namespace RType
     {
         namespace Components
         {
-            TextBox::TextBox(float max, std::string font, std::string text, Align align, int charactersize, gd::Color color, gd::Vector2<int> position)
+            TextBox::TextBox(float max, std::string font, std::string text, Align align, float charactersize, gd::Color color, gd::Vector2<int> position)
             {
                 _font = font;
                 _texts.clear();
@@ -25,6 +25,11 @@ namespace RType
                 _size = {max, 0};
                 _align = align;
 
+                _updateTexts();
+            }
+
+            void TextBox::reload()
+            {
                 _updateTexts();
             }
 

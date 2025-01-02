@@ -70,7 +70,7 @@ namespace RType
                     std::vector<std::tuple<std::string, std::string, std::unique_ptr<RType::Game::Components::Text>>> _links;
                     std::unique_ptr<RType::Game::Entity::SelectArrow> _selectArrow;
                     bool _connected = false;
-                    int _linkGap = 75;
+                    int _linkGap = 25;
                     int _linkSpacing = 50;
                     int _selectIndex = 1;
                     gd::Time _input;

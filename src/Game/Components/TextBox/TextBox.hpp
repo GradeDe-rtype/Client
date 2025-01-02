@@ -38,9 +38,10 @@ namespace RType
                         Right
                     };
 
-                    TextBox(float max, std::string font, std::string text, Align align = Align::Left, int charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
+                    TextBox(float max, std::string font, std::string text, Align align = Align::Left, float charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
                     ~TextBox() = default;
 
+                    void reload();
                     void draw(gd::Window &window);
 
                     void setCharacterSize(int charactersize);
@@ -62,7 +63,7 @@ namespace RType
                     std::vector<std::unique_ptr<Game::Components::Text>> _texts;
                     gd::Color _color;
                     std::string _text;
-                    int _charactersize;
+                    float _charactersize;
                     gd::Vector2<int> _position;
                     gd::Vector2<float> _size;
                     Align _align;

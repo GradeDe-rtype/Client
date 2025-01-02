@@ -29,9 +29,10 @@ namespace RType
             class Text
             {
                 public:
-                    Text(std::string font, std::string text, int charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
+                    Text(std::string font, std::string text, float charactersize = 1, gd::Color color = gd::Color::White, gd::Vector2<int> position = {0, 0});
                     ~Text() = default;
 
+                    void reload();
                     void draw(gd::Window &window);
 
                     void setCharacterSize(int charactersize);
@@ -50,7 +51,7 @@ namespace RType
                     gd::Text _gdText;
                     gd::Color _color;
                     std::string _text;
-                    int _charactersize;
+                    float _charactersize;
                     gd::Vector2<int> _position;
             };
         } // namespace Components

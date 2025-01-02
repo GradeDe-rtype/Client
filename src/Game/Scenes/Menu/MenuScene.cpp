@@ -43,8 +43,10 @@ namespace RType
 
             void Menu::reload(gd::Window &window)
             {
-                for (auto &link : _links)
+                for (auto &link : _links) {
+                    std::get<2>(link)->reload();
                     std::get<2>(link)->setText(Traductor::get()->translate(std::get<1>(link)));
+                }
                 _setPositionsLinks();
                 _setSelectArrowPosition();
             }
@@ -69,8 +71,11 @@ namespace RType
 
             void Menu::_setPositionsLinks()
             {
-                for (int i = 0; i < (int)_links.size(); i++)
-                    std::get<2>(_links[i])->setPosition({(int)_linkSpacing, (int)(_linkGap * i + _linkSpacing)});
+                int h = _linkSpacing;
+                for (auto &link : _links) {
+                    std::get<2>(link)->setPosition({(int)_linkSpacing, h});
+                    h += _linkGap + std::get<2>(link)->getSize().y;
+                }
             }
 
             int Menu::_getIndexLink(std::string name)

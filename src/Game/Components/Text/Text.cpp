@@ -14,7 +14,7 @@ namespace RType
     {
         namespace Components
         {
-            Text::Text(std::string font, std::string text, int charactersize, gd::Color color, gd::Vector2<int> position)
+            Text::Text(std::string font, std::string text, float charactersize, gd::Color color, gd::Vector2<int> position)
             {
                 _gdFont = Managers::Font::get().getFont(font);
                 _text = text;
@@ -27,6 +27,11 @@ namespace RType
                 _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * charactersize);
                 _gdText.setPosition(position);
                 _gdText.setColor(color);
+            }
+
+            void Text::reload()
+            {
+                _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * _charactersize);
             }
 
             void Text::draw(gd::Window &window)

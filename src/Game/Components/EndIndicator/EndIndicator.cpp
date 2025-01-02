@@ -18,13 +18,13 @@ namespace RType
             {
                 int _currentWave = RType::Ressources::get()->wave;
 
-                _endText = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.lose"), 50, gd::Color(255, 255, 255, 0));
+                _endText = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.lose"), 1.8, gd::Color(255, 255, 255, 0));
                 _endText->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _endText->getSize().x / 2), (int)(window.getHeight() / 3 - _endText->getSize().y / 2)});
 
-                _scoreText = std::make_unique<RType::Game::Components::Text>("Karma Future", std::to_string(_endScore), 40, gd::Color(255, 255, 255, 0));
+                _scoreText = std::make_unique<RType::Game::Components::Text>("Karma Future", std::to_string(_endScore), 1.5, gd::Color(255, 255, 255, 0));
                 _scoreText->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _scoreText->getSize().x / 2), (int)(window.getHeight() / 2 - _scoreText->getSize().y / 2)});
 
-                _pressEnter = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.pressEnterReplay"), 30, gd::Color(255, 255, 255, 0));
+                _pressEnter = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.pressEnterReplay"), 1, gd::Color(255, 255, 255, 0));
                 _pressEnter->setPosition((gd::Vector2<int>){(int)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (int)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
 
                 _fade.reset();
@@ -77,6 +77,10 @@ namespace RType
 
             void EndIndicator::reload(gd::Window &window)
             {
+                _endText->reload();
+                _scoreText->reload();
+                _pressEnter->reload();
+
                 _endText->setText(Traductor::get()->translate("game.end.lose"));
                 _scoreText->setText(std::to_string(_endScore));
                 _pressEnter->setText(Traductor::get()->translate("game.end.pressEnterReplay"));
