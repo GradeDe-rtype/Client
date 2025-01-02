@@ -1,5 +1,6 @@
 setting;value
-music;40
-sound;10
+music;0
+sound;20
 frameRate;24
 lang;EN
+textSize;25

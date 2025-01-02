@@ -24,6 +24,9 @@
 #include "Ressources/Ressources.hpp"
 #include "Traductor.hpp"
 
+#include "GradeDe/RectangleShape.hpp"
+#include "Game/Components/TextBox/TextBox.hpp"
+
 /*  ---- CLASS ---- */
 namespace RType
 {

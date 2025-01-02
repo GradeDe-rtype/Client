@@ -19,9 +19,11 @@
     "settings": {
         "frameRate": "Frame Rate: {value}",
         "music": "Music: {value}",
-        "sound": "Sound: {value}"
+        "sound": "Sound: {value}",
+        "textSize": "Text Size: {value}"
     },
     "dico": {
+        "accessibility": "Accessibility",
         "back": "Back",
         "graphic": "Graphic",
         "language": "Language",

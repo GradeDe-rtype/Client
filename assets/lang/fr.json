@@ -19,9 +19,11 @@
     "settings": {
         "frameRate": "Rafraichissement: {value}",
         "music": "Musique: {value}",
-        "sound": "Son: {value}"
+        "sound": "Son: {value}",
+        "textSize": "Taille du texte: {value}"
     },
     "dico": {
+        "accessibility": "Accessibilite",
         "back": "Retour",
         "graphic": "Graphisme",
         "language": "Langue",

@@ -28,6 +28,7 @@ namespace RType
             RType::Game::Managers::Music::get().setVolume(std::stoi(settings.getData("setting", "music", "value")));
             RType::Game::Managers::Sound::get().setVolume(std::stoi(settings.getData("setting", "sound", "value")));
             gd::FrameRate::get().setFrameRate(std::stoi(settings.getData("setting", "frameRate", "value")));
+            RType::Game::Managers::Accessibility::get().setTextSize(std::stoi(settings.getData("setting", "textSize", "value")));
 
             _window.create(800, 600, "R-Type");
             RType::Game::Managers::Scenes::get().load(_window);

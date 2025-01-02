@@ -16,13 +16,14 @@ namespace RType
         {
             void Settings::load(gd::Window &window)
             {
-                _links.push_back(std::make_tuple("dico.graphic", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.graphic")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
-                _links.push_back(std::make_tuple("dico.sound", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
-                _links.push_back(std::make_tuple("dico.language", std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
+                _links.push_back(std::make_tuple("dico.accessibility", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.accessibility")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::AccessibilityMiniScene>()));
+                _links.push_back(std::make_tuple("dico.graphic", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.graphic")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
+                _links.push_back(std::make_tuple("dico.language", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
+                _links.push_back(std::make_tuple("dico.sound", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 
                 for (int i = 0; i < (int)_links.size(); i++) {
                     std::get<1>(_links[i])->setPosition({(int)(_linkSpacing * 1.5), (int)(_linkGap * i + _linkSpacing)});
-                    std::get<2>(_links[i])->load({(float)(window.getWidth() / 3 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 3 * 2 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
+                    std::get<2>(_links[i])->load({(float)(window.getWidth() / 5 * 2 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 5 * 3 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
                 }
 
                 _selectArrow = std::make_unique<RType::Game::Entity::SelectArrow>();
@@ -31,14 +32,14 @@ namespace RType
                 _rectangles.push_back(gd::Shape());
                 _rectangles.push_back(gd::Shape());
 
-                _rectangles[0].createRectangle((float)(window.getWidth() / 3 - _linkSpacing / 2), (float)(window.getHeight() - _linkSpacing));
+                _rectangles[0].createRectangle((float)(window.getWidth() / 5 * 2 - _linkSpacing / 2), (float)(window.getHeight() - _linkSpacing));
                 _rectangles[0].setPosition({(float)(_linkSpacing / 2), (float)(_linkSpacing / 2)});
                 _rectangles[0].setFillColor(gd::Color::Transparent);
                 _rectangles[0].setOutlineColor(gd::Color::White);
                 _rectangles[0].setOutlineThickness(4);
 
-                _rectangles[1].createRectangle((float)(window.getWidth() / 3 * 2 - _linkSpacing), (float)(window.getHeight() - _linkSpacing));
-                _rectangles[1].setPosition({(float)(window.getWidth() / 3 + _linkSpacing / 2), (float)(_linkSpacing / 2)});
+                _rectangles[1].createRectangle((float)(window.getWidth() / 5 * 3 - _linkSpacing), (float)(window.getHeight() - _linkSpacing));
+                _rectangles[1].setPosition({(float)(window.getWidth() / 5 * 2 + _linkSpacing / 2), (float)(_linkSpacing / 2)});
                 _rectangles[1].setFillColor(gd::Color::Transparent);
                 _rectangles[1].setOutlineColor(gd::Color(255, 255, 255, 150));
                 _rectangles[1].setOutlineThickness(4);

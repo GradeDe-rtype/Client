@@ -20,11 +20,12 @@
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
-#include "Game/Components/Text/Text.hpp"
+#include "Game/Components/TextBox/TextBox.hpp"
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Game/Scenes/Base/MiniScene/AMiniScene.hpp"
+#include "Game/Scenes/Settings/MiniScene/Accessibility/AccessibilityMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Graphics/GraphicsMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Languages/LanguagesMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
@@ -48,7 +49,7 @@ namespace RType
                     void draw(gd::Window &window) override;
 
                 private:
-                    std::vector<std::tuple<std::string, std::unique_ptr<RType::Game::Components::Text>, std::unique_ptr<RType::Game::Scenes::MiniScene::AMiniScene>>> _links;
+                    std::vector<std::tuple<std::string, std::unique_ptr<RType::Game::Components::TextBox>, std::unique_ptr<RType::Game::Scenes::MiniScene::AMiniScene>>> _links;
                     std::unique_ptr<RType::Game::Entity::SelectArrow> _selectArrow;
                     std::vector<gd::Shape> _rectangles;
                     int _linkGap = 75;
