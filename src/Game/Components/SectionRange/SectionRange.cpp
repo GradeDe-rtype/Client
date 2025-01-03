@@ -75,6 +75,11 @@ namespace RType
             {
                 return _name;
             }
+
+            std::string SectionRange::saveValue() const
+            {
+                return std::to_string((int)getValue());
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

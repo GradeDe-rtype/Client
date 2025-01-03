@@ -48,6 +48,11 @@ namespace RType
                 dimension.second = std::stoi(parts[1]);
                 return dimension;
             }
+
+            std::vector<std::string> Resolution::getAvailableResolutions() const
+            {
+                return _availableResolutions;
+            }
         } // namespace Managers
     } // namespace Game
 } // namespace RType

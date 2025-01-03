@@ -19,6 +19,7 @@
     "settings": {
         "frameRate": "Rafraichissement: {value}",
         "music": "Musique: {value}",
+        "resolution": "Résolution: {value}",
         "sound": "Son: {value}",
         "textSize": "Taille du texte: {value}"
     },
@@ -29,7 +30,6 @@
         "language": "Langue",
         "play": "Jouer",
         "quit": "Quitter",
-        "resolution": "Résolution",
         "save": "Sauvegarder",
         "settings": "Options",
         "sound": "Son"

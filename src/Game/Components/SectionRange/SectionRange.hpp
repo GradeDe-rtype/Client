@@ -37,6 +37,7 @@ namespace RType
                     virtual float getValue() const = 0;
                     virtual std::string getName() const = 0;
                     virtual std::shared_ptr<RType::Game::Components::Range> range() = 0;
+                    virtual std::string saveValue() const = 0;
             };
 
             class SectionRange : public ISectionRange
@@ -56,6 +57,7 @@ namespace RType
                     float getValue() const override;
                     std::string getName() const override;
                     std::shared_ptr<RType::Game::Components::Range> range() override;
+                    std::string saveValue() const override;
 
                 protected:
                     std::string _name;

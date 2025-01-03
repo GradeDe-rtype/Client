@@ -128,7 +128,7 @@ namespace RType
 
                     Papaya settings("./assets/data", "settings");
                     for (auto &section : _sections)
-                        settings.updateData("setting", RType::Helpers::Utils::split(section->getName(), ".")[1], "value", std::to_string((int)section->getValue()));
+                        settings.updateData("setting", RType::Helpers::Utils::split(section->getName(), ".")[1], "value", section->saveValue());
                     settings.save();
                 }
             } // namespace MiniScene

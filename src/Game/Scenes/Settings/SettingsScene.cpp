@@ -11,7 +11,6 @@
 #include "Game/Scenes/Settings/MiniScene/Graphics/GraphicsMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Languages/LanguagesMiniScene.hpp"
 #include "Game/Scenes/Settings/MiniScene/Sounds/SoundsMiniScene.hpp"
-// #include "Game/Scenes/Settings/MiniScene/Resolution/ResolutionMiniScene.hpp"
 
 namespace RType
 {
@@ -24,7 +23,6 @@ namespace RType
                 _links.push_back(std::make_tuple("dico.accessibility", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.accessibility")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::AccessibilityMiniScene>()));
                 _links.push_back(std::make_tuple("dico.graphic", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.graphic")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::GraphicsMiniScene>()));
                 _links.push_back(std::make_tuple("dico.language", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.language")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::LanguagesMiniScene>()));
-                // _links.push_back(std::make_tuple("dico.resolution", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.resolution")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::ResolutionMiniScene>()));
                 _links.push_back(std::make_tuple("dico.sound", std::make_unique<RType::Game::Components::TextBox>(window.getWidth() / 5 * 2 - _linkSpacing * 2, "Karma Future", Traductor::get()->translate("dico.sound")), std::make_unique<RType::Game::Scenes::MiniScene::Settings::SoundsMiniScene>()));
 
                 int h = _linkSpacing;

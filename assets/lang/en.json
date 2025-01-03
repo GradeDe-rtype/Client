@@ -19,6 +19,7 @@
     "settings": {
         "frameRate": "Frame Rate: {value}",
         "music": "Music: {value}",
+        "resolution": "Resolution: {value}",
         "sound": "Sound: {value}",
         "textSize": "Text Size: {value}"
     },
@@ -29,7 +30,6 @@
         "language": "Language",
         "play": "Play",
         "quit": "Quit",
-        "resolution": "Resolution",
         "save": "Save",
         "settings": "Settings",
         "sound": "Sound"

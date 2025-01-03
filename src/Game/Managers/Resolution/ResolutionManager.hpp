@@ -34,11 +34,24 @@ namespace RType
                     std::string getNextResolution() const;
                     std::string getCurrentResolution() const;
                     std::pair<int, int> getResolution() const;
+                    std::vector<std::string> getAvailableResolutions() const;
 
                 private:
                     Resolution() = default;
                     std::string _currentResolution = "";
                     std::string _nextResolution = "";
+                    std::vector<std::string> _availableResolutions = {
+                        "640x480",
+                        "800x600",
+                        "960x720",
+                        "1024x768",
+                        "1280x960",
+                        "1400x1050",
+                        "1440x1080",
+                        "1600x1200",
+                        "1856x1392",
+                        "1920x1440",
+                        "2048x1536"};
             };
         } // namespace Managers
     } // namespace Game
