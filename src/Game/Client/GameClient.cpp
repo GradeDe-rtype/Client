@@ -29,8 +29,11 @@ namespace RType
             RType::Game::Managers::Sound::get().setVolume(std::stoi(settings.getData("setting", "sound", "value")));
             gd::FrameRate::get().setFrameRate(std::stoi(settings.getData("setting", "frameRate", "value")));
             RType::Game::Managers::Accessibility::get().setTextSize(std::stoi(settings.getData("setting", "textSize", "value")));
+            RType::Game::Managers::Resolution::get().setResolution(settings.getData("setting", "resolution", "value"));
+            RType::Game::Managers::Resolution::get().updateResolution();
+            std::pair<int, int> resolution = RType::Game::Managers::Resolution::get().getResolution();
 
-            _window.create(800, 600, "R-Type");
+            _window.create(resolution.first, resolution.second, "R-Type");
             RType::Game::Managers::Scenes::get().load(_window);
             if (RType::Ressources::get()->me != nullptr)
                 RType::Ressources::get()->me->shape().setPosition({(float)(_window.getWidth() / 2 - RType::Ressources::get()->me->getSize().x / 2), (float)(_window.getHeight() / 2 - RType::Ressources::get()->me->getSize().y / 2)});

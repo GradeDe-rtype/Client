@@ -29,6 +29,7 @@
         "language": "Language",
         "play": "Play",
         "quit": "Quit",
+        "resolution": "Resolution",
         "save": "Save",
         "settings": "Settings",
         "sound": "Sound"
