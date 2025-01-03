@@ -14,7 +14,7 @@ namespace RType
     {
         namespace Components
         {
-            TextBox::TextBox(float max, std::string font, std::string text, Align align, float charactersize, gd::Color color, gd::Vector2<int> position)
+            TextBox::TextBox(float max, std::string font, std::string text, Align align, float charactersize, gd::Color color, gd::Vector2<float> position)
             {
                 _font = font;
                 _texts.clear();
@@ -28,8 +28,9 @@ namespace RType
                 _updateTexts();
             }
 
-            void TextBox::reload()
+            void TextBox::reload(gd::Window &window)
             {
+                (void)window;
                 _updateTexts();
             }
 
@@ -52,7 +53,7 @@ namespace RType
                     text->setColor(color);
             }
 
-            void TextBox::setPosition(gd::Vector2<int> position)
+            void TextBox::setPosition(gd::Vector2<float> position)
             {
                 _position = position;
                 _alignTexts();
@@ -74,11 +75,6 @@ namespace RType
             {
                 _align = align;
                 _alignTexts();
-            }
-
-            gd::Vector2<int> TextBox::getPosition() const
-            {
-                return _position;
             }
 
             int TextBox::getCharacterSize() const
@@ -163,7 +159,7 @@ namespace RType
 
             void TextBox::_alignTexts()
             {
-                gd::Vector2<int> position = _position;
+                gd::Vector2<float> position = _position;
                 for (auto &text : _texts) {
                     if (_align == Align::Center)
                         position.x = _position.x + _size.x / 2 - text->getSize().x / 2;

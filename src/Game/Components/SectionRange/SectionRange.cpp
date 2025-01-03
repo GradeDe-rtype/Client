@@ -32,10 +32,11 @@ namespace RType
                 _range->draw(window);
             }
 
-            void SectionRange::setPos(gd::Vector2<float> pos)
+            void SectionRange::setPosition(gd::Vector2<float> position)
             {
-                _text->setPosition((gd::Vector2<int>){(int)(pos.x), (int)(pos.y)});
-                _range->setPosition(gd::Vector2<float>((float)(pos.x), (float)(_text->getPosition().y + _text->getSize().y + 20)));
+                _position = position;
+                _text->setPosition((gd::Vector2<float>){(float)(_position.x), (float)(_position.y)});
+                _range->setPosition(gd::Vector2<float>((float)(_position.x), (float)(_text->getPosition().y + _text->getSize().y + 20)));
             }
 
             float SectionRange::getSizeY() const

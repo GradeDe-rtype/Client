@@ -16,6 +16,7 @@
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
+#include "Game/Components/Base/AComponent.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Ressources/Ressources.hpp"
 #include "Traductor.hpp"
@@ -27,16 +28,16 @@ namespace RType
     {
         namespace Components
         {
-            class EndIndicator
+            class EndIndicator : public AComponent
             {
                 public:
                     EndIndicator(gd::Window &window);
                     ~EndIndicator() = default;
 
-                    void handleEvent(gd::Window &window, gd::Event &event);
-                    void draw(gd::Window &window);
-                    void update(gd::Window &window);
-                    void reload(gd::Window &window);
+                    void handleEvent(gd::Window &window, gd::Event &event) override;
+                    void draw(gd::Window &window) override;
+                    void update(gd::Window &window) override;
+                    void reload(gd::Window &window) override;
 
                 private:
                     int _endScore = 0;

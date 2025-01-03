@@ -25,14 +25,14 @@ namespace RType
 
                     int h = coord.y + _innerPadding;
                     for (auto &section : _sections) {
-                        section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                        section->setPosition(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
                         h += section->getSizeY() + _sectionGap;
                     }
 
                     _selected = (int)_sections.size();
 
                     _save = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
-                    _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                    _save->setPosition({(float)(coord.x + _innerPadding), (float)(window.y - _save->getSize().y - _innerPadding)});
                 }
 
                 void AMiniScene::reload(gd::Vector2<float> coord, gd::Vector2<float> window)
@@ -43,11 +43,11 @@ namespace RType
                     int h = coord.y + 50;
                     for (auto &section : _sections) {
                         section->setTextValue();
-                        section->setPos(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
+                        section->setPosition(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
                         h += section->getSizeY() + _sectionGap;
                     }
 
-                    _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                    _save->setPosition({(float)(coord.x + _innerPadding), (float)(window.y - _save->getSize().y - _innerPadding)});
                 }
 
                 bool AMiniScene::handleEvent(gd::Event &event)

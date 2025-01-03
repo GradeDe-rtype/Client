@@ -44,7 +44,7 @@ namespace RType
             void Menu::reload(gd::Window &window)
             {
                 for (auto &link : _links) {
-                    std::get<2>(link)->reload();
+                    std::get<2>(link)->reload(window);
                     std::get<2>(link)->setText(Traductor::get()->translate(std::get<1>(link)));
                 }
                 _setPositionsLinks();
@@ -73,7 +73,7 @@ namespace RType
             {
                 int h = _linkSpacing;
                 for (auto &link : _links) {
-                    std::get<2>(link)->setPosition({(int)_linkSpacing, h});
+                    std::get<2>(link)->setPosition({(float)_linkSpacing, (float)h});
                     h += _linkGap + std::get<2>(link)->getSize().y;
                 }
             }

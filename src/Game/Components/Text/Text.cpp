@@ -14,7 +14,7 @@ namespace RType
     {
         namespace Components
         {
-            Text::Text(std::string font, std::string text, float charactersize, gd::Color color, gd::Vector2<int> position)
+            Text::Text(std::string font, std::string text, float charactersize, gd::Color color, gd::Vector2<float> position)
             {
                 _gdFont = Managers::Font::get().getFont(font);
                 _text = text;
@@ -25,11 +25,11 @@ namespace RType
                 _gdText.setFont(_gdFont);
                 _gdText.setString(text);
                 _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * charactersize);
-                _gdText.setPosition(position);
+                _gdText.setPosition({(int)position.x, (int)position.y});
                 _gdText.setColor(color);
             }
 
-            void Text::reload()
+            void Text::reload(gd::Window &window)
             {
                 _gdText.setCharacterSize(RType::Game::Managers::Accessibility::get().getTextSize() * _charactersize);
             }
@@ -51,21 +51,16 @@ namespace RType
                 _gdText.setColor(_color);
             }
 
-            void Text::setPosition(gd::Vector2<int> position)
+            void Text::setPosition(gd::Vector2<float> position)
             {
                 _position = position;
-                _gdText.setPosition(_position);
+                _gdText.setPosition({(int)position.x, (int)position.y});
             }
 
             void Text::setText(std::string text)
             {
                 _text = text;
                 _gdText.setString(_text);
-            }
-
-            gd::Vector2<int> Text::getPosition() const
-            {
-                return _position;
             }
 
             int Text::getCharacterSize() const

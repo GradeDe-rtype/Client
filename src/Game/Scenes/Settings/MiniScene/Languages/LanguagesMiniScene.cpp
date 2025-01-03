@@ -29,7 +29,7 @@ namespace RType
 
                         for (auto &lang : Traductor::get()->getLangs()) {
                             _langs.push_back(std::make_tuple(lang, std::make_shared<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("languages." + lang))));
-                            std::get<1>(_langs.back())->setPosition({(int)(coord.x + _innerPadding), h});
+                            std::get<1>(_langs.back())->setPosition({(float)(coord.x + _innerPadding), (float)h});
                             h += std::get<1>(_langs.back())->getSize().y + _innerPadding;
                             std::get<1>(_langs.back())->setColor(gd::Color(255, 255, 255, 150));
 
@@ -40,7 +40,7 @@ namespace RType
                         }
 
                         _save = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("dico.back"));
-                        _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _save->setPosition({(float)(coord.x + _innerPadding), (float)(window.y - _save->getSize().y - _innerPadding)});
                         _selected = _langs.size();
                     }
 
@@ -54,14 +54,14 @@ namespace RType
 
                         for (auto &lang : _langs) {
                             std::get<1>(lang)->setText(Traductor::get()->translate("languages." + std::get<0>(lang)));
-                            std::get<1>(lang)->setPosition({(int)(coord.x + _innerPadding), h});
+                            std::get<1>(lang)->setPosition({(float)(coord.x + _innerPadding), (float)h});
                             h += std::get<1>(lang)->getSize().y + _innerPadding;
                             std::get<1>(lang)->setColor(gd::Color(255, 255, 255, 150));
                         }
 
                         _selectArrow->setPosition({(float)(_selectedLang->getPosition().x - _selectArrow->getSize().x - 10), (float)(_selectedLang->getPosition().y + _selectedLang->getSize().y / 2)});
 
-                        _save->setPosition({(int)(coord.x + _innerPadding), (int)(window.y - _save->getSize().y - _innerPadding)});
+                        _save->setPosition({(float)(coord.x + _innerPadding), (float)(window.y - _save->getSize().y - _innerPadding)});
                         _save->setColor(gd::Color(255, 255, 255, 150));
                         _selected = _langs.size();
                     }

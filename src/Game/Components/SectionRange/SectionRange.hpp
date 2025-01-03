@@ -12,6 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
+#include "Game/Components/Base/AComponent.hpp"
 #include "Game/Components/Range/Range.hpp"
 #include "Game/Components/Text/Text.hpp"
 #include "Traductor.hpp"
@@ -23,14 +24,11 @@ namespace RType
     {
         namespace Components
         {
-            class ISectionRange
+            class ISectionRange : public AComponent
             {
                 public:
                     virtual ~ISectionRange() = default;
 
-                    virtual void draw(gd::Window &window) = 0;
-
-                    virtual void setPos(gd::Vector2<float> pos) = 0;
                     virtual void setColor(gd::Color color) = 0;
                     virtual void setTextValue() = 0;
                     virtual void setSettingValue() = 0;
@@ -49,7 +47,7 @@ namespace RType
 
                     void draw(gd::Window &window) override;
 
-                    void setPos(gd::Vector2<float> pos) override;
+                    void setPosition(gd::Vector2<float> position) override;
                     void setColor(gd::Color color) override;
                     void setTextValue() override;
                     void setSettingValue() override;
