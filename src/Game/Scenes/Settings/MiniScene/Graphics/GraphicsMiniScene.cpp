@@ -48,12 +48,12 @@ namespace RType
 
                     std::string GraphicsMiniScene::SectionResolution::saveValue() const
                     {
+                        RType::Game::Managers::Resolution::get().setResolution(RType::Game::Managers::Resolution::get().getAvailableResolutions()[(int)_range->getValue()]);
                         return RType::Game::Managers::Resolution::get().getAvailableResolutions()[(int)_range->getValue()];
                     }
 
                     void GraphicsMiniScene::SectionResolution::setSettingValue()
                     {
-                        RType::Game::Managers::Resolution::get().setResolution(RType::Game::Managers::Resolution::get().getAvailableResolutions()[(int)_range->getValue()]);
                     }
 
                     void GraphicsMiniScene::loadSections(gd::Vector2<float> window)

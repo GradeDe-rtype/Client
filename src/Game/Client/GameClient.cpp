@@ -47,6 +47,7 @@ namespace RType
             while (_window.isOpen() && RType::Game::Managers::Scenes::get().getCurrentSceneName() != "exit") {
                 Ressources::get()->update();
                 RType::Game::Managers::Sound::get().update();
+                _checkWindowResize();
                 RType::Game::Managers::Scenes::get().reload(_window);
                 RType::Game::Managers::Scenes::get().getScene()->update(_window);
                 _handleEvent();
@@ -81,6 +82,17 @@ namespace RType
             RType::Game::Managers::Scenes::get().getScene()->draw(_window);
             RType::Game::Managers::Scenes::get().draw(_window);
             _window.display();
+        }
+
+        void Client::_checkWindowResize()
+        {
+            if (RType::Game::Managers::Resolution::get().getCurrentResolution() != RType::Game::Managers::Resolution::get().getNextResolution()) {
+                _window.close();
+                RType::Game::Managers::Resolution::get().updateResolution();
+                std::pair<int, int> resolution = RType::Game::Managers::Resolution::get().getResolution();
+                RType::Game::Managers::Scenes::get().needToReload();
+                _window.create(resolution.first, resolution.second);
+            }
         }
 
     } // namespace Game

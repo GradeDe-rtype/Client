@@ -47,6 +47,7 @@ namespace RType
                 void _handleEvent();
                 void _draw();
                 void _handleGeneralEvent();
+                void _checkWindowResize();
         };
     } // namespace Game
 } // namespace RType
