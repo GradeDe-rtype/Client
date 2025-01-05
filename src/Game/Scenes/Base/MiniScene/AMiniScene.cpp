@@ -42,7 +42,7 @@ namespace RType
 
                     int h = coord.y + 50;
                     for (auto &section : _sections) {
-                        section->setTextValue();
+                        section->reload((gd::Vector2<float>){window.x - _innerPadding * 2, 20});
                         section->setPosition(gd::Vector2<float>((float)(coord.x + _innerPadding), (float)h));
                         h += section->getSizeY() + _sectionGap;
                     }

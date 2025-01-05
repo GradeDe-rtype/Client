@@ -23,6 +23,7 @@ namespace RType
             void Resolution::updateResolution()
             {
                 _currentResolution = _nextResolution;
+                _ratio = static_cast<float>(getResolution().first) / 800.0f;
             }
 
             void Resolution::setResolution(std::string resolution)
@@ -52,6 +53,11 @@ namespace RType
             std::vector<std::string> Resolution::getAvailableResolutions() const
             {
                 return _availableResolutions;
+            }
+
+            float Resolution::getRatio() const
+            {
+                return _ratio;
             }
         } // namespace Managers
     } // namespace Game

@@ -26,6 +26,12 @@ namespace RType
                 setColor(gd::Color(255, 255, 255, 150));
             }
 
+            void SectionRange::reload(gd::Vector2<float> window)
+            {
+                setTextValue();
+                _range->reload(window);
+            }
+
             void SectionRange::draw(gd::Window &window)
             {
                 _text->draw(window);

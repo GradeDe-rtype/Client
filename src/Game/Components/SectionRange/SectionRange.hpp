@@ -47,6 +47,7 @@ namespace RType
                     ~SectionRange() = default;
 
                     void draw(gd::Window &window) override;
+                    void reload(gd::Vector2<float> window);
 
                     void setPosition(gd::Vector2<float> position) override;
                     void setColor(gd::Color color) override;

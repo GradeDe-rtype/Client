@@ -32,6 +32,7 @@ namespace RType
                     ~Range() = default;
 
                     void draw(gd::Window &window) override;
+                    void reload(gd::Vector2<float> window);
                     void upValue();
                     void downValue();
 

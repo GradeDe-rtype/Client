@@ -34,6 +34,16 @@ namespace RType
                 _range.setFillColor(gd::Color::White);
             }
 
+            void Range::reload(gd::Vector2<float> window)
+            {
+                _size.x = window.x;
+                _background.setSize({window.x, _size.y});
+                _background.setPosition(_position);
+                _range.setSize({0, _size.y - 4});
+                _range.setPosition({window.x + 2, _position.y + 2});
+                setValue(_value);
+            }
+
             void Range::draw(gd::Window &window)
             {
                 window.draw(_background);
