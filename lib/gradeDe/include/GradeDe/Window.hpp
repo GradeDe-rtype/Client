@@ -11,6 +11,7 @@
 
 /*  ---- INCLUDES ---- */
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/PrimitiveType.hpp"
 #include "GradeDe/RectangleShape.hpp"
@@ -224,6 +225,8 @@ namespace gd
              * \brief The window.
              */
             sf::RenderWindow _window;
+
+            sf::View _view;
 
             /**
              * \brief The video mode.

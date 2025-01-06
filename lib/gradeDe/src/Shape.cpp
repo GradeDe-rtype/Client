@@ -72,6 +72,21 @@ namespace gd
         _shape.setTexture((sf::Texture *)texture.getTexture());
     }
 
+    void Shape::setSize(gd::Vector2<float> factor)
+    {
+        _shape.setScale(factor.x, factor.y);
+    }
+
+    void Shape::setSizeX(float x)
+    {
+        _shape.setScale(x, _shape.getScale().y);
+    }
+
+    void Shape::setSizeY(float y)
+    {
+        _shape.setScale(_shape.getScale().x, y);
+    }
+
     void Shape::move(gd::Vector2<float> offset)
     {
         _position += offset;

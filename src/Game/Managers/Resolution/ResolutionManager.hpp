@@ -35,7 +35,6 @@ namespace RType
                     std::string getCurrentResolution() const;
                     std::pair<int, int> getResolution() const;
                     std::vector<std::string> getAvailableResolutions() const;
-                    float getRatio() const;
 
                 private:
                     Resolution() = default;
@@ -53,7 +52,6 @@ namespace RType
                         "1856x1392",
                         "1920x1440",
                         "2048x1536"};
-                    float _ratio = 1.0f;
             };
         } // namespace Managers
     } // namespace Game

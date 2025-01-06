@@ -61,11 +61,6 @@ namespace RType
                     std::get<2>(link)->reload({(float)(window.getWidth() / 5 * 2 + _linkSpacing), (float)(_linkSpacing)}, {(float)(window.getWidth() / 5 * 3 - _linkSpacing * 2), (float)(window.getHeight() - _linkSpacing * 2)});
                 }
                 _selectArrow->setPosition({(float)_linkSpacing, (float)(std::get<1>(_links[_selectIndex])->getPosition().y + std::get<1>(_links[_selectIndex])->getSize().y / 2)});
-
-                _rectangles[0].setSize({(float)(window.getWidth() / 5 * 2 - _linkSpacing / 2), (float)(window.getHeight() - _linkSpacing)});
-                _rectangles[0].setPosition({(float)(_linkSpacing / 2), (float)(_linkSpacing / 2)});
-                _rectangles[1].setSize({(float)(window.getWidth() / 5 * 3 - _linkSpacing), (float)(window.getHeight() - _linkSpacing)});
-                _rectangles[1].setPosition({(float)(window.getWidth() / 5 * 2 + _linkSpacing / 2), (float)(_linkSpacing / 2)});
             }
 
             void Settings::draw(gd::Window &window)
