@@ -11,8 +11,10 @@
 
 /*  ---- INCLUDES ---- */
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/PrimitiveType.hpp"
+#include "GradeDe/RectangleShape.hpp"
 #include "GradeDe/Shape.hpp"
 #include "GradeDe/Text.hpp"
 #include "GradeDe/Vector.hpp"
@@ -169,6 +171,8 @@ namespace gd
              */
             void draw(gd::Shape &shape);
 
+            void draw(gd::RectangleShape &rectangleShape);
+
             /**
              * \brief Draw the vertex array.
              *
@@ -221,6 +225,8 @@ namespace gd
              * \brief The window.
              */
             sf::RenderWindow _window;
+
+            sf::View _view;
 
             /**
              * \brief The video mode.

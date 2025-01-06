@@ -64,7 +64,8 @@ namespace gd
 
     Sound::Status Sound::getStatus() const
     {
-        return _status;
+        if (_status == Unloaded) return Unloaded;
+        return static_cast<Status>(_sound.getStatus());
     }
 
     bool Sound::isLooping() const
@@ -80,5 +81,10 @@ namespace gd
     float Sound::getPitch() const
     {
         return _pitch;
+    }
+
+    int Sound::getDuration() const
+    {
+        return _buffer.getDuration().asMilliseconds();
     }
 } // namespace gd

@@ -1,0 +1,37 @@
+{
+    "languages": {
+        "EN": "Anglais",
+        "FR": "Francais"
+    },
+    "game": {
+        "end": {
+            "lose": "Vous avez perdu !",
+            "pressEnterReplay": "Appuyez sur 'Entree' pour rejouer",
+            "wave": "{value} / 5 vagues completees",
+            "win": "Vous avez gagne !"
+        },
+        "wave": {
+            "nextWave": "Prochaine vague !",
+            "pressEnterReady": "Appuyez sur 'Entree' quand vous etes pret",
+            "wave": "Vague {value}"
+        }
+    },
+    "settings": {
+        "frameRate": "Rafraichissement: {value}",
+        "music": "Musique: {value}",
+        "resolution": "Résolution: {value}",
+        "sound": "Son: {value}",
+        "textSize": "Taille du texte: {value}"
+    },
+    "dico": {
+        "accessibility": "Accessibilite",
+        "back": "Retour",
+        "graphic": "Graphisme",
+        "language": "Langue",
+        "play": "Jouer",
+        "quit": "Quitter",
+        "save": "Sauvegarder",
+        "settings": "Options",
+        "sound": "Son"
+    }
+}

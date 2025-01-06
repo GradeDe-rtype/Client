@@ -14,9 +14,16 @@ namespace RType
     {
         namespace Managers
         {
+            Music &Music::get()
+            {
+                static Music instance;
+                return instance;
+            }
+
             Music::Music()
             {
                 _addMusic("menu", "assets/music/Neon Frenzy.mp3");
+                _addMusic("settings", "assets/music/Neon Frenzy.mp3");
                 _addMusic("game", "assets/music/Adrenaline Surge.mp3");
             }
 

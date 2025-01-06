@@ -17,8 +17,13 @@
 #include "GradeDe/Window.hpp"
 #include "Communication/SendList/SendList.hpp"
 #include "Game/Components/StarsBackground/StarsBackground.hpp"
+#include "Game/Managers/Accessibility/AccessibilityManager.hpp"
+#include "Game/Managers/Resolution/ResolutionManager.hpp"
 #include "Game/Managers/Scenes/Scenes.hpp"
+#include "Game/Managers/Sound/Sound.hpp"
+#include "Papaya.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -37,12 +42,12 @@ namespace RType
                 gd::Window _window;
                 gd::Event _event;
                 gd::Time _time;
-                std::unique_ptr<RType::Game::Managers::Scenes> _scenesManager;
                 std::unique_ptr<RType::Game::Components::StarsBackground> _starBackground;
 
                 void _handleEvent();
                 void _draw();
                 void _handleGeneralEvent();
+                void _checkWindowResize();
         };
     } // namespace Game
 } // namespace RType

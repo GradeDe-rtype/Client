@@ -20,10 +20,10 @@ namespace gd
     {
         public:
             enum Status {
-                Unloaded,
                 Stopped,
                 Paused,
-                Playing
+                Playing,
+                Unloaded,
             };
 
             Sound() = default;
@@ -42,6 +42,7 @@ namespace gd
             bool isLooping() const;
             float getVolume() const;
             float getPitch() const;
+            int getDuration() const;
 
         private:
             sf::SoundBuffer _buffer;

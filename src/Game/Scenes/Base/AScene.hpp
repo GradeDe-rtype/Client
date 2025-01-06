@@ -41,6 +41,7 @@ namespace RType
                      * @param `window` The window
                      */
                     void load(gd::Window &window) override;
+                    void reload(gd::Window &window) override;
 
                     /**
                      * @brief Unload the scene

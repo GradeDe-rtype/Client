@@ -30,7 +30,7 @@ namespace RType
              *
              * @return A vector of strings
              */
-            std::vector<std::string> split(const std::string &str, const std::string &delimiter);
+            std::vector<std::string> split(const std::string &str, const std::string &delimList);
 
             /**
              * @brief Check if a directory exists

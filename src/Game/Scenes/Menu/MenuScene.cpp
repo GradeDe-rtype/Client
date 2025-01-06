@@ -16,11 +16,12 @@ namespace RType
         {
             void Menu::load(gd::Window &window)
             {
-                _addLink("game", "Play", window);
-                _addLink("exit", "Quit", window);
+                _addLink("game", "dico.play", window);
+                _addLink("settings", "dico.settings", window);
+                _addLink("exit", "dico.quit", window);
                 _setPositionsLinks();
 
-                _links[_getIndexLink("game")].second->setColor(gd::Color(255, 255, 255, 150));
+                std::get<2>(_links[_getIndexLink("game")])->setColor(gd::Color(255, 255, 255, 150));
 
                 _selectArrow = std::make_unique<Game::Entity::SelectArrow>();
                 _setSelectArrowPosition();
@@ -30,44 +31,57 @@ namespace RType
             {
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectArrow(-1);
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectArrow(1);
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "exit";
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return _links[_selectIndex].first;
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
+                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return std::get<0>(_links[_selectIndex]);
                 if (event.joyStick().isConnected()) {
                     if (event.joyStick().getYAxisPosition(false) < -50) _moveSelectArrow(-1);
                     if (event.joyStick().getYAxisPosition(true) > 50) _moveSelectArrow(1);
-                    if (event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return _links[_selectIndex].first;
+                    if (event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return std::get<0>(_links[_selectIndex]);
                 }
                 return "";
+            }
+
+            void Menu::reload(gd::Window &window)
+            {
+                for (auto &link : _links) {
+                    std::get<2>(link)->reload(window);
+                    std::get<2>(link)->setText(Traductor::get()->translate(std::get<1>(link)));
+                }
+                _setPositionsLinks();
+                _setSelectArrowPosition();
             }
 
             void Menu::draw(gd::Window &window)
             {
                 for (auto &link : _links)
-                    link.second->draw(window);
+                    std::get<2>(link)->draw(window);
                 _selectArrow->draw(window);
             }
 
             void Menu::update(gd::Window &window)
             {
                 if (!RType::Ressources::get()->isConnected || _connected) return;
-                _links[_getIndexLink("game")].second->setColor(gd::Color::White);
+                std::get<2>(_links[_getIndexLink("game")])->setColor(gd::Color::White);
             }
 
             void Menu::_addLink(std::string name, std::string link, gd::Window &window)
             {
-                _links.push_back(std::make_pair(name, std::make_unique<Game::Components::Text>("Karma Future", link)));
+                _links.push_back(std::make_tuple(name, link, std::make_unique<Game::Components::Text>("Karma Future", Traductor::get()->translate(link))));
             }
 
             void Menu::_setPositionsLinks()
             {
-                for (int i = 0; i < (int)_links.size(); i++)
-                    _links[i].second->setPosition({_linkSpacing, (int)(_linkGap * i + _linkSpacing)});
+                int h = _linkSpacing;
+                for (auto &link : _links) {
+                    std::get<2>(link)->setPosition({(float)_linkSpacing, (float)h});
+                    h += _linkGap + std::get<2>(link)->getSize().y;
+                }
             }
 
             int Menu::_getIndexLink(std::string name)
             {
                 for (int i = 0; i < (int)_links.size(); i++)
-                    if (_links[i].first == name)
+                    if (std::get<0>(_links[i]) == name)
                         return i;
                 return 0;
             }
@@ -91,7 +105,7 @@ namespace RType
 
             void Menu::_setSelectArrowPosition()
             {
-                _selectArrow->setPosition({(float)_linkSpacing / 2, (float)_links[_selectIndex].second->getPosition().y + _links[_selectIndex].second->getSize().y / 2});
+                _selectArrow->setPosition({(float)_linkSpacing / 2, (float)std::get<2>(_links[_selectIndex])->getPosition().y + std::get<2>(_links[_selectIndex])->getSize().y / 2});
             }
         } // namespace Scenes
     } // namespace Game

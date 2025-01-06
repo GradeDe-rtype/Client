@@ -121,6 +121,12 @@ namespace gd
         _window.draw(*sh);
     }
 
+    void Window::draw(gd::RectangleShape &shape)
+    {
+        sf::RectangleShape *sh = (sf::RectangleShape *)shape.getShape();
+        _window.draw(*sh);
+    }
+
     void Window::draw(std::vector<gd::Vertex> &vertices, gd::PrimitiveType primitiveType)
     {
         sf::VertexArray va;
@@ -145,17 +151,22 @@ namespace gd
     void Window::_create(sf::VideoMode &videoMode, const std::string &title, sf::Uint32 style)
     {
         _window.create(videoMode, title, style);
+        _view.setSize(800, 600);
+        _view.setCenter(400, 300);
+        _window.setView(_view);
         _isOpen = true;
     }
 
     int Window::getWidth() const
     {
-        return _fullscreen ? (int)_fullScreenVideoMode.width : (int)_videoMode.width;
+        // return _fullscreen ? (int)_fullScreenVideoMode.width : (int)_videoMode.width;
+        return _view.getSize().x;
     }
 
     int Window::getHeight() const
     {
-        return _fullscreen ? (int)_fullScreenVideoMode.height : (int)_videoMode.height;
+        // return _fullscreen ? (int)_fullScreenVideoMode.height : (int)_videoMode.height;
+        return _view.getSize().y;
     }
 
     gd::Vector2<int> Window::getDimensions() const

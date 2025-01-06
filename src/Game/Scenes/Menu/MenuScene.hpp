@@ -12,7 +12,7 @@
 /*  ---- INCLUDES ---- */
 #include <memory>
 #include <string>
-#include <utility>
+#include <tuple>
 #include <vector>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
@@ -22,6 +22,10 @@
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
+#include "Traductor.hpp"
+
+#include "GradeDe/RectangleShape.hpp"
+#include "Game/Components/TextBox/TextBox.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -39,6 +43,8 @@ namespace RType
                      * @param `window` The window
                      */
                     void load(gd::Window &window) override;
+
+                    void reload(gd::Window &window) override;
 
                     /**
                      * @brief Update the scene
@@ -61,10 +67,10 @@ namespace RType
                     void update(gd::Window &window) override;
 
                 private:
-                    std::vector<std::pair<std::string, std::unique_ptr<RType::Game::Components::Text>>> _links;
+                    std::vector<std::tuple<std::string, std::string, std::unique_ptr<RType::Game::Components::Text>>> _links;
                     std::unique_ptr<RType::Game::Entity::SelectArrow> _selectArrow;
                     bool _connected = false;
-                    int _linkGap = 75;
+                    int _linkGap = 25;
                     int _linkSpacing = 50;
                     int _selectIndex = 1;
                     gd::Time _input;

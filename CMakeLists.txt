@@ -13,6 +13,7 @@ set(RTYPE_LIBRARIES
     gradeDe
     papaya
     rfcArgParser
+    traductor
 )
 
 foreach(LIB ${RTYPE_LIBRARIES})
@@ -21,6 +22,10 @@ endforeach()
 
 #  ---- SOURCES ---- #
 file(GLOB_RECURSE SOURCES
+    "src/**/**/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/**/*.cpp"
+    "src/**/**/**/**/*.cpp"
     "src/**/**/**/*.cpp"
     "src/**/**/*.cpp"
     "src/**/*.cpp"

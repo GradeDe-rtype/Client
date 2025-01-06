@@ -21,6 +21,7 @@
 #include "Game/Scenes/Base/IScene.hpp"
 #include "Game/Scenes/Game/GameScene.hpp"
 #include "Game/Scenes/Menu/MenuScene.hpp"
+#include "Game/Scenes/Settings/SettingsScene.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -32,24 +33,29 @@ namespace RType
             class Scenes
             {
                 public:
-                    Scenes(gd::Window &window);
+                    static Scenes &get();
                     ~Scenes() = default;
 
+                    void load(gd::Window &window);
+                    void reload(gd::Window &window);
                     void changeScene(const std::string &name);
                     std::shared_ptr<RType::Game::Scenes::IScene> getScene();
                     void update();
                     void draw(gd::Window &window);
                     bool isTransitioning() const;
                     std::string getCurrentSceneName() const;
+                    void needToReload();
 
                 private:
+                    Scenes() = default;
+
                     typedef enum {
                         FADE_IN,
                         FADE_OUT,
                         NOTHING,
                     } TransitionState;
 
-                    int _transitionFrame = 20;
+                    int _transitionFrame = 40;
                     int _transitionSpeed = 255 / _transitionFrame;
                     int _backupVolume = 100;
                     int _volumeTransition = 100 / _transitionFrame;
@@ -61,7 +67,7 @@ namespace RType
                     std::unordered_map<std::string, std::shared_ptr<RType::Game::Scenes::IScene>> _scenes = {};
                     gd::Shape _transitionShape;
                     gd::Color _transitionColor = gd::Color::Transparent;
-                    std::unique_ptr<RType::Game::Managers::Music> _musicManager = nullptr;
+                    bool _needReload = false;
 
                     void _addScene(const std::string &name, std::shared_ptr<RType::Game::Scenes::IScene> scene, gd::Window &window);
             };

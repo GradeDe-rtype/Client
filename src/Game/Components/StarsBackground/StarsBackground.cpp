@@ -33,8 +33,9 @@ namespace RType
                 _shape.setPosition(_position);
             }
 
-            void StarsBackground::Star::update()
+            void StarsBackground::Star::update(gd::Window &window)
             {
+                (void)window;
                 _shape.move({(float)(-_speed), 0});
             }
 
@@ -46,11 +47,6 @@ namespace RType
             void StarsBackground::Star::draw(gd::Window &window)
             {
                 window.draw(_shape);
-            }
-
-            gd::Vector2<float> StarsBackground::Star::getPosition() const
-            {
-                return _position;
             }
 
             StarsBackground::StarsBackground(gd::Window &window)
@@ -65,7 +61,7 @@ namespace RType
             {
                 if (_updateClock.getElapsedTime() > 1000 / 24) {
                     for (auto &star : _stars) {
-                        star.update();
+                        star.update(window);
                         if (star.getPosition().x < 0)
                             _stars.erase(_stars.begin());
                     }

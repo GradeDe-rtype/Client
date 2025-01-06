@@ -35,6 +35,7 @@ namespace RType
                      * @param `window` The window
                      */
                     virtual void load(gd::Window &window) = 0;
+                    virtual void reload(gd::Window &window) = 0;
 
                     /**
                      * @brief Unload the scene

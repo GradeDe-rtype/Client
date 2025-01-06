@@ -16,25 +16,25 @@ namespace RType
     {
         namespace Utils
         {
-            std::vector<std::string> split(const std::string &str, const std::string &delim)
+            std::vector<std::string> split(const std::string &str, const std::string &delimList)
             {
                 if (str.empty())
                     return {};
-                if (str.find(delim) == std::string::npos)
+                if (str.find_first_of(delimList) == std::string::npos)
                     return {str};
 
                 std::vector<std::string> tokens;
                 std::size_t start = 0;
 
                 while (true) {
-                    std::size_t end = str.find(delim, start);
+                    std::size_t end = str.find_first_of(delimList, start);
                     if (end == std::string::npos) {
                         tokens.push_back(str.substr(start));
                         break;
                     }
                     tokens.push_back(str.substr(start, end - start));
-                    start = end + delim.size();
-                    while (delim.find(str[start]) != std::string::npos && start < str.size())
+                    start = end + 1;
+                    while (delimList.find(str[start]) != std::string::npos && start < str.size())
                         start++;
                 }
                 return tokens;
