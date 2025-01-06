@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
+#include "Game/Components/Range/Range.hpp"
 #include "Game/Entity/Base/AEntity.hpp"
 
 /*  ---- CLASS ---- */
@@ -27,7 +28,8 @@ namespace RType
                 public:
                     Player(int id, std::string color = "#FFFFFF", float x = 0, float y = 0, int health = 100);
 
-                    void update();
+                    void update() override;
+                    void draw(gd::Window &window) override;
 
                     void setColor(std::string color) override;
                     void setColor(gd::Color color) override;
@@ -37,9 +39,11 @@ namespace RType
                     void setShootCooldown(int cooldown);
                     void die();
                     void respawn();
+                    void showHealthBar(bool show);
 
                     bool hasMoved();
                     int getShootCooldown();
+                    int getShootMaxCooldown();
 
                 private:
                     gd::Vector2<int> _goto = {-1, -1};
@@ -48,6 +52,8 @@ namespace RType
                     gd::Time _shootTimer;
                     int _shootCooldown = 800;
                     gd::Time _rotationReset;
+                    std::unique_ptr<Game::Components::Range> _healthBar;
+                    bool _showHealthBar = false;
             };
         } // namespace Entity
     } // namespace Game

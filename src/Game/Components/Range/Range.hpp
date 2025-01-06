@@ -39,6 +39,7 @@ namespace RType
                     void setValue(float value);
                     void setColor(gd::Color color);
                     void setPosition(gd::Vector2<float> position) override;
+                    void setEnd(int end);
 
                     float getValue() const;
                     gd::Vector2<float> getSize() const;

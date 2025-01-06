@@ -96,6 +96,12 @@ namespace RType
             {
                 return _background.getSize();
             }
+
+            void Range::setEnd(int end)
+            {
+                _end = end;
+                setValue(_value);
+            }
         } // namespace Components
     } // namespace Game
 } // namespace RType

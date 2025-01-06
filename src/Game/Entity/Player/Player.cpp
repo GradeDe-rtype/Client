@@ -38,6 +38,16 @@ namespace RType
                 _shootTimer.reset();
                 _rotationReset.reset();
                 _moveClock.reset();
+
+                _healthBar = std::make_unique<Game::Components::Range>(0, _health, 1, gd::Vector2<float>(0, 0), gd::Vector2<float>(_size * 1.5, 10));
+                _healthBar->setValue(_health);
+                _healthBar->setColor(gd::Color::fromHex("#900028"));
+            }
+
+            void Player::draw(gd::Window &window)
+            {
+                window.draw(_shape);
+                if (_showHealthBar) _healthBar->draw(window);
             }
 
             void Player::setColor(std::string color)
@@ -56,6 +66,7 @@ namespace RType
                 if (_position.x == x && _position.y == y) return;
                 _position = {x, y};
                 _shape.setPosition(_position);
+                _healthBar->setPosition(gd::Vector2<float>(_position.x - _healthBar->getSize().x / 2, _position.y + _size));
                 _moved = true;
             }
 
@@ -105,6 +116,11 @@ namespace RType
                 return _shootCooldown - _shootTimer.getElapsedTime();
             }
 
+            int Player::getShootMaxCooldown()
+            {
+                return _shootCooldown;
+            }
+
             void Player::update()
             {
                 if (_moveClock.getElapsedTime() >= 1000 / 24) {
@@ -135,6 +151,11 @@ namespace RType
                     }
                     _moveClock.reset();
                 }
+            }
+
+            void Player::showHealthBar(bool show)
+            {
+                _showHealthBar = show;
             }
         } // namespace Entity
     } // namespace Game

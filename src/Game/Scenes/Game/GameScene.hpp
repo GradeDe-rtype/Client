@@ -16,6 +16,7 @@
 #include "GradeDe/Sound.hpp"
 #include "GradeDe/Window.hpp"
 #include "Game/Components/EndIndicator/EndIndicator.hpp"
+#include "Game/Components/Range/Range.hpp"
 #include "Game/Components/WaveIndicators/WaveIndicators.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
@@ -47,6 +48,8 @@ namespace RType
                      */
                     void load(gd::Window &window) override;
 
+                    void enter() override;
+
                     void reload(gd::Window &window) override;
 
                     /**
@@ -72,6 +75,8 @@ namespace RType
                 private:
                     std::unique_ptr<RType::Game::Components::WaveIndicators> _waveIndicators;
                     std::unique_ptr<RType::Game::Components::EndIndicator> _endIndicator;
+                    std::unique_ptr<RType::Game::Components::Range> _health;
+                    std::unique_ptr<RType::Game::Components::Range> _shotCooldown;
             };
         } // namespace Scenes
     } // namespace Game
