@@ -54,15 +54,14 @@ namespace RType
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) position.y += RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed && position.x >= size.x / 2) position.x -= RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed && position.x <= window.getWidth() - size.x) position.x += RType::Ressources::get()->me->getSpeed();
-                for (auto &player : RType::Ressources::get()->players)
-                    player.second->showHealthBar(event.keyBoard().getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed);
+                _showHealthBar = event.keyBoard().getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed;
                 if (event.joyStick().isConnected()) {
                     if (event.joyStick().getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                     if (event.joyStick().isJoyStickMoved()) {
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LX)) position.x += RType::Ressources::get()->me->getSpeed() * event.joyStick().getAxisPosition(gd::JoyStick::Axis::LX) / 100;
                         if (event.joyStick().isJoyStickMoved(gd::JoyStick::Axis::LY)) position.y += RType::Ressources::get()->me->getSpeed() * event.joyStick().getAxisPosition(gd::JoyStick::Axis::LY) / 100;
                     }
-                    if (event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) {
+                    if (event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Pressed) {
                         if (RType::Ressources::get()->me->getShootCooldown() == 0) {
                             RType::Ressources::get()->me->shoot();
                             int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->getSize().x / 2;
@@ -74,6 +73,7 @@ namespace RType
                             RType::Ressources::get()->sendList->push("shoot " + rfcArgParser::CreateObject(tmp));
                         }
                     }
+                    if (event.joyStick().getButtonState(gd::JoyStick::Button::B) == gd::JoyStick::State::Pressed) _showHealthBar = true;
                 }
                 RType::Ressources::get()->me->setGoto(position.x, position.y);
                 return "";
@@ -116,6 +116,8 @@ namespace RType
                         i--;
                     }
                 }
+                for (auto &player : RType::Ressources::get()->players)
+                    player.second->showHealthBar(_showHealthBar);
             }
         } // namespace Scenes
     } // namespace Game

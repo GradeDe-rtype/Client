@@ -77,6 +77,7 @@ namespace RType
                     std::unique_ptr<RType::Game::Components::EndIndicator> _endIndicator;
                     std::unique_ptr<RType::Game::Components::Range> _health;
                     std::unique_ptr<RType::Game::Components::Range> _shotCooldown;
+                    bool _showHealthBar = false;
             };
         } // namespace Scenes
     } // namespace Game
