@@ -12,6 +12,7 @@
 
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
+#include "GradeDe/Event.hpp"
 #include "Game/Components/Base/IComponent.hpp"
 
 namespace RType

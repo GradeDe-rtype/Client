@@ -66,16 +66,31 @@ namespace RType
                         _selected = _langs.size();
                     }
 
-                    bool LanguagesMiniScene::handleEvent(gd::Event &event)
+                    bool LanguagesMiniScene::handleEvent(gd::Window &window, gd::Event &event)
                     {
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelected(1);
-                        if (event.joyStick().isConnected()) {
-                            if (event.joyStick().getYAxisPosition(false) < -50) _moveSelected(-1);
-                            if (event.joyStick().getYAxisPosition(true) > 50) _moveSelected(1);
+                        gd::Vector2<float> mouse = event.mouse.getPosition(window);
+                        for (int i = 0; i < (int)_langs.size(); i++) {
+                            gd::Vector2<float> pos = std::get<1>(_langs[i])->getPosition();
+                            gd::Vector2<float> size = std::get<1>(_langs[i])->getSize();
+                            if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y) {
+                                if (event.mouse.hasMove(window))
+                                    _moveSelected(i - _selected);
+                                if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) _changeSelectedLang();
+                            }
                         }
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Pressed) _changeSelectedLang();
-                        if (event.joyStick().isConnected() && event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Pressed) _changeSelectedLang();
+                        if (mouse.x >= _save->getPosition().x && mouse.x <= _save->getPosition().x + _save->getSize().x && mouse.y >= _save->getPosition().y && mouse.y <= _save->getPosition().y + _save->getSize().y) {
+                            if (event.mouse.hasMove(window))
+                                _moveSelected((int)_langs.size() - _selected);
+                            if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) _saveSettings();
+                        }
+                        if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);
+                        if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelected(1);
+                        if (event.joyStick.isConnected()) {
+                            if (event.joyStick.getYAxisPosition(false) < -50) _moveSelected(-1);
+                            if (event.joyStick.getYAxisPosition(true) > 50) _moveSelected(1);
+                        }
+                        if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Pressed) _changeSelectedLang();
+                        if (event.joyStick.isConnected() && event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Pressed) _changeSelectedLang();
                         return true;
                     }
 
@@ -109,6 +124,10 @@ namespace RType
 
                     void LanguagesMiniScene::_changeSelectedLang()
                     {
+                        if (_changes == false) {
+                            _changes = true;
+                            _save->setText(Traductor::get()->translate("dico.save"));
+                        }
                         if (_selected == (int)_langs.size()) {
                             _saveSettings();
                             return;
@@ -116,16 +135,15 @@ namespace RType
                         _selectedLang = std::get<1>(_langs[_selected]);
                         _selectArrow->setPosition({(float)(_selectedLang->getPosition().x - _selectArrow->getSize().x - 10), (float)(_selectedLang->getPosition().y + _selectedLang->getSize().y / 2)});
                         Traductor::get()->setLang(std::get<0>(_langs[_selected]));
-                        if (_changes == false) {
-                            _changes = true;
-                            _save->setText(Traductor::get()->translate("dico.save"));
-                        }
                         RType::Game::Managers::Scenes::get().needToReload();
                     }
 
                     void LanguagesMiniScene::_saveSettings()
                     {
-                        if (_changes == false) return;
+                        if (_changes == false) {
+                            _changeScene = true;
+                            return;
+                        }
                         _changes = false;
                         _save->setText(Traductor::get()->translate("dico.back"));
 

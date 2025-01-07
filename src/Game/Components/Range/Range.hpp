@@ -37,6 +37,7 @@ namespace RType
                     void downValue();
 
                     void setValue(float value);
+                    void setValuePercentage(float percentage);
                     void setColor(gd::Color color);
                     void setPosition(gd::Vector2<float> position) override;
                     void setEnd(int end);
@@ -52,6 +53,8 @@ namespace RType
                     int _end;
                     int _step;
                     float _value;
+
+                    void _setValueWithStep();
             };
         } // namespace Components
     } // namespace Game

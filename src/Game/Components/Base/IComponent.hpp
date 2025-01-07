@@ -13,6 +13,7 @@
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
+#include "GradeDe/Event.hpp"
 
 namespace RType
 {

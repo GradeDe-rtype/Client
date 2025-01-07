@@ -37,9 +37,10 @@ namespace RType
                         ~AMiniScene() override = default;
                         void load(gd::Vector2<float> coord, gd::Vector2<float> window) override;
                         void reload(gd::Vector2<float> coord, gd::Vector2<float> window) override;
-                        bool handleEvent(gd::Event &event) override;
+                        bool handleEvent(gd::Window &window, gd::Event &event) override;
                         void draw(gd::Window &window) override;
                         void loadSections(gd::Vector2<float> window) override;
+                        bool changeScene() override;
 
                     protected:
                         gd::Vector2<float> _window;
@@ -51,8 +52,8 @@ namespace RType
                         gd::Time _input;
                         int _selected = 0;
                         bool _changes = false;
+                        bool _changeScene = false;
 
-                        void _changeRangeValue(int value);
                         void _moveSelected(int value);
                         void _saveSettings();
                 };

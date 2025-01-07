@@ -29,9 +29,10 @@ namespace RType
                         virtual ~IMiniScene() = default;
                         virtual void load(gd::Vector2<float> coord, gd::Vector2<float> window) = 0;
                         virtual void reload(gd::Vector2<float> coord, gd::Vector2<float> window) = 0;
-                        virtual bool handleEvent(gd::Event &event) = 0;
+                        virtual bool handleEvent(gd::Window &window, gd::Event &event) = 0;
                         virtual void draw(gd::Window &window) = 0;
                         virtual void loadSections(gd::Vector2<float> window) = 0;
+                        virtual bool changeScene() = 0;
                 };
             }; // namespace MiniScene
         } // namespace Scenes
