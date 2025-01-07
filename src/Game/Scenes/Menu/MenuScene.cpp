@@ -29,14 +29,28 @@ namespace RType
 
             std::string Menu::handleEvent(gd::Window &window, gd::Event &event)
             {
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectArrow(-1);
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectArrow(1);
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return std::get<0>(_links[_selectIndex]);
-                if (event.joyStick().isConnected()) {
-                    if (event.joyStick().getYAxisPosition(false) < -50) _moveSelectArrow(-1);
-                    if (event.joyStick().getYAxisPosition(true) > 50) _moveSelectArrow(1);
-                    if (event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return std::get<0>(_links[_selectIndex]);
+                gd::Vector2<float> mouse = event.mouse.getPosition(window);
+                for (auto &link : _links) {
+                    gd::Vector2<float> pos = std::get<2>(link)->getPosition();
+                    gd::Vector2<float> size = std::get<2>(link)->getSize();
+                    if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y) {
+                        if (event.mouse.hasMove(window)) {
+                            _selectIndex = _getIndexLink(std::get<0>(link));
+                            if (_selectIndex == 0 && !RType::Ressources::get()->isConnected)
+                                _selectIndex = 1;
+                            _setSelectArrowPosition();
+                        }
+                        if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return std::get<0>(_links[_selectIndex]);
+                    }
+                }
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectArrow(-1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectArrow(1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return std::get<0>(_links[_selectIndex]);
+                if (event.joyStick.isConnected()) {
+                    if (event.joyStick.getYAxisPosition(false) < -50) _moveSelectArrow(-1);
+                    if (event.joyStick.getYAxisPosition(true) > 50) _moveSelectArrow(1);
+                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return std::get<0>(_links[_selectIndex]);
                 }
                 return "";
             }
