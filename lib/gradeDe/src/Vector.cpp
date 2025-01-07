@@ -79,6 +79,18 @@ namespace gd
         return *this;
     }
 
+    template <typename T>
+    bool Vector2<T>::operator==(const Vector2<T> &vector)
+    {
+        return x == vector.x && y == vector.y;
+    }
+
+    template <typename T>
+    bool Vector2<T>::operator!=(const Vector2<T> &vector)
+    {
+        return x != vector.x || y != vector.y;
+    }
+
     template class Vector2<int>;
     template class Vector2<float>;
     template class Vector2<double>;
