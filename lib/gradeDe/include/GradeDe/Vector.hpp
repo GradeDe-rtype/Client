@@ -86,6 +86,16 @@ namespace gd
             Vector2<T> &operator/=(const Vector2<T> &vector);
 
             /**
+             * \brief Overload of the == operator.
+             */
+            bool operator==(const Vector2<T> &vector);
+
+            /**
+             * \brief Overload of the != operator.
+             */
+            bool operator!=(const Vector2<T> &vector);
+
+            /**
              * \brief The x value of the vector.
              */
             T x;

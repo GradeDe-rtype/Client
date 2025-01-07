@@ -50,25 +50,35 @@ namespace RType
                     _save->setPosition({(float)(coord.x + _innerPadding), (float)(window.y - _save->getSize().y - _innerPadding)});
                 }
 
-                bool AMiniScene::handleEvent(gd::Event &event)
+                bool AMiniScene::handleEvent(gd::Window &window, gd::Event &event)
                 {
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelected(1);
-                    if (event.joyStick().isConnected()) {
-                        if (event.joyStick().getYAxisPosition(false) < -50) _moveSelected(-1);
-                        if (event.joyStick().getYAxisPosition(true) > 50) _moveSelected(1);
+                    gd::Vector2<float> mouse = event.mouse.getPosition(window);
+                    for (int i = 0; i < (int)_sections.size(); i++) {
+                        gd::Vector2<float> pos = _sections[i]->getPosition();
+                        gd::Vector2<float> size = _sections[i]->getSize();
+                        if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y)
+                            _moveSelected(i - _selected);
+                    }
+                    if (mouse.x >= _save->getPosition().x && mouse.x <= _save->getPosition().x + _save->getSize().x && mouse.y >= _save->getPosition().y && mouse.y <= _save->getPosition().y + _save->getSize().y) {
+                        _moveSelected((int)_sections.size() - _selected);
+                        if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) _saveSettings();
+                    }
+
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelected(-1);
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelected(1);
+                    if (event.joyStick.isConnected()) {
+                        if (event.joyStick.getYAxisPosition(false) < -50) _moveSelected(-1);
+                        if (event.joyStick.getYAxisPosition(true) > 50) _moveSelected(1);
                     }
                     if (_selected < (int)_sections.size()) {
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _changeRangeValue(-1);
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _changeRangeValue(1);
-                        if (event.joyStick().isConnected()) {
-                            if (event.joyStick().getXAxisPosition(false) < -50) _changeRangeValue(-1);
-                            if (event.joyStick().getXAxisPosition(true) > 50) _changeRangeValue(1);
+                        if (_sections[_selected]->handleEvt(window, event) && _changes == false) {
+                            _changes = true;
+                            _save->setText(Traductor::get()->translate("dico.save"));
                         }
                         return false;
                     } else {
-                        if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) _saveSettings();
-                        if (event.joyStick().isConnected() && event.joyStick().getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) _saveSettings();
+                        if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) _saveSettings();
+                        if (event.joyStick.isConnected() && event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) _saveSettings();
                     }
                     return true;
                 }
@@ -85,22 +95,11 @@ namespace RType
                     (void)window;
                 }
 
-                void AMiniScene::_changeRangeValue(int value)
+                bool AMiniScene::changeScene()
                 {
-                    if (_input.getElapsedTime() < 100) return;
-                    _input.reset();
-                    if (value < 0)
-                        _sections[_selected]->range()->downValue();
-                    else
-                        _sections[_selected]->range()->upValue();
-
-                    _sections[_selected]->setTextValue();
-                    _sections[_selected]->setSettingValue();
-                    RType::Game::Managers::Scenes::get().needToReload();
-                    if (_changes == false) {
-                        _changes = true;
-                        _save->setText(Traductor::get()->translate("dico.save"));
-                    }
+                    bool tmp = _changeScene;
+                    _changeScene = false;
+                    return tmp;
                 }
 
                 void AMiniScene::_moveSelected(int value)
@@ -122,7 +121,12 @@ namespace RType
 
                 void AMiniScene::_saveSettings()
                 {
-                    if (_changes == false) return;
+                    if (_input.getElapsedTime() < 200) return;
+                    _input.reset();
+                    if (_changes == false) {
+                        _changeScene = true;
+                        return;
+                    }
                     _changes = false;
                     _save->setText(Traductor::get()->translate("dico.back"));
 

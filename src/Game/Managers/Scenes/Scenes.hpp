@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
 #include "Game/Managers/Music/Music.hpp"
@@ -55,10 +56,12 @@ namespace RType
                         NOTHING,
                     } TransitionState;
 
+                    int _transitionDuration = 800;
                     int _transitionFrame = 40;
                     int _transitionSpeed = 255 / _transitionFrame;
                     int _backupVolume = 100;
                     int _volumeTransition = 100 / _transitionFrame;
+                    gd::Time _timer;
                     std::shared_ptr<RType::Game::Scenes::IScene> _currentScene = nullptr;
                     std::string _nextScene = "";
                     std::string _currentSceneName = "";

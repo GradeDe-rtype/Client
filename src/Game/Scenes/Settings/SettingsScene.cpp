@@ -75,26 +75,41 @@ namespace RType
 
             std::string Settings::handleEvent(gd::Window &window, gd::Event &event)
             {
+                gd::Vector2<float> mouse = event.mouse.getPosition(window);
+                for (int i = 0; i < (int)_rectangles.size(); i++) {
+                    gd::Vector2<float> pos = _rectangles[i].getPosition();
+                    gd::Vector2<float> size = _rectangles[i].getSize();
+                    if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y && event.mouse.hasMove(window))
+                        _moveSelectedColumn(i - _columnIndex);
+                }
+
                 if (_columnIndex == 0) {
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectArrow(-1);
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectArrow(1);
-                }
-                if (_columnIndex == 0 || std::get<2>(_links[_selectIndex])->handleEvent(event)) {
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _moveSelectedColumn(-1);
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _moveSelectedColumn(1);
-                }
-                if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
-                if (event.joyStick().isConnected()) {
-                    if (_columnIndex == 0) {
-                        if (event.joyStick().getYAxisPosition(false) < -50) _moveSelectArrow(-1);
-                        if (event.joyStick().getYAxisPosition(true) > 50) _moveSelectArrow(1);
+                    if (event.joyStick.isConnected()) {
+                        if (event.joyStick.getYAxisPosition(false) < -50) _moveSelectArrow(-1);
+                        if (event.joyStick.getYAxisPosition(true) > 50) _moveSelectArrow(1);
                     }
-                    if (_columnIndex == 0 || std::get<2>(_links[_selectIndex])->handleEvent(event)) {
-                        if (event.joyStick().getXAxisPosition(false) < -50) _moveSelectedColumn(-1);
-                        if (event.joyStick().getXAxisPosition(true) > 50) _moveSelectedColumn(1);
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectArrow(-1);
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectArrow(1);
+                    for (int i = 0; i < (int)_links.size(); i++) {
+                        gd::Vector2<float> pos = std::get<1>(_links[i])->getPosition();
+                        gd::Vector2<float> size = std::get<1>(_links[i])->getSize();
+                        if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y && event.mouse.hasMove(window)) {
+                            _selectIndex = i;
+                            _selectArrow->setPosition({(float)_linkSpacing, (float)(std::get<1>(_links[_selectIndex])->getPosition().y + std::get<1>(_links[_selectIndex])->getSize().y / 2)});
+                        }
                     }
-                    if (event.joyStick().getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                 }
+                if (_columnIndex == 0 || std::get<2>(_links[_selectIndex])->handleEvent(window, event)) {
+                    if (event.joyStick.isConnected()) {
+                        if (event.joyStick.getXAxisPosition(false) < -50) _moveSelectedColumn(-1);
+                        if (event.joyStick.getXAxisPosition(true) > 50) _moveSelectedColumn(1);
+                    }
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _moveSelectedColumn(-1);
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _moveSelectedColumn(1);
+                }
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
+                if (std::get<2>(_links[_selectIndex])->changeScene()) return "menu";
+                if (event.joyStick.isConnected() && event.joyStick.getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                 return "";
             }
 

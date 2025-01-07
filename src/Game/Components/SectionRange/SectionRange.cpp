@@ -38,6 +38,39 @@ namespace RType
                 _range->draw(window);
             }
 
+            bool SectionRange::handleEvt(gd::Window &window, gd::Event &event)
+            {
+                if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Pressed) {
+                    gd::Vector2<float> mouse = event.mouse.getPosition(window);
+                    if (mouse.x >= _range->getPosition().x && mouse.x <= _range->getPosition().x + _range->getSize().x && mouse.y >= _range->getPosition().y && mouse.y <= _range->getPosition().y + _range->getSize().y) {
+                        _range->setValuePercentage((mouse.x - _range->getPosition().x) / _range->getSize().x);
+                        setTextValue();
+                        setSettingValue();
+                        RType::Game::Managers::Scenes::get().needToReload();
+                        return true;
+                    }
+                }
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) {
+                    _changeRangeValue(-1);
+                    return true;
+                }
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) {
+                    _changeRangeValue(1);
+                    return true;
+                }
+                if (event.joyStick.isConnected()) {
+                    if (event.joyStick.getXAxisPosition(false) < -50) {
+                        _changeRangeValue(-1);
+                        return true;
+                    }
+                    if (event.joyStick.getXAxisPosition(true) > 50) {
+                        _changeRangeValue(1);
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             void SectionRange::setPosition(gd::Vector2<float> position)
             {
                 _position = position;
@@ -45,9 +78,21 @@ namespace RType
                 _range->setPosition(gd::Vector2<float>((float)(_position.x), (float)(_text->getPosition().y + _text->getSize().y + 20)));
             }
 
+            gd::Vector2<float> SectionRange::getSize() const
+            {
+                return {getSizeX(), getSizeY()};
+            }
+
             float SectionRange::getSizeY() const
             {
                 return _text->getSize().y + 10 + _range->getSize().y;
+            }
+
+            float SectionRange::getSizeX() const
+            {
+                float textX = _text->getSize().x;
+                float rangeX = _range->getSize().x;
+                return (textX > rangeX) ? textX : rangeX;
             }
 
             std::shared_ptr<RType::Game::Components::Range> SectionRange::range()
@@ -85,6 +130,20 @@ namespace RType
             std::string SectionRange::saveValue() const
             {
                 return std::to_string((int)getValue());
+            }
+
+            void SectionRange::_changeRangeValue(int value)
+            {
+                if (_input.getElapsedTime() < 100) return;
+                _input.reset();
+                if (value < 0)
+                    _range->downValue();
+                else
+                    _range->upValue();
+
+                setTextValue();
+                setSettingValue();
+                RType::Game::Managers::Scenes::get().needToReload();
             }
         } // namespace Components
     } // namespace Game

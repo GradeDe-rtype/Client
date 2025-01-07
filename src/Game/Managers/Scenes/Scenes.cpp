@@ -35,6 +35,7 @@ namespace RType
                 _currentScene = _scenes["menu"];
                 RType::Game::Managers::Music::get().setMusic("menu");
                 _currentScene->enter();
+                _timer.reset();
             }
 
             void Scenes::reload(gd::Window &window)
@@ -61,6 +62,8 @@ namespace RType
 
             void Scenes::update()
             {
+                if (_timer.getElapsedTime() <= _transitionDuration / _transitionFrame) return;
+                _timer.reset();
                 if (_transitionState == FADE_IN) {
                     _transitionOpacity += _transitionSpeed;
                     RType::Game::Managers::Music::get().modifyVolume(-_volumeTransition);

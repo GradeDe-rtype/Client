@@ -76,8 +76,14 @@ namespace RType
                     _value = _end;
                 else
                     _value = value;
+                _setValueWithStep();
 
                 _range.setSizeX((_size.x - 4) * (_value - _start) / (_end - _start));
+            }
+
+            void Range::setValuePercentage(float percentage)
+            {
+                setValue(_start + ((_end - _start) * percentage));
             }
 
             float Range::getValue() const
@@ -101,6 +107,25 @@ namespace RType
             {
                 _end = end;
                 setValue(_value);
+            }
+
+            void Range::_setValueWithStep()
+            {
+                float backUp = _value;
+                float sectionStart = 0;
+                float sectionEnd = 0;
+
+                for (int i = _start; i <= _end; i += _step) {
+                    if (_value >= i && _value < i + _step) {
+                        sectionStart = i;
+                        sectionEnd = i + _step;
+                        break;
+                    }
+                }
+                if (_value - sectionStart < sectionEnd - _value)
+                    _value = sectionStart;
+                else
+                    _value = sectionEnd;
             }
         } // namespace Components
     } // namespace Game

@@ -49,20 +49,9 @@ namespace gd
              */
             bool close() const;
 
-            /**
-             * \brief Get the joystick informations.
-             */
-            gd::JoyStick joyStick() const;
-
-            /**
-             * \brief Get the keyboard informations.
-             */
-            gd::KeyBoard keyBoard() const;
-
-            /**
-             * \brief Get the mouse informations.
-             */
-            gd::Mouse mouse() const;
+            gd::JoyStick joyStick = gd::JoyStick(0);
+            gd::KeyBoard keyBoard;
+            gd::Mouse mouse;
 
         private:
             /**
@@ -76,18 +65,6 @@ namespace gd
              * \note The default value is false.
              */
             bool _close = false;
-
-            gd::JoyStick _joyStick = gd::JoyStick(0);
-
-            /**
-             * \brief The keyboard informations.
-             */
-            gd::KeyBoard _keyBoard;
-
-            /**
-             * \brief The mouse informations.
-             */
-            gd::Mouse _mouse;
     };
 } // namespace gd
 
