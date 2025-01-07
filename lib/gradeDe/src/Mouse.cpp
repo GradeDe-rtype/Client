@@ -35,9 +35,20 @@ namespace gd
         return std::get<0>(_buttons.at(button));
     }
 
-    gd::Vector2<int> Mouse::getPosition(gd::Window &window) const
+    gd::Vector2<float> Mouse::getPosition(gd::Window &window)
     {
         sf::RenderWindow *sfmlWindow = (sf::RenderWindow *)window.getWindow();
-        return gd::Vector2<int>(sf::Mouse::getPosition(*sfmlWindow).x, sf::Mouse::getPosition(*sfmlWindow).y);
+        sf::Vector2i pos = sf::Mouse::getPosition(*sfmlWindow);
+        sf::Vector2f coord = sfmlWindow->mapPixelToCoords(pos);
+        _position = gd::Vector2<float>(coord.x, coord.y);
+        std::cout << std::endl;
+        return _position;
+    }
+
+    bool Mouse::hasMove(gd::Window &window)
+    {
+        gd::Vector2<float> oldPos = _position;
+        gd::Vector2<float> newPos = getPosition(window);
+        return oldPos != newPos;
     }
 } // namespace gd

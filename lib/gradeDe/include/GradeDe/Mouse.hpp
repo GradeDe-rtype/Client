@@ -111,10 +111,13 @@ namespace gd
              *
              * \return The position of the mouse relative to the window.
              */
-            gd::Vector2<int> getPosition(gd::Window &window) const;
+            gd::Vector2<float> getPosition(gd::Window &window);
+
+            bool hasMove(gd::Window &window);
 
         private:
             std::unordered_map<Button, std::tuple<State, gd::Time>> _buttons;
+            gd::Vector2<float> _position = {0, 0};
     };
 } // namespace gd
 
