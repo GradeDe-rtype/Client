@@ -15,9 +15,9 @@
 #include <unordered_map>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Shape.hpp"
+#include "GradeDe/Time.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
-#include "GradeDe/Time.hpp"
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/IScene.hpp"
 #include "Game/Scenes/Game/GameScene.hpp"

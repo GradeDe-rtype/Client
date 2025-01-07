@@ -10,9 +10,9 @@
 #ifndef RTYPE_GAME_COMPONENT_ABSTRACT_HPP_
 #define RTYPE_GAME_COMPONENT_ABSTRACT_HPP_
 
+#include "GradeDe/Event.hpp"
 #include "GradeDe/Vector.hpp"
 #include "GradeDe/Window.hpp"
-#include "GradeDe/Event.hpp"
 #include "Game/Components/Base/IComponent.hpp"
 
 namespace RType
