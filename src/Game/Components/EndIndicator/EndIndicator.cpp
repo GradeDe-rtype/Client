@@ -34,8 +34,8 @@ namespace RType
             void EndIndicator::handleEvent(gd::Window &window, gd::Event &event)
             {
                 if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::END) {
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed ||
-                        event.joyStick().getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed ||
+                        event.joyStick.getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::GAME;
                         RType::Ressources::get()->wave = 1;
                         for (auto &player : RType::Ressources::get()->players)

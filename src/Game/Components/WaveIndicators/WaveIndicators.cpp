@@ -39,8 +39,8 @@ namespace RType
             void WaveIndicators::handleEvent(gd::Window &window, gd::Event &event)
             {
                 if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::WAVE_WAITING) {
-                    if (event.keyBoard().getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed ||
-                        event.joyStick().getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
+                    if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed ||
+                        event.joyStick.getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::WAVE_READY;
                         _currentWave = RType::Ressources::get()->wave;
                         std::string text = Traductor::get()->translate("game.wave.wave");
