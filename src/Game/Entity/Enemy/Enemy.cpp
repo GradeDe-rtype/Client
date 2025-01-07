@@ -39,6 +39,9 @@ namespace RType
                     case Type::BASIC_MONSTER:
                         _createBasicMonster();
                         break;
+                    case Type::BOSS:
+                        _createBossMonster();
+                        break;
                 }
             }
 
@@ -60,6 +63,22 @@ namespace RType
                     {static_cast<float>(_size), static_cast<float>(_size)},
                 });
             }
+
+            void Enemy::_createBossMonster()
+            {
+                _shape.create({
+                    {static_cast<float>(_size / 2), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
+                    {static_cast<float>(_size), static_cast<float>(0)},
+                    {static_cast<float>(_size), static_cast<float>(_size * 0.4)},
+                    {static_cast<float>(_size * 0.8), static_cast<float>(_size)},
+                    {static_cast<float>(_size * 0.2), static_cast<float>(_size)},
+                    {static_cast<float>(0), static_cast<float>(_size * 0.4)},
+                    {static_cast<float>(0), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
+                });
+            }
+
         } // namespace Entity
     } // namespace Game
 } // namespace RType
