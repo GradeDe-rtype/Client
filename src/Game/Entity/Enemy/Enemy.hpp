@@ -39,6 +39,7 @@ namespace RType
                     void _createMonsterShape();
                     void _createKamikazeMonster();
                     void _createBasicMonster();
+                    void _createBossMonster();
             };
         } // namespace Entity
     } // namespace Game
