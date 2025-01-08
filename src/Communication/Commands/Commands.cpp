@@ -89,7 +89,6 @@ namespace RType
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)
         {
             RType::Ressources::get()->players.erase(args[1]);
-            RType::Ressources::get()->shoots["player"].erase(args[1]);
         }
 
         void Commands::_handlePlayerColor(std::vector<std::string> args)
@@ -152,7 +151,6 @@ namespace RType
         void Commands::_handleEnemyDeath(std::vector<std::string> args)
         {
             RType::Ressources::get()->enemies.erase(args[1]);
-            RType::Ressources::get()->shoots["enemy"].erase(args[1]);
         }
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
