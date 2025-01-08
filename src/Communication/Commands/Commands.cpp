@@ -161,6 +161,8 @@ namespace RType
         void Commands::_handleShootCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
             gd::Vector2<float> pos = (obj["from"] == "player") ? RType::Ressources::get()->players[obj["related"]]->getPosition() : RType::Ressources::get()->enemies[obj["related"]]->getPosition();
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]] = std::make_shared<RType::Game::Entity::Shoot>(pos.x, pos.y, obj["from"]);
         }
@@ -169,12 +171,18 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             std::unordered_map<std::string, std::string> position = rfcArgParser::ParseObject(args[2]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stoi(position["x"]), std::stoi(position["y"]));
         }
 
         void Commands::_handleShootDeath(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]].erase(obj["id"]);
         }
 
