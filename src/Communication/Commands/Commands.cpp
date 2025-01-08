@@ -75,6 +75,7 @@ namespace RType
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots["player"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
             RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Entity::Player>(std::stoi(obj["id"]), obj["color"]);
         }
 
@@ -88,6 +89,7 @@ namespace RType
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)
         {
             RType::Ressources::get()->players.erase(args[1]);
+            RType::Ressources::get()->shoots["player"].erase(args[1]);
         }
 
         void Commands::_handlePlayerColor(std::vector<std::string> args)
@@ -131,6 +133,7 @@ namespace RType
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots["enemy"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
             RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), static_cast<RType::Game::Entity::Enemy::Type>(std::stoi(obj["type"])), std::stoi(obj["x"]), std::stoi(obj["y"]), std::stoi(obj["health"]));
         }
 
@@ -149,6 +152,7 @@ namespace RType
         void Commands::_handleEnemyDeath(std::vector<std::string> args)
         {
             RType::Ressources::get()->enemies.erase(args[1]);
+            RType::Ressources::get()->shoots["enemy"].erase(args[1]);
         }
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
@@ -167,7 +171,7 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             std::unordered_map<std::string, std::string> position = rfcArgParser::ParseObject(args[2]);
-            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stof(position["x"]), std::stof(position["y"]));
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stoi(position["x"]), std::stoi(position["y"]));
         }
 
         void Commands::_handleShootDeath(std::vector<std::string> args)
