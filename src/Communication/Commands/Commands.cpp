@@ -27,14 +27,16 @@ namespace RType
             _commands["p_position"] = &Commands::_handlePlayerPosition;
             _commands["p_damage"] = &Commands::_handlePlayerDamage;
             _commands["p_death"] = &Commands::_handlePlayerDeath;
-            _commands["p_shoot"] = &Commands::_handlePlayerShoot;
             _commands["p_info"] = &Commands::_handlePlayerInfo;
             _commands["enemy"] = &Commands::_handleEnemyCreation;
             _commands["e_position"] = &Commands::_handleEnemyPosition;
             _commands["e_damage"] = &Commands::_handleEnemyDamage;
             _commands["e_death"] = &Commands::_handleEnemyDeath;
-            _commands["e_shoot"] = &Commands::_handleEnemyShoot;
             _commands["e_info"] = &Commands::_handleEnemyInfo;
+            _commands["shoot"] = &Commands::_handleShootCreation;
+            _commands["s_position"] = &Commands::_handleShootPosition;
+            _commands["s_death"] = &Commands::_handleShootDeath;
+            _commands["s_info"] = &Commands::_handleShootInfo;
             _commands["wave"] = &Commands::_handleGameWave;
             _commands["end"] = &Commands::_handleRoomEndGame;
         }
@@ -121,12 +123,6 @@ namespace RType
             RType::Ressources::get()->players[args[1]]->die();
         }
 
-        void Commands::_handlePlayerShoot(std::vector<std::string> args)
-        {
-            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), 10));
-        }
-
         void Commands::_handlePlayerInfo(std::vector<std::string> args)
         {
             std::cerr << "\"p_info\" command not implemented yet" << std::endl;
@@ -155,15 +151,34 @@ namespace RType
             RType::Ressources::get()->enemies.erase(args[1]);
         }
 
-        void Commands::_handleEnemyShoot(std::vector<std::string> args)
-        {
-            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -9));
-        }
-
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
         {
             std::cerr << "\"e_info\" command not implemented yet" << std::endl;
+        }
+
+        void Commands::_handleShootCreation(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            gd::Vector2<float> pos = (obj["from"] == "player") ? RType::Ressources::get()->players[obj["related"]]->getPosition() : RType::Ressources::get()->enemies[obj["related"]]->getPosition();
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]] = std::make_shared<RType::Game::Entity::Shoot>(pos.x, pos.y, obj["from"]);
+        }
+
+        void Commands::_handleShootPosition(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            std::unordered_map<std::string, std::string> position = rfcArgParser::ParseObject(args[2]);
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stof(position["x"]), std::stof(position["y"]));
+        }
+
+        void Commands::_handleShootDeath(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]].erase(obj["id"]);
+        }
+
+        void Commands::_handleShootInfo(std::vector<std::string> args)
+        {
+            std::cerr << "\"s_info\" command not implemented yet" << std::endl;
         }
 
         void Commands::_handleGameWave(std::vector<std::string> args)

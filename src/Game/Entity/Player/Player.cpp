@@ -7,6 +7,7 @@
 */
 
 #include "Player.hpp"
+#include "Ressources/Ressources.hpp"
 
 namespace RType
 {
@@ -78,8 +79,9 @@ namespace RType
             void Player::shoot()
             {
                 if (!_isAlive) return;
-                if (_shootTimer.getElapsedTime() > _shootCooldown)
-                    _shootTimer.reset();
+                if (_shootTimer.getElapsedTime() < _shootCooldown) return;
+                RType::Ressources::get()->sendList->push("shoot " + getEntityPosition());
+                _shootTimer.reset();
             }
 
             void Player::setShootCooldown(int cooldown)
