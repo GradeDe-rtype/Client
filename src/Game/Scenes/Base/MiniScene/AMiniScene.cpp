@@ -60,7 +60,7 @@ namespace RType
                             _moveSelected(i - _selected);
                     }
                     if (mouse.x >= _save->getPosition().x && mouse.x <= _save->getPosition().x + _save->getSize().x && mouse.y >= _save->getPosition().y && mouse.y <= _save->getPosition().y + _save->getSize().y) {
-                        _moveSelected((int)_sections.size() - _selected);
+                        if (event.mouse.hasMove(window)) _moveSelected((int)_sections.size() - _selected);
                         if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) _saveSettings();
                     }
 

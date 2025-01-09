@@ -10,6 +10,7 @@
 #define RTYPE_GAME_COMPONENT_ENTITY_SHOOT_HPP_
 
 /*  ---- INCLUDES ---- */
+#include <string>
 #include <unordered_map>
 #include "GradeDe/Color.hpp"
 #include "GradeDe/Sound.hpp"
@@ -26,10 +27,8 @@ namespace RType
             class Shoot : public AEntity
             {
                 public:
-                    Shoot(float x = 0, float y = 0, int speed = 15);
+                    Shoot(float x = 0, float y = 0, std::string from = "player");
                     ~Shoot() = default;
-
-                    void update();
             };
         } // namespace Entity
     } // namespace Game

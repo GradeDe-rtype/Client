@@ -48,14 +48,16 @@ namespace RType
                 void _handlePlayerPosition(std::vector<std::string> args);
                 void _handlePlayerDamage(std::vector<std::string> args);
                 void _handlePlayerDeath(std::vector<std::string> args);
-                void _handlePlayerShoot(std::vector<std::string> args);
                 void _handlePlayerInfo(std::vector<std::string> args);
                 void _handleEnemyCreation(std::vector<std::string> args);
                 void _handleEnemyPosition(std::vector<std::string> args);
                 void _handleEnemyDamage(std::vector<std::string> args);
                 void _handleEnemyDeath(std::vector<std::string> args);
-                void _handleEnemyShoot(std::vector<std::string> args);
                 void _handleEnemyInfo(std::vector<std::string> args);
+                void _handleShootCreation(std::vector<std::string> args);
+                void _handleShootPosition(std::vector<std::string> args);
+                void _handleShootDeath(std::vector<std::string> args);
+                void _handleShootInfo(std::vector<std::string> args);
                 void _handleGameWave(std::vector<std::string> args);
                 void _handleRoomEndGame(std::vector<std::string> args);
         };

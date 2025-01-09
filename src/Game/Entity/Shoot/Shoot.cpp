@@ -14,10 +14,9 @@ namespace RType
     {
         namespace Entity
         {
-            Shoot::Shoot(float x, float y, int speed)
+            Shoot::Shoot(float x, float y, std::string from)
             {
                 _position = {x, y};
-                _speed = speed;
 
                 _size = 20;
                 _shape.create({
@@ -31,19 +30,10 @@ namespace RType
                 _shape.setPosition(_position);
                 _shape.setRotation(0);
                 RType::Game::Managers::Sound::get().play("blaster");
-                _moveClock.reset();
 
-                if (_speed < 0) {
+                if (from == "enemy") {
                     _shape.setRotation(180);
                     _shape.setFillColor(gd::Color::Yellow);
-                }
-            }
-
-            void Shoot::update()
-            {
-                if (_moveClock.getElapsedTime() > 1000 / 60) {
-                    _moveClock.reset();
-                    move(_speed, 0);
                 }
             }
         } // namespace Entity

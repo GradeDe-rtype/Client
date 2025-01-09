@@ -43,8 +43,8 @@ namespace RType
             std::shared_ptr<RType::Game::Entity::Player> me = nullptr;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Player>> players;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Enemy>> enemies;
+            std::unordered_map<std::string, std::unordered_map<std::string, std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>>> shoots;
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
-            std::vector<std::unique_ptr<RType::Game::Entity::Shoot>> shoots;
             int wave = 0;
             RoomState roomState = RoomState::GAME;
             bool isConnected = false;

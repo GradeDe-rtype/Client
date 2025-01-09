@@ -37,18 +37,8 @@ namespace RType
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->getSize();
 
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Pressed) {
-                    if (RType::Ressources::get()->me->getShootCooldown() == 0) {
-                        RType::Ressources::get()->me->shoot();
-                        int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->getSize().x / 2;
-                        int y = RType::Ressources::get()->me->shape().getPosition().y;
-                        RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(x, y, 8));
-                        std::unordered_map<std::string, std::string> tmp;
-                        tmp["x"] = std::to_string(x);
-                        tmp["y"] = std::to_string(y);
-                        RType::Ressources::get()->sendList->push("shoot " + rfcArgParser::CreateObject(tmp));
-                    }
-                }
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Space) == gd::KeyBoard::State::Pressed)
+                    if (RType::Ressources::get()->me->getShootCooldown() == 0) RType::Ressources::get()->me->shoot();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Released) return "menu";
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed && position.y >= size.y / 2) position.y -= RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) position.y += RType::Ressources::get()->me->getSpeed();
@@ -61,18 +51,8 @@ namespace RType
                         if (event.joyStick.isJoyStickMoved(gd::JoyStick::Axis::LX)) position.x += RType::Ressources::get()->me->getSpeed() * event.joyStick.getAxisPosition(gd::JoyStick::Axis::LX) / 100;
                         if (event.joyStick.isJoyStickMoved(gd::JoyStick::Axis::LY)) position.y += RType::Ressources::get()->me->getSpeed() * event.joyStick.getAxisPosition(gd::JoyStick::Axis::LY) / 100;
                     }
-                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Pressed) {
-                        if (RType::Ressources::get()->me->getShootCooldown() == 0) {
-                            RType::Ressources::get()->me->shoot();
-                            int x = RType::Ressources::get()->me->shape().getPosition().x + RType::Ressources::get()->me->getSize().x / 2;
-                            int y = RType::Ressources::get()->me->shape().getPosition().y;
-                            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(x, y, 8));
-                            std::unordered_map<std::string, std::string> tmp;
-                            tmp["x"] = std::to_string(x);
-                            tmp["y"] = std::to_string(y);
-                            RType::Ressources::get()->sendList->push("shoot " + rfcArgParser::CreateObject(tmp));
-                        }
-                    }
+                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Pressed)
+                        if (RType::Ressources::get()->me->getShootCooldown() == 0) RType::Ressources::get()->me->shoot();
                     if (event.joyStick.getButtonState(gd::JoyStick::Button::B) == gd::JoyStick::State::Pressed) _showHealthBar = true;
                 }
                 RType::Ressources::get()->me->setGoto(position.x, position.y);
@@ -89,10 +69,12 @@ namespace RType
             {
                 for (auto &player : RType::Ressources::get()->players)
                     player.second->draw(window);
-                for (auto &shoot : RType::Ressources::get()->shoots)
-                    shoot->draw(window);
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->draw(window);
+                for (auto &from : RType::Ressources::get()->shoots)
+                    for (auto &who : from.second)
+                        for (auto &shoot : who.second)
+                            shoot.second->draw(window);
                 _waveIndicators->draw(window);
                 _endIndicator->draw(window);
                 _health->draw(window);
@@ -107,17 +89,10 @@ namespace RType
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
                 RType::Ressources::get()->me->update();
-                for (auto &player : RType::Ressources::get()->players)
+                for (auto &player : RType::Ressources::get()->players) {
                     player.second->update();
-                for (int i = 0; i < (int)RType::Ressources::get()->shoots.size(); i++) {
-                    RType::Ressources::get()->shoots[i]->update();
-                    if (RType::Ressources::get()->shoots[i]->getX() > window.getWidth() || RType::Ressources::get()->shoots[i]->getX() < 0) {
-                        RType::Ressources::get()->shoots.erase(RType::Ressources::get()->shoots.begin() + i);
-                        i--;
-                    }
-                }
-                for (auto &player : RType::Ressources::get()->players)
                     player.second->showHealthBar(_showHealthBar);
+                }
             }
         } // namespace Scenes
     } // namespace Game
