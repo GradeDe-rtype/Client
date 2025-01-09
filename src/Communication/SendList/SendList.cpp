@@ -22,7 +22,6 @@ namespace RType
 
         void SendList::push(std::string message)
         {
-            if (_isLocked) return;
             _mutex.lock();
             _list.push_back(message);
             _client->write(_list);

@@ -12,12 +12,14 @@ namespace RType
 {
     namespace Communication
     {
-        Commands::Commands()
+        Commands::Commands(std::shared_ptr<SendList> sendList) : _sendList(sendList)
         {
+            _sendList = sendList;
+
             _commands["create"] = &Commands::_handleCreateRoom;
             _commands["join"] = &Commands::_handleJoinRoom;
             _commands["list"] = &Commands::_handleListRooms;
-            _commands["info"] = &Commands::_handleRoomInfo;
+            _commands["r_info"] = &Commands::_handleRoomInfo;
             _commands["connect"] = &Commands::_handlePlayerConnection;
             _commands["connect_you"] = &Commands::_handleYouConnection;
             _commands["disconnect"] = &Commands::_handlePlayerDisconnection;
@@ -64,12 +66,15 @@ namespace RType
 
         void Commands::_handleListRooms(std::vector<std::string> args)
         {
-            std::cerr << "\"list\" command not implemented yet" << std::endl;
+            std::vector<std::string> rooms = rfcArgParser::ParseArray(args[1]);
+            for (auto &room : rooms)
+                _sendList->push("r_info " + room);
         }
 
         void Commands::_handleRoomInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            std::cout << obj["name"] << ": " << obj["mode"] << " (" << obj["count"] << ")" << std::endl;
         }
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)

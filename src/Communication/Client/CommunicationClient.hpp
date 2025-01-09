@@ -48,7 +48,7 @@ namespace RType
                 boost::asio::ip::tcp::socket _socket;
                 std::vector<std::string> _buffer;
                 std::shared_ptr<RType::Communication::SendList> _sendList;
-                RType::Communication::Commands _commands;
+                std::unique_ptr<RType::Communication::Commands> _commands;
 
                 void _connect();
                 void _disconnect();
