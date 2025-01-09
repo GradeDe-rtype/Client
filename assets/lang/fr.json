@@ -26,7 +26,9 @@
     "dico": {
         "accessibility": "Accessibilite",
         "back": "Retour",
+        "create": "Creer",
         "graphic": "Graphisme",
+        "join": "Rejoindre",
         "language": "Langue",
         "play": "Jouer",
         "quit": "Quitter",

@@ -16,12 +16,12 @@ namespace RType
         {
             void Menu::load(gd::Window &window)
             {
-                _addLink("game", "dico.play", window);
+                _addLink("roomsList", "dico.play", window);
                 _addLink("settings", "dico.settings", window);
                 _addLink("exit", "dico.quit", window);
                 _setPositionsLinks();
 
-                std::get<2>(_links[_getIndexLink("game")])->setColor(gd::Color(255, 255, 255, 150));
+                std::get<2>(_links[_getIndexLink("roomsList")])->setColor(gd::Color(255, 255, 255, 150));
 
                 _selectArrow = std::make_unique<Game::Entity::SelectArrow>();
                 _setSelectArrowPosition();
@@ -75,7 +75,7 @@ namespace RType
             void Menu::update(gd::Window &window)
             {
                 if (!RType::Ressources::get()->isConnected || _connected) return;
-                std::get<2>(_links[_getIndexLink("game")])->setColor(gd::Color::White);
+                std::get<2>(_links[_getIndexLink("roomsList")])->setColor(gd::Color::White);
             }
 
             void Menu::_addLink(std::string name, std::string link, gd::Window &window)

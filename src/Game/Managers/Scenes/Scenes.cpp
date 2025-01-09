@@ -30,6 +30,7 @@ namespace RType
                 _addScene("exit", std::make_shared<RType::Game::Scenes::AScene>(), window);
                 _addScene("menu", std::make_shared<RType::Game::Scenes::Menu>(), window);
                 _addScene("game", std::make_shared<RType::Game::Scenes::Game>(), window);
+                _addScene("roomsList", std::make_shared<RType::Game::Scenes::RoomsList>(), window);
 
                 _currentSceneName = "menu";
                 _currentScene = _scenes["menu"];
