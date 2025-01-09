@@ -33,8 +33,10 @@
         "language": "Langue",
         "play": "Jouer",
         "quit": "Quitter",
+        "refresh": "Rafraichir",
         "save": "Sauvegarder",
         "settings": "Options",
-        "sound": "Son"
+        "sound": "Son",
+        "wait": "Attendez"
     }
 }

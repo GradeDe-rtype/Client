@@ -34,14 +34,15 @@ namespace RType
                 public:
                     void load(gd::Window &window) override;
                     void reload(gd::Window &window) override;
+                    void update(gd::Window &window) override;
                     std::string handleEvent(gd::Window &window, gd::Event &event) override;
                     void draw(gd::Window &window) override;
 
                 private:
                     std::vector<std::tuple<std::string (RoomsList::*)(), std::string, std::unique_ptr<RType::Game::Components::TextBox>>> _links;
                     int _linkPadding = 25;
-                    int _selectIndex = 1;
-                    int _selectRow = 0;
+                    int _selectIndex = 0;
+                    int _selectRow = 1;
                     gd::Time _input;
                     gd::Time _refreshTimer;
 

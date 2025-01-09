@@ -17,10 +17,17 @@ namespace RType
             void RoomsList::load(gd::Window &window)
             {
                 _createLinks({{&RoomsList::_linkBack, "dico.back"},
-                              {&RoomsList::_linkRefresh, "dico.settings"},
+                              {&RoomsList::_linkRefresh, "dico.refresh"},
                               {&RoomsList::_linkJoin, "dico.join"},
                               {&RoomsList::_linkCreate, "dico.create"}},
                              window);
+                _input.reset();
+                _refreshTimer.reset();
+
+                for (auto &link : _links)
+                    std::get<2>(link)->setColor(gd::Color(255, 255, 255, 150));
+                std::get<2>(_links[_selectIndex])->setColor(gd::Color(255, 255, 255, 255));
+                std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.wait"));
             }
 
             std::string RoomsList::handleEvent(gd::Window &window, gd::Event &event)
@@ -36,17 +43,17 @@ namespace RType
                                 _selectIndex = 1;
                             _moveSelectedIndex(0);
                         }
-                        // if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return std::get<0>(_links[_selectIndex]);
+                        if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
                     }
                 }
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Up) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(-1);
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(-1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(1);
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
-                // if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return std::get<0>(_links[_selectIndex]);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
                 if (event.joyStick.isConnected()) {
-                    if (event.joyStick.getYAxisPosition(false) < -50) _moveSelectedIndex(-1);
-                    if (event.joyStick.getYAxisPosition(true) > 50) _moveSelectedIndex(1);
-                    // if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return std::get<0>(_links[_selectIndex]);
+                    if (event.joyStick.getXAxisPosition(false) < -50) _moveSelectedIndex(-1);
+                    if (event.joyStick.getXAxisPosition(true) > 50) _moveSelectedIndex(1);
+                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
                 }
                 return "";
             }
@@ -56,6 +63,14 @@ namespace RType
                 for (auto &link : _links) {
                     std::get<2>(link)->reload(window);
                     std::get<2>(link)->setText(Traductor::get()->translate(std::get<1>(link)));
+                }
+            }
+
+            void RoomsList::update(gd::Window &window)
+            {
+                if (_refreshTimer.getElapsedTime() > 1000 && std::get<2>(_links[_getIndexLink("dico.refresh")])->getText() == Traductor::get()->translate("dico.wait")) {
+                    _refreshTimer.reset();
+                    std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.refresh"));
                 }
             }
 
@@ -99,16 +114,22 @@ namespace RType
 
                 for (auto &link : _links)
                     std::get<2>(link)->setColor(gd::Color(255, 255, 255, 150));
-                std::get<2>(_links[_selectIndex])->setColor(gd::Color(255, 255, 255, 255));
+                if (_selectRow == 1)
+                    std::get<2>(_links[_selectIndex])->setColor(gd::Color(255, 255, 255, 255));
             }
 
             std::string RoomsList::_linkBack()
             {
-                return "";
+                return "menu";
             }
 
             std::string RoomsList::_linkRefresh()
             {
+                if (_refreshTimer.getElapsedTime() >= 1000) {
+                    std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.wait"));
+                    RType::Ressources::get()->sendList->push("list");
+                    _refreshTimer.reset();
+                }
                 return "";
             }
 

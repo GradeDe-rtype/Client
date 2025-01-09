@@ -33,8 +33,10 @@
         "language": "Language",
         "play": "Play",
         "quit": "Quit",
+        "refresh": "Refresh",
         "save": "Save",
         "settings": "Settings",
-        "sound": "Sound"
+        "sound": "Sound",
+        "wait": "Wait"
     }
 }
