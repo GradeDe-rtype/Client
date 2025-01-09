@@ -7,7 +7,8 @@
         "end": {
             "lose": "You lose !",
             "pressEnterReplay": "Press 'Enter' when you want to replay",
-            "wave": "{value} / 5 waves completed",
+            "wavesCompleted": "All waves completed !",
+            "wavesIncompleted": "Oh no... You didn't complete all waves",
             "win": "You win !"
         },
         "wave": {

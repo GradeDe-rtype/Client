@@ -40,9 +40,9 @@ namespace RType
                     void reload(gd::Window &window) override;
 
                 private:
-                    int _endScore = 0;
+                    bool _endWin = false;
                     std::unique_ptr<RType::Game::Components::Text> _endText;
-                    std::unique_ptr<RType::Game::Components::Text> _scoreText;
+                    std::unique_ptr<RType::Game::Components::Text> _wavesCompleted;
                     std::unique_ptr<RType::Game::Components::Text> _pressEnter;
                     gd::Time _fade;
                     int _opacity = 0;
