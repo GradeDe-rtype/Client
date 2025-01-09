@@ -40,6 +40,7 @@ namespace RType
                     void die();
                     void respawn();
                     void showHealthBar(bool show);
+                    void takeDamage(int damage);
 
                     bool hasMoved();
                     int getShootCooldown();
