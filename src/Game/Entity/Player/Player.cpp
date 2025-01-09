@@ -80,6 +80,11 @@ namespace RType
             {
                 if (!_isAlive) return;
                 if (_shootTimer.getElapsedTime() < _shootCooldown) return;
+                if (RType::Ressources::get()->roomState != RType::Ressources::RoomState::GAME) {
+                    RType::Game::Managers::Sound::get().play("error");
+                    _shootTimer.reset();
+                    return;
+                }
                 RType::Ressources::get()->sendList->push("shoot " + getEntityPosition());
                 _shootTimer.reset();
             }

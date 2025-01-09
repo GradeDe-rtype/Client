@@ -24,6 +24,7 @@ namespace RType
             {
                 _addSound("blaster", "assets/sound/blaster.mp3");
                 _addSound("beep", "assets/sound/beep.mp3");
+                _addSound("error", "assets/sound/error.mp3");
             }
 
             void Sound::setVolume(int volume)
