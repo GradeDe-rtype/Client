@@ -1,8 +1,9 @@
 # Tests CMakeLists.txt
 
-# ---- DEPENDENCIES ----
+# ---- SOURCES ---- #
 file(GLOB TEST_SOURCES "*.cpp")
 
+# ---- SRC SOURCES ---- #
 set(SRC_SOURCES
     ${CMAKE_SOURCE_DIR}/src/Game/Entity/Base/AEntity.cpp
     ${CMAKE_SOURCE_DIR}/src/Game/Entity/Enemy/Enemy.cpp
@@ -14,10 +15,10 @@ foreach(FILE ${TEST_SOURCES} ${SRC_SOURCES})
     endif()
 endforeach()
 
-# ---- EXECUTABLE ----
+# ---- EXECUTABLE ---- #
 add_executable(r-type_tests ${TEST_SOURCES} ${SRC_SOURCES})
 
-# ---- INCLUDES ----
+# ---- INCLUDES ---- #
 target_include_directories(r-type_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/include/
     ${CMAKE_SOURCE_DIR}/src/
@@ -29,7 +30,7 @@ target_include_directories(r-type_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/lib/traductor/include/
 )
 
-# ---- LINK LIBRARIES ----
+# ---- LINK LIBRARIES ---- #
 target_link_libraries(r-type_tests PRIVATE
     ${Boost_LIBRARIES}
     ${CRITERION_LIBRARIES}
@@ -37,20 +38,20 @@ target_link_libraries(r-type_tests PRIVATE
     sfml-graphics sfml-window sfml-system sfml-audio sfml-network
 )
 
-# ---- COMPILE OPTIONS ----
+# ---- COMPILE OPTIONS ---- #
 target_compile_options(r-type_tests PRIVATE -g -O0)
 
-# ---- TESTS ----
+# ---- TESTS ---- #
 enable_testing()
 
-# ---- ADD TEST ----
+# ---- ADD TEST ---- #
 add_test(
     NAME RTypeTests
     COMMAND $<TARGET_FILE:r-type_tests>
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
-# ---- MANUAL TESTS EXECUTION ----
+# ---- MANUAL TESTS EXECUTION ---- #
 add_custom_target(run_tests
     COMMAND $<TARGET_FILE:r-type_tests>
     DEPENDS r-type_tests
