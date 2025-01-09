@@ -116,7 +116,7 @@ namespace RType
 
         void Commands::_handlePlayerDamage(std::vector<std::string> args)
         {
-            std::cerr << "\"p_damage\" command not implemented yet" << std::endl;
+            RType::Ressources::get()->players[args[1]]->takeDamage(std::stoi(args[2]));
         }
 
         void Commands::_handlePlayerDeath(std::vector<std::string> args)
@@ -145,7 +145,7 @@ namespace RType
 
         void Commands::_handleEnemyDamage(std::vector<std::string> args)
         {
-            std::cerr << "\"e_damage\" command not implemented yet" << std::endl;
+            RType::Ressources::get()->enemies[args[1]]->takeDamage(std::stoi(args[2]));
         }
 
         void Commands::_handleEnemyDeath(std::vector<std::string> args)
@@ -203,7 +203,7 @@ namespace RType
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
         {
-            RType::Ressources::get()->endScore = std::stoi(args[1]);
+            RType::Ressources::get()->endWin = (args[1] == "win");
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
             RType::Ressources::get()->enemies.clear();
         }
