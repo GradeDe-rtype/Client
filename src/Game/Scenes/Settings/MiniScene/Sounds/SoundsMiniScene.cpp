@@ -23,12 +23,16 @@ namespace RType
                     {
                         _range->setValue(RType::Game::Managers::Sound::get().getVolume());
                         setTextValue();
+                        _soundTimer.reset();
                     }
 
                     void SoundsMiniScene::SectionSound::setSettingValue()
                     {
                         RType::Game::Managers::Sound::get().setVolume(_range->getValue());
-                        RType::Game::Managers::Sound::get().play("beep");
+                        if (_soundTimer.getElapsedTime() > 100) {
+                            RType::Game::Managers::Sound::get().play("beep");
+                            _soundTimer.reset();
+                        }
                     }
 
                     SoundsMiniScene::SectionMusic::SectionMusic(gd::Vector2<float> size)
