@@ -81,8 +81,8 @@ namespace RType
 
         void Commands::_handleYouConnection(std::vector<std::string> args)
         {
+            _handlePlayerConnection(args);
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Entity::Player>(std::stoi(obj["id"]), obj["color"]);
             RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
         }
 
