@@ -48,7 +48,7 @@ namespace RType
             int wave = 0;
             RoomState roomState = RoomState::GAME;
             bool isConnected = false;
-            int endScore = 5;
+            bool endWin = false;
 
         private:
             Ressources();

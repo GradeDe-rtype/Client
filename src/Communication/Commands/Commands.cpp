@@ -203,7 +203,7 @@ namespace RType
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
         {
-            RType::Ressources::get()->endScore = std::stoi(args[1]);
+            RType::Ressources::get()->endWin = (args[1] == "win");
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
             RType::Ressources::get()->enemies.clear();
         }
