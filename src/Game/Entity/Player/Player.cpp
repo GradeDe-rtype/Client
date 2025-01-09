@@ -164,6 +164,13 @@ namespace RType
             {
                 _showHealthBar = show;
             }
+
+            void Player::takeDamage(int damage)
+            {
+                _health -= damage;
+                if (_health <= 0) _health = 0;
+                _healthBar->setValue(_health);
+            }
         } // namespace Entity
     } // namespace Game
 } // namespace RType
