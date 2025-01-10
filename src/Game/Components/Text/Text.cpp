@@ -16,7 +16,8 @@ namespace RType
         {
             Text::Text(std::string font, std::string text, float charactersize, gd::Color color, gd::Vector2<float> position)
             {
-                _gdFont = Managers::Font::get().getFont(font);
+                // _gdFont = Managers::Font::get().getFont(font);
+                _gdFont.load("assets/font/" + font + ".otf");
                 _text = text;
                 _charactersize = charactersize;
                 _position = position;

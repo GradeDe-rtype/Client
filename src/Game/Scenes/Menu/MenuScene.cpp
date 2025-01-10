@@ -76,6 +76,8 @@ namespace RType
             {
                 if (!RType::Ressources::get()->isConnected || _connected) return;
                 std::get<2>(_links[_getIndexLink("roomsList")])->setColor(gd::Color::White);
+                RType::Ressources::get()->sendList->push("list");
+                _connected = true;
             }
 
             void Menu::_addLink(std::string name, std::string link, gd::Window &window)

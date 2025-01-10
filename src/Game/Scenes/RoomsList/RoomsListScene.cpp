@@ -72,12 +72,25 @@ namespace RType
                     _refreshTimer.reset();
                     std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.refresh"));
                 }
+                if (RType::Ressources::get()->majRoom) {
+                    int h = _linkPadding;
+                    for (auto &room : RType::Ressources::get()->roomGameSlots) {
+                        room.second->setSizeX(window.getWidth() - _linkPadding * 2);
+                        room.second->setPosition(gd::Vector2<float>(_linkPadding, h));
+                        h += room.second->getSize().y + _linkPadding;
+                    }
+                    RType::Ressources::get()->majRoom = false;
+                }
             }
 
             void RoomsList::draw(gd::Window &window)
             {
                 for (auto &link : _links)
                     std::get<2>(link)->draw(window);
+                for (auto &room : RType::Ressources::get()->roomGameSlots) {
+                    if (room.second->getPosition().y >= std::get<2>(_links[0])->getPosition().y - _linkPadding) break;
+                    room.second->draw(window);
+                }
             }
 
             void RoomsList::_createLinks(std::vector<std::pair<std::string (RoomsList::*)(), std::string>> datas, gd::Window &window)

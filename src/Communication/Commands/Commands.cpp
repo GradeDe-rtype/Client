@@ -67,6 +67,7 @@ namespace RType
         void Commands::_handleListRooms(std::vector<std::string> args)
         {
             std::vector<std::string> rooms = rfcArgParser::ParseArray(args[1]);
+            Ressources::get()->roomGameSlots.clear();
             for (auto &room : rooms)
                 _sendList->push("r_info " + room);
         }
@@ -74,7 +75,12 @@ namespace RType
         void Commands::_handleRoomInfo(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            std::cout << obj["name"] << ": " << obj["mode"] << " (" << obj["count"] << ")" << std::endl;
+            for (auto &key : {"name", "mode", "count", "id"}) {
+                if (obj.count(key) == 0) std::cerr << "Invalid room object, missing \"" << key << "\" key" << std::endl;
+                if (obj.count(key) == 0) return;
+            }
+            RType::Ressources::get()->roomGameSlots[obj["id"]] = std::make_shared<RType::Game::Components::RoomGameSlot>(std::stoi(obj["id"]), obj);
+            RType::Ressources::get()->majRoom = true;
         }
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
