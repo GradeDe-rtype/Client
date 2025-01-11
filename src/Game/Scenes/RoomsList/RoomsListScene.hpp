@@ -43,6 +43,7 @@ namespace RType
                     int _linkPadding = 25;
                     int _selectIndex = 0;
                     int _selectRow = 1;
+                    int _refreshTimeout = 2000;
                     gd::Time _input;
                     gd::Time _refreshTimer;
 

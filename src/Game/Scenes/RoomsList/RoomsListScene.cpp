@@ -68,7 +68,7 @@ namespace RType
 
             void RoomsList::update(gd::Window &window)
             {
-                if (_refreshTimer.getElapsedTime() > 1000 && std::get<2>(_links[_getIndexLink("dico.refresh")])->getText() == Traductor::get()->translate("dico.wait")) {
+                if (_refreshTimer.getElapsedTime() > _refreshTimeout && std::get<2>(_links[_getIndexLink("dico.refresh")])->getText() == Traductor::get()->translate("dico.wait")) {
                     _refreshTimer.reset();
                     std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.refresh"));
                 }
@@ -138,7 +138,7 @@ namespace RType
 
             std::string RoomsList::_linkRefresh()
             {
-                if (_refreshTimer.getElapsedTime() >= 1000) {
+                if (_refreshTimer.getElapsedTime() >= _refreshTimeout) {
                     std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.wait"));
                     RType::Ressources::get()->sendList->push("list");
                     _refreshTimer.reset();
