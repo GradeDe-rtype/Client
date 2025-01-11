@@ -26,7 +26,7 @@ namespace RType
 
                 for (auto &link : _links)
                     std::get<2>(link)->setColor(gd::Color(255, 255, 255, 150));
-                std::get<2>(_links[_selectIndex])->setColor(gd::Color(255, 255, 255, 255));
+                std::get<2>(_links[_selectIndexLink])->setColor(gd::Color(255, 255, 255, 255));
                 std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.wait"));
             }
 
@@ -38,22 +38,22 @@ namespace RType
                     gd::Vector2<float> size = std::get<2>(link)->getSize();
                     if (mouse.x >= pos.x && mouse.x <= pos.x + size.x && mouse.y >= pos.y && mouse.y <= pos.y + size.y) {
                         if (event.mouse.hasMove(window)) {
-                            _selectIndex = _getIndexLink(std::get<1>(link));
-                            if (_selectIndex == 0 && !RType::Ressources::get()->isConnected)
-                                _selectIndex = 1;
-                            _moveSelectedIndex(0);
+                            _selectIndexLink = _getIndexLink(std::get<1>(link));
+                            if (_selectIndexLink == 0 && !RType::Ressources::get()->isConnected)
+                                _selectIndexLink = 1;
+                            _moveSelectIndexLink(0);
                         }
-                        if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
+                        if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return (this->*std::get<0>(_links[_selectIndexLink]))();
                     }
                 }
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(-1);
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _moveSelectedIndex(1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed) _moveSelectIndexLink(-1);
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed) _moveSelectIndexLink(1);
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
-                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) return (this->*std::get<0>(_links[_selectIndexLink]))();
                 if (event.joyStick.isConnected()) {
-                    if (event.joyStick.getXAxisPosition(false) < -50) _moveSelectedIndex(-1);
-                    if (event.joyStick.getXAxisPosition(true) > 50) _moveSelectedIndex(1);
-                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return (this->*std::get<0>(_links[_selectIndex]))();
+                    if (event.joyStick.getXAxisPosition(false) < -50) _moveSelectIndexLink(-1);
+                    if (event.joyStick.getXAxisPosition(true) > 50) _moveSelectIndexLink(1);
+                    if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) return (this->*std::get<0>(_links[_selectIndexLink]))();
                 }
                 return "";
             }
@@ -73,12 +73,7 @@ namespace RType
                     std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.refresh"));
                 }
                 if (RType::Ressources::get()->majRoom) {
-                    int h = _linkPadding;
-                    for (auto &room : RType::Ressources::get()->roomGameSlots) {
-                        room.second->setSizeX(window.getWidth() - _linkPadding * 2);
-                        room.second->setPosition(gd::Vector2<float>(_linkPadding, h));
-                        h += room.second->getSize().y + _linkPadding;
-                    }
+                    _setRoomGameSlotIndex(window, 0);
                     RType::Ressources::get()->majRoom = false;
                 }
             }
@@ -87,24 +82,16 @@ namespace RType
             {
                 for (auto &link : _links)
                     std::get<2>(link)->draw(window);
-                for (auto &room : RType::Ressources::get()->roomGameSlots) {
-                    if (room.second->getPosition().y >= std::get<2>(_links[0])->getPosition().y - _linkPadding) break;
-                    room.second->draw(window);
-                }
+                for (int i = _roomGameSlotIndex; i < _displayRoomGameSlot && i < (int)RType::Ressources::get()->roomGameSlots.size(); i++)
+                    RType::Ressources::get()->roomGameSlots[i]->draw(window);
             }
 
             void RoomsList::_createLinks(std::vector<std::pair<std::string (RoomsList::*)(), std::string>> datas, gd::Window &window)
             {
-                float maxSize = (window.getWidth() - _linkPadding * 2) / datas.size();
-                float x = _linkPadding;
-                for (auto &data : datas) {
-                    _links.push_back(
-                        std::make_tuple(
-                            data.first,
-                            data.second,
-                            std::make_unique<Game::Components::TextBox>(maxSize, "Karma Future", Traductor::get()->translate(data.second), RType::Game::Components::TextBox::Align::Center)));
-                    std::get<2>(_links.back())->setPosition(gd::Vector2<float>(x, window.getHeight() - _linkPadding - std::get<2>(_links.back())->getSize().y));
-                    x += maxSize;
+                float maxSize = window.getWidth() / 4 - _linkPadding * 2;
+                for (int i = 0; i < (int)datas.size(); i++) {
+                    _links.push_back(std::make_tuple(datas[i].first, datas[i].second, std::make_unique<Game::Components::TextBox>(maxSize, "Karma Future", Traductor::get()->translate(datas[i].second), RType::Game::Components::TextBox::Align::Center)));
+                    std::get<2>(_links.back())->setPosition(gd::Vector2<float>(_linkPadding, window.getHeight() / ((int)datas.size() + 1) * (i + 1) - std::get<2>(_links.back())->getSize().y / 2));
                 }
             }
 
@@ -116,19 +103,19 @@ namespace RType
                 return 0;
             }
 
-            void RoomsList::_moveSelectedIndex(int index)
+            void RoomsList::_moveSelectIndexLink(int index)
             {
                 if (_input.getElapsedTime() < 200) return;
                 _input.reset();
 
-                _selectIndex += index;
-                _selectIndex = _selectIndex % (int)_links.size();
-                _selectIndex = (_selectIndex < 0) ? (int)_links.size() - 1 : _selectIndex;
+                _selectIndexLink += index;
+                _selectIndexLink = _selectIndexLink % (int)_links.size();
+                _selectIndexLink = (_selectIndexLink < 0) ? (int)_links.size() - 1 : _selectIndexLink;
 
                 for (auto &link : _links)
                     std::get<2>(link)->setColor(gd::Color(255, 255, 255, 150));
-                if (_selectRow == 1)
-                    std::get<2>(_links[_selectIndex])->setColor(gd::Color(255, 255, 255, 255));
+                if (_selectColumn == 1)
+                    std::get<2>(_links[_selectIndexLink])->setColor(gd::Color(255, 255, 255, 255));
             }
 
             std::string RoomsList::_linkBack()
@@ -141,6 +128,7 @@ namespace RType
                 if (_refreshTimer.getElapsedTime() >= _refreshTimeout) {
                     std::get<2>(_links[_getIndexLink("dico.refresh")])->setText(Traductor::get()->translate("dico.wait"));
                     RType::Ressources::get()->sendList->push("list");
+                    _roomGameSlotIndex = 0;
                     _refreshTimer.reset();
                 }
                 return "";
@@ -154,6 +142,16 @@ namespace RType
             std::string RoomsList::_linkCreate()
             {
                 return "";
+            }
+
+            void RoomsList::_setRoomGameSlotIndex(gd::Window &window, int index)
+            {
+                float x = window.getWidth() / 4 + _linkPadding;
+                float maxSize = window.getWidth() / 4 * 3 - _linkPadding * 2;
+                for (int i = _roomGameSlotIndex; i < _displayRoomGameSlot && i < (int)RType::Ressources::get()->roomGameSlots.size(); i++) {
+                    RType::Ressources::get()->roomGameSlots[i]->setSizeX(maxSize);
+                    RType::Ressources::get()->roomGameSlots[i]->setPosition(gd::Vector2<float>(x, window.getHeight() / (_displayRoomGameSlot + 1) * (i + 1) - RType::Ressources::get()->roomGameSlots[i]->getSize().y / 2));
+                }
             }
         } // namespace Scenes
     } // namespace Game

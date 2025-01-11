@@ -79,7 +79,7 @@ namespace RType
                 if (obj.count(key) == 0) std::cerr << "Invalid room object, missing \"" << key << "\" key" << std::endl;
                 if (obj.count(key) == 0) return;
             }
-            RType::Ressources::get()->roomGameSlots[obj["id"]] = std::make_shared<RType::Game::Components::RoomGameSlot>(std::stoi(obj["id"]), obj);
+            RType::Ressources::get()->roomGameSlots.push_back(std::make_shared<RType::Game::Components::RoomGameSlot>(std::stoi(obj["id"]), obj));
             RType::Ressources::get()->majRoom = true;
         }
 

@@ -41,15 +41,18 @@ namespace RType
                 private:
                     std::vector<std::tuple<std::string (RoomsList::*)(), std::string, std::unique_ptr<RType::Game::Components::TextBox>>> _links;
                     int _linkPadding = 25;
-                    int _selectIndex = 0;
-                    int _selectRow = 1;
+                    int _selectIndexLink = 0;
+                    int _selectColumn = 1;
                     int _refreshTimeout = 2000;
+                    int _roomGameSlotIndex = 0;
                     gd::Time _input;
                     gd::Time _refreshTimer;
+                    int _displayRoomGameSlot = 5;
 
                     void _createLinks(std::vector<std::pair<std::string (RoomsList::*)(), std::string>> datas, gd::Window &window);
                     int _getIndexLink(std::string name);
-                    void _moveSelectedIndex(int index);
+                    void _moveSelectIndexLink(int index);
+                    void _setRoomGameSlotIndex(gd::Window &window, int index);
 
                     std::string _linkBack();
                     std::string _linkRefresh();
