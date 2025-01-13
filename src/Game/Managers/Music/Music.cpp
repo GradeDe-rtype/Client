@@ -22,8 +22,10 @@ namespace RType
 
             Music::Music()
             {
-                _addMusic("menu", "assets/music/Neon Frenzy.mp3");
-                _addMusic("settings", "assets/music/Neon Frenzy.mp3");
+                _addMusic("roomsList", "assets/music/Neon Frenzy.mp3");
+                _addMusic("roomLobby", "assets/music/Stardust Symphony.mp3");
+                _addMusic("menu", "assets/music/Eternal Pulsar.mp3");
+                _addMusic("settings", "assets/music/Eternal Hard Pulse.mp3");
                 _addMusic("game", "assets/music/Adrenaline Surge.mp3");
             }
 

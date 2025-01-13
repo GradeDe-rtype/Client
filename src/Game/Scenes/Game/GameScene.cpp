@@ -24,8 +24,9 @@ namespace RType
                 _shotCooldown->setColor(gd::Color::fromHex("#1CA350"));
             }
 
-            void Game::enter()
+            void Game::enter(gd::Window &window)
             {
+                (void)window;
                 _shotCooldown->setEnd(RType::Ressources::get()->me->getShootMaxCooldown());
             }
 

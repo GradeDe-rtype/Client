@@ -15,7 +15,6 @@ std::vector<std::string> rfcArgParser::ParseArray(std::string str)
     if (tmp.size() == 0)
         throw rfcArgParser::Error("Invalid array format, missing \"[]\" or empty string", "rfcArgParser::ParseArray");
 
-    tmp = tmp.substr(1, tmp.size() - 2);
     result = _split(tmp, ';');
     return result;
 }

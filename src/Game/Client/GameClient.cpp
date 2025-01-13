@@ -68,7 +68,7 @@ namespace RType
         {
             _window.pollEvent(_event);
             _handleGeneralEvent();
-            RType::Game::Managers::Scenes::get().update();
+            RType::Game::Managers::Scenes::get().update(_window);
             _starBackground->update(_window);
             if (RType::Game::Managers::Scenes::get().isTransitioning()) return;
             std::string next_scene = RType::Game::Managers::Scenes::get().getScene()->handleEvent(_window, _event);

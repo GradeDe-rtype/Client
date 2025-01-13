@@ -48,7 +48,7 @@ namespace RType
                      */
                     void load(gd::Window &window) override;
 
-                    void enter() override;
+                    void enter(gd::Window &window) override;
 
                     void reload(gd::Window &window) override;
 

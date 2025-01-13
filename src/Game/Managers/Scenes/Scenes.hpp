@@ -21,8 +21,11 @@
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/IScene.hpp"
 #include "Game/Scenes/Game/GameScene.hpp"
+#include "Game/Scenes/JoinRoom/JoinRoom.hpp"
 #include "Game/Scenes/Menu/MenuScene.hpp"
+#include "Game/Scenes/RoomsList/RoomsListScene.hpp"
 #include "Game/Scenes/Settings/SettingsScene.hpp"
+#include "Game/Scenes/WaitingRoom/WaitingRoom.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
@@ -41,7 +44,7 @@ namespace RType
                     void reload(gd::Window &window);
                     void changeScene(const std::string &name);
                     std::shared_ptr<RType::Game::Scenes::IScene> getScene();
-                    void update();
+                    void update(gd::Window &window);
                     void draw(gd::Window &window);
                     bool isTransitioning() const;
                     std::string getCurrentSceneName() const;

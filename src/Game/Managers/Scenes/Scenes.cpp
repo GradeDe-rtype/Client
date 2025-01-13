@@ -30,11 +30,14 @@ namespace RType
                 _addScene("exit", std::make_shared<RType::Game::Scenes::AScene>(), window);
                 _addScene("menu", std::make_shared<RType::Game::Scenes::Menu>(), window);
                 _addScene("game", std::make_shared<RType::Game::Scenes::Game>(), window);
+                _addScene("roomsList", std::make_shared<RType::Game::Scenes::RoomsList>(), window);
+                _addScene("waitingRoom", std::make_shared<RType::Game::Scenes::WaitingRoom>(), window);
+                _addScene("joinRoom", std::make_shared<RType::Game::Scenes::JoinRoom>(), window);
 
                 _currentSceneName = "menu";
                 _currentScene = _scenes["menu"];
                 RType::Game::Managers::Music::get().setMusic("menu");
-                _currentScene->enter();
+                _currentScene->enter(window);
                 _timer.reset();
             }
 
@@ -60,7 +63,7 @@ namespace RType
                 return _currentScene;
             }
 
-            void Scenes::update()
+            void Scenes::update(gd::Window &window)
             {
                 if (_timer.getElapsedTime() <= _transitionDuration / _transitionFrame) return;
                 _timer.reset();
@@ -74,7 +77,7 @@ namespace RType
                         _currentSceneName = _nextScene;
                         _currentScene = _scenes[_nextScene];
                         RType::Game::Managers::Music::get().setMusic(_nextScene);
-                        _currentScene->enter();
+                        _currentScene->enter(window);
                     }
                 } else if (_transitionState == FADE_OUT) {
                     _transitionOpacity -= _transitionSpeed;
