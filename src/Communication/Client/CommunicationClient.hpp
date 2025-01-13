@@ -11,9 +11,11 @@
 
 /*  ---- INCLUDES ---- */
 #include <boost/asio.hpp>
+#include <chrono>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 #include "Communication/Commands/Commands.hpp"
 #include "Communication/SendList/SendList.hpp"
 #include "Helpers/Utils/Utils.hpp"

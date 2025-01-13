@@ -56,12 +56,13 @@ namespace RType
 
         void Commands::_handleCreateRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"create\" command not implemented yet" << std::endl;
+            _sendList->push("join " + args[1]);
         }
 
         void Commands::_handleJoinRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"join\" command not implemented yet" << std::endl;
+            RType::Game::Managers::Scenes::get().changeScene("game");
+            RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
         }
 
         void Commands::_handleListRooms(std::vector<std::string> args)

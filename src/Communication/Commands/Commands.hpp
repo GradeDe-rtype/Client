@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <vector>
 #include "Game/Entity/Player/Player.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
 #include "Helpers/Utils/Utils.hpp"
 #include "Ressources/Ressources.hpp"
 #include "rfcArgParser.hpp"
