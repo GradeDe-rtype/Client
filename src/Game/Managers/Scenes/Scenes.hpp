@@ -21,6 +21,7 @@
 #include "Game/Managers/Music/Music.hpp"
 #include "Game/Scenes/Base/IScene.hpp"
 #include "Game/Scenes/Game/GameScene.hpp"
+#include "Game/Scenes/JoinRoom/JoinRoom.hpp"
 #include "Game/Scenes/Menu/MenuScene.hpp"
 #include "Game/Scenes/RoomsList/RoomsListScene.hpp"
 #include "Game/Scenes/Settings/SettingsScene.hpp"

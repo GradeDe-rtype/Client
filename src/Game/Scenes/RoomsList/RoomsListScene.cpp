@@ -192,7 +192,7 @@ namespace RType
                 if (_input.getElapsedTime() < 200) return "";
                 _input.reset();
 
-                return "";
+                return "joinRoom";
             }
 
             std::string RoomsList::_linkCreate()
