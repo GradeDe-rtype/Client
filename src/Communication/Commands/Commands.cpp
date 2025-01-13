@@ -96,6 +96,7 @@ namespace RType
             _handlePlayerConnection(args);
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
+            RType::Ressources::get()->me->setOutlineColor(gd::Color::White);
         }
 
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)
