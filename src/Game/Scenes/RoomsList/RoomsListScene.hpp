@@ -60,6 +60,7 @@ namespace RType
                     std::string _linkBack();
                     std::string _linkRefresh();
                     std::string _linkJoin();
+                    std::string _joinRoom();
                     std::string _linkCreate();
             };
         } // namespace Scenes

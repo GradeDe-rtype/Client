@@ -17,6 +17,13 @@
             "wave": "Wave {value}"
         }
     },
+    "scenes": {
+        "waitingRoom": {
+            "errorMessage": "An error occurred while trying to connect you to the room",
+            "pressEnter": "Press 'Enter' to return to the rooms list",
+            "waitMessage": "We are trying to connect you to the room..."
+        }
+    },
     "settings": {
         "frameRate": "Frame Rate: {value}",
         "music": "Music: {value}",

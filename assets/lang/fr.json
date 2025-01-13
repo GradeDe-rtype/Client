@@ -17,6 +17,13 @@
             "wave": "Vague {value}"
         }
     },
+    "scenes": {
+        "waitingRoom": {
+            "errorMessage": "Une erreur est survenue lors de la tentative de connexion a la partie",
+            "pressEnter": "Appuyez sur 'Entree' pour retourner a la liste des parties",
+            "wait_message": "Nous essayons de vous connecter a la partie..."
+        }
+    },
     "settings": {
         "frameRate": "Rafraichissement: {value}",
         "music": "Musique: {value}",

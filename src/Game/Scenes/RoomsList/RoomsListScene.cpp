@@ -53,7 +53,7 @@ namespace RType
                                 _selectIndex = i;
                                 _moveSelectIndexLink(0);
                             }
-                            if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) std::cout << "join " << RType::Ressources::get()->roomGameSlots[i]->getId() << std::endl;
+                            if (event.mouse.getButtonState(gd::Mouse::Button::Left) == gd::Mouse::State::Released) return _joinRoom();
                         }
                     }
                 }
@@ -64,14 +64,14 @@ namespace RType
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Escape) == gd::KeyBoard::State::Pressed) return "exit";
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Return) == gd::KeyBoard::State::Released) {
                     if (_selectColumn == 0) return (this->*std::get<0>(_linksDatas[_selectIndex]))();
-                    if (_selectColumn == 1) std::cout << "join " << RType::Ressources::get()->roomGameSlots[_selectIndex]->getId() << std::endl;
+                    if (_selectColumn == 1) return _joinRoom();
                 }
                 if (event.joyStick.isConnected()) {
                     if (event.joyStick.getXAxisPosition(false) < -50) _moveSelectIndexLink(-1);
                     if (event.joyStick.getXAxisPosition(true) > 50) _moveSelectIndexLink(1);
                     if (event.joyStick.getButtonState(gd::JoyStick::Button::A) == gd::JoyStick::State::Released) {
                         if (_selectColumn == 0) return (this->*std::get<0>(_linksDatas[_selectIndex]))();
-                        if (_selectColumn == 1) std::cout << "join " << RType::Ressources::get()->roomGameSlots[_selectIndex]->getId() << std::endl;
+                        if (_selectColumn == 1) return _joinRoom();
                     }
                 }
                 return "";
@@ -178,6 +178,15 @@ namespace RType
                 return "";
             }
 
+            std::string RoomsList::_joinRoom()
+            {
+                if (_input.getElapsedTime() < 200) return "";
+                _input.reset();
+
+                RType::Ressources::get()->sendList->push("join " + std::to_string(RType::Ressources::get()->roomGameSlots[_selectIndex]->getId()));
+                return "waitingRoom";
+            }
+
             std::string RoomsList::_linkJoin()
             {
                 if (_input.getElapsedTime() < 200) return "";
@@ -192,7 +201,7 @@ namespace RType
                 _input.reset();
 
                 RType::Ressources::get()->sendList->push("create");
-                return "";
+                return "waitingRoom";
             }
 
             void RoomsList::_setRoomGameSlotIndex(gd::Window &window, int index)

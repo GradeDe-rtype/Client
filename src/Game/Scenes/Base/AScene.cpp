@@ -26,8 +26,9 @@ namespace RType
             {
             }
 
-            void AScene::enter()
+            void AScene::enter(gd::Window &window)
             {
+                (void)window;
             }
 
             void AScene::leave()
