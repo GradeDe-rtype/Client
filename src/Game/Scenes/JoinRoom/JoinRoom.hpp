@@ -15,6 +15,7 @@
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
+#include "Game/Components/NumPad/NumPad.hpp"
 #include "Game/Components/TextBox/TextBox.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
@@ -40,9 +41,10 @@ namespace RType
 
                 private:
                     std::unique_ptr<RType::Game::Components::TextBox> _codePreview;
+                    std::unique_ptr<RType::Game::Components::NumPad> _numPad;
                     std::string _code;
                     int _codeSize = 6;
-                    int _linkSpacing = 100;
+                    int _padding = 25;
                     int _codeIndex = 0;
                     gd::Time _input;
 
