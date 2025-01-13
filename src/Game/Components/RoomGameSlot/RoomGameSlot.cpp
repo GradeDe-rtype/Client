@@ -16,6 +16,7 @@ namespace RType
         {
             RoomGameSlot::RoomGameSlot(int id, std::unordered_map<std::string, std::string> &datas, float sizeX, gd::Vector2<float> position)
             {
+                _id = id;
                 _size = gd::Vector2<float>(sizeX, 50);
                 _position = position;
 
@@ -84,6 +85,11 @@ namespace RType
                 _background->setSize(_size);
 
                 setPosition(_position);
+            }
+
+            int RoomGameSlot::getId() const
+            {
+                return _id;
             }
         } // namespace Components
     } // namespace Game

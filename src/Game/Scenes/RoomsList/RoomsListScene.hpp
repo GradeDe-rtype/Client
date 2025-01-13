@@ -39,10 +39,11 @@ namespace RType
                     void draw(gd::Window &window) override;
 
                 private:
-                    std::vector<std::tuple<std::string (RoomsList::*)(), std::string, std::unique_ptr<RType::Game::Components::TextBox>>> _links;
+                    std::vector<std::shared_ptr<RType::Game::Components::TextBox>> _linksComponent;
+                    std::vector<std::tuple<std::string (RoomsList::*)(), std::string>> _linksDatas;
                     int _linkPadding = 25;
-                    int _selectIndexLink = 0;
-                    int _selectColumn = 1;
+                    int _selectIndex = 0;
+                    int _selectColumn = 0;
                     int _refreshTimeout = 2000;
                     int _roomGameSlotIndex = 0;
                     gd::Time _input;
@@ -51,8 +52,10 @@ namespace RType
 
                     void _createLinks(std::vector<std::pair<std::string (RoomsList::*)(), std::string>> datas, gd::Window &window);
                     int _getIndexLink(std::string name);
-                    void _moveSelectIndexLink(int index);
+                    void _moveSelectIndexLink(int index, bool forced = false);
+                    void _moveSelectIndexRoomGameSlot(gd::Window &window, int index, bool forced = false);
                     void _setRoomGameSlotIndex(gd::Window &window, int index);
+                    void _moveSelectedColumn(gd::Window &window, int index, bool forced = false);
 
                     std::string _linkBack();
                     std::string _linkRefresh();

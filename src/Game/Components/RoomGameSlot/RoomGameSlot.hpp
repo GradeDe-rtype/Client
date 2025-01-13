@@ -37,6 +37,7 @@ namespace RType
                     void setColor(gd::Color color);
 
                     gd::Vector2<float> getSize() const;
+                    int getId() const;
 
                 private:
                     int _id;
