@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <vector>
 #include "Game/Entity/Player/Player.hpp"
+#include "Game/Managers/Scenes/Scenes.hpp"
 #include "Helpers/Utils/Utils.hpp"
 #include "Ressources/Ressources.hpp"
 #include "rfcArgParser.hpp"
@@ -27,13 +28,14 @@ namespace RType
         class Commands
         {
             public:
-                Commands();
+                Commands(std::shared_ptr<SendList> sendList);
                 ~Commands() = default;
 
                 void handleCommand(std::string command);
 
             private:
                 std::unordered_map<std::string, void (Commands::*)(std::vector<std::string>)> _commands;
+                std::shared_ptr<SendList> _sendList;
 
                 void _handleCreateRoom(std::vector<std::string> args);
                 void _handleJoinRoom(std::vector<std::string> args);

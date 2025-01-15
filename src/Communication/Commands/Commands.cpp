@@ -12,12 +12,14 @@ namespace RType
 {
     namespace Communication
     {
-        Commands::Commands()
+        Commands::Commands(std::shared_ptr<SendList> sendList) : _sendList(sendList)
         {
+            _sendList = sendList;
+
             _commands["create"] = &Commands::_handleCreateRoom;
             _commands["join"] = &Commands::_handleJoinRoom;
             _commands["list"] = &Commands::_handleListRooms;
-            _commands["info"] = &Commands::_handleRoomInfo;
+            _commands["r_info"] = &Commands::_handleRoomInfo;
             _commands["connect"] = &Commands::_handlePlayerConnection;
             _commands["connect_you"] = &Commands::_handleYouConnection;
             _commands["disconnect"] = &Commands::_handlePlayerDisconnection;
@@ -54,22 +56,32 @@ namespace RType
 
         void Commands::_handleCreateRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"create\" command not implemented yet" << std::endl;
+            _sendList->push("join " + args[1]);
         }
 
         void Commands::_handleJoinRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"join\" command not implemented yet" << std::endl;
+            RType::Game::Managers::Scenes::get().changeScene("game");
+            RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
         }
 
         void Commands::_handleListRooms(std::vector<std::string> args)
         {
-            std::cerr << "\"list\" command not implemented yet" << std::endl;
+            std::vector<std::string> rooms = rfcArgParser::ParseArray(args[1]);
+            Ressources::get()->roomGameSlots.clear();
+            for (auto &room : rooms)
+                _sendList->push("r_info " + room);
         }
 
         void Commands::_handleRoomInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            for (auto &key : {"name", "mode", "count", "id"}) {
+                if (obj.count(key) == 0) std::cerr << "Invalid room object, missing \"" << key << "\" key" << std::endl;
+                if (obj.count(key) == 0) return;
+            }
+            RType::Ressources::get()->roomGameSlots.push_back(std::make_shared<RType::Game::Components::RoomGameSlot>(std::stoi(obj["id"]), obj));
+            RType::Ressources::get()->majRoom = true;
         }
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
@@ -84,6 +96,7 @@ namespace RType
             _handlePlayerConnection(args);
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
+            RType::Ressources::get()->me->setOutlineColor(gd::Color::White);
         }
 
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)

@@ -11,11 +11,12 @@
 std::vector<std::string> rfcArgParser::ParseArray(std::string str)
 {
     std::vector<std::string> result;
+    if (str.find('[') == std::string::npos || str.find(']') == std::string::npos)
+        throw rfcArgParser::Error("Invalid array format, missing \"[]\"", "rfcArgParser::ParseArray");
     std::string tmp = _keep(str, '[', ']');
     if (tmp.size() == 0)
-        throw rfcArgParser::Error("Invalid array format, missing \"[]\" or empty string", "rfcArgParser::ParseArray");
+        return {};
 
-    tmp = tmp.substr(1, tmp.size() - 2);
     result = _split(tmp, ';');
     return result;
 }

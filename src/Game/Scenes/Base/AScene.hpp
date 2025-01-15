@@ -51,7 +51,7 @@ namespace RType
                     /**
                      * @brief Enter the scene
                      */
-                    void enter() override;
+                    void enter(gd::Window &window) override;
 
                     /**
                      * @brief Leave the scene
