@@ -124,25 +124,6 @@ namespace RType
                 });
             }
 
-            void Enemy::_createLaserPickup()
-            {
-                _shape.create({
-                    {static_cast<float>(_size * 0.4), static_cast<float>(0)},
-                    {static_cast<float>(_size * 0.6), static_cast<float>(0)},
-                    {static_cast<float>(_size * 0.6), static_cast<float>(_size)},
-                    {static_cast<float>(_size * 0.4), static_cast<float>(_size)},
-
-                    {static_cast<float>(_size * 0.2), static_cast<float>(_size * 0.2)},
-                    {static_cast<float>(_size * 0.4), static_cast<float>(_size * 0.4)},
-                    {static_cast<float>(_size * 0.2), static_cast<float>(_size * 0.6)},
-
-                    {static_cast<float>(_size * 0.6), static_cast<float>(_size * 0.4)},
-                    {static_cast<float>(_size * 0.8), static_cast<float>(_size * 0.2)},
-                    {static_cast<float>(_size * 0.8), static_cast<float>(_size * 0.6)},
-                });
-            }
-
-
             void Enemy::takeDamage(int damage)
             {
                 _health -= damage;
