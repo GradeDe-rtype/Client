@@ -33,14 +33,23 @@ namespace RType
             void Enemy::_createMonsterShape()
             {
                 switch (_type) {
-                    case Type::KAMIKAZE_MONSTER:
-                        _createKamikazeMonster();
-                        break;
-                    case Type::BASIC_MONSTER:
+                    case Enemy::Type::BASIC_MONSTER:
                         _createBasicMonster();
                         break;
-                    case Type::BOSS:
+                    case Enemy::Type::KAMIKAZE_MONSTER:
+                        _createKamikazeMonster();
+                        break;
+                    case Enemy::Type::BOSS:
                         _createBossMonster();
+                        break;
+                    case Enemy::Type::HEALTH_BONUS:
+                        _createHealthPickup();
+                        break;
+                    case Enemy::Type::DAMAGE_BONUS:
+                        _createDamagePickup();
+                        break;
+                    case Enemy::Type::ROCKET_WEAPON:
+                        _createRocketPickup();
                         break;
                 }
             }
@@ -75,6 +84,50 @@ namespace RType
                     {static_cast<float>(_size * 0.2), static_cast<float>(_size)},
                     {static_cast<float>(0), static_cast<float>(_size * 0.4)},
                     {static_cast<float>(0), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
+                });
+            }
+
+            void Enemy::_createHealthPickup()
+            {
+                _shape.create({
+                    {static_cast<float>(_size * 0.4), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.6), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.6), static_cast<float>(_size * 0.4)},
+                    {static_cast<float>(_size), static_cast<float>(_size * 0.4)},
+                    {static_cast<float>(_size), static_cast<float>(_size * 0.6)},
+                    {static_cast<float>(_size * 0.6), static_cast<float>(_size * 0.6)},
+                    {static_cast<float>(_size * 0.6), static_cast<float>(_size)},
+                    {static_cast<float>(_size * 0.4), static_cast<float>(_size)},
+                    {static_cast<float>(_size * 0.4), static_cast<float>(_size * 0.6)},
+                    {static_cast<float>(0), static_cast<float>(_size * 0.6)},
+                    {static_cast<float>(0), static_cast<float>(_size * 0.4)},
+                    {static_cast<float>(_size * 0.4), static_cast<float>(_size * 0.4)},
+                });
+            }
+
+            void Enemy::_createDamagePickup()
+            {
+                _shape.create({
+                    {static_cast<float>(_size / 2), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
+                    {static_cast<float>(_size), static_cast<float>(_size * 0.5)},
+                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.7)},
+                    {static_cast<float>(_size / 2), static_cast<float>(_size)},
+                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
+                    {static_cast<float>(0), static_cast<float>(_size * 0.5)},
+                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
+                });
+            }
+
+            void Enemy::_createRocketPickup()
+            {
+                _shape.create({
+                    {static_cast<float>(_size * 0.5), static_cast<float>(0)},
+                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
+                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.7)},
+                    {static_cast<float>(_size * 0.5), static_cast<float>(_size)},
+                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
                     {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
                 });
             }
