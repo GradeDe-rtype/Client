@@ -79,7 +79,6 @@ namespace RType
                 });
             }
 
-
             void Enemy::_createHealthPickup()
             {
                 _shape.create({
@@ -105,7 +104,7 @@ namespace RType
                     {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
                     {static_cast<float>(_size), static_cast<float>(_size * 0.5)},
                     {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.7)},
-                    {static_cast<float>(_size / 2), static_cast<float>(_size)}, 
+                    {static_cast<float>(_size / 2), static_cast<float>(_size)},
                     {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
                     {static_cast<float>(0), static_cast<float>(_size * 0.5)},
                     {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
