@@ -28,6 +28,12 @@ namespace RType
                 _shape.setOutlineThickness(5);
                 _shape.setPosition(_position);
                 _shape.setRotation(0);
+
+                _healthBar = std::make_unique<Game::Components::Range>(0, _health, 1, gd::Vector2<float>(0, 0), gd::Vector2<float>(_size * 1.5, 10));
+                _healthBar->setValue(_health);
+                _healthBar->setColor(gd::Color::fromHex("#900028"));
+                _showHealthBar = false;
+                _healthBar->setPosition(gd::Vector2<float>(_position.x + _size / 2 - _healthBar->getSize().x / 2, _position.y + _size + _healthBar->getSize().y));
             }
 
             void Enemy::_createMonsterShape()
@@ -136,8 +142,33 @@ namespace RType
             {
                 _health -= damage;
                 if (_health <= 0) _health = 0;
+                _healthBar->setValue(_health);
             }
 
+            void Enemy::showHealthBar(bool show)
+            {
+                _showHealthBar = show;
+            }
+
+            void Enemy::draw(gd::Window &window)
+            {
+                window.draw(_shape);
+                if (_showHealthBar) _healthBar->draw(window);
+            }
+
+            void Enemy::setPosition(float x, float y)
+            {
+                if (_position.x == x && _position.y == y) return;
+                _position = {x, y};
+                _shape.setPosition(_position);
+                _healthBar->setPosition(gd::Vector2<float>(_position.x + _size / 2 - _healthBar->getSize().x / 2, _position.y + _size + _healthBar->getSize().y));
+            }
+
+            void Enemy::setHealth(int health)
+            {
+                _health = health;
+                _healthBar->setValue(_health);
+            }
         } // namespace Entity
     } // namespace Game
 } // namespace RType
