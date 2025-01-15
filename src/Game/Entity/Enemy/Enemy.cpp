@@ -54,9 +54,6 @@ namespace RType
                     case Enemy::Type::DAMAGE_BONUS:
                         _createDamagePickup();
                         break;
-                    case Enemy::Type::ROCKET_WEAPON:
-                        _createRocketPickup();
-                        break;
                 }
             }
 
@@ -122,18 +119,6 @@ namespace RType
                     {static_cast<float>(_size / 2), static_cast<float>(_size)},
                     {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
                     {static_cast<float>(0), static_cast<float>(_size * 0.5)},
-                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
-                });
-            }
-
-            void Enemy::_createRocketPickup()
-            {
-                _shape.create({
-                    {static_cast<float>(_size * 0.5), static_cast<float>(0)},
-                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
-                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.7)},
-                    {static_cast<float>(_size * 0.5), static_cast<float>(_size)},
-                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
                     {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
                 });
             }

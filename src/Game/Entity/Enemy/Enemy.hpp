@@ -30,8 +30,7 @@ namespace RType
                         KAMIKAZE_MONSTER = 2,
                         BASIC_MONSTER = 3,
                         HEALTH_BONUS = 4,
-                        DAMAGE_BONUS = 5,
-                        ROCKET_WEAPON = 6
+                        DAMAGE_BONUS = 5
                     } Type;
 
                     Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
@@ -54,7 +53,6 @@ namespace RType
                     void _createBossMonster();
                     void _createHealthPickup();
                     void _createDamagePickup();
-                    void _createRocketPickup();
             };
         } // namespace Entity
     } // namespace Game
