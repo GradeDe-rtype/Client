@@ -71,6 +71,16 @@ namespace RType
                 _updateTexts();
             }
 
+            void TextBox::setSizeX(float x)
+            {
+                setSize(gd::Vector2<float>(x, _size.y));
+            }
+
+            void TextBox::setSizeY(float y)
+            {
+                setSize(gd::Vector2<float>(_size.x, y));
+            }
+
             void TextBox::setAlign(Align align)
             {
                 _align = align;

@@ -7,13 +7,21 @@
         "end": {
             "lose": "Vous avez perdu !",
             "pressEnterReplay": "Appuyez sur 'Entree' pour rejouer",
-            "wave": "{value} / 5 vagues completees",
+            "wavesCompleted": "Toutes les vagues ont ete completees !",
+            "wavesIncompleted": "Oh non... Vous n'avez pas complete toutes les vagues",
             "win": "Vous avez gagne !"
         },
         "wave": {
             "nextWave": "Prochaine vague !",
             "pressEnterReady": "Appuyez sur 'Entree' quand vous etes pret",
             "wave": "Vague {value}"
+        }
+    },
+    "scenes": {
+        "waitingRoom": {
+            "errorMessage": "Une erreur est survenue lors de la tentative de connexion a la partie",
+            "pressEnter": "Appuyez sur 'Entree' pour retourner a la liste des parties",
+            "wait_message": "Nous essayons de vous connecter a la partie..."
         }
     },
     "settings": {
@@ -26,12 +34,16 @@
     "dico": {
         "accessibility": "Accessibilite",
         "back": "Retour",
+        "create": "Creer",
         "graphic": "Graphisme",
+        "join": "Rejoindre",
         "language": "Langue",
         "play": "Jouer",
         "quit": "Quitter",
+        "refresh": "Rafraichir",
         "save": "Sauvegarder",
         "settings": "Options",
-        "sound": "Son"
+        "sound": "Son",
+        "wait": "Attendez"
     }
 }

@@ -12,12 +12,14 @@ namespace RType
 {
     namespace Communication
     {
-        Commands::Commands()
+        Commands::Commands(std::shared_ptr<SendList> sendList) : _sendList(sendList)
         {
+            _sendList = sendList;
+
             _commands["create"] = &Commands::_handleCreateRoom;
             _commands["join"] = &Commands::_handleJoinRoom;
             _commands["list"] = &Commands::_handleListRooms;
-            _commands["info"] = &Commands::_handleRoomInfo;
+            _commands["r_info"] = &Commands::_handleRoomInfo;
             _commands["connect"] = &Commands::_handlePlayerConnection;
             _commands["connect_you"] = &Commands::_handleYouConnection;
             _commands["disconnect"] = &Commands::_handlePlayerDisconnection;
@@ -27,14 +29,16 @@ namespace RType
             _commands["p_position"] = &Commands::_handlePlayerPosition;
             _commands["p_damage"] = &Commands::_handlePlayerDamage;
             _commands["p_death"] = &Commands::_handlePlayerDeath;
-            _commands["p_shoot"] = &Commands::_handlePlayerShoot;
             _commands["p_info"] = &Commands::_handlePlayerInfo;
             _commands["enemy"] = &Commands::_handleEnemyCreation;
             _commands["e_position"] = &Commands::_handleEnemyPosition;
             _commands["e_damage"] = &Commands::_handleEnemyDamage;
             _commands["e_death"] = &Commands::_handleEnemyDeath;
-            _commands["e_shoot"] = &Commands::_handleEnemyShoot;
             _commands["e_info"] = &Commands::_handleEnemyInfo;
+            _commands["shoot"] = &Commands::_handleShootCreation;
+            _commands["s_position"] = &Commands::_handleShootPosition;
+            _commands["s_death"] = &Commands::_handleShootDeath;
+            _commands["s_info"] = &Commands::_handleShootInfo;
             _commands["wave"] = &Commands::_handleGameWave;
             _commands["end"] = &Commands::_handleRoomEndGame;
         }
@@ -52,35 +56,47 @@ namespace RType
 
         void Commands::_handleCreateRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"create\" command not implemented yet" << std::endl;
+            _sendList->push("join " + args[1]);
         }
 
         void Commands::_handleJoinRoom(std::vector<std::string> args)
         {
-            std::cerr << "\"join\" command not implemented yet" << std::endl;
+            RType::Game::Managers::Scenes::get().changeScene("game");
+            RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
         }
 
         void Commands::_handleListRooms(std::vector<std::string> args)
         {
-            std::cerr << "\"list\" command not implemented yet" << std::endl;
+            std::vector<std::string> rooms = rfcArgParser::ParseArray(args[1]);
+            Ressources::get()->roomGameSlots.clear();
+            for (auto &room : rooms)
+                _sendList->push("r_info " + room);
         }
 
         void Commands::_handleRoomInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            for (auto &key : {"name", "mode", "count", "id"}) {
+                if (obj.count(key) == 0) std::cerr << "Invalid room object, missing \"" << key << "\" key" << std::endl;
+                if (obj.count(key) == 0) return;
+            }
+            RType::Ressources::get()->roomGameSlots.push_back(std::make_shared<RType::Game::Components::RoomGameSlot>(std::stoi(obj["id"]), obj));
+            RType::Ressources::get()->majRoom = true;
         }
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots["player"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
             RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Entity::Player>(std::stoi(obj["id"]), obj["color"]);
         }
 
         void Commands::_handleYouConnection(std::vector<std::string> args)
         {
+            _handlePlayerConnection(args);
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Entity::Player>(std::stoi(obj["id"]), obj["color"]);
             RType::Ressources::get()->me = RType::Ressources::get()->players[obj["id"]];
+            RType::Ressources::get()->me->setOutlineColor(gd::Color::White);
         }
 
         void Commands::_handlePlayerDisconnection(std::vector<std::string> args)
@@ -113,18 +129,12 @@ namespace RType
 
         void Commands::_handlePlayerDamage(std::vector<std::string> args)
         {
-            std::cerr << "\"p_damage\" command not implemented yet" << std::endl;
+            RType::Ressources::get()->players[args[1]]->takeDamage(std::stoi(args[2]));
         }
 
         void Commands::_handlePlayerDeath(std::vector<std::string> args)
         {
             RType::Ressources::get()->players[args[1]]->die();
-        }
-
-        void Commands::_handlePlayerShoot(std::vector<std::string> args)
-        {
-            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), 10));
         }
 
         void Commands::_handlePlayerInfo(std::vector<std::string> args)
@@ -135,6 +145,7 @@ namespace RType
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots["enemy"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
             RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), static_cast<RType::Game::Entity::Enemy::Type>(std::stoi(obj["type"])), std::stoi(obj["x"]), std::stoi(obj["y"]), std::stoi(obj["health"]));
         }
 
@@ -147,7 +158,7 @@ namespace RType
 
         void Commands::_handleEnemyDamage(std::vector<std::string> args)
         {
-            std::cerr << "\"e_damage\" command not implemented yet" << std::endl;
+            RType::Ressources::get()->enemies[args[1]]->takeDamage(std::stoi(args[2]));
         }
 
         void Commands::_handleEnemyDeath(std::vector<std::string> args)
@@ -155,15 +166,42 @@ namespace RType
             RType::Ressources::get()->enemies.erase(args[1]);
         }
 
-        void Commands::_handleEnemyShoot(std::vector<std::string> args)
-        {
-            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots.push_back(std::make_unique<RType::Game::Entity::Shoot>(std::stoi(obj["x"]), std::stoi(obj["y"]), -9));
-        }
-
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
         {
             std::cerr << "\"e_info\" command not implemented yet" << std::endl;
+        }
+
+        void Commands::_handleShootCreation(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            gd::Vector2<float> pos = (obj["from"] == "player") ? RType::Ressources::get()->players[obj["related"]]->getPosition() : RType::Ressources::get()->enemies[obj["related"]]->getPosition();
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]] = std::make_shared<RType::Game::Entity::Shoot>(pos.x, pos.y, obj["from"]);
+        }
+
+        void Commands::_handleShootPosition(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            std::unordered_map<std::string, std::string> position = rfcArgParser::ParseObject(args[2]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stoi(position["x"]), std::stoi(position["y"]));
+        }
+
+        void Commands::_handleShootDeath(std::vector<std::string> args)
+        {
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]].erase(obj["id"]);
+        }
+
+        void Commands::_handleShootInfo(std::vector<std::string> args)
+        {
+            std::cerr << "\"s_info\" command not implemented yet" << std::endl;
         }
 
         void Commands::_handleGameWave(std::vector<std::string> args)
@@ -178,7 +216,7 @@ namespace RType
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
         {
-            RType::Ressources::get()->endScore = std::stoi(args[1]);
+            RType::Ressources::get()->endWin = (args[1] == "win");
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
             RType::Ressources::get()->enemies.clear();
         }

@@ -45,7 +45,7 @@ namespace RType
                     /**
                      * @brief Enter the scene
                      */
-                    virtual void enter() = 0;
+                    virtual void enter(gd::Window &window) = 0;
 
                     /**
                      * @brief Leave the scene

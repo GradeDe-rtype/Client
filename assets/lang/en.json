@@ -7,13 +7,21 @@
         "end": {
             "lose": "You lose !",
             "pressEnterReplay": "Press 'Enter' when you want to replay",
-            "wave": "{value} / 5 waves completed",
+            "wavesCompleted": "All waves completed !",
+            "wavesIncompleted": "Oh no... You didn't complete all waves",
             "win": "You win !"
         },
         "wave": {
             "nextWave": "Next Wave !",
             "pressEnterReady": "Press 'Enter' when you're ready",
             "wave": "Wave {value}"
+        }
+    },
+    "scenes": {
+        "waitingRoom": {
+            "errorMessage": "An error occurred while trying to connect you to the room",
+            "pressEnter": "Press 'Enter' to return to the rooms list",
+            "waitMessage": "We are trying to connect you to the room..."
         }
     },
     "settings": {
@@ -26,12 +34,16 @@
     "dico": {
         "accessibility": "Accessibility",
         "back": "Back",
+        "create": "Create",
         "graphic": "Graphic",
+        "join": "Join",
         "language": "Language",
         "play": "Play",
         "quit": "Quit",
+        "refresh": "Refresh",
         "save": "Save",
         "settings": "Settings",
-        "sound": "Sound"
+        "sound": "Sound",
+        "wait": "Wait"
     }
 }

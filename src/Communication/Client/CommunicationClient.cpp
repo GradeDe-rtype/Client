@@ -15,6 +15,7 @@ namespace RType
         Client::Client(const std::string &ip, int port, std::shared_ptr<SendList> sendList)
             : _ip(ip), _port(port), _state(TRY_CONNECT), _socket(_io_context), _sendList(sendList)
         {
+            _commands = std::make_unique<Commands>(sendList);
         }
 
         void Client::run()
@@ -87,7 +88,7 @@ namespace RType
                     rfcArgParser::DataPacket packet = rfcArgParser::DeserializePacket(data, length);
                     if (length == sizeof(rfcArgParser::DataPacket)) {
                         std::string stringPacket = rfcArgParser::DeserializePacket(packet);
-                        _commands.handleCommand(stringPacket);
+                        _commands->handleCommand(stringPacket);
                     } else {
                         std::cerr << "Incomplete packet received" << std::endl;
                     }

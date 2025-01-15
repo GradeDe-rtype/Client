@@ -35,6 +35,9 @@ namespace RType
                                     SectionSound(gd::Vector2<float> size);
 
                                     void setSettingValue() override;
+
+                                private:
+                                    gd::Time _soundTimer;
                             };
 
                             class SectionMusic : public RType::Game::Components::SectionRange

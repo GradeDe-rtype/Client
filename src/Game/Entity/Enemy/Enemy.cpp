@@ -79,6 +79,12 @@ namespace RType
                 });
             }
 
+            void Enemy::takeDamage(int damage)
+            {
+                _health -= damage;
+                if (_health <= 0) _health = 0;
+            }
+
         } // namespace Entity
     } // namespace Game
 } // namespace RType

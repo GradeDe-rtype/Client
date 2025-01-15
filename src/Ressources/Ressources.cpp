@@ -13,6 +13,9 @@ namespace RType
     Ressources::Ressources()
     {
         _timers.push_back(std::make_tuple(gd::Time(), 1, &Ressources::_sendPlayerPosition));
+
+        shoots["enemy"] = std::unordered_map<std::string, std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>>();
+        shoots["player"] = std::unordered_map<std::string, std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>>();
     }
 
     Ressources *Ressources::get()

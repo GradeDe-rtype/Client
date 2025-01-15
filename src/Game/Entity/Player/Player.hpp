@@ -33,6 +33,7 @@ namespace RType
 
                     void setColor(std::string color) override;
                     void setColor(gd::Color color) override;
+                    void setOutlineColor(gd::Color color);
                     void setPosition(float x, float y) override;
                     void setGoto(int x, int y);
                     void shoot();
@@ -40,6 +41,7 @@ namespace RType
                     void die();
                     void respawn();
                     void showHealthBar(bool show);
+                    void takeDamage(int damage);
 
                     bool hasMoved();
                     int getShootCooldown();

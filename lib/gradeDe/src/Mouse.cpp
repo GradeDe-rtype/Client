@@ -41,7 +41,6 @@ namespace gd
         sf::Vector2i pos = sf::Mouse::getPosition(*sfmlWindow);
         sf::Vector2f coord = sfmlWindow->mapPixelToCoords(pos);
         _position = gd::Vector2<float>(coord.x, coord.y);
-        std::cout << std::endl;
         return _position;
     }
 

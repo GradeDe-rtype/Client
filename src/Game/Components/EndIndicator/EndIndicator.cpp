@@ -21,8 +21,8 @@ namespace RType
                 _endText = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.lose"), 1.8, gd::Color(255, 255, 255, 0));
                 _endText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _endText->getSize().x / 2), (float)(window.getHeight() / 3 - _endText->getSize().y / 2)});
 
-                _scoreText = std::make_unique<RType::Game::Components::Text>("Karma Future", std::to_string(_endScore), 1.5, gd::Color(255, 255, 255, 0));
-                _scoreText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _scoreText->getSize().x / 2), (float)(window.getHeight() / 2 - _scoreText->getSize().y / 2)});
+                _wavesCompleted = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate(_endWin ? "game.end.wavesCompleted" : "game.end.wavesIncompleted"), 1.5, gd::Color(255, 255, 255, 0));
+                _wavesCompleted->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _wavesCompleted->getSize().x / 2), (float)(window.getHeight() / 2 - _wavesCompleted->getSize().y / 2)});
 
                 _pressEnter = std::make_unique<RType::Game::Components::Text>("Karma Future", Traductor::get()->translate("game.end.pressEnterReplay"), 1, gd::Color(255, 255, 255, 0));
                 _pressEnter->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (float)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
@@ -48,20 +48,18 @@ namespace RType
             void EndIndicator::draw(gd::Window &window)
             {
                 _endText->draw(window);
-                _scoreText->draw(window);
+                _wavesCompleted->draw(window);
                 _pressEnter->draw(window);
             }
 
             void EndIndicator::update(gd::Window &window)
             {
                 if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::END) {
-                    _endScore = RType::Ressources::get()->endScore;
-                    _endText->setText(Traductor::get()->translate((_endScore >= 5) ? "game.end.win" : "game.end.lose"));
+                    _endWin = RType::Ressources::get()->endWin;
+                    _endText->setText(Traductor::get()->translate(_endWin ? "game.end.win" : "game.end.lose"));
                     _endText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _endText->getSize().x / 2), (float)(window.getHeight() / 3 - _endText->getSize().y / 2)});
-                    std::string text = Traductor::get()->translate("game.end.wave");
-                    text.replace(text.find("{value}"), 7, std::to_string(_endScore));
-                    _scoreText->setText(text);
-                    _scoreText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _scoreText->getSize().x / 2), (float)(window.getHeight() / 2 - _scoreText->getSize().y / 2)});
+                    _wavesCompleted->setText(Traductor::get()->translate(_endWin ? "game.end.wavesCompleted" : "game.end.wavesIncompleted"));
+                    _wavesCompleted->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _wavesCompleted->getSize().x / 2), (float)(window.getHeight() / 2 - _wavesCompleted->getSize().y / 2)});
                 }
 
                 if (_fade.getElapsedTime() >= _fadeTime) {
@@ -70,7 +68,7 @@ namespace RType
                     else
                         _opacity = (_opacity - _fadeSpeed > 0) ? _opacity - _fadeSpeed : 0;
                     _endText->setColor(gd::Color(255, 255, 255, _opacity));
-                    _scoreText->setColor(gd::Color(255, 255, 255, _opacity));
+                    _wavesCompleted->setColor(gd::Color(255, 255, 255, _opacity));
                     _pressEnter->setColor(gd::Color(255, 255, 255, _opacity));
                     _fade.reset();
                 }
@@ -79,15 +77,15 @@ namespace RType
             void EndIndicator::reload(gd::Window &window)
             {
                 _endText->reload(window);
-                _scoreText->reload(window);
+                _wavesCompleted->reload(window);
                 _pressEnter->reload(window);
 
                 _endText->setText(Traductor::get()->translate("game.end.lose"));
-                _scoreText->setText(std::to_string(_endScore));
+                _wavesCompleted->setText(Traductor::get()->translate(_endWin ? "game.end.wavesCompleted" : "game.end.wavesIncompleted"));
                 _pressEnter->setText(Traductor::get()->translate("game.end.pressEnterReplay"));
 
                 _endText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _endText->getSize().x / 2), (float)(window.getHeight() / 3 - _endText->getSize().y / 2)});
-                _scoreText->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _scoreText->getSize().x / 2), (float)(window.getHeight() / 2 - _scoreText->getSize().y / 2)});
+                _wavesCompleted->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _wavesCompleted->getSize().x / 2), (float)(window.getHeight() / 2 - _wavesCompleted->getSize().y / 2)});
                 _pressEnter->setPosition((gd::Vector2<float>){(float)(window.getWidth() / 2 - _pressEnter->getSize().x / 2), (float)(window.getHeight() / 3 * 2 - _pressEnter->getSize().y / 2)});
             }
         } // namespace Components

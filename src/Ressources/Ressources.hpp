@@ -16,6 +16,7 @@
 #include <unordered_map>
 #include "GradeDe/Time.hpp"
 #include "Communication/SendList/SendList.hpp"
+#include "Game/Components/RoomGameSlot/RoomGameSlot.hpp"
 #include "Game/Entity/Enemy/Enemy.hpp"
 #include "Game/Entity/Player/Player.hpp"
 #include "Game/Entity/Shoot/Shoot.hpp"
@@ -43,12 +44,14 @@ namespace RType
             std::shared_ptr<RType::Game::Entity::Player> me = nullptr;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Player>> players;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Enemy>> enemies;
+            std::unordered_map<std::string, std::unordered_map<std::string, std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>>> shoots;
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
-            std::vector<std::unique_ptr<RType::Game::Entity::Shoot>> shoots;
+            std::vector<std::shared_ptr<RType::Game::Components::RoomGameSlot>> roomGameSlots;
+            bool majRoom = false;
             int wave = 0;
             RoomState roomState = RoomState::GAME;
             bool isConnected = false;
-            int endScore = 5;
+            bool endWin = false;
 
         private:
             Ressources();

@@ -50,6 +50,8 @@ namespace RType
                     void setPosition(gd::Vector2<float> position) override;
                     void setText(std::string text);
                     void setSize(gd::Vector2<float> size);
+                    void setSizeX(float x);
+                    void setSizeY(float y);
                     void setAlign(Align align);
 
                     int getCharacterSize() const;

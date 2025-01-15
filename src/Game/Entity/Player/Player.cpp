@@ -7,6 +7,7 @@
 */
 
 #include "Player.hpp"
+#include "Ressources/Ressources.hpp"
 
 namespace RType
 {
@@ -30,7 +31,7 @@ namespace RType
                     {static_cast<float>(_size / 4), static_cast<float>(_size / 2)},
                 });
                 _shape.setOrigin({static_cast<float>(_size / 2), static_cast<float>(_size / 2)});
-                _shape.setFillColor(gd::Color::Transparent);
+                _shape.setFillColor(_color);
                 _shape.setOutlineColor(_color);
                 _shape.setOutlineThickness(5);
                 _shape.setPosition(_position);
@@ -52,13 +53,19 @@ namespace RType
 
             void Player::setColor(std::string color)
             {
-                _shape.setOutlineColor(gd::Color::fromHex(color));
+                setColor(gd::Color::fromHex(color));
+            }
+
+            void Player::setOutlineColor(gd::Color color)
+            {
+                _color = color;
+                _shape.setOutlineColor(_color);
             }
 
             void Player::setColor(gd::Color color)
             {
-                _color = color;
                 _shape.setOutlineColor(_color);
+                _shape.setFillColor(_color);
             }
 
             void Player::setPosition(float x, float y)
@@ -78,8 +85,14 @@ namespace RType
             void Player::shoot()
             {
                 if (!_isAlive) return;
-                if (_shootTimer.getElapsedTime() > _shootCooldown)
+                if (_shootTimer.getElapsedTime() < _shootCooldown) return;
+                if (RType::Ressources::get()->roomState != RType::Ressources::RoomState::GAME) {
+                    RType::Game::Managers::Sound::get().play("error");
                     _shootTimer.reset();
+                    return;
+                }
+                RType::Ressources::get()->sendList->push("shoot " + getEntityPosition());
+                _shootTimer.reset();
             }
 
             void Player::setShootCooldown(int cooldown)
@@ -156,6 +169,13 @@ namespace RType
             void Player::showHealthBar(bool show)
             {
                 _showHealthBar = show;
+            }
+
+            void Player::takeDamage(int damage)
+            {
+                _health -= damage;
+                if (_health <= 0) _health = 0;
+                _healthBar->setValue(_health);
             }
         } // namespace Entity
     } // namespace Game

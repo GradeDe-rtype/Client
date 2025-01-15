@@ -33,6 +33,8 @@ namespace RType
                     Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
                     ~Enemy() = default;
 
+                    void takeDamage(int damage);
+
                 private:
                     Type _type;
 
