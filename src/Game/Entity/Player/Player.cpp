@@ -43,6 +43,7 @@ namespace RType
                 _healthBar = std::make_unique<Game::Components::Range>(0, _health, 1, gd::Vector2<float>(0, 0), gd::Vector2<float>(_size * 1.5, 10));
                 _healthBar->setValue(_health);
                 _healthBar->setColor(gd::Color::fromHex("#900028"));
+                _showHealthBar = false;
             }
 
             void Player::draw(gd::Window &window)

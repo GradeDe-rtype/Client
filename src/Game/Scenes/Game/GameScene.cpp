@@ -94,6 +94,10 @@ namespace RType
                     player.second->update();
                     player.second->showHealthBar(_showHealthBar);
                 }
+                for (auto &enemy : RType::Ressources::get()->enemies) {
+                    enemy.second->update();
+                    enemy.second->showHealthBar(_showHealthBar);
+                }
             }
         } // namespace Scenes
     } // namespace Game

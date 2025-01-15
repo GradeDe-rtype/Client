@@ -139,7 +139,9 @@ namespace RType
 
         void Commands::_handlePlayerInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"p_info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->players[obj["id"]]->setHealth(std::stoi(obj["health"]));
+            RType::Ressources::get()->players[obj["id"]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
 
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
@@ -153,7 +155,7 @@ namespace RType
         {
             if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
-            RType::Ressources::get()->enemies[args[1]]->setPosition(std::stoi(obj["x"]), std::stoi(obj["y"]));
+            RType::Ressources::get()->enemies[args[1]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
 
         void Commands::_handleEnemyDamage(std::vector<std::string> args)
@@ -168,7 +170,9 @@ namespace RType
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"e_info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->enemies[obj["id"]]->setHealth(std::stoi(obj["health"]));
+            RType::Ressources::get()->enemies[obj["id"]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
 
         void Commands::_handleShootCreation(std::vector<std::string> args)
@@ -201,7 +205,8 @@ namespace RType
 
         void Commands::_handleShootInfo(std::vector<std::string> args)
         {
-            std::cerr << "\"s_info\" command not implemented yet" << std::endl;
+            std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
 
         void Commands::_handleGameWave(std::vector<std::string> args)
