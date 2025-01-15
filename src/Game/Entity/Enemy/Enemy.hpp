@@ -30,8 +30,7 @@ namespace RType
                         BASIC_MONSTER = 3,
                         HEALTH_BONUS = 4,
                         DAMAGE_BONUS = 5,
-                        ROCKET_WEAPON = 6,
-                        LASER_WEAPON = 7
+                        ROCKET_WEAPON = 6
                     } Type;
 
                     Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
@@ -41,8 +40,8 @@ namespace RType
 
                 private:
                     Type _type;
-
                     void _createMonsterShape();
+
                     void _createKamikazeMonster();
                     void _createBasicMonster();
                     void _createBossMonster();

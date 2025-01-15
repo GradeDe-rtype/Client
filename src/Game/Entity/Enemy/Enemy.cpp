@@ -33,14 +33,23 @@ namespace RType
             void Enemy::_createMonsterShape()
             {
                 switch (_type) {
-                    case Type::KAMIKAZE_MONSTER:
-                        _createKamikazeMonster();
-                        break;
-                    case Type::BASIC_MONSTER:
+                    case Enemy::Type::BASIC_MONSTER:
                         _createBasicMonster();
                         break;
-                    case Type::BOSS:
+                    case Enemy::Type::KAMIKAZE_MONSTER:
+                        _createKamikazeMonster();
+                        break;
+                    case Enemy::Type::BOSS:
                         _createBossMonster();
+                        break;
+                    case Enemy::Type::HEALTH_BONUS:
+                        _createHealthPickup();
+                        break;
+                    case Enemy::Type::DAMAGE_BONUS:
+                        _createDamagePickup();
+                        break;
+                    case Enemy::Type::ROCKET_WEAPON:
+                        _createRocketPickup();
                         break;
                 }
             }
