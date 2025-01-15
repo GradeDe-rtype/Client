@@ -155,7 +155,7 @@ namespace RType
         {
             if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
-            RType::Ressources::get()->enemies[args[1]]->setPosition(std::stoi(obj["x"]), std::stoi(obj["y"]));
+            RType::Ressources::get()->enemies[args[1]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
         }
 
         void Commands::_handleEnemyDamage(std::vector<std::string> args)

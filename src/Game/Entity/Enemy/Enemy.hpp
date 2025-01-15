@@ -11,6 +11,7 @@
 
 /*  ---- INCLUDES ---- */
 #include <unordered_map>
+#include "Game/Components/Range/Range.hpp"
 #include "Game/Entity/Base/AEntity.hpp"
 
 /*  ---- CLASS ---- */
@@ -35,11 +36,17 @@ namespace RType
 
                     Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
                     ~Enemy() = default;
+                    void draw(gd::Window &window) override;
 
+                    void setPosition(float x, float y) override;
                     void takeDamage(int damage);
+                    void showHealthBar(bool show);
+                    void setHealth(int health);
 
                 private:
                     Type _type;
+                    std::unique_ptr<Game::Components::Range> _healthBar;
+                    bool _showHealthBar = false;
                     void _createMonsterShape();
 
                     void _createKamikazeMonster();

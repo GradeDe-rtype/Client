@@ -59,7 +59,7 @@ namespace RType
                         NOTHING,
                     } TransitionState;
 
-                    int _transitionDuration = 800;
+                    int _transitionDuration = 400;
                     int _transitionFrame = 40;
                     int _transitionSpeed = 255 / _transitionFrame;
                     int _backupVolume = 100;
