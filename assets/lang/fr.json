@@ -6,7 +6,7 @@
     "game": {
         "end": {
             "lose": "Vous avez perdu !",
-            "pressEnterReplay": "Appuyez sur 'Entree' pour rejouer",
+            "pressEnterReplay": "Appuyez sur 'Entree' pour revenir a la liste des parties",
             "wavesCompleted": "Toutes les vagues ont ete completees !",
             "wavesIncompleted": "Oh non... Vous n'avez pas complete toutes les vagues",
             "win": "Vous avez gagne !"
