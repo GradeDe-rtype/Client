@@ -34,6 +34,7 @@ namespace RType
                 WAVE_READY,
                 GAME,
                 END,
+                ROOMS_LIST,
             };
 
             static Ressources *get();

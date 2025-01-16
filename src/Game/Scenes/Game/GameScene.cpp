@@ -35,6 +35,11 @@ namespace RType
                 _waveIndicators->handleEvent(window, event);
                 _endIndicator->handleEvent(window, event);
 
+                if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::ROOMS_LIST) {
+                    RType::Ressources::get()->roomState = RType::Ressources::RoomState::GAME;
+                    return "roomsList";
+                }
+
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->getSize();
 
