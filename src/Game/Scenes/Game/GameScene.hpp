@@ -78,6 +78,9 @@ namespace RType
                     std::unique_ptr<RType::Game::Components::Range> _health;
                     std::unique_ptr<RType::Game::Components::Range> _shotCooldown;
                     bool _showHealthBar = false;
+                    gd::Time _healthBarToggleTimer;
+
+                    void _toggleHealthBar();
             };
         } // namespace Scenes
     } // namespace Game

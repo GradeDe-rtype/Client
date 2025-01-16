@@ -45,7 +45,7 @@ namespace RType
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) position.y += RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed && position.x >= size.x / 2) position.x -= RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed && position.x <= window.getWidth() - size.x) position.x += RType::Ressources::get()->me->getSpeed();
-                _showHealthBar = event.keyBoard.getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed;
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed) _toggleHealthBar();
                 if (event.joyStick.isConnected()) {
                     if (event.joyStick.getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                     if (event.joyStick.isJoyStickMoved()) {
@@ -90,14 +90,21 @@ namespace RType
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
                 RType::Ressources::get()->me->update();
-                for (auto &player : RType::Ressources::get()->players) {
+                for (auto &player : RType::Ressources::get()->players)
                     player.second->update();
-                    player.second->showHealthBar(_showHealthBar);
-                }
-                for (auto &enemy : RType::Ressources::get()->enemies) {
+                for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->update();
+            }
+
+            void Game::_toggleHealthBar()
+            {
+                if (_healthBarToggleTimer.getElapsedTime() < 200) return;
+                _healthBarToggleTimer.reset();
+                _showHealthBar = !_showHealthBar;
+                for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->showHealthBar(_showHealthBar);
-                }
+                for (auto &player : RType::Ressources::get()->players)
+                    player.second->showHealthBar(_showHealthBar);
             }
         } // namespace Scenes
     } // namespace Game
