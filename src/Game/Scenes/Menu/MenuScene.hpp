@@ -16,16 +16,15 @@
 #include <vector>
 #include "GradeDe/Event.hpp"
 #include "GradeDe/Music.hpp"
+#include "GradeDe/RectangleShape.hpp"
 #include "GradeDe/Time.hpp"
 #include "GradeDe/Window.hpp"
 #include "Game/Components/Text/Text.hpp"
+#include "Game/Components/TextBox/TextBox.hpp"
 #include "Game/Entity/SelectArrow/SelectArrow.hpp"
 #include "Game/Scenes/Base/AScene.hpp"
 #include "Ressources/Ressources.hpp"
 #include "Traductor.hpp"
-
-#include "GradeDe/RectangleShape.hpp"
-#include "Game/Components/TextBox/TextBox.hpp"
 
 /*  ---- CLASS ---- */
 namespace RType
