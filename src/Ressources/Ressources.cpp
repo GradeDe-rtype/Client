@@ -46,4 +46,21 @@ namespace RType
             sendList->push("position " + me->getEntityPosition());
     }
 
+    void Ressources::clearShoots(std::vector<std::string> from)
+    {
+        for (auto &from : from) {
+            for (auto &related : shoots[from])
+                related.second.clear();
+            shoots[from].clear();
+        }
+    }
+
+    void Ressources::cleanShoots(std::vector<std::string> from)
+    {
+        for (auto &from : from) {
+            for (auto &related : shoots[from])
+                related.second.clear();
+        }
+    }
+
 } // namespace RType

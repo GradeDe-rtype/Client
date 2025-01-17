@@ -217,6 +217,8 @@ namespace RType
                     player.second->respawn();
             RType::Ressources::get()->enemies.clear();
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
+            RType::Ressources::get()->clearShoots({"enemy"});
+            RType::Ressources::get()->cleanShoots({"player"});
         }
 
         void Commands::_handleRoomEndGame(std::vector<std::string> args)
@@ -224,6 +226,7 @@ namespace RType
             RType::Ressources::get()->endWin = (args[1] == "win");
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
             RType::Ressources::get()->enemies.clear();
+            RType::Ressources::get()->clearShoots();
         }
     } // namespace Communication
 } // namespace RType

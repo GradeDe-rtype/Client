@@ -37,6 +37,7 @@ namespace RType
                     if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Enter) == gd::KeyBoard::State::Pressed ||
                         event.joyStick.getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::ROOMS_LIST;
+                        RType::Ressources::get()->wave = 0;
                         for (auto &player : RType::Ressources::get()->players)
                             if (!player.second->getIsAlive())
                                 player.second->respawn();

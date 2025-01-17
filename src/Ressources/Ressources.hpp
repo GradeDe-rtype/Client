@@ -53,6 +53,8 @@ namespace RType
             RoomState roomState = RoomState::GAME;
             bool isConnected = false;
             bool endWin = false;
+            void clearShoots(std::vector<std::string> from = {"player", "enemy"});
+            void cleanShoots(std::vector<std::string> from = {"player", "enemy"});
 
         private:
             Ressources();
