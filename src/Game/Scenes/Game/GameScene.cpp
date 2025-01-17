@@ -75,8 +75,10 @@ namespace RType
             {
                 for (auto &player : RType::Ressources::get()->players)
                     player.second->draw(window);
+                RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->draw(window);
+                RType::Ressources::get()->enemiesMutex.unlock();
                 for (auto &from : RType::Ressources::get()->shoots)
                     for (auto &who : from.second)
                         for (auto &shoot : who.second)
@@ -99,10 +101,12 @@ namespace RType
                     player.second->showHealthBar(_showHealthBar);
                     player.second->update();
                 }
+                RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies) {
                     enemy.second->showHealthBar(_showHealthBar);
                     enemy.second->update();
                 }
+                RType::Ressources::get()->enemiesMutex.unlock();
             }
 
             void Game::_toggleHealthBar()

@@ -148,31 +148,44 @@ namespace RType
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             RType::Ressources::get()->shoots["enemy"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
+            RType::Ressources::get()->enemiesMutex.lock();
             RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), static_cast<RType::Game::Entity::Enemy::Type>(std::stoi(obj["type"])), std::stof(obj["x"]), std::stof(obj["y"]), std::stoi(obj["size"]), std::stoi(obj["health"]));
+            RType::Ressources::get()->enemiesMutex.unlock();
         }
 
         void Commands::_handleEnemyPosition(std::vector<std::string> args)
         {
+            RType::Ressources::get()->enemiesMutex.lock();
             if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[2]);
             RType::Ressources::get()->enemies[args[1]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
+            RType::Ressources::get()->enemiesMutex.unlock();
         }
 
         void Commands::_handleEnemyDamage(std::vector<std::string> args)
         {
+            RType::Ressources::get()->enemiesMutex.lock();
+            if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             RType::Ressources::get()->enemies[args[1]]->takeDamage(std::stoi(args[2]));
+            RType::Ressources::get()->enemiesMutex.unlock();
         }
 
         void Commands::_handleEnemyDeath(std::vector<std::string> args)
         {
+            RType::Ressources::get()->enemiesMutex.lock();
+            if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             RType::Ressources::get()->enemies.erase(args[1]);
+            RType::Ressources::get()->enemiesMutex.unlock();
         }
 
         void Commands::_handleEnemyInfo(std::vector<std::string> args)
         {
+            RType::Ressources::get()->enemiesMutex.lock();
+            if (RType::Ressources::get()->enemies.find(args[1]) == RType::Ressources::get()->enemies.end()) return;
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             RType::Ressources::get()->enemies[obj["id"]]->setHealth(std::stoi(obj["health"]));
             RType::Ressources::get()->enemies[obj["id"]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
+            RType::Ressources::get()->enemiesMutex.unlock();
         }
 
         void Commands::_handleShootCreation(std::vector<std::string> args)
@@ -180,7 +193,9 @@ namespace RType
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
+            RType::Ressources::get()->enemiesMutex.lock();
             gd::Vector2<float> pos = (obj["from"] == "player") ? RType::Ressources::get()->players[obj["related"]]->getPosition() : RType::Ressources::get()->enemies[obj["related"]]->getPosition();
+            RType::Ressources::get()->enemiesMutex.unlock();
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]] = std::make_shared<RType::Game::Entity::Shoot>(pos.x, pos.y, obj["from"]);
         }
 
@@ -215,7 +230,9 @@ namespace RType
             for (auto &player : RType::Ressources::get()->players)
                 if (!player.second->getIsAlive())
                     player.second->respawn();
+            RType::Ressources::get()->enemiesMutex.lock();
             RType::Ressources::get()->enemies.clear();
+            RType::Ressources::get()->enemiesMutex.unlock();
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::NEXT_WAVE;
             RType::Ressources::get()->clearShoots({"enemy"});
             RType::Ressources::get()->cleanShoots({"player"});
@@ -225,7 +242,9 @@ namespace RType
         {
             RType::Ressources::get()->endWin = (args[1] == "win");
             RType::Ressources::get()->roomState = RType::Ressources::RoomState::END;
+            RType::Ressources::get()->enemiesMutex.lock();
             RType::Ressources::get()->enemies.clear();
+            RType::Ressources::get()->enemiesMutex.unlock();
             RType::Ressources::get()->clearShoots();
         }
     } // namespace Communication
