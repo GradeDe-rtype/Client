@@ -95,10 +95,14 @@ namespace RType
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
                 RType::Ressources::get()->me->update();
-                for (auto &player : RType::Ressources::get()->players)
+                for (auto &player : RType::Ressources::get()->players) {
+                    player.second->showHealthBar(_showHealthBar);
                     player.second->update();
-                for (auto &enemy : RType::Ressources::get()->enemies)
+                }
+                for (auto &enemy : RType::Ressources::get()->enemies) {
+                    enemy.second->showHealthBar(_showHealthBar);
                     enemy.second->update();
+                }
             }
 
             void Game::_toggleHealthBar()
@@ -106,10 +110,6 @@ namespace RType
                 if (_healthBarToggleTimer.getElapsedTime() < 200) return;
                 _healthBarToggleTimer.reset();
                 _showHealthBar = !_showHealthBar;
-                for (auto &enemy : RType::Ressources::get()->enemies)
-                    enemy.second->showHealthBar(_showHealthBar);
-                for (auto &player : RType::Ressources::get()->players)
-                    player.second->showHealthBar(_showHealthBar);
             }
         } // namespace Scenes
     } // namespace Game
