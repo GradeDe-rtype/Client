@@ -50,6 +50,7 @@ namespace RType
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Player>> players;
             RType::Helpers::Mutex enemiesMutex;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Enemy>> enemies;
+            RType::Helpers::Mutex shootsMutex;
             std::unordered_map<std::string, std::unordered_map<std::string, std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>>> shoots;
             std::shared_ptr<RType::Communication::SendList> sendList = nullptr;
             std::vector<std::shared_ptr<RType::Game::Components::RoomGameSlot>> roomGameSlots;

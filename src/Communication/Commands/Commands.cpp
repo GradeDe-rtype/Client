@@ -86,11 +86,13 @@ namespace RType
 
         void Commands::_handlePlayerConnection(std::vector<std::string> args)
         {
-            RType::Ressources::get()->playersMutex.lock();
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots["player"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
+            RType::Ressources::get()->playersMutex.lock();
             RType::Ressources::get()->players[obj["id"]] = std::make_shared<RType::Game::Entity::Player>(std::stoi(obj["id"]), obj["color"]);
             RType::Ressources::get()->playersMutex.unlock();
+            RType::Ressources::get()->shootsMutex.lock();
+            RType::Ressources::get()->shoots["player"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleYouConnection(std::vector<std::string> args)
@@ -166,10 +168,12 @@ namespace RType
         void Commands::_handleEnemyCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
-            RType::Ressources::get()->shoots["enemy"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
             RType::Ressources::get()->enemiesMutex.lock();
             RType::Ressources::get()->enemies[obj["id"]] = std::make_shared<RType::Game::Entity::Enemy>(std::stoi(obj["id"]), static_cast<RType::Game::Entity::Enemy::Type>(std::stoi(obj["type"])), std::stof(obj["x"]), std::stof(obj["y"]), std::stoi(obj["size"]), std::stoi(obj["health"]));
             RType::Ressources::get()->enemiesMutex.unlock();
+            RType::Ressources::get()->shootsMutex.lock();
+            RType::Ressources::get()->shoots["enemy"][obj["id"]] = std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Shoot>>();
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleEnemyPosition(std::vector<std::string> args)
@@ -210,6 +214,7 @@ namespace RType
         void Commands::_handleShootCreation(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shootsMutex.lock();
             if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
             gd::Vector2<float> pos;
@@ -225,31 +230,38 @@ namespace RType
                 RType::Ressources::get()->enemiesMutex.unlock();
             }
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]] = std::make_shared<RType::Game::Entity::Shoot>(pos.x, pos.y, obj["from"]);
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleShootPosition(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
             std::unordered_map<std::string, std::string> position = rfcArgParser::ParseObject(args[2]);
+            RType::Ressources::get()->shootsMutex.lock();
             if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stoi(position["x"]), std::stoi(position["y"]));
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleShootDeath(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shootsMutex.lock();
             if (RType::Ressources::get()->shoots.find(obj["from"]) == RType::Ressources::get()->shoots.end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]].find(obj["related"]) == RType::Ressources::get()->shoots[obj["from"]].end()) return;
             if (RType::Ressources::get()->shoots[obj["from"]][obj["related"]].find(obj["id"]) == RType::Ressources::get()->shoots[obj["from"]][obj["related"]].end()) return;
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]].erase(obj["id"]);
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleShootInfo(std::vector<std::string> args)
         {
             std::unordered_map<std::string, std::string> obj = rfcArgParser::ParseObject(args[1]);
+            RType::Ressources::get()->shootsMutex.lock();
             RType::Ressources::get()->shoots[obj["from"]][obj["related"]][obj["id"]]->setPosition(std::stof(obj["x"]), std::stof(obj["y"]));
+            RType::Ressources::get()->shootsMutex.unlock();
         }
 
         void Commands::_handleGameWave(std::vector<std::string> args)

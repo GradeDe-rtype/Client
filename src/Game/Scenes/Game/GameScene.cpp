@@ -81,10 +81,12 @@ namespace RType
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->draw(window);
                 RType::Ressources::get()->enemiesMutex.unlock();
+                RType::Ressources::get()->shootsMutex.lock();
                 for (auto &from : RType::Ressources::get()->shoots)
                     for (auto &who : from.second)
                         for (auto &shoot : who.second)
                             shoot.second->draw(window);
+                RType::Ressources::get()->shootsMutex.unlock();
                 _waveIndicators->draw(window);
                 _endIndicator->draw(window);
                 _health->draw(window);
