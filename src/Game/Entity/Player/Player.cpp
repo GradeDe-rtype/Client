@@ -78,6 +78,12 @@ namespace RType
                 _moved = true;
             }
 
+            void Player::setHealth(int health)
+            {
+                _health = health;
+                _healthBar->setValue(_health);
+            }
+
             void Player::setGoto(int x, int y)
             {
                 _goto = {x, y};
