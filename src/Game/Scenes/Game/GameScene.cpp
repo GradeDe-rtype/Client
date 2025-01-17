@@ -73,8 +73,10 @@ namespace RType
 
             void Game::draw(gd::Window &window)
             {
+                RType::Ressources::get()->playersMutex.lock();
                 for (auto &player : RType::Ressources::get()->players)
                     player.second->draw(window);
+                RType::Ressources::get()->playersMutex.unlock();
                 RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->draw(window);
@@ -97,10 +99,12 @@ namespace RType
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
                 RType::Ressources::get()->me->update();
+                RType::Ressources::get()->playersMutex.lock();
                 for (auto &player : RType::Ressources::get()->players) {
                     player.second->showHealthBar(_showHealthBar);
                     player.second->update();
                 }
+                RType::Ressources::get()->playersMutex.unlock();
                 RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies) {
                     enemy.second->showHealthBar(_showHealthBar);

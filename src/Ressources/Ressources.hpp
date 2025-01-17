@@ -46,6 +46,7 @@ namespace RType
             void cleanShoots(std::vector<std::string> from = {"player", "enemy"});
 
             std::shared_ptr<RType::Game::Entity::Player> me = nullptr;
+            RType::Helpers::Mutex playersMutex;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Player>> players;
             RType::Helpers::Mutex enemiesMutex;
             std::unordered_map<std::string, std::shared_ptr<RType::Game::Entity::Enemy>> enemies;
