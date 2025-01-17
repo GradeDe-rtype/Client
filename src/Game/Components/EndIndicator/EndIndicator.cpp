@@ -38,9 +38,11 @@ namespace RType
                         event.joyStick.getButtonState(gd::JoyStick::Button::Y) == gd::JoyStick::State::Pressed) {
                         RType::Ressources::get()->roomState = RType::Ressources::RoomState::ROOMS_LIST;
                         RType::Ressources::get()->wave = 0;
+                        RType::Ressources::get()->playersMutex.lock();
                         for (auto &player : RType::Ressources::get()->players)
                             if (!player.second->getIsAlive())
                                 player.second->respawn();
+                        RType::Ressources::get()->playersMutex.unlock();
                     }
                 }
             }
