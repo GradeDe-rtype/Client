@@ -1,7 +1,7 @@
 #include <criterion/criterion.h>
 
 #include "Enemy.hpp"
-
+#include "Player.hpp"
 namespace RType
 {
     namespace Game
@@ -67,6 +67,52 @@ namespace RType
                 Enemy enemy(7, Enemy::Type::BOSS);
                 enemy.showHealthBar(true);
                 cr_assert(true, "Health bar visibility toggled (manual verification required in graphics module)");
+            }
+
+            /* ---- PLAYER CLASS ---- */
+                        
+            Test(Player, Constructor_Default)
+            {
+                Player player(1, "#FF0000");
+                cr_assert_eq(player.getId(), 1, "Player ID should be 1");
+                cr_assert_eq(player.getHealth(), 100, "Player health should be initialized to 100");
+                cr_assert(player.getIsAlive(), "Player should be alive by default");
+                cr_assert_eq(player.getSpeed(), 15, "Player default speed should be 15");
+            }
+
+            Test(Player, SetPosition)
+            {
+                Player player(2, "#00FF00");
+                player.setPosition(30.0f, 50.0f);
+                cr_assert_float_eq(player.getX(), 30.0f, 1e-6, "Player X position should be updated to 30.0");
+                cr_assert_float_eq(player.getY(), 50.0f, 1e-6, "Player Y position should be updated to 50.0");
+            }
+
+            Test(Player, TakeDamage)
+            {
+                Player player(3, "#0000FF");
+                player.takeDamage(20);
+                cr_assert_eq(player.getHealth(), 80, "Player health should be 80 after taking 20 damage");
+                
+                player.takeDamage(100);
+                cr_assert_eq(player.getHealth(), 0, "Player health should not go below 0");
+            }
+
+            Test(Player, DieAndRespawn)
+            {
+                Player player(4, "#FFFF00");
+                player.die();
+                cr_assert_not(player.getIsAlive(), "Player should be dead after calling die()");
+                
+                player.respawn();
+                cr_assert(player.getIsAlive(), "Player should be alive after calling respawn()");
+            }
+
+            Test(Player, ShootCooldown)
+            {
+                Player player(5, "#FF00FF");
+                player.setShootCooldown(1000);
+                cr_assert_eq(player.getShootMaxCooldown(), 1000, "Player shoot cooldown should be set to 1000");
             }
         } // namespace Entity
     } // namespace Game
