@@ -5,12 +5,9 @@ project(RType VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-#  ---- FIND BOOST ---- #
+#  ---- FIND PACKAGES ---- #
 find_package(Boost 1.70 REQUIRED COMPONENTS system)
-
-#  ---- FIND CRITERION ---- #
-# find_package(PkgConfig REQUIRED)
-# pkg_check_modules(CRITERION REQUIRED criterion)
+find_package(SFML REQUIRED COMPONENTS graphics window system audio network)
 
 #  ---- LIBRARIES ---- #
 set(RTYPE_LIBRARIES
@@ -36,11 +33,15 @@ file(GLOB_RECURSE SOURCES
     "src/*.cpp"
 )
 
-#  ---- SUBDIRECTORY ---- #
-# add_subdirectory(tests)
-
 #  ---- EXECUTABLE ---- #
 add_executable(r-type_client ${SOURCES})
+
+#  ---- COMPILE OPTIONS ---- #
+if(MSVC)
+    target_compile_options(r-type_client PRIVATE /W4)
+else()
+    target_compile_options(r-type_client PRIVATE)
+endif()
 
 #  ---- INCLUDES ---- #
 foreach(LIB ${RTYPE_LIBRARIES})
