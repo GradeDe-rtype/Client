@@ -118,6 +118,22 @@ namespace RType
                 cr_assert_eq(player.getShootMaxCooldown(), 1000, "Player shoot cooldown should be set to 1000");
             }
 
+            /* ---- SHOOT CLASS ---- */
+            
+            Test(Shoot, Constructor_Default)
+            {
+                Shoot shoot(10.0f, 20.0f);
+                cr_assert_float_eq(shoot.getX(), 10.0f, 1e-6, "Shoot X position should be initialized to 10.0");
+                cr_assert_float_eq(shoot.getY(), 20.0f, 1e-6, "Shoot Y position should be initialized to 20.0");
+            }
+
+            Test(Shoot, Constructor_FromEnemy)
+            {
+                Shoot shoot(15.0f, 25.0f, "enemy");
+                cr_assert_float_eq(shoot.getX(), 15.0f, 1e-6, "Shoot X position should be initialized to 15.0");
+                cr_assert_float_eq(shoot.getY(), 25.0f, 1e-6, "Shoot Y position should be initialized to 25.0");
+            }
+
             /* ---- SELECTARROW CLASS ---- */
             
             Test(SelectArrow, Constructor_Default)
