@@ -14,13 +14,13 @@ namespace RType
     {
         namespace Entity
         {
-            Enemy::Enemy(int id, Enemy::Type type, float x, float y, int health)
+            Enemy::Enemy(int id, Enemy::Type type, float x, float y, int size, int health)
             {
                 _id = id;
                 _position = {x, y};
                 _health = health;
 
-                _size = 40;
+                _size = size;
                 _type = type;
                 _createMonsterShape();
                 _shape.setFillColor(gd::Color::Transparent);
@@ -54,8 +54,11 @@ namespace RType
                     case Enemy::Type::DAMAGE_BONUS:
                         _createDamagePickup();
                         break;
-                    case Enemy::Type::ROCKET_WEAPON:
-                        _createRocketPickup();
+                    case Enemy::Type::SHOTGUN_WEAPON:
+                        _createShotgunWeapon();
+                        break;
+                    default:
+                        _createBasicMonster();
                         break;
                 }
             }
@@ -126,15 +129,16 @@ namespace RType
                 });
             }
 
-            void Enemy::_createRocketPickup()
+            void Enemy::_createShotgunWeapon()
             {
                 _shape.create({
-                    {static_cast<float>(_size * 0.5), static_cast<float>(0)},
-                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.3)},
-                    {static_cast<float>(_size * 0.7), static_cast<float>(_size * 0.7)},
-                    {static_cast<float>(_size * 0.5), static_cast<float>(_size)},
-                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.7)},
-                    {static_cast<float>(_size * 0.3), static_cast<float>(_size * 0.3)},
+                    {static_cast<float>(_size / 2), static_cast<float>(0)},
+                    {static_cast<float>(0), static_cast<float>(_size / 2)},
+                    {static_cast<float>(_size / 3), static_cast<float>(_size / 2)},
+                    {static_cast<float>(_size / 3), static_cast<float>(_size)},
+                    {static_cast<float>(_size / 3 * 2), static_cast<float>(_size)},
+                    {static_cast<float>(_size / 3 * 2), static_cast<float>(_size / 2)},
+                    {static_cast<float>(_size), static_cast<float>(_size / 2)},
                 });
             }
 

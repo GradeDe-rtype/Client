@@ -42,6 +42,7 @@ namespace RType
                     void respawn();
                     void showHealthBar(bool show);
                     void takeDamage(int damage);
+                    void setHealth(int health) override;
 
                     bool hasMoved();
                     int getShootCooldown();
