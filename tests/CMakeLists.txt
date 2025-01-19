@@ -40,6 +40,9 @@ add_executable(r-type_tests ${TEST_SOURCES} ${SRC_SOURCES})
 target_include_directories(r-type_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/../include/
     ${CMAKE_SOURCE_DIR}/../src/
+    ${CMAKE_SOURCE_DIR}/../src/Communication/Client/
+    ${CMAKE_SOURCE_DIR}/../src/Communication/Commands/
+    ${CMAKE_SOURCE_DIR}/../src/Communication/SendList/
     ${CMAKE_SOURCE_DIR}/../src/Game/
     ${CMAKE_SOURCE_DIR}/../src/Game/Components/
     ${CMAKE_SOURCE_DIR}/../src/Game/Entity/
