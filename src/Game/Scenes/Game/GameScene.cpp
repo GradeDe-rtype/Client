@@ -35,6 +35,11 @@ namespace RType
                 _waveIndicators->handleEvent(window, event);
                 _endIndicator->handleEvent(window, event);
 
+                if (RType::Ressources::get()->roomState == RType::Ressources::RoomState::ROOMS_LIST) {
+                    RType::Ressources::get()->roomState = RType::Ressources::RoomState::GAME;
+                    return "roomsList";
+                }
+
                 gd::Vector2<float> position = RType::Ressources::get()->me->shape().getPosition();
                 gd::Vector2<float> size = RType::Ressources::get()->me->getSize();
 
@@ -45,7 +50,7 @@ namespace RType
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Down) == gd::KeyBoard::State::Pressed && position.y <= window.getHeight() - size.y / 2) position.y += RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Left) == gd::KeyBoard::State::Pressed && position.x >= size.x / 2) position.x -= RType::Ressources::get()->me->getSpeed();
                 if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Right) == gd::KeyBoard::State::Pressed && position.x <= window.getWidth() - size.x) position.x += RType::Ressources::get()->me->getSpeed();
-                _showHealthBar = event.keyBoard.getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed;
+                if (event.keyBoard.getKeyState(gd::KeyBoard::Key::Tab) == gd::KeyBoard::State::Pressed) _toggleHealthBar();
                 if (event.joyStick.isConnected()) {
                     if (event.joyStick.getButtonState(gd::JoyStick::Button::Home) == gd::JoyStick::State::Released) return "menu";
                     if (event.joyStick.isJoyStickMoved()) {
@@ -68,14 +73,20 @@ namespace RType
 
             void Game::draw(gd::Window &window)
             {
+                RType::Ressources::get()->playersMutex.lock();
                 for (auto &player : RType::Ressources::get()->players)
                     player.second->draw(window);
+                RType::Ressources::get()->playersMutex.unlock();
+                RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies)
                     enemy.second->draw(window);
+                RType::Ressources::get()->enemiesMutex.unlock();
+                RType::Ressources::get()->shootsMutex.lock();
                 for (auto &from : RType::Ressources::get()->shoots)
                     for (auto &who : from.second)
                         for (auto &shoot : who.second)
                             shoot.second->draw(window);
+                RType::Ressources::get()->shootsMutex.unlock();
                 _waveIndicators->draw(window);
                 _endIndicator->draw(window);
                 _health->draw(window);
@@ -90,14 +101,25 @@ namespace RType
                 _endIndicator->update(window);
                 _waveIndicators->update(window);
                 RType::Ressources::get()->me->update();
+                RType::Ressources::get()->playersMutex.lock();
                 for (auto &player : RType::Ressources::get()->players) {
-                    player.second->update();
                     player.second->showHealthBar(_showHealthBar);
+                    player.second->update();
                 }
+                RType::Ressources::get()->playersMutex.unlock();
+                RType::Ressources::get()->enemiesMutex.lock();
                 for (auto &enemy : RType::Ressources::get()->enemies) {
-                    enemy.second->update();
                     enemy.second->showHealthBar(_showHealthBar);
+                    enemy.second->update();
                 }
+                RType::Ressources::get()->enemiesMutex.unlock();
+            }
+
+            void Game::_toggleHealthBar()
+            {
+                if (_healthBarToggleTimer.getElapsedTime() < 200) return;
+                _healthBarToggleTimer.reset();
+                _showHealthBar = !_showHealthBar;
             }
         } // namespace Scenes
     } // namespace Game

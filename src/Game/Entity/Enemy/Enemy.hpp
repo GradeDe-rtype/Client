@@ -30,10 +30,12 @@ namespace RType
                         KAMIKAZE_MONSTER = 2,
                         BASIC_MONSTER = 3,
                         HEALTH_BONUS = 4,
-                        DAMAGE_BONUS = 5
+                        DAMAGE_BONUS = 5,
+                        SHOTGUN_WEAPON = 6,
+                        ENEMY_TYPE_COUNT
                     } Type;
 
-                    Enemy(int id, Type type, float x = 0, float y = 0, int health = 100);
+                    Enemy(int id, Type type, float x = 0, float y = 0, int size = 40, int health = 100);
                     ~Enemy() = default;
                     void draw(gd::Window &window) override;
 
@@ -53,6 +55,7 @@ namespace RType
                     void _createBossMonster();
                     void _createHealthPickup();
                     void _createDamagePickup();
+                    void _createShotgunWeapon();
             };
         } // namespace Entity
     } // namespace Game

@@ -6,7 +6,7 @@
     "game": {
         "end": {
             "lose": "You lose !",
-            "pressEnterReplay": "Press 'Enter' when you want to replay",
+            "pressEnterReplay": "Press 'Enter' to go back to the room list",
             "wavesCompleted": "All waves completed !",
             "wavesIncompleted": "Oh no... You didn't complete all waves",
             "win": "You win !"
