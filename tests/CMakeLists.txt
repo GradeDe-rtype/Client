@@ -8,7 +8,7 @@ file(GLOB_RECURSE SRC_SOURCES
     "${CMAKE_SOURCE_DIR}/src/**/*.cpp"
 )
 
-# ---- VÉRIFICATION DES FICHIERS ---- #
+# ---- CHECK FILES ---- #
 foreach(FILE ${TEST_SOURCES} ${SRC_SOURCES})
     if (NOT EXISTS "${FILE}")
         message(FATAL_ERROR "Source file not found: ${FILE}")
@@ -61,7 +61,7 @@ target_compile_options(r-type_tests PRIVATE -g -O0)
 # ---- TESTS ---- #
 enable_testing()
 
-# ---- AJOUTER LE TEST ---- #
+# ---- ADD TEST ---- #
 add_test(
     NAME RTypeTests
     COMMAND $<TARGET_FILE:r-type_tests>
