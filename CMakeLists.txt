@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 #  ---- FIND PACKAGES ---- #
 find_package(Boost 1.70 REQUIRED COMPONENTS system)
-find_package(SFML REQUIRED COMPONENTS graphics window system audio network)
+find_package(SFML 2.5.1 REQUIRED COMPONENTS graphics window system audio network)
 
 #  ---- LIBRARIES ---- #
 set(RTYPE_LIBRARIES
