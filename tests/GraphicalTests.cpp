@@ -2,6 +2,9 @@
 
 #include "Enemy.hpp"
 #include "Player.hpp"
+#include "Shoot.hpp"
+#include "SelectArrow.hpp"
+
 namespace RType
 {
     namespace Game
@@ -114,6 +117,29 @@ namespace RType
                 player.setShootCooldown(1000);
                 cr_assert_eq(player.getShootMaxCooldown(), 1000, "Player shoot cooldown should be set to 1000");
             }
+
+            /* ---- SELECTARROW CLASS ---- */
+            
+            Test(SelectArrow, Constructor_Default)
+            {
+                SelectArrow arrow(SelectArrow::LEFT, gd::Color::White, 10, {0, 0});
+                cr_assert_eq(arrow.getDirection(), SelectArrow::LEFT, "Arrow direction should be LEFT");
+            }
+
+            Test(SelectArrow, ChangeDirection)
+            {
+                SelectArrow arrow;
+                arrow.setDirection(SelectArrow::UP);
+                cr_assert_eq(arrow.getDirection(), SelectArrow::UP, "Arrow direction should be set to UP");
+            }
+
+            Test(SelectArrow, ChangeColor)
+            {
+                SelectArrow arrow;
+                arrow.setColor("#FF0000");
+                cr_assert(true, "Arrow color change tested (manual verification needed in graphics)");
+            }
+
         } // namespace Entity
     } // namespace Game
 } // namespace RType

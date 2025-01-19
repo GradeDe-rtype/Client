@@ -46,6 +46,7 @@ target_include_directories(r-type_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/../src/Game/Entity/Base/
     ${CMAKE_SOURCE_DIR}/../src/Game/Entity/Enemy/
     ${CMAKE_SOURCE_DIR}/../src/Game/Entity/Player/
+    ${CMAKE_SOURCE_DIR}/../src/Game/Entity/SelectArrow/
     ${CMAKE_SOURCE_DIR}/../src/Game/Entity/Shoot/
     ${CMAKE_SOURCE_DIR}/../src/Game/Managers/
     ${CMAKE_SOURCE_DIR}/../src/Game/Scenes/
