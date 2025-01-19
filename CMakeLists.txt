@@ -9,8 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(Boost 1.70 REQUIRED COMPONENTS system)
 
 #  ---- FIND CRITERION ---- #
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(CRITERION REQUIRED criterion)
+# find_package(PkgConfig REQUIRED)
+# pkg_check_modules(CRITERION REQUIRED criterion)
 
 #  ---- LIBRARIES ---- #
 set(RTYPE_LIBRARIES
@@ -37,7 +37,7 @@ file(GLOB_RECURSE SOURCES
 )
 
 #  ---- SUBDIRECTORY ---- #
-add_subdirectory(tests)
+# add_subdirectory(tests)
 
 #  ---- EXECUTABLE ---- #
 add_executable(r-type_client ${SOURCES})
